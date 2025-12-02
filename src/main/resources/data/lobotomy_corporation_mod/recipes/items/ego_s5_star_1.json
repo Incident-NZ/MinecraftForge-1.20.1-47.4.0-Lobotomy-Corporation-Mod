@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "XYX",
+    "XYX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:diamond"
+    },
+    "Y": {
+      "item": "minecraft:nether_star"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_5"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s5_star_1"
+  }
+}

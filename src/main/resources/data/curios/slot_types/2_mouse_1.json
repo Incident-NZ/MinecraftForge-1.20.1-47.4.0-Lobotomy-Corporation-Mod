@@ -1,0 +1,9 @@
+{
+  "type": "curios:slot_type",
+  "name": {
+    "translate": "curios.slot.2_mouse_1.name"
+  },
+  "priority": 80,
+  "size": 1,
+  "icon": "curios:gui/slot/empty_curio_slot"
+}

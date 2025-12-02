@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "lobotomy_corporation_mod:e_box_4"
+    },
+    "Y": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:e_box_5"
+  }
+}

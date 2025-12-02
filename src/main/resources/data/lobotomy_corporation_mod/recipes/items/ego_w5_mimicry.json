@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "Y": {
+      "item": "minecraft:netherite_sword"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:w5_mimicry"
+  }
+}

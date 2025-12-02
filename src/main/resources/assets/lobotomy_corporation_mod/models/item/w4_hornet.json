@@ -1,0 +1,56 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "lobotomy_corporation_mod:item/ego_w4_hornet"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ -180, -270, -220 ],
+      "translation": [ 0, -2, -6 ],
+      "scale": [ 1.5, 1.5, 1.0 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ -180, -270, -220 ],
+      "translation": [ 0, -2, 6 ],
+      "scale": [ 1.5, 1.5, 1.0 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ -180, -270, -220 ],
+      "translation": [ 0, -2, -4 ],
+      "scale": [ 1.5, 1.5, 1.0 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ -180, -270, -220 ],
+      "translation": [ 0, -2, 6 ],
+      "scale": [ 1.5, 1.5, 1.0 ]
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1
+      },
+      "model": "item/crossbow_pulling_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.58
+      },
+      "model": "item/crossbow_pulling_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 1.0
+      },
+      "model": "item/crossbow_pulling_2"
+    },
+    {
+      "predicate": {
+        "charged": 1
+      },
+      "model": "item/crossbow_arrow"
+    }
+  ]
+}

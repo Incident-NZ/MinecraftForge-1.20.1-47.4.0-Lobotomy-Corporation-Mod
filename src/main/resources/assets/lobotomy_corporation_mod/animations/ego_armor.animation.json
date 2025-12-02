@@ -1,0 +1,46 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.ego_armor_2.head": {
+			"loop": true,
+			"bones": {
+				"bipedHead": {
+					"rotation": ["query.head_x * 0.017453292", "query.head_y * 0.017453292", 0]
+				}
+			}
+		},
+		"animation.ego_armor_2.body": {
+			"loop": true,
+			"bones": {
+				"bipedBody": {
+					"rotation": ["query.body_x * 0.017453292", 0, 0]
+				}
+			}
+		},
+		"animation.ego_armor_2.arms": {
+			"loop": true,
+			"bones": {
+				"bipedRightArm": {
+					"rotation": ["query.right_arm_x * 0.017453292", 0, 0]
+				},
+				"bipedLeftArm": {
+					"rotation": ["query.left_arm_x  * 0.017453292", 0, 0]
+				}
+			}
+		},
+		"animation.ego_armor_2.legs": {
+			"loop": true,
+			"bones": {
+				"bipedLeftLeg": {
+					"rotation": ["query.left_leg_x  * 0.017453292", 0, 0]
+				},
+				"bipedRightLeg": {
+					"rotation": ["query.right_leg_x * 0.017453292", 0, 0]
+				}
+			}
+		},
+		"animation.ego_armor_2.idle": {
+			"loop": true
+		}
+	}
+}

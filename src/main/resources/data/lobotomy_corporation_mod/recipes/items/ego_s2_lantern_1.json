@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "XYX",
+    "YYY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:torch"
+    },
+    "Y": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_2"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s2_lantern_1"
+  }
+}

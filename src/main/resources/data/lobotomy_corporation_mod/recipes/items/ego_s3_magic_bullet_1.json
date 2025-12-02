@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YZY",
+    "YXY",
+    "YXY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "Y": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_3"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s3_magic_bullet_1"
+  }
+}

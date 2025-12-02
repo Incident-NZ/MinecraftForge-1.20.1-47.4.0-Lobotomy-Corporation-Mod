@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XYZ"
+  ],
+  "key": {
+    "X": {
+      "item": "lobotomy_corporation_mod:w2_beak"
+    },
+    "Y": {
+      "item": "lobotomy_corporation_mod:w4_lamp"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:w5_justitia"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:w5_twilight"
+  }
+}

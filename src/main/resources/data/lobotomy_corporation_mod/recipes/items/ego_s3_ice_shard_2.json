@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "Y Y",
+    "Y Y"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:snow_block"
+    },
+    "Y": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_3"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s3_ice_shard_2"
+  }
+}

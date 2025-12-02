@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lobotomy_corporation_mod:item/ego_s5_justitia_2"
+  }
+}

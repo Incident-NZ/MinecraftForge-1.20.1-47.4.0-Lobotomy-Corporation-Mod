@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "YXY",
+    "YYY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:feather"
+    },
+    "Y": {
+      "item": "minecraft:bone"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_2"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s2_beak_1"
+  }
+}

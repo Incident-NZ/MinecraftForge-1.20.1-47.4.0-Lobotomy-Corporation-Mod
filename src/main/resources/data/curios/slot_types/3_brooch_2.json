@@ -1,0 +1,9 @@
+{
+  "type": "curios:slot_type",
+  "name": {
+    "translate": "curios.slot.3_brooch_2.name"
+  },
+  "priority": 140,
+  "size": 1,
+  "icon": "curios:gui/slot/empty_curio_slot"
+}

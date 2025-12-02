@@ -1,0 +1,9 @@
+{
+  "type": "curios:slot_type",
+  "name": {
+    "translate": "curios.slot.abnormality.name"
+  },
+  "priority": 20,
+  "size": 1,
+  "icon": "curios:gui/slot/empty_curio_slot"
+}

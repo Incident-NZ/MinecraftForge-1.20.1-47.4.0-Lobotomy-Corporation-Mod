@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YZY",
+    "YXY",
+    "YXY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:spider_eye"
+    },
+    "Y": {
+      "item": "minecraft:string"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_3"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s3_laetitia_1"
+  }
+}

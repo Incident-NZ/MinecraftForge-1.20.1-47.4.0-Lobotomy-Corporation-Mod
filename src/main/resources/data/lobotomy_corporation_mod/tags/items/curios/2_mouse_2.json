@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "lobotomy_corporation_mod:g2_match",
+    "lobotomy_corporation_mod:g2_lantern",
+    "lobotomy_corporation_mod:g3_magic_bullet",
+    "lobotomy_corporation_mod:g3_blood"
+  ]
+}

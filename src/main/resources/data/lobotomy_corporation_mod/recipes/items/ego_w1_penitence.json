@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XYY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:bone"
+    },
+    "Y": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:w1_penitence"
+  }
+}

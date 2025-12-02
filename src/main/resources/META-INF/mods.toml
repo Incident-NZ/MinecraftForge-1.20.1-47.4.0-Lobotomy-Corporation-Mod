@@ -1,0 +1,43 @@
+
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+
+[[mods]]
+modId = "lobotomy_corporation_mod"
+version = "5.0-hotfix"
+displayName = "Lobotomy Corporation Mod"
+authors = "Rei"
+description = "Face the fear, Make the future."
+
+[[dependencies."lobotomy_corporation_mod"]]
+modId = "forge"
+mandatory = true
+versionRange = "47.4.0"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies."lobotomy_corporation_mod"]]
+modId = "minecraft"
+mandatory = true
+versionRange = "1.20.1"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.lobotomy_corporation_mod]]
+modId="geckolib"
+mandatory=true
+versionRange="[4.4.9,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.lobotomy_corporation_mod]]
+modId="curios"
+mandatory=true
+versionRange="[5.14.1,)"
+ordering="AFTER"
+side="BOTH"
+
+[[mixins]]
+config="net.mixins.json"
+

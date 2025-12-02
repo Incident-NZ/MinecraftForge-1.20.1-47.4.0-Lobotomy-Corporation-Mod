@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "XXY",
+    "XYY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "Y": {
+      "item": "minecraft:bone"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_5"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s5_smile_1"
+  }
+}

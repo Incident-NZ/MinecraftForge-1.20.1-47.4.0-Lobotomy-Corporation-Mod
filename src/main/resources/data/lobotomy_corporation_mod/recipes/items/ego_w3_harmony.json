@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Y": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:w3_harmony"
+  }
+}

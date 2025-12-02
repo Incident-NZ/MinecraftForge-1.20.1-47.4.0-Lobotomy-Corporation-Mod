@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XYZ"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "Y": {
+      "item": "minecraft:bone"
+    },
+    "Z": {
+      "item": "minecraft:netherite_shovel"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:w5_smile"
+  }
+}

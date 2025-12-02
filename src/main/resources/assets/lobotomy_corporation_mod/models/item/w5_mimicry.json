@@ -1,0 +1,28 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "lobotomy_corporation_mod:item/ego_w5_mimicry"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ 320, 270, 0 ],
+      "translation": [ 0, 11.3, 0.8 ],
+      "scale": [ 1.9, 2.4, 1.5 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ -30, 90, 0 ],
+      "translation": [ 0, 11.3, 3.0 ],
+      "scale": [ 1.9, 2.4, 1.5 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 320, 270, 0 ],
+      "translation": [ 0, 10.3, 3.0 ],
+      "scale": [ 1.2, 1.7, 1.0 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ -30, 90, 0 ],
+      "translation": [ 0, 10.3, 3.0 ],
+      "scale": [ 1.2, 1.7, 1.0 ]
+    }
+  }
+}

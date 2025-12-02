@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "lobotomy_corporation_mod:block/e_box_top",
+    "east": "lobotomy_corporation_mod:block/e_box_side",
+    "north": "lobotomy_corporation_mod:block/e_box_2",
+    "south": "lobotomy_corporation_mod:block/e_box_top",
+    "up": "lobotomy_corporation_mod:block/e_box_top",
+    "west": "lobotomy_corporation_mod:block/e_box_side"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "X Y",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:leather"
+    },
+    "Y": {
+      "item": "minecraft:bone_block"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_5"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s5_mimicry_2"
+  }
+}

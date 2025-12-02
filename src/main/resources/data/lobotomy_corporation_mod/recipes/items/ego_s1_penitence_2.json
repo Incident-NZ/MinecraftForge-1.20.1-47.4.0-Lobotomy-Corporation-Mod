@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "Y Y",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Y": {
+      "item": "minecraft:bone"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_1"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s1_penitence_2"
+  }
+}

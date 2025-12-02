@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:music_disc_5"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_5"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s5_da_capo_2"
+  }
+}

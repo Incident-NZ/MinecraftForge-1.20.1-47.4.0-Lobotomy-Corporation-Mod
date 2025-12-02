@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "Y Y",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:bone_block"
+    },
+    "Y": {
+      "item": "minecraft:enchanted_golden_apple"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_5"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s5_whitenight_2"
+  }
+}

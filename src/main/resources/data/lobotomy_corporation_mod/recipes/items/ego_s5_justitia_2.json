@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "Y X",
+    "Y Y"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:feather"
+    },
+    "Y": {
+      "item": "minecraft:gold_ingot"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_4"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s5_justitia_2"
+  }
+}

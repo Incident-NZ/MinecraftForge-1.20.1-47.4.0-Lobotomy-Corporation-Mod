@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "lobotomy_corporation_mod:e_box_3"
+    },
+    "Y": {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:e_box_4"
+  }
+}

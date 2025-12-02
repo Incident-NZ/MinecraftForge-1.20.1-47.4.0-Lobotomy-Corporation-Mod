@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "Y Y",
+    "Y Y"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:coal"
+    },
+    "Y": {
+      "item": "minecraft:flint"
+    },
+    "Z": {
+      "item": "lobotomy_corporation_mod:e_box_2"
+    }
+  },
+  "result": {
+    "item": "lobotomy_corporation_mod:s2_match_2"
+  }
+}
