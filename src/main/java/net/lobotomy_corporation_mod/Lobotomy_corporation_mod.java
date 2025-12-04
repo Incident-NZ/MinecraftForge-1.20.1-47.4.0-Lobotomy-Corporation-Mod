@@ -38,8 +38,6 @@ public class Lobotomy_corporation_mod {
         GeckoLib.initialize();
     }
 
-
-
     @SubscribeEvent
     public static void onLoad(final ModConfigEvent.Loading event) {}
 
