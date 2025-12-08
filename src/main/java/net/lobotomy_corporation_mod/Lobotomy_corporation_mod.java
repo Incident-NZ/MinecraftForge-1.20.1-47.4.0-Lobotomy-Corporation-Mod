@@ -15,7 +15,7 @@ import software.bernie.geckolib.GeckoLib;
 @Mod(Lobotomy_corporation_mod.MOD_ID)
 public class Lobotomy_corporation_mod {
 
-    public static final String MOD_ID = "lobotomy_corporation_mod";
+    public static final String MOD_ID = "LCModMixin";
 
     public Lobotomy_corporation_mod(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();

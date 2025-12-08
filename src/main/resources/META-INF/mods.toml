@@ -5,7 +5,7 @@ license = "${mod_license}"
 
 [[mods]]
 modId = "lobotomy_corporation_mod"
-version = "5.0-hotfix"
+version = "5.1"
 displayName = "Lobotomy Corporation Mod"
 authors = "Rei"
 description = "Face the fear, Make the future."
@@ -39,5 +39,5 @@ ordering="AFTER"
 side="BOTH"
 
 [[mixins]]
-config="net.mixins.json"
+config="lobotomy_corporation_mod.mixins.json"
 
