@@ -12,27 +12,23 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
-import java.util.Objects;
-
-public class MagicBulletEntity extends Projectile {
+public class BulletEntity extends Projectile {
     private float damage;
-    private float velocity;
     private int maxLifetime = 100;
 
-    public MagicBulletEntity(EntityType<? extends MagicBulletEntity> type, Level level) {
+    public BulletEntity(EntityType<? extends BulletEntity> type, Level level) {
         super(type, level);
         this.setNoGravity(true);
     }
 
-    public MagicBulletEntity(Level level, LivingEntity shooter, float damage, float velocity, Vec3 direction) {
-        this(EntityInit.MAGIC_BULLET.get(), level);
+    public BulletEntity(Level level, LivingEntity shooter, float damage, float velocity, Vec3 direction) {
+        this(EntityInit.BULLET.get(), level);
         this.setOwner(shooter);
         this.damage = damage;
-        this.velocity = velocity;
         this.setMaxLifetime(100);
 
         Vec3 shootDir = direction.normalize();
-        Vec3 motion = shootDir.scale(this.velocity);
+        Vec3 motion = shootDir.scale(velocity);
         this.setDeltaMovement(motion);
 
         Vec3 eyePos = shooter.getEyePosition();
@@ -40,23 +36,8 @@ public class MagicBulletEntity extends Projectile {
         this.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
     }
 
-    public void setVelocity(float velocity) {
-        this.velocity = velocity;
-        Vec3 currentDir = this.getDeltaMovement();
-        if (currentDir.lengthSqr() > 0) {
-            Vec3 normalized = currentDir.normalize();
-            this.setDeltaMovement(normalized.scale(velocity));
-        }
-    }
-
-    public void setMaxLifetime(int lifetime) {
-        this.maxLifetime = lifetime;
-    }
-
     @Override
-    protected void defineSynchedData() {
-
-    }
+    protected void defineSynchedData() {}
 
     @Override
     public void tick() {
@@ -72,12 +53,12 @@ public class MagicBulletEntity extends Projectile {
         if (this.level().isClientSide) {
             Vec3 pos = this.position();
 
-            this.level().addParticle(ParticleTypes.PORTAL,
+            this.level().addParticle(ParticleTypes.SMOKE,
                     pos.x, pos.y, pos.z,
                     0, 0, 0);
 
             if (this.tickCount % 3 == 0) {
-                this.level().addParticle(ParticleTypes.REVERSE_PORTAL,
+                this.level().addParticle(ParticleTypes.LARGE_SMOKE,
                         pos.x, pos.y + 0.1, pos.z,
                         (this.random.nextFloat() - 0.5) * 0.1, 0, (this.random.nextFloat() - 0.5) * 0.1);
             }
@@ -89,27 +70,37 @@ public class MagicBulletEntity extends Projectile {
     }
 
     @Override
-    protected void onHit(HitResult result) {
-
-    }
+    protected void onHit(HitResult result) {}
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity target = result.getEntity();
-        if (target instanceof LivingEntity livingTarget && !target.is(Objects.requireNonNull(this.getOwner()))) {
-            livingTarget.hurt(this.level().damageSources().mobProjectile(this, (LivingEntity) this.getOwner()), this.damage);
+        LivingEntity owner = (LivingEntity) this.getOwner();
+
+        if (target instanceof LivingEntity living && owner != null && !target.is(owner)) {
+            living.hurt(this.level().damageSources().mobProjectile(this, owner), this.damage);
         }
         this.discard();
+    }
+
+    // 武器側で調整用（全部使用！）
+    public void setDamage(float damage) { this.damage = damage; }
+    public void setVelocity(float velocity) {
+        Vec3 dir = this.getDeltaMovement().normalize();
+        if (dir.lengthSqr() > 0) {
+            this.setDeltaMovement(dir.scale(velocity));
+        }
+    }
+    public void setMaxLifetime(int lifetime) { this.maxLifetime = lifetime; }
+
+    @Override
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
         return EntityDimensions.fixed(0.25F, 0.25F);
-    }
-
-    @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

@@ -25,9 +25,8 @@ public class W4Lamp extends SwordItem {
 
         hits++;
         if (hits >= 4) {
-            // フラグとして効果を付与
             tag.putBoolean("lamp_weapons_buff", true);
-            tag.putInt(id, 0); // リセット
+            tag.putInt(id, 0);
         } else {
             tag.putInt(id, hits);
         }

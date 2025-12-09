@@ -19,11 +19,11 @@ public class ItemInit {
 
     //Ammo
     public static final RegistryObject<Item> MAGIC_BULLET_AMMO = ITEMS.register("weapon_bullet_magic",
-            () -> new MagicBulletItem(new ResourceLocation("lobotomy_corporation_mod", "magic_bullet")));
+            () -> new AmmoMagicBullet(new ResourceLocation("lobotomy_corporation_mod", "magic_bullet")));
     public static final RegistryObject<Item> RIFLE_BULLET_AMMO = ITEMS.register("weapon_bullet_rifle",
-            () -> new MagicBulletItem(new ResourceLocation("lobotomy_corporation_mod", "rifle_bullet")));
+            () -> new AmmoRifle(new ResourceLocation("lobotomy_corporation_mod", "rifle_bullet")));
     public static final RegistryObject<Item> PISTOL_BULLET_AMMO = ITEMS.register("weapon_bullet_pistol",
-            () -> new MagicBulletItem(new ResourceLocation("lobotomy_corporation_mod", "pistol_bullet")));
+            () -> new AmmoPistol(new ResourceLocation("lobotomy_corporation_mod", "pistol_bullet")));
 
     //EGO Weapons
     public static final RegistryObject<Item> W5_TWILIGHT = ITEMS.register("w5_twilight", W5Twilight::new);
@@ -34,7 +34,6 @@ public class ItemInit {
     public static final RegistryObject<Item> W5_SOUND_OF_A_STAR = ITEMS.register("w5_star", W5Star::new);
     public static final RegistryObject<Item> W5_JUSTITIA = ITEMS.register("w5_justitia", W5Justitia::new);
     public static final RegistryObject<Item> W4_THE_SWORD_SHARPENED_WITH_TEARS = ITEMS.register("w4_tears", W4Tears::new);
-    public static final RegistryObject<Item> W4_HORNET = ITEMS.register("w4_hornet", W4Hornet::new);
     public static final RegistryObject<Item> W4_LAMP = ITEMS.register("w4_lamp", W4Lamp::new);
     public static final RegistryObject<Item> W4_BLUE_SCAR = ITEMS.register("w4_blue_scar", W4BlueScar::new);
     public static final RegistryObject<Item> W4_SOLEMN_LAMENT_L = ITEMS.register("w4_lament_l", W4LamentL::new);
@@ -59,9 +58,9 @@ public class ItemInit {
 
     //EGO Guns
     public static final RegistryObject<Item> W4_MAGIC_BULLET = ITEMS.register("w4_magic_bullet",
-            () -> new W4MagicBullet(
-                    new ResourceLocation("lobotomy_corporation_mod", "magic_bullet"),
-                    24.0F, 3.0F));
+            () -> new W4MagicBullet(new Item.Properties().durability(3000)));
+    public static final RegistryObject<Item> W4_HORNET = ITEMS.register("w4_hornet",
+            () -> new W4Hornet(new Item.Properties().durability(3000)));
 
     //EGO Suit
     public static final RegistryObject<Item> A5_TWILIGHT_1 = ITEMS.register("s5_twilight_1",

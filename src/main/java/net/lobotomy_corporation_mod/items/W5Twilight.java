@@ -30,7 +30,6 @@ public class W5Twilight extends SwordItem {
         super(new CustomTier(), 25, -2.8f, new Properties().durability(4000));
     }
 
-    // ==== 攻撃時：前方8ブロック範囲 薙ぎ払い処理 ====
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!attacker.level().isClientSide && attacker instanceof Player player) {

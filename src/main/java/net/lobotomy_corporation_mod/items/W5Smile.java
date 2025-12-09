@@ -24,14 +24,9 @@ public class W5Smile extends SwordItem {
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!attacker.level().isClientSide && attacker instanceof Player player) {
 
-            // ===== 1. 通常攻撃時の移動速度低下 =====
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30 * 20, 2)); // 30秒, Lv3
-
-            // ===== 2. 攻撃回数カウント =====
             var tag = stack.getOrCreateTag();
             int count = tag.getInt(ATTACK_COUNT_TAG) + 1;
-
-            // ===== 3. 5回ごとに広域デバフ =====
             if (count >= 5) {
                 count = 0;
 
@@ -48,11 +43,9 @@ public class W5Smile extends SwordItem {
                     entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 120 * 20, 2)); // 2分, Lv3
                 }
 
-                // 攻撃対象にも重ねて付与
                 target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 120 * 20, 2));
             }
 
-            // カウント保存
             tag.putInt(ATTACK_COUNT_TAG, count);
         }
 

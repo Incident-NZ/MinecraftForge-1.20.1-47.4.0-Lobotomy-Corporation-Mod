@@ -2,6 +2,7 @@ package net.lobotomy_corporation_mod.client;
 
 import net.lobotomy_corporation_mod.EntityInit;
 import net.lobotomy_corporation_mod.Lobotomy_corporation_mod;
+import net.lobotomy_corporation_mod.client.renderer.BulletRenderer;
 import net.lobotomy_corporation_mod.client.renderer.MagicBulletRenderer;
 import net.lobotomy_corporation_mod.items.W4MagicBullet;
 import net.lobotomy_corporation_mod.network.ModPackets;
@@ -34,6 +35,8 @@ public class ClientEvents {
                 ctx -> new ThrownItemRenderer<>(ctx, 1.0f, true));
         event.registerEntityRenderer(EntityInit.MAGIC_BULLET.get(),
                 MagicBulletRenderer::new);
+        event.registerEntityRenderer(EntityInit.BULLET.get(),
+                BulletRenderer::new);
     }
 
     @Mod.EventBusSubscriber(modid = "lobotomy_corporation_mod", value = Dist.CLIENT)

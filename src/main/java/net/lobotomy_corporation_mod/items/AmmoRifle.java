@@ -3,10 +3,10 @@ package net.lobotomy_corporation_mod.items;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
-public class MagicBulletItem extends Item {
+public class AmmoRifle extends Item {
     private final ResourceLocation bulletType;
 
-    public MagicBulletItem(ResourceLocation bulletType) {
+    public AmmoRifle(ResourceLocation bulletType) {
         super(new Item.Properties().stacksTo(64));
         this.bulletType = bulletType;
     }
