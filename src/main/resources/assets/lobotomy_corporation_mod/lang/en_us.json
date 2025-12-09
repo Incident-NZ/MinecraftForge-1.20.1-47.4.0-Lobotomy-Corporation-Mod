@@ -142,5 +142,10 @@
   "item.lobotomy_corporation_mod.g5_mimicry": "E.G.O Gift - Mimicry",
   "item.lobotomy_corporation_mod.g5_smile": "E.G.O Gift - Smile",
   "item.lobotomy_corporation_mod.g5_whitenight": "E.G.O Gift - Paradise Lost",
-  "item.lobotomy_corporation_mod.g5_twilight": "E.G.O Gift - Twilight"
+  "item.lobotomy_corporation_mod.g5_twilight": "E.G.O Gift - Twilight",
+
+  "entity.lobotomy_corporation_mod.magic_bullet": "Magic Bullet",
+  "entity.lobotomy_corporation_mod.bullet": "Bullet",
+  "entity.lobotomy_corporation_mod.ego_sound_of_a_star_projectile": "Sound of a Star",
+  "entity.lobotomy_corporation_mod.m5_t0346": "Abnormality T-03-46 Whitenight"
 }

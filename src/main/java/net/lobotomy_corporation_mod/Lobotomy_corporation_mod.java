@@ -31,6 +31,7 @@ public class Lobotomy_corporation_mod {
 
         // ネットワークイベント・キー入力・ズームなどのカスタムイベントを登録したい場合は以下でOK
         MinecraftForge.EVENT_BUS.register(this);
+        modEventBus.addListener(EntityInit::registerAttributes);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

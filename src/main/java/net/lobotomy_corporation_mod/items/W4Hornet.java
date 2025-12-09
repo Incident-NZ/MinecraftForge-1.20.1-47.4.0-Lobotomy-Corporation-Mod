@@ -61,7 +61,7 @@ public class W4Hornet extends ProjectileWeaponItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        target.hurt(attacker.level().damageSources().generic(), 12.0F);
+        target.hurt(attacker.level().damageSources().generic(), 8.0F);
 
         stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return true;

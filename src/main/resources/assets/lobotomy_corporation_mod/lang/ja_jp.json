@@ -142,5 +142,10 @@
   "item.lobotomy_corporation_mod.g5_mimicry": "E.G.O ギフト - ミミック",
   "item.lobotomy_corporation_mod.g5_smile": "E.G.O ギフト - 笑顔",
   "item.lobotomy_corporation_mod.g5_whitenight": "E.G.O ギフト - 失楽園",
-  "item.lobotomy_corporation_mod.g5_twilight": "E.G.O ギフト - 闇の黄昏を過しもの"
+  "item.lobotomy_corporation_mod.g5_twilight": "E.G.O ギフト - 闇の黄昏を過しもの",
+
+  "entity.lobotomy_corporation_mod.magic_bullet": "魔法の弾丸",
+  "entity.lobotomy_corporation_mod.bullet": "弾丸",
+  "entity.lobotomy_corporation_mod.ego_sound_of_a_star_projectile": "星の音",
+  "entity.lobotomy_corporation_mod.m5_t0346": "アブノーマリティ T-03-46 白夜"
 }

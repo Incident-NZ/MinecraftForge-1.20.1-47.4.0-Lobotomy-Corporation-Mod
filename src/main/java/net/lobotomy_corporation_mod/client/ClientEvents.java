@@ -4,6 +4,7 @@ import net.lobotomy_corporation_mod.EntityInit;
 import net.lobotomy_corporation_mod.Lobotomy_corporation_mod;
 import net.lobotomy_corporation_mod.client.renderer.BulletRenderer;
 import net.lobotomy_corporation_mod.client.renderer.MagicBulletRenderer;
+import net.lobotomy_corporation_mod.client.renderer.m5r_t0346;
 import net.lobotomy_corporation_mod.items.W4MagicBullet;
 import net.lobotomy_corporation_mod.network.ModPackets;
 import net.minecraft.client.Minecraft;
@@ -37,6 +38,7 @@ public class ClientEvents {
                 MagicBulletRenderer::new);
         event.registerEntityRenderer(EntityInit.BULLET.get(),
                 BulletRenderer::new);
+        event.registerEntityRenderer(EntityInit.M5_T0346.get(), m5r_t0346::new);
     }
 
     @Mod.EventBusSubscriber(modid = "lobotomy_corporation_mod", value = Dist.CLIENT)

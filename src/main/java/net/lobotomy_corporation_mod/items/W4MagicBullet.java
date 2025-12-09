@@ -96,7 +96,7 @@ public class W4MagicBullet extends ProjectileWeaponItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        target.hurt(attacker.level().damageSources().magic(), 12.0F);
+        target.hurt(attacker.level().damageSources().magic(), 24.0F);
 
         stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return true;
