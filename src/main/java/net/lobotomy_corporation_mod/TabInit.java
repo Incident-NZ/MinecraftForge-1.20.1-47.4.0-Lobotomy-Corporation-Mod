@@ -10,7 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 public class TabInit {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Lobotomy_corporation_mod.MOD_ID);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, lobotomy_corporation_mod.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> PM_ITEMS = CREATIVE_TABS.register("pm_items",
             () -> CreativeModeTab.builder()

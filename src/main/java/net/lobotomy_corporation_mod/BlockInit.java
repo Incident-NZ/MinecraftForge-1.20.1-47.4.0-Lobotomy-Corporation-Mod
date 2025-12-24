@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class BlockInit {
     public static class Blocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Lobotomy_corporation_mod.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, lobotomy_corporation_mod.MOD_ID);
 
     //PE-Box
     public static final RegistryObject<Block> ZAYIN_PE_BOX = BLOCKS.register("e_box_1",
@@ -55,7 +55,7 @@ public class BlockInit {
     }
 
     public static class BlockItems {
-        public static final DeferredRegister<Item> BLOCK_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Lobotomy_corporation_mod.MOD_ID);
+        public static final DeferredRegister<Item> BLOCK_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, lobotomy_corporation_mod.MOD_ID);
 
 
         public static final RegistryObject<Item> ZAYIN_PE_BOX = BLOCK_ITEMS.register("e_box_1",

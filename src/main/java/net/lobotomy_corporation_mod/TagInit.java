@@ -15,7 +15,7 @@ public class TagInit {
         public static final TagKey<Item> EGO = createTag("ego");
 
         private static TagKey<Item> createTag(String name) {
-            return ItemTags.create(ResourceLocation.fromNamespaceAndPath(Lobotomy_corporation_mod.MOD_ID, name));
+            return ItemTags.create(new ResourceLocation(lobotomy_corporation_mod.MOD_ID, name));
         }
     }
 }

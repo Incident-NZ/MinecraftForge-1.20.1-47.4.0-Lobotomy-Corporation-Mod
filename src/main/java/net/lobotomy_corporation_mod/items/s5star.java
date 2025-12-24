@@ -1,6 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
-import net.lobotomy_corporation_mod.Lobotomy_corporation_mod;
+import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.lobotomy_corporation_mod.client.renderer.s5r_star;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.sounds.SoundEvents;
@@ -75,7 +75,7 @@ public class s5star extends ArmorItem implements GeoItem {
     }
 
     // ====== パッシブ回復処理 ======
-    @Mod.EventBusSubscriber(modid = Lobotomy_corporation_mod.MOD_ID)
+    @Mod.EventBusSubscriber(modid = lobotomy_corporation_mod.MOD_ID)
     public static class ArmorTickHandler {
         private static final int COOLDOWN_TICKS = 200; // 10秒 = 200tick
         private static final Map<UUID, Integer> cooldowns = new HashMap<>();

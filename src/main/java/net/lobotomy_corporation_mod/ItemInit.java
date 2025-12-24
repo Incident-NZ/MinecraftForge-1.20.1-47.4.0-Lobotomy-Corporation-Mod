@@ -11,7 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ItemInit {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Lobotomy_corporation_mod.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, lobotomy_corporation_mod.MOD_ID);
 
     //Item
     public static final RegistryObject<Item> TASK_TABLET = ITEMS.register("tool_task_tablet",

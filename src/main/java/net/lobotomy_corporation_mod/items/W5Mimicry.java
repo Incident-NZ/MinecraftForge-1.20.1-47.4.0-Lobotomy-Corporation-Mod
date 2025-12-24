@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 
 public class W5Mimicry extends SwordItem {
@@ -36,8 +37,8 @@ public class W5Mimicry extends SwordItem {
         @Override public float getAttackDamageBonus() { return 0.0f; }
         @Override public int getLevel() { return 1; }
         @Override public int getEnchantmentValue() { return 0; }
-        @Override public net.minecraft.world.item.crafting.Ingredient getRepairIngredient() {
-            return net.minecraft.world.item.crafting.Ingredient.EMPTY;
+        @Override public Ingredient getRepairIngredient() {
+            return Ingredient.EMPTY;
         }
     }
 }

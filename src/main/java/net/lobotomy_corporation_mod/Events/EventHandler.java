@@ -22,7 +22,6 @@ public class EventHandler {
 
         ItemStack stack = player.getMainHandItem();
 
-        // ego_justitia_weaponsのガード処理
         if (stack.getItem() instanceof W5Justitia &&
                 player.isUsingItem() &&
                 !player.getCooldowns().isOnCooldown(stack.getItem())) {
@@ -34,12 +33,11 @@ public class EventHandler {
             player.stopUsingItem();
         }
 
-        // ego_mimicry_weaponsのガード処理
         if (stack.getItem() instanceof W5Mimicry &&
                 player.isUsingItem() &&
                 !player.getCooldowns().isOnCooldown(stack.getItem())) {
 
-            event.setCanceled(true); // 完全ダメージカット
+            event.setCanceled(true);
             player.level().playSound(null, player.blockPosition(), SoundEvents.ANVIL_FALL, SoundSource.PLAYERS, 1.0F, 1.0F);
             player.getCooldowns().addCooldown(stack.getItem(), 20 * 15); // 15秒
             player.stopUsingItem();
@@ -53,17 +51,14 @@ public class EventHandler {
     public static void onDamageDealt(LivingHurtEvent event) {
         DamageSource source = event.getSource();
 
-        // 攻撃者がプレイヤーかチェック
         if (!(source.getEntity() instanceof Player player)) return;
 
-        // メイン・オフハンドのどちらかに武器を持っているか確認
         ItemStack stack = player.getMainHandItem();
         if (!(stack.getItem() instanceof W5Mimicry)) {
             stack = player.getOffhandItem();
             if (!(stack.getItem() instanceof W5Mimicry)) return;
         }
 
-        // NBT取得と初期化
         var tag = stack.getOrCreateTag();
         int count = tag.getInt(ATTACK_COUNT_TAG);
         float accum = tag.getFloat(DAMAGE_ACCUM_TAG);
@@ -71,7 +66,6 @@ public class EventHandler {
         count++;
         accum += event.getAmount();
 
-        // 5回目の攻撃ごとに25%分回復
         if (count >= 5) {
             float heal = accum * 0.25f;
             player.heal(heal);

@@ -2,7 +2,7 @@ package net.lobotomy_corporation_mod.Events;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.lobotomy_corporation_mod.ItemInit;
-import net.lobotomy_corporation_mod.Lobotomy_corporation_mod;
+import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.lobotomy_corporation_mod.client.ClientForgeEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -17,10 +17,10 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = Lobotomy_corporation_mod.MOD_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = "lobotomy_corporation_mod", value = Dist.CLIENT)
 public class OverlayHandler {
     private static final ResourceLocation SCOPE_OVERLAY =
-            new ResourceLocation(Lobotomy_corporation_mod.MOD_ID, "textures/gui/gun_scope_overlay.png");
+            new ResourceLocation(lobotomy_corporation_mod.MOD_ID, "textures/gui/gun_scope_overlay.png");
 
     // 🔹オーバーレイ対象アイテム
     private static final List<RegistryObject<Item>> OVERLAY_ITEMS = List.of(
@@ -48,7 +48,6 @@ public class OverlayHandler {
         // 🔹キー押下チェック
         if (!ClientForgeEvents.isScopeActive) return;
 
-        // HUDにスコープ描画
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();

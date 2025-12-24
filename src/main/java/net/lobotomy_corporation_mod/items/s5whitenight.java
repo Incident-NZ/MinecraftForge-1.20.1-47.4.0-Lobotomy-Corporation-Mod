@@ -1,6 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
-import net.lobotomy_corporation_mod.Lobotomy_corporation_mod;
+import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.lobotomy_corporation_mod.client.renderer.s5r_whitenight;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -28,7 +28,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-@Mod.EventBusSubscriber(modid = Lobotomy_corporation_mod.MOD_ID)
+@Mod.EventBusSubscriber(modid = lobotomy_corporation_mod.MOD_ID)
 public class s5whitenight extends ArmorItem implements GeoItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 

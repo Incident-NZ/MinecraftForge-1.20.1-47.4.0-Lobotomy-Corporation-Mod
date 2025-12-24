@@ -1,7 +1,7 @@
 package net.lobotomy_corporation_mod.client;
 
 import net.lobotomy_corporation_mod.EntityInit;
-import net.lobotomy_corporation_mod.Lobotomy_corporation_mod;
+import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.lobotomy_corporation_mod.client.renderer.BulletRenderer;
 import net.lobotomy_corporation_mod.client.renderer.MagicBulletRenderer;
 import net.lobotomy_corporation_mod.client.renderer.m5r_t0346;
@@ -25,7 +25,7 @@ import java.util.UUID;
 import static net.lobotomy_corporation_mod.client.ClientKeyBindings.EGO_ABILITY_KEY;
 
 @Mod.EventBusSubscriber(
-        modid = Lobotomy_corporation_mod.MOD_ID,
+        modid = lobotomy_corporation_mod.MOD_ID,
         bus = Mod.EventBusSubscriber.Bus.MOD,
         value = Dist.CLIENT)
 public class ClientEvents {

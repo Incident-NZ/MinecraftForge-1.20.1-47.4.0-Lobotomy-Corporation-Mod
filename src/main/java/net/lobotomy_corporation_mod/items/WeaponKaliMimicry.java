@@ -45,14 +45,12 @@ public class WeaponKaliMimicry extends SwordItem {
         }
     }
 
-    // ダメージを与えたとき（回復ロジック）
     public static void onDamageDealt(LivingDamageEvent event) {
         if (!(event.getSource().getEntity() instanceof Player player)) return;
 
         ItemStack stack = player.getMainHandItem();
         if (!(stack.getItem() instanceof WeaponKaliMimicry)) return;
 
-        // NBT取得
         var tag = stack.getOrCreateTag();
         int count = tag.getInt(ATTACK_COUNT_TAG);
         float accum = tag.getFloat(DAMAGE_ACCUM_TAG);
@@ -73,7 +71,6 @@ public class WeaponKaliMimicry extends SwordItem {
         tag.putFloat(DAMAGE_ACCUM_TAG, accum);
     }
 
-    // プレイヤーが攻撃を受けたとき（ガード）
     public static void onPlayerAttacked(LivingHurtEvent event) {
         if (event.getEntity() instanceof Player player) {
             ItemStack stack = player.getMainHandItem();

@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.lobotomy_corporation_mod.Events.OverlayHandler;
-import net.lobotomy_corporation_mod.Lobotomy_corporation_mod;
+import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(
-        modid = Lobotomy_corporation_mod.MOD_ID,
+        modid = lobotomy_corporation_mod.MOD_ID,
         bus = Mod.EventBusSubscriber.Bus.FORGE,
         value = Dist.CLIENT)
 public class ClientForgeEvents {

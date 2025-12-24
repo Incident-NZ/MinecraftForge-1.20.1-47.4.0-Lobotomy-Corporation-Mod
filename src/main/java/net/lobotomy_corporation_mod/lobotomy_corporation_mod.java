@@ -12,13 +12,13 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import software.bernie.geckolib.GeckoLib;
 
-@Mod(Lobotomy_corporation_mod.MOD_ID)
-public class Lobotomy_corporation_mod {
+@Mod(lobotomy_corporation_mod.MOD_ID)
+public class lobotomy_corporation_mod {
 
     public static final String MOD_ID = "lobotomy_corporation_mod";
 
-    public Lobotomy_corporation_mod(FMLJavaModLoadingContext context) {
-        IEventBus modEventBus = context.getModEventBus();
+    public lobotomy_corporation_mod() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         BlockInit.Blocks.BLOCKS.register(modEventBus);
         BlockInit.BlockItems.BLOCK_ITEMS.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
@@ -35,7 +35,6 @@ public class Lobotomy_corporation_mod {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        // パケット登録を初期化段階で呼び出す（enqueueWorkを使わず即実行）
         GeckoLib.initialize();
     }
 

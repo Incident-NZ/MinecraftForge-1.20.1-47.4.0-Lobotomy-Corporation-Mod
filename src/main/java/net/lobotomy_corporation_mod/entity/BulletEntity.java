@@ -84,7 +84,6 @@ public class BulletEntity extends Projectile {
         this.discard();
     }
 
-    // 武器側で調整用（全部使用！）
     public void setDamage(float damage) { this.damage = damage; }
     public void setVelocity(float velocity) {
         Vec3 dir = this.getDeltaMovement().normalize();

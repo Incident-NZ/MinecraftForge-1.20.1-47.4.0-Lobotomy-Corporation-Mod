@@ -1,6 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
-import net.lobotomy_corporation_mod.Lobotomy_corporation_mod;
+import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.lobotomy_corporation_mod.client.renderer.s5r_smile;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -79,7 +79,7 @@ public class s5smile extends ArmorItem implements GeoItem {
     }
 
     // ===== イベントハンドラ =====
-    @Mod.EventBusSubscriber(modid = Lobotomy_corporation_mod.MOD_ID)
+    @Mod.EventBusSubscriber(modid = lobotomy_corporation_mod.MOD_ID)
     public static class Events {
         /** モブを倒した時にボーナスを付与 */
         @SubscribeEvent
@@ -105,14 +105,12 @@ public class s5smile extends ArmorItem implements GeoItem {
             applyModifiers(player, hpBonus, atkBonus);
         }
 
-        /** 毎tickチェックしてアーマー外したらリセット */
         @SubscribeEvent
         public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
             Player player = event.player;
             UUID id = player.getUUID();
 
             if (!hasFullSet(player)) {
-                // 外したらリセット
                 if (bonusHealth.containsKey(id) || bonusAttack.containsKey(id)) {
                     bonusHealth.remove(id);
                     bonusAttack.remove(id);

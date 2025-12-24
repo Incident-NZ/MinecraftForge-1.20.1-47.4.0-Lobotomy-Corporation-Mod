@@ -70,7 +70,6 @@ public class ForgeEventHandler {
         int startX = screenWidth - iconSize - padding;
         int startY = screenHeight - iconSize - padding;
 
-        // ✅ GuiGraphicsで直接描画！
         renderIconWithText(guiGraphics, font, startX, startY, "textures/gui/gui_hp", (int)player.getHealth());
         renderIconWithText(guiGraphics, font, startX - (iconSize + padding), startY, "textures/gui/gui_mp", player.getFoodData().getFoodLevel());
         renderIconWithText(guiGraphics, font, startX - 2 * (iconSize + padding), startY, "textures/gui/gui_rp", player.getAirSupply());
@@ -86,16 +85,13 @@ public class ForgeEventHandler {
 
         ResourceLocation resourceLocation = new ResourceLocation("lobotomy_corporation_mod", iconPath + ".png");
 
-        // ✅ GuiGraphicsで直接blit！
         guiGraphics.blit(resourceLocation, x, y, 0, 0, 16, 16, 16, 16);
 
-        // 💎 中心配置
         String text = String.valueOf(value);
         int textWidth = font.width(text);
         int centerX = x + (16 - textWidth) / 2;
         int centerY = y + (16 - font.lineHeight) / 2 + 1;
 
-        // ✨ シャドウ付き
         guiGraphics.drawString(font, text, centerX + 1, centerY + 1, 0x40000000, false);
         guiGraphics.drawString(font, text, centerX, centerY, 0xFFFFFF, false);
     }

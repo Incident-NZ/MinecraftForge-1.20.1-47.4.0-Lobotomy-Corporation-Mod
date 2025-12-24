@@ -1,7 +1,7 @@
 package net.lobotomy_corporation_mod.items.materials;
 
 import net.lobotomy_corporation_mod.BlockInit;
-import net.lobotomy_corporation_mod.Lobotomy_corporation_mod;
+import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
@@ -138,7 +138,7 @@ public enum EGOArmor implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return Lobotomy_corporation_mod.MOD_ID + ":" + this.name;
+        return lobotomy_corporation_mod.MOD_ID + ":" + this.name;
     }
 
     @Override
