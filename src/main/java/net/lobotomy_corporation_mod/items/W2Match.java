@@ -1,131 +1,182 @@
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.ItemInit;
 import net.lobotomy_corporation_mod.config.Config;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
+import net.lobotomy_corporation_mod.entity.BulletExEntity;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.SmallFireball;
-import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level.ExplosionInteraction;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.AABB;
 
-public class W2Match extends CrossbowItem {
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.function.Predicate;
 
-    private static final String AMMO_TAG = "fourth_match_ammo";
-    private static final int MAX_AMMO = 1;
-    private static final int RELOAD_TICKS = 60; // 3秒（20tick * 3）
+public class W2Match extends ProjectileWeaponItem {
+    private static final float DAMAGE = 30.0f;
+    private static final float VELOCITY = 4.0f;
+    private static final int RANGE = 128;
+    private static final int COOLDOWN_TICKS = 100;
+    private static final float EXPLOSION_POWER = 20.0f;
 
-    public W2Match() {
-        super(new Properties().durability(2000).setNoRepair());
+    public W2Match(Properties properties) {
+        super(properties.durability(1000));
     }
 
     @Override
-    public int getUseDuration(ItemStack stack) {
-        return RELOAD_TICKS;
+    public Predicate<ItemStack> getAllSupportedProjectiles() {
+        return (stack) -> stack.is(ItemInit.EXPLOSIVE_BULLET_AMMO.get());
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
-        if (!(entityLiving instanceof Player player)) return;
-
-        int useTicks = this.getUseDuration(stack) - timeLeft;
-        CompoundTag tag = stack.getOrCreateTag();
-        tag.putBoolean("Reloaded", true);
-        stack.setTag(tag);
-
-        if (useTicks >= RELOAD_TICKS && getAmmo(stack) == 0) {
-            setAmmo(stack, MAX_AMMO);
-            level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                    SoundEvents.ARMOR_EQUIP_IRON, SoundSource.PLAYERS, 1.0F, 1.0F);
-        }
+    public int getDefaultProjectileRange() {
+        return RANGE;
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        int ammo = getAmmo(stack);
+        ItemStack gun = player.getItemInHand(hand);
 
-        if (ammo > 0) {
+        if (!hasAmmo(player)) {
             if (!level.isClientSide) {
-                shoot(level, player, stack);
-                setAmmo(stack, 0);
-                stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                player.displayClientMessage(Component.literal("弾薬切れ / No Ammo"), true);
+                level.playSound(null, player, SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS, 1.0F, 1.2F);
             }
-            return InteractionResultHolder.success(stack);
+            return InteractionResultHolder.fail(gun);
         }
 
-        player.startUsingItem(hand);
-        return InteractionResultHolder.consume(stack);
-    }
-
-    private void shoot(Level level, Player player, ItemStack stack) {
-        Vec3 direction = player.getLookAngle();
-        Vec3 spawnPos = player.getEyePosition().add(direction.scale(1.0));
-
-        CustomFireball fireball = new CustomFireball(level, player, direction.x, direction.y, direction.z);
-        fireball.setPos(spawnPos);
-        level.addFreshEntity(fireball);
-
-        level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.0F, 1.0F);
-    }
-
-    private int getAmmo(ItemStack stack) {
-        return stack.getOrCreateTag().getInt(AMMO_TAG);
-    }
-
-    private void setAmmo(ItemStack stack, int ammo) {
-        stack.getOrCreateTag().putInt(AMMO_TAG, Math.max(0, Math.min(MAX_AMMO, ammo)));
-    }
-
-    // === カスタムファイアボール ===
-    public static class CustomFireball extends SmallFireball {
-        public CustomFireball(Level level, LivingEntity shooter, double x, double y, double z) {
-            super(level, shooter, x, y, z);
+        if (level.isClientSide) {
+            level.playSound(player, player.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.2F, 0.8F);
+            return InteractionResultHolder.consume(gun);
         }
 
-        @Override
-        protected void onHit(HitResult result) {
-            super.onHit(result);
-            if (!this.level().isClientSide && result.getType() == HitResult.Type.BLOCK) {
-                Vec3 pos = result.getLocation();
+        shootBullet(level, player);
+        consumeAmmo(player);
 
-                // 🔹 Configを参照して地形破壊を制御
-                Level.ExplosionInteraction interaction =
-                        Config.ALLOW_TERRAIN_DAMAGE.get()
-                                ? Level.ExplosionInteraction.BLOCK   // ブロック破壊あり
-                                : Level.ExplosionInteraction.NONE;   // ダメージはあるがブロック破壊なし
+        gun.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+        player.awardStat(Stats.ITEM_USED.get(this));
+        player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
 
-                // 爆発
-                level().explode(this, pos.x, pos.y, pos.z, 30.0f, interaction);
+        return InteractionResultHolder.consume(gun);
+    }
 
-                // 🔹 Configがtrueの時だけ炎を撒き散らす
-                if (Config.ALLOW_TERRAIN_DAMAGE.get()) {
-                    for (int dx = -5; dx <= 5; dx++) {
-                        for (int dy = -5; dy <= 5; dy++) {
-                            for (int dz = -5; dz <= 5; dz++) {
-                                BlockPos firePos = this.blockPosition().offset(dx, dy, dz);
-                                BlockState state = level().getBlockState(firePos);
-                                if (state.isAir()) {
-                                    level().setBlock(firePos, Blocks.FIRE.defaultBlockState(), 15);
-                                }
-                            }
-                        }
+    private boolean hasAmmo(Player player) {
+        return player.getInventory().contains(new ItemStack(ItemInit.EXPLOSIVE_BULLET_AMMO.get()));
+    }
+
+    private void consumeAmmo(Player player) {
+        if (!player.getAbilities().instabuild) {
+            player.getInventory().clearOrCountMatchingItems(
+                    stack -> stack.is(ItemInit.EXPLOSIVE_BULLET_AMMO.get()),
+                    1, player.inventoryMenu.getCraftSlots()
+            );
+        }
+    }
+
+    private void shootBullet(Level level, Player player) {
+        Vec3 look = player.getLookAngle();
+        Vec3 eyePos = player.getEyePosition();
+        Vec3 spawnPos = eyePos.add(look.scale(0.5));
+        Vec3 endPos = eyePos.add(look.scale(getDefaultProjectileRange()));
+
+        EntityHitResult entityHit = null;
+        if (!level.isClientSide) {
+            entityHit = ProjectileUtil.getEntityHitResult(
+                    level,
+                    player,
+                    eyePos,
+                    endPos,
+                    player.getBoundingBox().expandTowards(look.scale(getDefaultProjectileRange())).inflate(1.0D),
+                    (e) -> e != player && e instanceof LivingEntity && e.isAlive()
+            );
+        }
+
+        Vec3 explosionCenter;
+        if (entityHit != null) {
+            explosionCenter = entityHit.getEntity().position();
+        } else {
+            explosionCenter = endPos;
+        }
+
+        if (!level.isClientSide) {
+            handleExplosion(level, player, explosionCenter.x, explosionCenter.y, explosionCenter.z);
+        }
+
+        BulletExEntity bullet = new BulletExEntity(level, player, DAMAGE, VELOCITY, look);
+        bullet.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
+        bullet.setDamage(DAMAGE);
+        bullet.setVelocity(VELOCITY);
+        bullet.setMaxLifetime(getDefaultProjectileRange());
+        level.addFreshEntity(bullet);
+
+        level.playSound(null, player, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.2F, 0.8F);
+    }
+
+    private void handleExplosion(Level lvl, Player shooter, double x, double y, double z) {
+        boolean allowTerrain = Config.ALLOW_TERRAIN_DAMAGE.get();
+        boolean allowFriendly = Config.ALLOW_FRIENDLY_FIRE.get();
+
+        double radius = Math.max(1.0, EXPLOSION_POWER);
+
+        if (allowTerrain) {
+            Map<Player, Float> savedPlayerHealth = new HashMap<>();
+            if (!allowFriendly) {
+                List<Player> players = lvl.getEntitiesOfClass(
+                        Player.class,
+                        new AABB(x, y, z, x, y, z).inflate(radius),
+                        p -> p != shooter && p.isAlive()
+                );
+                for (Player p : players) {
+                    savedPlayerHealth.put(p, p.getHealth());
+                }
+            }
+
+            Explosion explosion = lvl.explode(shooter, x, y, z, EXPLOSION_POWER, ExplosionInteraction.TNT);
+
+            if (!allowFriendly) {
+                for (Map.Entry<Player, Float> e : savedPlayerHealth.entrySet()) {
+                    Player p = e.getKey();
+                    if (p.isAlive()) {
+                        p.setHealth(e.getValue());
+                        p.invulnerableTime = 0;
                     }
                 }
             }
+        } else {
+            // ブロック破壊なしの爆発（視覚/音のみ）を発生させ、Explosion を取得
+            Explosion explosion = lvl.explode(shooter, x, y, z, EXPLOSION_POWER, ExplosionInteraction.NONE);
+
+            AABB area = new AABB(x, y, z, x, y, z).inflate(radius);
+            List<LivingEntity> targets = lvl.getEntitiesOfClass(LivingEntity.class, area, e -> e.isAlive() && e != shooter);
+            for (LivingEntity t : targets) {
+                if (t instanceof Player && !allowFriendly) {
+                    continue;
+                }
+                // Explosion オブジェクトを用いてダメージソースを生成して与える
+                t.hurt(lvl.damageSources().explosion(explosion), DAMAGE);
+            }
         }
     }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        target.hurt(attacker.level().damageSources().explosion(null), DAMAGE);
+        stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+        return true;
+    }
 }
-
-
-

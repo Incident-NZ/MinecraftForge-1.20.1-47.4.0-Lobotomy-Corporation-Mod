@@ -1,9 +1,6 @@
 package net.lobotomy_corporation_mod;
 
-import net.lobotomy_corporation_mod.entity.BulletEntity;
-import net.lobotomy_corporation_mod.entity.MagicBulletEntity;
-import net.lobotomy_corporation_mod.entity.W5StarProjectile;
-import net.lobotomy_corporation_mod.entity.m5_t0346;
+import net.lobotomy_corporation_mod.entity.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -45,6 +42,17 @@ public class EntityInit {
                             .clientTrackingRange(64)
                             .updateInterval(1)
                             .build("bullet"));
+
+    public static final RegistryObject<EntityType<BulletExEntity>> BULLET_EX =
+            ENTITY_TYPES.register("bullet_ex", () ->
+                    EntityType.Builder.<BulletExEntity>of(
+                            BulletExEntity::new,
+                            MobCategory.MISC
+                            )
+                            .sized(1.5F, 1.5F)
+                            .clientTrackingRange(64)
+                            .updateInterval(1)
+                            .build("bullet_ex"));
 
     public static final RegistryObject<EntityType<m5_t0346>> M5_T0346 =
             ENTITY_TYPES.register("m5_t0346", () ->

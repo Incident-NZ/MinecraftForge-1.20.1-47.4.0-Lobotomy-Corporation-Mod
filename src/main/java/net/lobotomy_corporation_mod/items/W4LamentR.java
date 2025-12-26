@@ -1,111 +1,176 @@
+// java
 package net.lobotomy_corporation_mod.items;
 
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
-import net.minecraft.nbt.CompoundTag;
+import net.lobotomy_corporation_mod.ItemInit;
+import net.lobotomy_corporation_mod.config.Config;
+import net.lobotomy_corporation_mod.entity.BulletEntity;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.core.particles.ParticleTypes;
 
-import java.util.List;
+import java.util.function.Predicate;
 
-public class W4LamentR extends Item {
+public class W4LamentR extends ProjectileWeaponItem {
+    private static final float DAMAGE = 4.0f;
+    private static final float VELOCITY = 16.0f;
+    private static final int RANGE = 96;
+    private static final int COOLDOWN_TICKS = 5; // 0.25秒
+    private static final double ANGLE_DEGREES = 5.0; // 弾を左右に少し振る角度
 
-    private static final String AMMO_TAG = "solemn_lament_ammo";
-    private static final int MAX_AMMO = 16;
-    private static final int RELOAD_TICKS = 30;
-    private static final float DAMAGE = 2.0f;
-    private static final int RANGE = 128;
-
-    public W4LamentR() {
-        super(new Properties().durability(3000).setNoRepair());
+    public W4LamentR(Properties properties) {
+        super(properties.durability(1500));
     }
 
     @Override
-    public int getUseDuration(ItemStack stack) {
-        return 50;
+    public Predicate<ItemStack> getAllSupportedProjectiles() {
+        return (stack) -> stack.is(ItemInit.PISTOL_BULLET_AMMO.get());
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.BOW;
-    }
-
-    @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
-        if (!(entity instanceof Player player)) return;
-
-        int useTicks = this.getUseDuration(stack) - timeLeft;
-        CompoundTag tag = stack.getOrCreateTag();
-        tag.putBoolean("Reloaded", true);
-        stack.setTag(tag);
-
-        if (useTicks >= RELOAD_TICKS) {
-            setAmmo(stack, MAX_AMMO);
-            level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                    SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.PLAYERS, 1.0F, 1.0F);
-        }
+    public int getDefaultProjectileRange() {
+        return RANGE;
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack main = player.getMainHandItem();
-        ItemStack off = player.getOffhandItem();
+        ItemStack gun = player.getItemInHand(hand);
 
-        if (!(main.getItem() instanceof W4LamentR && off.getItem() instanceof W4LamentL)) {
-            return InteractionResultHolder.fail(main);
-        }
-
-        ItemStack stack = player.getItemInHand(hand);
-        int ammo = getAmmo(stack);
-
-        if (ammo > 0) {
+        // オフハンドに W4LamentL が無ければ使用不可
+        ItemStack off = player.getItemInHand(InteractionHand.OFF_HAND);
+        if (off.getItem() != ItemInit.W4_SOLEMN_LAMENT_L.get()) {
             if (!level.isClientSide) {
-                shoot(level, player);
-                setAmmo(stack, ammo - 1);
-                stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                player.displayClientMessage(Component.literal("オフハンドに崇高な誓い 白が必要です"), true);
+                level.playSound(null, player, SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS, 1.0F, 1.2F);
             }
-            return InteractionResultHolder.success(stack);
-        } else {
-            player.startUsingItem(hand);
-            return InteractionResultHolder.consume(stack);
+            return InteractionResultHolder.fail(gun);
+        }
+
+        // 必要弾数は2発
+        if (!hasAmmo(player)) {
+            if (!level.isClientSide) {
+                player.displayClientMessage(Component.literal("弾薬切れ / No Ammo (2 required)"), true);
+                level.playSound(null, player, SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS, 1.0F, 1.2F);
+            }
+            return InteractionResultHolder.fail(gun);
+        }
+
+        if (level.isClientSide) {
+            level.playSound(player, player.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.0F, 0.9F);
+            return InteractionResultHolder.consume(gun);
+        }
+
+        // サーバー側で2発射撃
+        shootDouble(level, player);
+        consumeAmmo(player);
+
+        gun.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+        player.awardStat(Stats.ITEM_USED.get(this));
+        player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
+
+        return InteractionResultHolder.consume(gun);
+    }
+
+    private boolean hasAmmo(Player player) {
+        // クリエイティブは無制限
+        if (player.getAbilities().instabuild) return true;
+        return player.getInventory().countItem(ItemInit.PISTOL_BULLET_AMMO.get()) >= 2;
+    }
+
+    private void consumeAmmo(Player player) {
+        if (!player.getAbilities().instabuild) {
+            player.getInventory().clearOrCountMatchingItems(
+                    stack -> stack.is(ItemInit.PISTOL_BULLET_AMMO.get()),
+                    1, player.inventoryMenu.getCraftSlots()
+            );
         }
     }
 
-    private void shoot(Level level, Player player) {
-        Vec3 start = player.getEyePosition();
+    private void shootDouble(Level level, Player player) {
         Vec3 look = player.getLookAngle();
+        Vec3 eyePos = player.getEyePosition();
+        Vec3 spawnBase = eyePos.add(look.scale(0.5));
 
-        for (int i = 0; i < RANGE; i++) {
-            Vec3 pos = start.add(look.scale(i * 0.5));
-            level.addParticle(ParticleTypes.CRIT, pos.x, pos.y, pos.z, 0, 0, 0);
+        // 左右2方向（角度を回転）
+        Vec3 dirLeft = rotateY(look, ANGLE_DEGREES);
+        Vec3 dirRight = rotateY(look, -ANGLE_DEGREES);
 
-            AABB box = new AABB(pos.subtract(0.5, 0.5, 0.5), pos.add(0.5, 0.5, 0.5));
-            List<LivingEntity> targets = level.getEntitiesOfClass(LivingEntity.class, box, e -> e != player);
-
-            for (LivingEntity target : targets) {
-                target.hurt(target.damageSources().playerAttack(player), DAMAGE);
-                return;
-            }
+        if (!level.isClientSide) {
+            applyRayDamage(level, player, eyePos, dirLeft);
+            applyRayDamage(level, player, eyePos, dirRight);
         }
 
-        level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                SoundEvents.ENDER_DRAGON_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F);
+        BulletEntity b1 = new BulletEntity(level, player, DAMAGE, VELOCITY, dirLeft);
+        b1.setPos(spawnBase.x, spawnBase.y, spawnBase.z);
+        b1.setDamage(DAMAGE);
+        b1.setVelocity(VELOCITY);
+        b1.setMaxLifetime(getDefaultProjectileRange());
+        level.addFreshEntity(b1);
+
+        BulletEntity b2 = new BulletEntity(level, player, DAMAGE, VELOCITY, dirRight);
+        b2.setPos(spawnBase.x, spawnBase.y, spawnBase.z);
+        b2.setDamage(DAMAGE);
+        b2.setVelocity(VELOCITY);
+        b2.setMaxLifetime(getDefaultProjectileRange());
+        level.addFreshEntity(b2);
+
+        level.playSound(null, player, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.0F, 0.9F);
     }
 
-    private int getAmmo(ItemStack stack) {
-        return stack.getOrCreateTag().getInt(AMMO_TAG);
+    private void applyRayDamage(Level level, Player player, Vec3 eyePos, Vec3 dir) {
+        Vec3 endPos = eyePos.add(dir.scale(getDefaultProjectileRange()));
+        EntityHitResult entityHit = ProjectileUtil.getEntityHitResult(
+                level,
+                player,
+                eyePos,
+                endPos,
+                player.getBoundingBox().expandTowards(dir.scale(getDefaultProjectileRange())).inflate(1.0D),
+                (e) -> e != player && e instanceof LivingEntity && e.isAlive()
+        );
+
+        if (entityHit != null) {
+            if (entityHit.getEntity() instanceof LivingEntity target) {
+                if (!(target instanceof Player) || Config.ALLOW_FRIENDLY_FIRE.get()) {
+                    target.hurt(player.level().damageSources().generic(), DAMAGE);
+                    level.playSound(null, target.blockPosition(), SoundEvents.GENERIC_HURT, SoundSource.PLAYERS, 1.0F, 1.0F);
+                }
+            }
+        }
     }
 
-    private void setAmmo(ItemStack stack, int ammo) {
-        stack.getOrCreateTag().putInt(AMMO_TAG, Math.max(0, Math.min(MAX_AMMO, ammo)));
+    // Y軸回転（度）
+    private Vec3 rotateY(Vec3 v, double degrees) {
+        double rad = Math.toRadians(degrees);
+        double cos = Math.cos(rad);
+        double sin = Math.sin(rad);
+        double x = v.x * cos - v.z * sin;
+        double z = v.x * sin + v.z * cos;
+        return new Vec3(x, v.y, z).normalize();
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        // プレイヤーへのダメージは設定を尊重
+        if (target instanceof Player && !Config.ALLOW_FRIENDLY_FIRE.get()) {
+            stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+            return true;
+        }
+
+        target.hurt(attacker.level().damageSources().generic(), DAMAGE);
+
+        stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+        return true;
     }
 }
+

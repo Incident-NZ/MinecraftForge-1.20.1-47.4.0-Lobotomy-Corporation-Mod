@@ -12,17 +12,18 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
-public class BulletEntity extends Projectile {
-    private float damage;
+public class BulletExEntity extends Projectile {
+    private float damage = 0f;
     private int maxLifetime = 100;
+    private static final float EXPLOSION_POWER = 20.0f; // TNT (4.0f) * 5 = 20.0f
 
-    public BulletEntity(EntityType<? extends BulletEntity> type, Level level) {
+    public BulletExEntity(EntityType<? extends BulletExEntity> type, Level level) {
         super(type, level);
         this.setNoGravity(true);
     }
 
-    public BulletEntity(Level level, LivingEntity shooter, float damage, float velocity, Vec3 direction) {
-        this(EntityInit.BULLET.get(), level);
+    public BulletExEntity(Level level, LivingEntity shooter, float damage, float velocity, Vec3 direction) {
+        this(EntityInit.BULLET_EX.get(), level);
         this.setOwner(shooter);
         this.damage = damage;
         this.setMaxLifetime(100);
@@ -52,7 +53,6 @@ public class BulletEntity extends Projectile {
 
         if (this.level().isClientSide) {
             Vec3 pos = this.position();
-
             this.level().addParticle(ParticleTypes.SMOKE,
                     pos.x, pos.y, pos.z,
                     0, 0, 0);
@@ -71,20 +71,28 @@ public class BulletEntity extends Projectile {
 
     @Override
     protected void onHit(HitResult result) {
-
+        if (!this.level().isClientSide) {
+            explodeAt(this.getX(), this.getY(), this.getZ());
+        }
+        this.discard();
     }
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        Entity target = result.getEntity();
-        LivingEntity owner = (LivingEntity) this.getOwner();
-
-        if (target instanceof LivingEntity living && owner != null && !target.is(owner)) {
-            living.hurt(this.level().damageSources().mobProjectile(this, owner), this.damage);
+        if (!this.level().isClientSide) {
+            explodeAt(result.getEntity().getX(), result.getEntity().getY(), result.getEntity().getZ());
         }
         this.discard();
     }
+
+    private void explodeAt(double x, double y, double z) {
+        Level lvl = this.level();
+        if (!lvl.isClientSide) {
+            lvl.explode(this.getOwner(), x, y, z, EXPLOSION_POWER, Level.ExplosionInteraction.TNT);
+        }
+    }
+
 
     public void setDamage(float damage) { this.damage = damage; }
     public void setVelocity(float velocity) {
@@ -102,6 +110,7 @@ public class BulletEntity extends Projectile {
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
-        return EntityDimensions.fixed(0.25F, 0.25F);
+        // 当たり判定を 1.5F にする
+        return EntityDimensions.fixed(1.5F, 1.5F);
     }
 }

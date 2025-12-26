@@ -24,6 +24,7 @@
   "item.lobotomy_corporation_mod.weapon_bullet_magic": "Magic Bullet",
   "item.lobotomy_corporation_mod.weapon_bullet_rifle": "Rifle Bullet",
   "item.lobotomy_corporation_mod.weapon_bullet_pistol": "Pistol Bullet",
+  "item.lobotomy_corporation_mod.weapon_bullet_explosive": "Explosive Shell",
 
   "block.lobotomy_corporation_mod.e_box_1": "E-Box ZAYIN",
   "block.lobotomy_corporation_mod.e_box_2": "E-Box TETH",
@@ -146,6 +147,7 @@
 
   "entity.lobotomy_corporation_mod.magic_bullet": "Magic Bullet",
   "entity.lobotomy_corporation_mod.bullet": "Bullet",
+  "entity.lobotomy_corporation_mod.bullet_ex": "Explosive Shell",
   "entity.lobotomy_corporation_mod.ego_sound_of_a_star_projectile": "Sound of a Star",
   "entity.lobotomy_corporation_mod.m5_t0346": "Abnormality T-03-46 Whitenight"
 }

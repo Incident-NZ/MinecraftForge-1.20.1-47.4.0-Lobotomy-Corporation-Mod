@@ -11,9 +11,11 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Predicate;
@@ -22,7 +24,7 @@ public class W4MagicBullet extends ProjectileWeaponItem {
 
     private static final float DAMAGE = 24.0F;
     private static final float VELOCITY = 16.0F;
-    private static final int COOLDOWN_TICKS = 2; // 0.1秒
+    private static final int COOLDOWN_TICKS = 40; // 2秒
 
     public W4MagicBullet(Properties properties) {
         super(properties.durability(3000).setNoRepair());
@@ -87,8 +89,29 @@ public class W4MagicBullet extends ProjectileWeaponItem {
         Vec3 look = player.getLookAngle();
         Vec3 eyePos = player.getEyePosition();
         Vec3 spawnPos = eyePos.add(look.scale(0.8));
+        Vec3 endPos = eyePos.add(look.scale(getDefaultProjectileRange()));
+
+        // レイキャストで最初にヒットするエンティティを探してダメージを与える（サーバー側のみ）
+        if (!level.isClientSide) {
+            EntityHitResult entityHit = ProjectileUtil.getEntityHitResult(
+                    level,
+                    player,
+                    eyePos,
+                    endPos,
+                    player.getBoundingBox().expandTowards(look.scale(getDefaultProjectileRange())).inflate(1.0D),
+                    (e) -> e != player && e instanceof LivingEntity && e.isAlive()
+            );
+
+            if (entityHit != null) {
+                if (entityHit.getEntity() instanceof LivingEntity target) {
+                    target.hurt(player.level().damageSources().magic(), DAMAGE);
+                    level.playSound(null, target.blockPosition(), SoundEvents.GENERIC_HURT, SoundSource.PLAYERS, 1.0F, 1.0F);
+                }
+            }
+        }
 
         MagicBulletEntity bullet = new MagicBulletEntity(level, player, DAMAGE, VELOCITY, look);
+        bullet.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
         level.addFreshEntity(bullet);
 
         level.playSound(null, player, SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS, 1.5F, 0.9F);

@@ -29,8 +29,9 @@ public class OverlayHandler {
             ItemInit.W3_LAETITIA,
             ItemInit.W3_HARMONY,
             ItemInit.W4_MAGIC_BULLET,
-            ItemInit.W4_SOLEMN_LAMENT_L,
-            ItemInit.W4_HORNET
+            ItemInit.W4_SOLEMN_LAMENT_R,
+            ItemInit.W4_HORNET,
+            ItemInit.W5_PARADISE_LOST
     );
 
     @SubscribeEvent

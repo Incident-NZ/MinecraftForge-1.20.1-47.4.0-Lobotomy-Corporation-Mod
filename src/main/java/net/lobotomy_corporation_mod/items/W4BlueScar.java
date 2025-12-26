@@ -18,7 +18,6 @@ public class W4BlueScar extends SwordItem {
             stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(p.getUsedItemHand()));
         }
 
-        // 持続ダメージ用フラグをNBTでつける
         CompoundTag tag = target.getPersistentData();
         tag.putInt("blue_scar_dot_ticks", 40); // 2秒間 (20tick = 1秒)
         return true;

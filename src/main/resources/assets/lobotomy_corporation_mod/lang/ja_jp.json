@@ -24,6 +24,7 @@
   "item.lobotomy_corporation_mod.weapon_bullet_magic": "魔法の弾丸",
   "item.lobotomy_corporation_mod.weapon_bullet_rifle": "ライフル用弾丸",
   "item.lobotomy_corporation_mod.weapon_bullet_pistol": "ピストル用弾丸",
+  "item.lobotomy_corporation_mod.weapon_bullet_explosive": "砲弾",
 
   "block.lobotomy_corporation_mod.e_box_1": "エンケファリン - ZAYIN",
   "block.lobotomy_corporation_mod.e_box_2": "エンケファリン - TETH",
@@ -146,6 +147,7 @@
 
   "entity.lobotomy_corporation_mod.magic_bullet": "魔法の弾丸",
   "entity.lobotomy_corporation_mod.bullet": "弾丸",
+  "entity.lobotomy_corporation_mod.bullet_ex": "砲弾",
   "entity.lobotomy_corporation_mod.ego_sound_of_a_star_projectile": "星の音",
   "entity.lobotomy_corporation_mod.m5_t0346": "アブノーマリティ T-03-46 白夜"
 }

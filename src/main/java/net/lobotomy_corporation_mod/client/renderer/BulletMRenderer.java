@@ -7,9 +7,9 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.resources.ResourceLocation;
 
-public class MagicBulletRenderer extends EntityRenderer<MagicBulletEntity> {
+public class BulletMRenderer extends EntityRenderer<MagicBulletEntity> {
 
-    public MagicBulletRenderer(EntityRendererProvider.Context context) {
+    public BulletMRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.shadowRadius = 0.0F;
         this.shadowStrength = 0.0F;

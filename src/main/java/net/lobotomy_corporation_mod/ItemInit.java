@@ -24,6 +24,8 @@ public class ItemInit {
             () -> new AmmoRifle(new ResourceLocation("lobotomy_corporation_mod", "rifle_bullet")));
     public static final RegistryObject<Item> PISTOL_BULLET_AMMO = ITEMS.register("weapon_bullet_pistol",
             () -> new AmmoPistol(new ResourceLocation("lobotomy_corporation_mod", "pistol_bullet")));
+    public static final RegistryObject<Item> EXPLOSIVE_BULLET_AMMO = ITEMS.register("weapon_bullet_explosive",
+            () -> new AmmoExplosive(new ResourceLocation("lobotomy_corporation_mod", "explosive_bullet")));
 
     //EGO Weapons
     public static final RegistryObject<Item> W5_TWILIGHT = ITEMS.register("w5_twilight", W5Twilight::new);
@@ -36,31 +38,36 @@ public class ItemInit {
     public static final RegistryObject<Item> W4_THE_SWORD_SHARPENED_WITH_TEARS = ITEMS.register("w4_tears", W4Tears::new);
     public static final RegistryObject<Item> W4_LAMP = ITEMS.register("w4_lamp", W4Lamp::new);
     public static final RegistryObject<Item> W4_BLUE_SCAR = ITEMS.register("w4_blue_scar", W4BlueScar::new);
-    public static final RegistryObject<Item> W4_SOLEMN_LAMENT_L = ITEMS.register("w4_lament_l", W4LamentL::new);
-    public static final RegistryObject<Item> W4_SOLEMN_LAMENT_R = ITEMS.register("w4_lament_r", W4LamentR::new);
     public static final RegistryObject<Item> W3_BLOOD = ITEMS.register("w3_blood", W3Blood::new);
     public static final RegistryObject<Item> W3_HARVEST = ITEMS.register("w3_harvest", W3Harvest::new);
     public static final RegistryObject<Item> W3_LOGGING = ITEMS.register("w3_logging", W3Logging::new);
     public static final RegistryObject<Item> W3_GALAXY = ITEMS.register("w3_galaxy", W3Galaxy::new);
     public static final RegistryObject<Item> W3_GRINDER_MK4 = ITEMS.register("w3_mk4", W3MK4::new);
-    public static final RegistryObject<Item> W3_HARMONY = ITEMS.register("w3_harmony", W3Harmony::new);
-    public static final RegistryObject<Item> W3_LAETITIA = ITEMS.register("w3_laetitia", W3Laetitia::new);
     public static final RegistryObject<Item> W3_ICE_SHARD = ITEMS.register("w3_ice_shard", W3IceShard::new);
     public static final RegistryObject<Item> W2_REGLET = ITEMS.register("w2_reglet", W2Reglet::new);
     public static final RegistryObject<Item> W2_RED_EYE = ITEMS.register("w2_red_eye", W2RedEye::new);
     public static final RegistryObject<Item> W2_LANTERN = ITEMS.register("w2_lantern", W2Lantern::new);
-    public static final RegistryObject<Item> W2_BEAK = ITEMS.register("w2_beak", W2Beak::new);
-    public static final RegistryObject<Item> W2_FOURTH_MATCH_FIRE = ITEMS.register("w2_match", W2Match::new);
     public static final RegistryObject<Item> W1_PENITENCE = ITEMS.register("w1_penitence", W1Penitence::new);
     public static final RegistryObject<Item> G_MIMICRY = ITEMS.register("ex_mimicry", WeaponKaliMimicry::new);
     public static final RegistryObject<Item> EX_DURANDAL = ITEMS.register("ex_durandal", WeaponRolandDurandal::new);
     public static final RegistryObject<Item> EX_ARGALIA = ITEMS.register("ex_argalia", WeaponArgalia::new);
 
     //EGO Guns
+    public static final RegistryObject<Item> W4_SOLEMN_LAMENT_L = ITEMS.register("w4_lament_l", W4LamentL::new);
+    public static final RegistryObject<Item> W4_SOLEMN_LAMENT_R = ITEMS.register("w4_lament_r",
+            () -> new W4LamentR(new Item.Properties().durability(3000)));
     public static final RegistryObject<Item> W4_MAGIC_BULLET = ITEMS.register("w4_magic_bullet",
             () -> new W4MagicBullet(new Item.Properties().durability(3000)));
     public static final RegistryObject<Item> W4_HORNET = ITEMS.register("w4_hornet",
             () -> new W4Hornet(new Item.Properties().durability(3000)));
+    public static final RegistryObject<Item> W3_HARMONY = ITEMS.register("w3_harmony",
+            () -> new W3Harmony(new Item.Properties().durability(2000)));
+    public static final RegistryObject<Item> W3_LAETITIA = ITEMS.register("w3_laetitia",
+            () -> new W3Laetitia(new Item.Properties().durability(2000)));
+    public static final RegistryObject<Item> W2_BEAK = ITEMS.register("w2_beak",
+            () -> new W2Beak(new Item.Properties().durability(1000)));
+    public static final RegistryObject<Item> W2_FOURTH_MATCH_FIRE = ITEMS.register("w2_match",
+            () -> new W2Match(new Item.Properties().durability(1000)));
 
     //EGO Suit
     public static final RegistryObject<Item> A5_TWILIGHT_1 = ITEMS.register("s5_twilight_1",

@@ -1,9 +1,10 @@
 package net.lobotomy_corporation_mod.client;
 
 import net.lobotomy_corporation_mod.EntityInit;
+import net.lobotomy_corporation_mod.client.renderer.BulletExRenderer;
 import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.lobotomy_corporation_mod.client.renderer.BulletRenderer;
-import net.lobotomy_corporation_mod.client.renderer.MagicBulletRenderer;
+import net.lobotomy_corporation_mod.client.renderer.BulletMRenderer;
 import net.lobotomy_corporation_mod.client.renderer.m5r_t0346;
 import net.lobotomy_corporation_mod.items.W4MagicBullet;
 import net.lobotomy_corporation_mod.network.ModPackets;
@@ -35,9 +36,11 @@ public class ClientEvents {
         event.registerEntityRenderer(EntityInit.W5_SOUND_OF_A_STAR_PROJECTILE.get(),
                 ctx -> new ThrownItemRenderer<>(ctx, 1.0f, true));
         event.registerEntityRenderer(EntityInit.MAGIC_BULLET.get(),
-                MagicBulletRenderer::new);
+                BulletMRenderer::new);
         event.registerEntityRenderer(EntityInit.BULLET.get(),
                 BulletRenderer::new);
+        event.registerEntityRenderer(EntityInit.BULLET_EX.get(),
+                BulletExRenderer::new);
         event.registerEntityRenderer(EntityInit.M5_T0346.get(), m5r_t0346::new);
     }
 

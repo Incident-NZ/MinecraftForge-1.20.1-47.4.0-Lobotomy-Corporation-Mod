@@ -16,5 +16,6 @@ public class PMBlockTabs {
             ItemInit.MAGIC_BULLET_AMMO.get(),
             ItemInit.RIFLE_BULLET_AMMO.get(),
             ItemInit.PISTOL_BULLET_AMMO.get(),
+            ItemInit.EXPLOSIVE_BULLET_AMMO.get(),
     };
 }

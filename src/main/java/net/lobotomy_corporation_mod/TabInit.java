@@ -15,7 +15,7 @@ public class TabInit {
     public static final RegistryObject<CreativeModeTab> PM_ITEMS = CREATIVE_TABS.register("pm_items",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.pm_items"))
-                    .icon(() -> ItemInit.TASK_TABLET.get().getDefaultInstance())
+                    .icon(() -> ItemInit.W1_PENITENCE.get().getDefaultInstance())
                     .displayItems((param, output) -> {
                         for (Item item : PMItemTabs.items) {
                             output.accept(item);
