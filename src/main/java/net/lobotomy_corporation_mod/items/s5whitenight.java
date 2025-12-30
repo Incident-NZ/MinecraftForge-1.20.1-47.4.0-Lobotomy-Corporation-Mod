@@ -1,6 +1,5 @@
 package net.lobotomy_corporation_mod.items;
 
-import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.lobotomy_corporation_mod.client.renderer.s5r_whitenight;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -28,7 +27,6 @@ import software.bernie.geckolib.core.object.PlayState;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-@Mod.EventBusSubscriber(modid = lobotomy_corporation_mod.MOD_ID)
 public class s5whitenight extends ArmorItem implements GeoItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
@@ -66,70 +64,70 @@ public class s5whitenight extends ArmorItem implements GeoItem {
         return cache;
     }
 
-    // ==== フルセットチェック（3部位） ====
-    public static boolean hasFullSet(Player player) {
-        return player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof s5whitenight &&
-                player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof s5whitenight;
-    }
-
-    // ==== イベント処理 ====
 
     private static final UUID HEALTH_BONUS_UUID = UUID.fromString("aaaaaaaa-bbbb-cccc-dddd-eeeeeeee0001");
     private static final UUID RESIST_BONUS_UUID = UUID.fromString("aaaaaaaa-bbbb-cccc-dddd-eeeeeeee0002");
 
-    @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        Player player = event.player;
-        if (event.phase != TickEvent.Phase.END) return;
+    @Mod.EventBusSubscriber(modid = "lobotomy_corporation_mod")
+    public static class WhiteNightEvents{
+        @SubscribeEvent
+        public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+            Player player = event.player;
+            if (event.phase != TickEvent.Phase.END) return;
 
-        if (hasFullSet(player)) {
-            // HP上限 +20
-            applyModifier(player, Attributes.MAX_HEALTH, HEALTH_BONUS_UUID, 20.0, AttributeModifier.Operation.ADDITION);
-
-            // ノックバック耐性 (80% = 0.8)
-            applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, RESIST_BONUS_UUID, 0.8, AttributeModifier.Operation.ADDITION);
-        } else {
-            // 外したらリセット
-            removeModifier(player, Attributes.MAX_HEALTH, HEALTH_BONUS_UUID);
-            removeModifier(player, Attributes.KNOCKBACK_RESISTANCE, RESIST_BONUS_UUID);
+            if (WhiteNightFullSet(player)) {
+                applyModifier(player, Attributes.MAX_HEALTH, HEALTH_BONUS_UUID, 20.0);
+                applyModifier(player, Attributes.KNOCKBACK_RESISTANCE, RESIST_BONUS_UUID, 0.8);
+            } else {
+                removeModifier(player, Attributes.MAX_HEALTH, HEALTH_BONUS_UUID);
+                removeModifier(player, Attributes.KNOCKBACK_RESISTANCE, RESIST_BONUS_UUID);
+            }
         }
-    }
 
-    @SubscribeEvent
-    public static void onLivingHurt(LivingHurtEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-        if (!hasFullSet(player)) return;
+        @SubscribeEvent
+        public static void onLivingHurt(LivingHurtEvent event) {
+            if (!(event.getEntity() instanceof Player player)) return;
+            if (!WhiteNightFullSet(player)) return;
 
-        float damage = event.getAmount();
+            float damage = event.getAmount();
 
-        if (damage <= 5.0f) {
-            event.setCanceled(true); // ダメージ無効化
-            // 吸収ハートを回復
-            player.setAbsorptionAmount(player.getAbsorptionAmount() + damage);
+            if (damage <= 5.0f) {
+                event.setCanceled(true);
+                player.setAbsorptionAmount(player.getAbsorptionAmount() + damage);
+            }
         }
-    }
 
-    private static void applyModifier(Player player, Attribute attribute, UUID id, double value, AttributeModifier.Operation op) {
-        AttributeInstance instance = player.getAttribute(attribute);
-        if (instance == null) return;
-
-        if (instance.getModifier(id) == null) { // UUIDで確認
-            instance.addPermanentModifier(new AttributeModifier(id, "a5_paradise_lost_bonus", value, op));
+        public static boolean WhiteNightFullSet(Player player) {
+            return player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof s5whitenight &&
+                    player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof s5whitenight;
         }
-    }
 
-    private static void removeModifier(Player player, Attribute attribute, UUID id) {
-        AttributeInstance instance = player.getAttribute(attribute);
-        if (instance != null && instance.getModifier(id) != null) {
-            // === 現在HPを保存 ===
-            float currentHp = player.getHealth();
+        private static void applyModifier(Player player, Attribute attribute, UUID id, double value) {
+            AttributeInstance instance = player.getAttribute(attribute);
+            if (instance == null) return;
 
-            // === 修飾子削除 ===
-            instance.removeModifier(id);
+            if (instance.getModifier(id) == null) {
+                instance.addPermanentModifier(new AttributeModifier(id, "a5_paradise_lost_bonus", value, AttributeModifier.Operation.ADDITION));
+            }
+        }
 
-            // === 上限に応じて再設定 ===
-            float newMax = (float) player.getAttributeValue(attribute);
-            player.setHealth(Math.min(currentHp, newMax));
+        private static void removeModifier(Player player, Attribute attribute, UUID id) {
+            AttributeInstance instance = player.getAttribute(attribute);
+            if (instance != null && instance.getModifier(id) != null) {
+                float currentHp = player.getHealth();
+                float currentMax = player.getMaxHealth();
+
+                instance.removeModifier(id);
+
+                float newMax = player.getMaxHealth();
+
+                if (currentMax > 0f) {
+                    float adjustedHp = currentHp * (newMax / currentMax);
+                    player.setHealth(Math.min(adjustedHp, newMax));
+                } else {
+                    player.setHealth(Math.min(currentHp, newMax));
+                }
+            }
         }
     }
 }

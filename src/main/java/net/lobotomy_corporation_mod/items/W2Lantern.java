@@ -1,5 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.BlockInit;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -15,6 +16,6 @@ public class W2Lantern extends SwordItem {
         @Override public float getAttackDamageBonus() { return 0.0f; }
         @Override public int getLevel() { return 1; }
         @Override public int getEnchantmentValue() { return 0; }
-        @Override public Ingredient getRepairIngredient() { return Ingredient.EMPTY; }
+        @Override public Ingredient getRepairIngredient() { return Ingredient.of(BlockInit.BlockItems.TETH_PE_BOX.get()); }
     }
 }

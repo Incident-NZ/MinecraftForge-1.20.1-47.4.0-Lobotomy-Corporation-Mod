@@ -15,10 +15,10 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class m5_t0346 extends Monster implements GeoEntity {
+public class a5_t0346 extends Monster implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public m5_t0346(EntityType<? extends Monster> type, Level level) {
+    public a5_t0346(EntityType<? extends Monster> type, Level level) {
         super(type, level);
     }
 
@@ -27,7 +27,7 @@ public class m5_t0346 extends Monster implements GeoEntity {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
-    private PlayState predicate(AnimationState<m5_t0346> state) {
+    private PlayState predicate(AnimationState<a5_t0346> state) {
         if (state.isMoving()) {
             state.getController().setAnimation(RawAnimation.begin().then("animation.t0346.idle", Animation.LoopType.LOOP));
         }

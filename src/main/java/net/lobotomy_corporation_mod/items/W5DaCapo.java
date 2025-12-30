@@ -22,7 +22,6 @@ public class W5DaCapo extends SwordItem {
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!target.level().isClientSide && attacker instanceof Player player) {
 
-            // === 前方5ブロックの薙ぎ払い処理 ===
             Level level = player.level();
             Vec3 look = player.getLookAngle();
             Vec3 origin = player.position().add(0, player.getEyeHeight(), 0);
@@ -53,15 +52,14 @@ public class W5DaCapo extends SwordItem {
             Vec3 toTarget = entity.position().add(0, 1.0, 0).subtract(origin).normalize();
             double angle = Math.acos(look.dot(toTarget));
             if (angle < Math.toRadians(60)) {
-                for (int i = 0; i < 8; i++) { // 多段ヒット 8回
-                    entity.hurt(entity.damageSources().playerAttack(player), 2.0f); // 合計ダメージ16
+                for (int i = 0; i < 8; i++) {
+                    entity.hurt(entity.damageSources().playerAttack(player), 2.0f);
                 }
             }
         }
 
-        // 通常攻撃にも多段ヒット
         for (int i = 0; i < 8; i++) {
-            target.hurt(target.damageSources().playerAttack(player), 3.0f); // 合計24
+            target.hurt(target.damageSources().playerAttack(player), 3.0f);
         }
 
         stack.hurtAndBreak(1, attacker, e -> e.broadcastBreakEvent(attacker.getUsedItemHand()));

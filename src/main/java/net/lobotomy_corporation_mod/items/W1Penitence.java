@@ -1,10 +1,12 @@
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.BlockInit;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class W1Penitence extends SwordItem {
 
@@ -53,8 +55,8 @@ public class W1Penitence extends SwordItem {
         }
 
         @Override
-        public net.minecraft.world.item.crafting.Ingredient getRepairIngredient() {
-            return net.minecraft.world.item.crafting.Ingredient.EMPTY; // 任意で変更可能
+        public Ingredient getRepairIngredient() {
+            return Ingredient.of(BlockInit.BlockItems.ZAYIN_PE_BOX.get()); // 任意で変更可能
         }
     }
 }

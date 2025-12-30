@@ -4,7 +4,6 @@ import net.lobotomy_corporation_mod.client.renderer.s5r_mimicry;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
@@ -18,10 +17,10 @@ import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.function.Consumer;
 
-public class s5mimcry extends ArmorItem implements GeoItem {
+public class s5mimicry extends ArmorItem implements GeoItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public s5mimcry(ArmorMaterial mat, Type type, Properties props) {
+    public s5mimicry(ArmorMaterial mat, Type type, Properties props) {
         super(mat, type, props);
     }
 
@@ -55,10 +54,5 @@ public class s5mimcry extends ArmorItem implements GeoItem {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
-    }
-    /** フルセット装備チェック */
-    public static boolean hasFullSet(Player player) {
-        return player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof s5mimcry &&
-                player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof s5mimcry;
     }
 }

@@ -1,5 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.BlockInit;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -7,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class W4Lamp extends SwordItem {
     public W4Lamp() {
@@ -70,8 +72,8 @@ public class W4Lamp extends SwordItem {
         }
 
         @Override
-        public net.minecraft.world.item.crafting.Ingredient getRepairIngredient() {
-            return net.minecraft.world.item.crafting.Ingredient.EMPTY; // 任意で変更可能
+        public Ingredient getRepairIngredient() {
+            return Ingredient.of(BlockInit.BlockItems.WAW_PE_BOX.get());
         }
     }
 }

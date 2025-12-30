@@ -56,10 +56,10 @@ public class s5dacapo extends ArmorItem implements GeoItem {
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
-    /** フルセット装備チェック */
+
     public static boolean hasFullSet(Player player) {
         return player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof s5dacapo &&
-                player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof s5dacapo;
+                player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof s5dacapo ;
     }
 }
 

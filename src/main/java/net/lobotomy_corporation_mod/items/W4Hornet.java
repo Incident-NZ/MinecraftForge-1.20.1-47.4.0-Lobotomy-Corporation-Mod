@@ -1,5 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.BlockInit;
 import net.lobotomy_corporation_mod.ItemInit;
 import net.lobotomy_corporation_mod.config.Config;
 import net.lobotomy_corporation_mod.entity.BulletEntity;
@@ -121,5 +122,10 @@ public class W4Hornet extends ProjectileWeaponItem {
 
         stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return true;
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack repair) {
+        return repair.is(BlockInit.BlockItems.WAW_PE_BOX.get());
     }
 }

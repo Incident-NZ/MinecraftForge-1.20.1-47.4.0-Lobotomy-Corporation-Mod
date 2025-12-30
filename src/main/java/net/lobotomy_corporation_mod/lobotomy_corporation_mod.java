@@ -24,12 +24,12 @@ public class lobotomy_corporation_mod {
         ItemInit.ITEMS.register(modEventBus);
         TabInit.CREATIVE_TABS.register(modEventBus);
         EntityInit.ENTITY_TYPES.register(modEventBus);
+        MobEffectInit.MOB_EFFECTS.register(modEventBus);
 
         modEventBus.addListener(this::setup);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON,
                 Config.CLIENT_CONFIG, MOD_ID + "-common.toml");
 
-        // ネットワークイベント・キー入力・ズームなどのカスタムイベントを登録したい場合は以下でOK
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(EntityInit::registerAttributes);
     }

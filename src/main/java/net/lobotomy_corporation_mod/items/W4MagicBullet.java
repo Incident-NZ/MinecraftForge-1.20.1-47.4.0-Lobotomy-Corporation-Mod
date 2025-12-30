@@ -1,5 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.BlockInit;
 import net.lobotomy_corporation_mod.ItemInit;
 import net.lobotomy_corporation_mod.entity.MagicBulletEntity;
 import net.minecraft.network.chat.Component;
@@ -91,7 +92,6 @@ public class W4MagicBullet extends ProjectileWeaponItem {
         Vec3 spawnPos = eyePos.add(look.scale(0.8));
         Vec3 endPos = eyePos.add(look.scale(getDefaultProjectileRange()));
 
-        // レイキャストで最初にヒットするエンティティを探してダメージを与える（サーバー側のみ）
         if (!level.isClientSide) {
             EntityHitResult entityHit = ProjectileUtil.getEntityHitResult(
                     level,
@@ -123,5 +123,10 @@ public class W4MagicBullet extends ProjectileWeaponItem {
 
         stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return true;
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack repair) {
+        return repair.is(BlockInit.BlockItems.WAW_PE_BOX.get());
     }
 }

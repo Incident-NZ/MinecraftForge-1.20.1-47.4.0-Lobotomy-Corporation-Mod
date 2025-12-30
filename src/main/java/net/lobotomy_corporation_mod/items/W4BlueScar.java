@@ -1,11 +1,13 @@
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.BlockInit;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class W4BlueScar extends SwordItem {
     public W4BlueScar() {
@@ -19,7 +21,7 @@ public class W4BlueScar extends SwordItem {
         }
 
         CompoundTag tag = target.getPersistentData();
-        tag.putInt("blue_scar_dot_ticks", 40); // 2秒間 (20tick = 1秒)
+        tag.putInt("blue_scar_dot_ticks", 40);
         return true;
     }
 
@@ -50,8 +52,8 @@ public class W4BlueScar extends SwordItem {
         }
 
         @Override
-        public net.minecraft.world.item.crafting.Ingredient getRepairIngredient() {
-            return net.minecraft.world.item.crafting.Ingredient.EMPTY; // 任意で変更可能
+        public Ingredient getRepairIngredient() {
+            return Ingredient.of(BlockInit.BlockItems.WAW_PE_BOX.get());
         }
     }
 }

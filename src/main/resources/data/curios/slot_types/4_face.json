@@ -1,9 +1,6 @@
 {
-  "type": "curios:slot_type",
-  "name": {
-    "translate": "curios.slot.4_face.name"
-  },
-  "priority": 160,
+  "name": "lobotomy_corporation_mod:4_face",
   "size": 1,
-  "icon": "curios:gui/slot/empty_curio_slot"
+  "priority": 0,
+  "hidden": false
 }

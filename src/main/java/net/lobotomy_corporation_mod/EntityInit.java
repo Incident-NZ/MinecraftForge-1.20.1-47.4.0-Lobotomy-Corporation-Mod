@@ -54,19 +54,19 @@ public class EntityInit {
                             .updateInterval(1)
                             .build("bullet_ex"));
 
-    public static final RegistryObject<EntityType<m5_t0346>> M5_T0346 =
-            ENTITY_TYPES.register("m5_t0346", () ->
-                    EntityType.Builder.<m5_t0346>of(
-                                    net.lobotomy_corporation_mod.entity.m5_t0346::new,
+    public static final RegistryObject<EntityType<a5_t0346>> A5_T0346 =
+            ENTITY_TYPES.register("a5_t0346", () ->
+                    EntityType.Builder.<a5_t0346>of(
+                                    a5_t0346::new,
                                     MobCategory.CREATURE
                             )
                             .sized(4.0F, 4.0F)
                             .clientTrackingRange(1)
                             .updateInterval(3)
-                            .build("m5_t0346"));
+                            .build("a5_t0346"));
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(M5_T0346.get(), m5_t0346.createAttributes().build());
+        event.put(A5_T0346.get(), a5_t0346.createAttributes().build());
     }
 }

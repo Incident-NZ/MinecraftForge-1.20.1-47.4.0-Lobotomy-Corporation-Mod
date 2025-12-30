@@ -4,7 +4,6 @@ import net.lobotomy_corporation_mod.client.renderer.s5r_justitia;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
@@ -55,10 +54,5 @@ public class s5justitia extends ArmorItem implements GeoItem {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
-    }
-    /** フルセット装備チェック */
-    public static boolean hasFullSet(Player player) {
-        return player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof s5justitia &&
-                player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof s5justitia;
     }
 }

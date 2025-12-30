@@ -1,5 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.BlockInit;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -70,16 +71,16 @@ public class W5Twilight extends SwordItem {
         }
 
         if (isHolding) {
-            addEffect(player, MobEffects.ABSORPTION, 3);
-            addEffect(player, MobEffects.DAMAGE_BOOST, 3);
-            addEffect(player, MobEffects.MOVEMENT_SPEED, 3);
+            addEffect(player, MobEffects.NIGHT_VISION);
+            addEffect(player, MobEffects.DAMAGE_BOOST);
+            addEffect(player, MobEffects.MOVEMENT_SPEED);
         }
     }
 
-    private void addEffect(Player player, MobEffect effect, int level) {
+    private void addEffect(Player player, MobEffect effect) {
         MobEffectInstance current = player.getEffect(effect);
-        if (current == null || current.getAmplifier() < level - 1) {
-            player.addEffect(new MobEffectInstance(effect, 2, level - 1, true, false, false));
+        if (current == null || current.getAmplifier() < 3 - 1) {
+            player.addEffect(new MobEffectInstance(effect, 2, 3 - 1, true, false, false));
         }
     }
 
@@ -89,6 +90,6 @@ public class W5Twilight extends SwordItem {
         @Override public float getAttackDamageBonus() { return 0.0f; }
         @Override public int getLevel() { return 1; }
         @Override public int getEnchantmentValue() { return 0; }
-        @Override public Ingredient getRepairIngredient() { return Ingredient.EMPTY; }
+        @Override public Ingredient getRepairIngredient() { return Ingredient.of(BlockInit.BlockItems.ALEPH_PE_BOX.get()); }
     }
 }

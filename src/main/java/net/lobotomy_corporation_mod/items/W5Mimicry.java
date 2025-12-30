@@ -1,5 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.BlockInit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +39,7 @@ public class W5Mimicry extends SwordItem {
         @Override public int getLevel() { return 1; }
         @Override public int getEnchantmentValue() { return 0; }
         @Override public Ingredient getRepairIngredient() {
-            return Ingredient.EMPTY;
+            return Ingredient.of(BlockInit.BlockItems.ALEPH_PE_BOX.get());
         }
     }
 }

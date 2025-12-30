@@ -1,5 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.BlockInit;
 import net.lobotomy_corporation_mod.config.Config;
 import net.minecraft.core.particles.DustColorTransitionOptions;
 import net.minecraft.core.particles.ParticleOptions;
@@ -10,7 +11,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
@@ -124,10 +124,9 @@ public class W5WhiteNight extends BowItem {
         return 0;
     }
 
-    private boolean hasFullSet(Player player) {
-        return player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof s5whitenight &&
-                player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof s5whitenight &&
-                player.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof W5WhiteNight;
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack repair) {
+        return repair.is(BlockInit.BlockItems.ALEPH_PE_BOX.get());
     }
 }
 

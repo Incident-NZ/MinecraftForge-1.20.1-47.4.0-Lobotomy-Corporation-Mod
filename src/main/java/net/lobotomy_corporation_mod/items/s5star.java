@@ -1,6 +1,5 @@
 package net.lobotomy_corporation_mod.items;
 
-import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.lobotomy_corporation_mod.client.renderer.s5r_star;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.sounds.SoundEvents;
@@ -68,17 +67,15 @@ public class s5star extends ArmorItem implements GeoItem {
         return cache;
     }
 
-    /** フルセット装備かどうかチェック */
-    public static boolean hasFullSet(Player player) {
-        return player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof s5star &&
-                player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof s5star;
-    }
-
-    // ====== パッシブ回復処理 ======
-    @Mod.EventBusSubscriber(modid = lobotomy_corporation_mod.MOD_ID)
-    public static class ArmorTickHandler {
+    @Mod.EventBusSubscriber(modid = "lobotomy_corporation_mod")
+    public static class BlueStarEvents {
         private static final int COOLDOWN_TICKS = 200; // 10秒 = 200tick
         private static final Map<UUID, Integer> cooldowns = new HashMap<>();
+
+        public static boolean BlueStarFullSet(Player player) {
+            return player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof s5star &&
+                    player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof s5star;
+        }
 
         @SubscribeEvent
         public static void onLivingTick(LivingEvent.LivingTickEvent event) {
@@ -86,7 +83,7 @@ public class s5star extends ArmorItem implements GeoItem {
             if (player.level().isClientSide) return;
 
             // フルセット確認
-            if (!hasFullSet(player)) return;
+            if (!BlueStarFullSet(player)) return;
 
             UUID uuid = player.getUUID();
             int ticks = cooldowns.getOrDefault(uuid, 0);

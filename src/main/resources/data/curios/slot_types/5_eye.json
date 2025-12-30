@@ -1,9 +1,6 @@
 {
-  "type": "curios:slot_type",
-  "name": {
-    "translate": "curios.slot.5_eye.name"
-  },
-  "priority": 180,
+  "name": "lobotomy_corporation_mod:5_eye",
   "size": 1,
-  "icon": "curios:gui/slot/empty_curio_slot"
+  "priority": 0,
+  "hidden": false
 }

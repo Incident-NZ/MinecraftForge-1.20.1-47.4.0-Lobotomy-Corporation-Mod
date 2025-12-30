@@ -64,18 +64,14 @@ public class s5twilight extends ArmorItem implements GeoItem {
     @Override
     public void onArmorTick(ItemStack stack, Level level, Player player) {
         if (!level.isClientSide) {
-            // 全セット装備チェック
             boolean fullSet = hasFullSet(player);
 
             if (fullSet) {
-                // 攻撃力上昇（HP減少分に比例）
                 float missingHp = player.getMaxHealth() - player.getHealth();
                 if (missingHp > 0) {
                     int amplifier = (int) Math.floor(missingHp / 4); // 4HP減少ごとに+1段階
                     player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 40, amplifier, true, false, true));
                 }
-
-                // 周囲のモブに5秒ごとに6ダメージ
                 if (player.tickCount % 100 == 0) { // 100tick = 5秒
                     List<LivingEntity> nearby = level.getEntitiesOfClass(
                             LivingEntity.class,

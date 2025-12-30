@@ -1,6 +1,5 @@
 package net.lobotomy_corporation_mod.items;
 
-import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.lobotomy_corporation_mod.client.renderer.s5r_smile;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -31,11 +30,6 @@ import java.util.function.Consumer;
 
 public class s5smile extends ArmorItem implements GeoItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-
-    private static final Map<UUID, Integer> bonusHealth = new HashMap<>();
-    private static final Map<UUID, Integer> bonusAttack = new HashMap<>();
-
-
     public s5smile(ArmorMaterial material, Type type, Properties props) {
         super(material, type, props);
     }
@@ -72,33 +66,25 @@ public class s5smile extends ArmorItem implements GeoItem {
         return cache;
     }
 
-    /** フルセット装備チェック */
-    public static boolean hasFullSet(Player player) {
-        return player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof s5smile &&
-                player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof s5smile;
-    }
+    private static final Map<UUID, Integer> bonusHealth = new HashMap<>();
+    private static final Map<UUID, Integer> bonusAttack = new HashMap<>();
 
-    // ===== イベントハンドラ =====
-    @Mod.EventBusSubscriber(modid = lobotomy_corporation_mod.MOD_ID)
-    public static class Events {
-        /** モブを倒した時にボーナスを付与 */
+    @Mod.EventBusSubscriber(modid = "lobotomy_corporation_mod")
+    public static class SmileEvents {
         @SubscribeEvent
         public static void onMobKill(LivingDeathEvent event) {
             if (!(event.getSource().getEntity() instanceof Player player)) return;
-            if (!hasFullSet(player)) return;
+            if (SmileFullSet(player)) return;
 
             UUID id = player.getUUID();
 
-            // HPボーナスを+2
             int hpBonus = bonusHealth.getOrDefault(id, 0) + 2;
             bonusHealth.put(id, hpBonus);
 
-            // HP上限20ごとに全回復
             if (hpBonus % 20 == 0) {
                 player.setHealth(player.getMaxHealth());
             }
 
-            // HP上限40ごとに攻撃力+5
             int atkBonus = (hpBonus / 40) * 5;
             bonusAttack.put(id, atkBonus);
 
@@ -110,7 +96,7 @@ public class s5smile extends ArmorItem implements GeoItem {
             Player player = event.player;
             UUID id = player.getUUID();
 
-            if (!hasFullSet(player)) {
+            if (SmileFullSet(player)) {
                 if (bonusHealth.containsKey(id) || bonusAttack.containsKey(id)) {
                     bonusHealth.remove(id);
                     bonusAttack.remove(id);
@@ -119,7 +105,11 @@ public class s5smile extends ArmorItem implements GeoItem {
             }
         }
 
-        // === Attribute操作 ===
+        public static boolean SmileFullSet(Player player) {
+            return (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof s5smile) &&
+                    (player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof s5smile);
+        }
+
         private static final UUID HEALTH_MODIFIER_UUID = UUID.fromString("11111111-1111-1111-1111-111111111111");
         private static final UUID ATTACK_MODIFIER_UUID = UUID.fromString("22222222-2222-2222-2222-222222222222");
 

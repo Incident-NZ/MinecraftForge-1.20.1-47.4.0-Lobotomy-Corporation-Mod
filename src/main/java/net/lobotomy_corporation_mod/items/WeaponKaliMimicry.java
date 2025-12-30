@@ -78,7 +78,7 @@ public class WeaponKaliMimicry extends SwordItem {
                     player.isUsingItem() &&
                     !player.getCooldowns().isOnCooldown(stack.getItem())) {
 
-                event.setCanceled(true); // 完全ダメージカット
+                event.setCanceled(true);
                 player.level().playSound(null, player.blockPosition(), SoundEvents.ANVIL_FALL, SoundSource.PLAYERS, 1.0F, 1.0F);
                 player.getCooldowns().addCooldown(stack.getItem(), 20 * 15); // 15秒
                 player.stopUsingItem();

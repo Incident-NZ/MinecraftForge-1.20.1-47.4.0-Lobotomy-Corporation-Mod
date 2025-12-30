@@ -1,5 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.BlockInit;
 import net.lobotomy_corporation_mod.ItemInit;
 import net.lobotomy_corporation_mod.config.Config;
 import net.lobotomy_corporation_mod.entity.BulletExEntity;
@@ -157,7 +158,6 @@ public class W3Harmony extends ProjectileWeaponItem {
                 }
             }
         } else {
-            // ブロック破壊なしの爆発（視覚/音のみ）を発生させ、Explosion を取得
             Explosion explosion = lvl.explode(shooter, x, y, z, EXPLOSION_POWER, Level.ExplosionInteraction.NONE);
 
             AABB area = new AABB(x, y, z, x, y, z).inflate(radius);
@@ -166,7 +166,6 @@ public class W3Harmony extends ProjectileWeaponItem {
                 if (t instanceof Player && !allowFriendly) {
                     continue;
                 }
-                // Explosion オブジェクトを用いてダメージソースを生成して与える
                 t.hurt(lvl.damageSources().explosion(explosion), DAMAGE);
             }
         }
@@ -177,5 +176,10 @@ public class W3Harmony extends ProjectileWeaponItem {
         target.hurt(attacker.level().damageSources().explosion(null), DAMAGE);
         stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return true;
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack repair) {
+        return repair.is(BlockInit.BlockItems.HE_PE_BOX.get());
     }
 }

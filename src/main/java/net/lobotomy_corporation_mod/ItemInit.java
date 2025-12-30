@@ -87,11 +87,11 @@ public class ItemInit {
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A5_MIMICRY_2 = ITEMS.register("s5_mimicry_1",
-            () -> new s5mimcry(EGOArmor.A5_MIMICRY, ArmorItem.Type.CHESTPLATE,
+            () -> new s5mimicry(EGOArmor.A5_MIMICRY, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A5_MIMICRY_3 = ITEMS.register("s5_mimicry_2",
-            () -> new s5mimcry(EGOArmor.A5_MIMICRY, ArmorItem.Type.LEGGINGS,
+            () -> new s5mimicry(EGOArmor.A5_MIMICRY, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A5_DA_CAPO_2 = ITEMS.register("s5_da_capo_1",

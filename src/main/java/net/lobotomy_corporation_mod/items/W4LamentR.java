@@ -1,6 +1,7 @@
 // java
 package net.lobotomy_corporation_mod.items;
 
+import net.lobotomy_corporation_mod.BlockInit;
 import net.lobotomy_corporation_mod.ItemInit;
 import net.lobotomy_corporation_mod.config.Config;
 import net.lobotomy_corporation_mod.entity.BulletEntity;
@@ -161,7 +162,6 @@ public class W4LamentR extends ProjectileWeaponItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        // プレイヤーへのダメージは設定を尊重
         if (target instanceof Player && !Config.ALLOW_FRIENDLY_FIRE.get()) {
             stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
             return true;
@@ -171,6 +171,11 @@ public class W4LamentR extends ProjectileWeaponItem {
 
         stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return true;
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack repair) {
+        return repair.is(BlockInit.BlockItems.WAW_PE_BOX.get());
     }
 }
 
