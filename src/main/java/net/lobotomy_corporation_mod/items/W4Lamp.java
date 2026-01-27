@@ -12,7 +12,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class W4Lamp extends SwordItem {
     public W4Lamp() {
-        super(new CustomTier(), 22, -3.6f, new Properties().durability(3000));
+        super(new CustomTier(), 28, -3.3f, new Properties().durability(3000));
     }
 
     @Override
@@ -58,12 +58,12 @@ public class W4Lamp extends SwordItem {
 
         @Override
         public float getAttackDamageBonus() {
-            return 1.0f;
+            return 0f;
         }
 
         @Override
         public int getLevel() {
-            return 4;
+            return 0;
         }
 
         @Override

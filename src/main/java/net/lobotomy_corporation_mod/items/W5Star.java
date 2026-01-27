@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 
 public class W5Star extends Item {
     public W5Star() {
-        super(new Properties().stacksTo(64));
+        super(new Properties().durability(4000));
     }
 
     @Override

@@ -5,7 +5,7 @@ license = "${mod_license}"
 
 [[mods]]
 modId = "lobotomy_corporation_mod"
-version = "5.4"
+version = "5.4-hotfix"
 displayName = "Lobotomy Corporation Mod"
 authors = "Rei"
 description = "Face the fear, Make the future."

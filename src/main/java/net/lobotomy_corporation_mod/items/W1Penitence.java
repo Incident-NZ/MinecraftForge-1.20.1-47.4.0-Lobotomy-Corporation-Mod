@@ -11,7 +11,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 public class W1Penitence extends SwordItem {
 
     public W1Penitence() {
-        super(new CustomTier(), 5, -2.8f, new Properties().durability(800));
+        super(new CustomTier(), 7, -2.8f, new Properties().durability(800));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class W1Penitence extends SwordItem {
 
         @Override
         public int getLevel() {
-            return 1;
+            return 0;
         }
 
         @Override

@@ -11,7 +11,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class W4BlueScar extends SwordItem {
     public W4BlueScar() {
-        super(new CustomTier(), 14, -2.5f, new Properties().durability(3000));
+        super(new CustomTier(), 17, -2.2f, new Properties().durability(3000));
     }
 
     @Override
@@ -43,7 +43,7 @@ public class W4BlueScar extends SwordItem {
 
         @Override
         public int getLevel() {
-            return 4;
+            return 0;
         }
 
         @Override

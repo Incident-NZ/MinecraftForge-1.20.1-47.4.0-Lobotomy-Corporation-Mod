@@ -4,23 +4,14 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.lobotomy_corporation_mod.CapabilitiesInit;
 import net.lobotomy_corporation_mod.ItemInit;
 import net.lobotomy_corporation_mod.capability.MentalHealthProvider;
-import net.lobotomy_corporation_mod.items.W5Justitia;
-import net.lobotomy_corporation_mod.items.W5Mimicry;
-import net.lobotomy_corporation_mod.items.WeaponKaliMimicry;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.lobotomy_corporation_mod.lobotomy_corporation_mod;
 import net.minecraft.client.Minecraft;
@@ -29,7 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -159,24 +149,36 @@ public class ClientForgeEvents {
 
         int iconSize = 16;
         int padding = 6;
-        int startX = screenWidth - iconSize - padding;
-        int startY = screenHeight - iconSize - padding;
 
-        renderIconWithText(guiGraphics, font, startX, startY, "textures/gui/gui_hp", (int)player.getHealth());
-        renderIconWithText(guiGraphics, font, startX - (iconSize + padding), startY, "textures/gui/gui_mp", player.getFoodData().getFoodLevel());
-        renderIconWithText(guiGraphics, font, startX - 2 * (iconSize + padding), startY, "textures/gui/gui_rp", player.getAirSupply());
-        renderIconWithText(guiGraphics, font, startX - 3 * (iconSize + padding), startY, "textures/gui/gui_def", player.getArmorValue());
+        // ホットバー中央（スロット5）を基準に横中央揃えで配置
+        int iconsCount = 5; // HP, 空腹, 防具, 精神, 水中ゲージ
+        int totalWidth = iconsCount * iconSize + (iconsCount - 1) * padding;
+        int startX = screenWidth / 2 - totalWidth / 2;
 
+        // ホットバーの上に表示するY位置（微調整可能）
+        int hotbarHeight = 22; // 目安
+        int hotbarOffset = 4;
+        int startY = screenHeight - hotbarHeight - iconSize - padding - hotbarOffset;
+
+        // 左から: HP, 空腹度, 防具値, 精神力, 水中ゲージ
+        int x = startX;
+        renderIconWithText(guiGraphics, font, x, startY, "textures/gui/gui_hp", (int) player.getHealth());
+        x += iconSize + padding;
+        renderIconWithText(guiGraphics, font, x, startY, "textures/gui/gui_mp", player.getFoodData().getFoodLevel());
+        x += iconSize + padding;
+        renderIconWithText(guiGraphics, font, x, startY, "textures/gui/gui_def", player.getArmorValue());
+        x += iconSize + padding;
+        int finalX = x;
         player.getCapability(CapabilitiesInit.MENTAL_HEALTH).ifPresent(mentalHealth -> {
             int mentalHealthValue = mentalHealth.getMentalHealth();
-            renderIconWithText(guiGraphics, font, startX - 4 * (iconSize + padding), startY, "textures/gui/gui_sp", mentalHealthValue);
+            renderIconWithText(guiGraphics, font, finalX, startY, "textures/gui/gui_sp", mentalHealthValue);
         });
+        x += iconSize + padding;
+        renderIconWithText(guiGraphics, font, x, startY, "textures/gui/gui_rp", player.getAirSupply());
     }
 
     public static void renderIconWithText(GuiGraphics guiGraphics, Font font, int x, int y, String iconPath, int value) {
-
         ResourceLocation resourceLocation = new ResourceLocation("lobotomy_corporation_mod", iconPath + ".png");
-
         guiGraphics.blit(resourceLocation, x, y, 0, 0, 16, 16, 16, 16);
 
         String text = String.valueOf(value);
@@ -203,89 +205,4 @@ public class ClientForgeEvents {
             player.getCapability(CapabilitiesInit.MENTAL_HEALTH).ifPresent(w -> w.addMentalHealth(10));
         }
     }
-
-    //EGOPassiveSkill
-    @SubscribeEvent
-    public static void onPlayerAttacked(LivingHurtEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-
-        ItemStack stack = player.getMainHandItem();
-
-        if (stack.getItem() instanceof W5Justitia &&
-                player.isUsingItem() &&
-                !player.getCooldowns().isOnCooldown(stack.getItem())) {
-
-            event.setCanceled(true);
-
-            player.level().playSound(null, player.blockPosition(), SoundEvents.SHIELD_BLOCK, SoundSource.PLAYERS, 1.0F, 1.0F);
-            player.getCooldowns().addCooldown(stack.getItem(), 20 * 10);
-            player.stopUsingItem();
-        }
-
-        if (stack.getItem() instanceof W5Mimicry &&
-                player.isUsingItem() &&
-                !player.getCooldowns().isOnCooldown(stack.getItem())) {
-
-            event.setCanceled(true);
-            player.level().playSound(null, player.blockPosition(), SoundEvents.ANVIL_FALL, SoundSource.PLAYERS, 1.0F, 1.0F);
-            player.getCooldowns().addCooldown(stack.getItem(), 20 * 15); // 15秒
-            player.stopUsingItem();
-        }
-
-        WeaponKaliMimicry.onPlayerAttacked(event);
-    }
-
-    private static final String ATTACK_COUNT_TAG = "mimicry_attack_count";
-    private static final String DAMAGE_ACCUM_TAG = "mimicry_damage_total";
-
-    @SubscribeEvent
-    public static void onDamageDealt(LivingHurtEvent event) {
-        DamageSource source = event.getSource();
-
-        if (!(source.getEntity() instanceof Player player)) return;
-
-        ItemStack stack = player.getMainHandItem();
-        if (!(stack.getItem() instanceof W5Mimicry)) {
-            stack = player.getOffhandItem();
-            if (!(stack.getItem() instanceof W5Mimicry)) return;
-        }
-
-        var tag = stack.getOrCreateTag();
-        int count = tag.getInt(ATTACK_COUNT_TAG);
-        float accum = tag.getFloat(DAMAGE_ACCUM_TAG);
-
-        count++;
-        accum += event.getAmount();
-
-        if (count >= 4) {
-            float heal = accum * 0.25f;
-            player.heal(heal);
-            count = 0;
-            accum = 0;
-
-            Level level = player.level();
-            level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                    SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
-        }
-
-        tag.putInt(ATTACK_COUNT_TAG, count);
-        tag.putFloat(DAMAGE_ACCUM_TAG, accum);
-    }
-
-    @SubscribeEvent
-    public static void onLivingDeath(LivingDeathEvent event) {
-        W5Justitia.onLivingDeath(event);
-    }
-
-    @SubscribeEvent
-    public static void onHurt(LivingHurtEvent event) {
-        WeaponKaliMimicry.onPlayerAttacked(event);
-    }
-
-    @SubscribeEvent
-    public static void onDamageDealt(LivingDamageEvent event) {
-        WeaponKaliMimicry.onDamageDealt(event);
-    }
-
-
 }

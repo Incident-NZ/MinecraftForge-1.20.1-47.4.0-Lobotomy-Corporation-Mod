@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 
 public class W2RedEye extends SwordItem {
     public W2RedEye() {
-        super(new CustomTier(), 8, -2.9f, new Properties().durability(1000));
+        super(new CustomTier(), 9, -2.6f, new Properties().durability(1000));
     }
 
     @Override
@@ -31,7 +31,7 @@ public class W2RedEye extends SwordItem {
         @Override public int getUses() { return 1000; }
         @Override public float getSpeed() { return 4.0f; }
         @Override public float getAttackDamageBonus() { return 0.0f; }
-        @Override public int getLevel() { return 1; }
+        @Override public int getLevel() { return 0; }
         @Override public int getEnchantmentValue() { return 0; }
         @Override public Ingredient getRepairIngredient() { return Ingredient.of(BlockInit.BlockItems.TETH_PE_BOX.get()); }
     }

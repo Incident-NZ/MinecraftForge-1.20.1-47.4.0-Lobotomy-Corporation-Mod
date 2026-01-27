@@ -1,9 +1,6 @@
 package net.lobotomy_corporation_mod.items;
 
 import net.lobotomy_corporation_mod.BlockInit;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -28,7 +25,7 @@ public class W5Twilight extends SwordItem {
             new AttributeModifier(REACH_UUID, "twilight_reach_bonus", 5.0, AttributeModifier.Operation.ADDITION);
 
     public W5Twilight() {
-        super(new CustomTier(), 25, -2.8f, new Properties().durability(4000));
+        super(new CustomTier(), 18, -2.5f, new Properties().durability(4000));
     }
 
     @Override
@@ -46,7 +43,7 @@ public class W5Twilight extends SwordItem {
                 Vec3 toTarget = entity.position().add(0, 1.0, 0).subtract(origin).normalize();
                 double angle = Math.acos(look.dot(toTarget));
                 if (angle < Math.toRadians(60)) {
-                    entity.hurt(entity.damageSources().playerAttack(player), 26.0f); // 薙ぎ払いダメージ
+                    entity.hurt(entity.damageSources().playerAttack(player), 18.0f); // 薙ぎ払いダメージ
                 }
             }
         }
@@ -69,26 +66,13 @@ public class W5Twilight extends SwordItem {
                 reachAttr.removeModifier(REACH_MODIFIER);
             }
         }
-
-        if (isHolding) {
-            addEffect(player, MobEffects.NIGHT_VISION);
-            addEffect(player, MobEffects.DAMAGE_BOOST);
-            addEffect(player, MobEffects.MOVEMENT_SPEED);
-        }
-    }
-
-    private void addEffect(Player player, MobEffect effect) {
-        MobEffectInstance current = player.getEffect(effect);
-        if (current == null || current.getAmplifier() < 3 - 1) {
-            player.addEffect(new MobEffectInstance(effect, 2, 3 - 1, true, false, false));
-        }
     }
 
     private static class CustomTier implements Tier {
         @Override public int getUses() { return 4000; }
         @Override public float getSpeed() { return 4.0f; }
         @Override public float getAttackDamageBonus() { return 0.0f; }
-        @Override public int getLevel() { return 1; }
+        @Override public int getLevel() { return 0; }
         @Override public int getEnchantmentValue() { return 0; }
         @Override public Ingredient getRepairIngredient() { return Ingredient.of(BlockInit.BlockItems.ALEPH_PE_BOX.get()); }
     }

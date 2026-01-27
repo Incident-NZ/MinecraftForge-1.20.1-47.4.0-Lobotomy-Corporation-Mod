@@ -18,7 +18,7 @@ public class W5Smile extends SwordItem {
     private static final String ATTACK_COUNT_TAG = "smile_attack_count";
 
     public W5Smile() {
-        super(new CustomTier(), 0, -2.1f, new Properties().durability(4000));
+        super(new CustomTier(), 18, -2.1f, new Properties().durability(4000));
     }
 
     @Override
@@ -57,8 +57,8 @@ public class W5Smile extends SwordItem {
     private static class CustomTier implements Tier {
         @Override public int getUses() { return 4000; }
         @Override public float getSpeed() { return 4.0f; }
-        @Override public float getAttackDamageBonus() { return 16f; } // 攻撃力
-        @Override public int getLevel() { return 3; }
+        @Override public float getAttackDamageBonus() { return 0f; } // 攻撃力
+        @Override public int getLevel() { return 0; }
         @Override public int getEnchantmentValue() { return 0; }
         @Override public Ingredient getRepairIngredient() { return Ingredient.of(BlockInit.BlockItems.ALEPH_PE_BOX.get()); }
     }

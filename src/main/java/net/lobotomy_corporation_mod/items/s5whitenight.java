@@ -64,7 +64,6 @@ public class s5whitenight extends ArmorItem implements GeoItem {
         return cache;
     }
 
-
     private static final UUID HEALTH_BONUS_UUID = UUID.fromString("aaaaaaaa-bbbb-cccc-dddd-eeeeeeee0001");
     private static final UUID RESIST_BONUS_UUID = UUID.fromString("aaaaaaaa-bbbb-cccc-dddd-eeeeeeee0002");
 
