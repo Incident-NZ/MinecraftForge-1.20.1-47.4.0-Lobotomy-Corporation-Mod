@@ -7,7 +7,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class W3Logging extends SwordItem {
     public W3Logging() {
-        super(new CustomTier(), 15, -3.1f, new Properties().durability(2000));
+        super(new CustomTier(), 20, -3.2f, new Properties().durability(2000));
     }
 
     private static class CustomTier implements Tier {

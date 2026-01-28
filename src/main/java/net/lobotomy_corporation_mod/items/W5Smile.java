@@ -18,7 +18,7 @@ public class W5Smile extends SwordItem {
     private static final String ATTACK_COUNT_TAG = "smile_attack_count";
 
     public W5Smile() {
-        super(new CustomTier(), 18, -2.1f, new Properties().durability(4000));
+        super(new CustomTier(), 17, -2.1f, new Properties().durability(4000));
     }
 
     @Override

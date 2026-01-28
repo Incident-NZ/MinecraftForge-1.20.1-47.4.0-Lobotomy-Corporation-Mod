@@ -12,7 +12,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class W4Lamp extends SwordItem {
     public W4Lamp() {
-        super(new CustomTier(), 28, -3.3f, new Properties().durability(3000));
+        super(new CustomTier(), 27, -3.3f, new Properties().durability(3000));
     }
 
     @Override

@@ -7,7 +7,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class W3Harvest extends SwordItem {
     public W3Harvest( ) {
-        super(new CustomTier(), 9, -2.3f, new Properties().durability(2000));
+        super(new CustomTier(), 11, -2.3f, new Properties().durability(2000));
     }
 
     private static class CustomTier implements Tier {

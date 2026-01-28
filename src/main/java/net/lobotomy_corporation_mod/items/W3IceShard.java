@@ -13,7 +13,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 public class W3IceShard extends SwordItem {
 
     public W3IceShard() {
-        super(new CustomTier(), 9, -2.3f, new Properties().durability(2000));
+        super(new CustomTier(), 11, -2.3f, new Properties().durability(2000));
     }
 
     @Override

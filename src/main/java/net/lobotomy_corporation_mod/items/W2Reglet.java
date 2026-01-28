@@ -7,7 +7,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class W2Reglet extends SwordItem {
     public W2Reglet() {
-        super(new CustomTier(), 18, -3.3f, new Properties().durability(1000));
+        super(new CustomTier(), 17, -3.3f, new Properties().durability(1000));
     }
 
     private static class CustomTier implements Tier {

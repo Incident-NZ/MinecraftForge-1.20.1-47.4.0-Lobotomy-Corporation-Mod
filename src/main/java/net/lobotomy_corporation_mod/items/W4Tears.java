@@ -7,7 +7,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class W4Tears extends SwordItem {
     public W4Tears() {
-        super(new CustomTier(), 12, -2.1f, new Properties());
+        super(new CustomTier(), 11, -2.1f, new Properties());
     }
 
     private static class CustomTier implements Tier {

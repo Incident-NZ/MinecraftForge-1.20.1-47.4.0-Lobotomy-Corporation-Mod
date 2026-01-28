@@ -14,7 +14,7 @@ import java.util.List;
 
 public class W5DaCapo extends SwordItem {
     public W5DaCapo() {
-        super(new CustomTier(), 5, -2.0f, new Properties().durability(4000));
+        super(new CustomTier(), 4, -2.0f, new Properties().durability(4000));
     }
 
     @Override

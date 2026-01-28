@@ -7,7 +7,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class W2Lantern extends SwordItem {
     public W2Lantern() {
-        super(new CustomTier(), 18, -3.4f, new Properties().durability(1000));
+        super(new CustomTier(), 17, -3.4f, new Properties().durability(1000));
     }
 
     private static class CustomTier implements Tier {

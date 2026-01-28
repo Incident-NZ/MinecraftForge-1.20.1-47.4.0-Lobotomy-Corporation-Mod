@@ -18,7 +18,7 @@ import java.util.List;
 
 public class W5Justitia extends SwordItem {
     public W5Justitia() {
-        super(new CustomTier(), 4, -2.7f, new Properties().durability(4000));
+        super(new CustomTier(), 3, -2.7f, new Properties().durability(4000));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class W5Justitia extends SwordItem {
         if (!attacker.level().isClientSide && attacker instanceof Player player) {
             Vec3 look = player.getLookAngle();
             Vec3 origin = player.position().add(0, 1.0, 0);
-            double range = 8.0;
+            double range = 5.0;
 
             AABB box = new AABB(origin.add(-range, -1.5, -range), origin.add(range, 1.5, range));
             List<LivingEntity> entities = player.level().getEntitiesOfClass(LivingEntity.class, box,
@@ -52,7 +52,7 @@ public class W5Justitia extends SwordItem {
                 Vec3 toTarget = entity.position().add(0, 1.0, 0).subtract(origin).normalize();
                 double angle = Math.acos(look.dot(toTarget));
                 if (angle < Math.toRadians(60)) {
-                    entity.hurt(entity.damageSources().magic(), 4.0f);
+                    entity.hurt(player.level().damageSources().magic(), 4.0f);
                 }
             }
         }

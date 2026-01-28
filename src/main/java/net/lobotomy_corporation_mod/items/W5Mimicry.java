@@ -16,7 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class W5Mimicry extends SwordItem {
     public W5Mimicry() {
-        super(new CustomTier(), 14, -2.2f, new Properties().durability(4000));
+        super(new CustomTier(), 13, -2.2f, new Properties().durability(4000));
     }
 
     @Override

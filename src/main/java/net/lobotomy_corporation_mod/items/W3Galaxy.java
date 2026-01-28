@@ -6,7 +6,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class W3Galaxy extends SwordItem {
     public W3Galaxy() {
-        super(new CustomTier(), 12, -2.5f, new Properties().durability(3000));
+        super(new CustomTier(), 14, -2.5f, new Properties().durability(3000));
     }
 
     private static class CustomTier implements net.minecraft.world.item.Tier {

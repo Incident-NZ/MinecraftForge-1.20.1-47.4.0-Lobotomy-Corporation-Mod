@@ -25,7 +25,7 @@ public class W5Twilight extends SwordItem {
             new AttributeModifier(REACH_UUID, "twilight_reach_bonus", 5.0, AttributeModifier.Operation.ADDITION);
 
     public W5Twilight() {
-        super(new CustomTier(), 18, -2.5f, new Properties().durability(4000));
+        super(new CustomTier(), 17, -2.5f, new Properties().durability(4000));
     }
 
     @Override

@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 
 public class W2RedEye extends SwordItem {
     public W2RedEye() {
-        super(new CustomTier(), 9, -2.6f, new Properties().durability(1000));
+        super(new CustomTier(), 8, -2.6f, new Properties().durability(1000));
     }
 
     @Override
