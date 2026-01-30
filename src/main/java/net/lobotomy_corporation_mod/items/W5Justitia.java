@@ -18,7 +18,7 @@ import java.util.List;
 
 public class W5Justitia extends SwordItem {
     public W5Justitia() {
-        super(new CustomTier(), 3, -2.7f, new Properties().durability(4000));
+        super(new CustomTier(), 19, -2.7f, new Properties().durability(4000));
     }
 
     @Override

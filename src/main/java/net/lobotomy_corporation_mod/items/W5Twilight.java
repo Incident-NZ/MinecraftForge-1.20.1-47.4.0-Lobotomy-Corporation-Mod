@@ -43,7 +43,10 @@ public class W5Twilight extends SwordItem {
                 Vec3 toTarget = entity.position().add(0, 1.0, 0).subtract(origin).normalize();
                 double angle = Math.acos(look.dot(toTarget));
                 if (angle < Math.toRadians(60)) {
-                    entity.hurt(entity.damageSources().playerAttack(player), 18.0f); // 薙ぎ払いダメージ
+                    entity.hurt(entity.damageSources().magic(), 18.0f);
+                    entity.hurt(entity.damageSources().playerAttack(player), 18.0f);
+                    entity.hurt(entity.damageSources().freeze(), 18.0f);
+                    entity.hurt(entity.damageSources().onFire(), 18.0f); // 薙ぎ払いダメージ
                 }
             }
         }

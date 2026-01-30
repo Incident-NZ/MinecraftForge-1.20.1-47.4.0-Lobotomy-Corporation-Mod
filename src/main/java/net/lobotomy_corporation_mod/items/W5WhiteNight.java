@@ -39,10 +39,10 @@ public class W5WhiteNight extends BowItem {
 
         if (!level.isClientSide && chargeLevel > 0) {
             double damage = switch (chargeLevel) {
-                case 1 -> 22.0 * 1.2;
-                case 2 -> 22.0 * 1.5;
-                case 3 -> 22.0 * 2.0;
-                default -> 22.0;
+                case 1 -> 28.0 * 1.2;
+                case 2 -> 28.0 * 1.5;
+                case 3 -> 28.0 * 2.0;
+                default -> 28.0;
             };
 
             Vec3 look = player.getLookAngle().normalize();
