@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XYZ"
+  ],
+  "key": {
+    "X": {
+      "item": "pm_equips:s4_lamp_2"
+    },
+    "Y": {
+      "item": "pm_equips:s2_beak_2"
+    },
+    "Z": {
+      "item": "pm_equips:s5_justitia_2"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s5_twilight_2"
+  }
+}

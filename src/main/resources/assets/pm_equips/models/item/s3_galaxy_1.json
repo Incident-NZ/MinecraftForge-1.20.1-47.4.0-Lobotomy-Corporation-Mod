@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pm_equips:item/ego_s3_galaxy_1"
+  }
+}

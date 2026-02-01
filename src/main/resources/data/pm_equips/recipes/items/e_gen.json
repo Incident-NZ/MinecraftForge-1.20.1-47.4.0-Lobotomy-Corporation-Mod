@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "ABA",
+    "AZA"
+  ],
+  "key": {
+    "Z": {
+      "item": "minecraft:hopper"
+    },
+    "A": {
+      "item": "minecraft:iron_block"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "C": {
+      "item": "minecraft:stonecutter"
+    }
+  },
+  "result": {
+    "item": "pm_equips:e_gen"
+  }
+}

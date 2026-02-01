@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XYX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "pm_equips:e_box_3"
+    },
+    "Y": {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result": {
+    "item": "pm_equips:e_box_4"
+  }
+}

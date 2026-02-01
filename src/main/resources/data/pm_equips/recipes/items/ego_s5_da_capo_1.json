@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YZY",
+    "YXY",
+    "YXY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:music_disc_11"
+    },
+    "Y": {
+      "item": "minecraft:music_disc_5"
+    },
+    "Z": {
+      "item": "pm_equips:e_box_5"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s5_da_capo_1"
+  }
+}

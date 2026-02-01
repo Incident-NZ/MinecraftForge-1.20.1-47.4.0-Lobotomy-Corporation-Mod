@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZY",
+    "YYX",
+    "XXY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_bars"
+    },
+    "Y": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Z": {
+      "item": "pm_equips:e_box_2"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s2_reglet_1"
+  }
+}

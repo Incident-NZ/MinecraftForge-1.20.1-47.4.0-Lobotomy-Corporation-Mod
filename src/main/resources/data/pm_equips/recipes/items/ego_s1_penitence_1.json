@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YZY",
+    "YXY",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Y": {
+      "item": "minecraft:bone"
+    },
+    "Z": {
+      "item": "pm_equips:e_box_1"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s1_penitence_1"
+  }
+}

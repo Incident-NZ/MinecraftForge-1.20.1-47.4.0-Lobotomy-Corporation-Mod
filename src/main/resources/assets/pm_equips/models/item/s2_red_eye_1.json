@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pm_equips:item/ego_s2_red_eye_1"
+  }
+}

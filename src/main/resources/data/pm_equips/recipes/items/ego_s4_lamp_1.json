@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YZY",
+    "YXY",
+    "YXY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:feather"
+    },
+    "Y": {
+      "item": "minecraft:ender_eye"
+    },
+    "Z": {
+      "item": "pm_equips:e_box_4"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s4_lamp_1"
+  }
+}

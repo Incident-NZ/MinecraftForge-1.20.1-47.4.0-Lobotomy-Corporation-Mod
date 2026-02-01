@@ -49,7 +49,7 @@ minecraft {
         }
 
         client {
-            args "--mixin", "lobotomy_corporation_mod.mixins.json"
+            args "--mixin", "pm_equips.mixins.json"
             property 'forge.enabledGameTestNamespaces', mod_id
         }
 
@@ -73,7 +73,7 @@ minecraft {
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"
 
-    add sourceSets.main, "lobotomy_corporation_mod.refmap.json"
+    add sourceSets.main, "pm_equips.refmap.json"
     config "${mod_id}.mixins.json"
 }
 

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YZY",
+    "YXY",
+    "YXY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:gray_wool"
+    },
+    "Y": {
+      "item": "minecraft:bone"
+    },
+    "Z": {
+      "item": "pm_equips:e_box_4"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s4_hornet_1"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XZX",
+    "X Y",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:leather"
+    },
+    "Y": {
+      "item": "minecraft:bone_block"
+    },
+    "Z": {
+      "item": "pm_equips:e_box_5"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s5_mimicry_2"
+  }
+}

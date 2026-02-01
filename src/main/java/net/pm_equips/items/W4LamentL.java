@@ -1,0 +1,9 @@
+package net.pm_equips.items;
+
+import net.minecraft.world.item.Item;
+
+public class W4LamentL extends Item {
+    public W4LamentL() {
+        super(new Properties().stacksTo(1));
+    }
+}

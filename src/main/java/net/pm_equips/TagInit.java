@@ -1,0 +1,21 @@
+package net.pm_equips;
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+
+public class TagInit {
+    public static class Items {
+        public static final TagKey<Item> BULLET = createTag("bullet");
+        public static final TagKey<Item> E_BOX = createTag("e_box");
+        public static final TagKey<Item> EGO_LOW = createTag("ego_low");
+        public static final TagKey<Item> EGO_MED = createTag("ego_med");
+        public static final TagKey<Item> EGO_HIGH = createTag("ego_high");
+        public static final TagKey<Item> EGO_BOSS = createTag("ego_boss");
+
+        private static TagKey<Item> createTag(String name) {
+            return ItemTags.create(new ResourceLocation(PMEquipsMain.MOD_ID, name));
+        }
+    }
+}
