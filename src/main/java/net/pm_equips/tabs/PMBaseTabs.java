@@ -4,7 +4,7 @@ import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
 import net.minecraft.world.item.Item;
 
-public class PMBlockTabs {
+public class PMBaseTabs {
     public static final Item[] items = {
             BlockInit.BlockItems.E_GEN.get(),
             BlockInit.BlockItems.ZAYIN_PE_BOX.get(),

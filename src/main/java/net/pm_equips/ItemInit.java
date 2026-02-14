@@ -45,7 +45,7 @@ public class ItemInit {
     public static final RegistryObject<Item> W1_PENITENCE = ITEMS.register("w1_penitence", W1Penitence::new);
     public static final RegistryObject<Item> G_MIMICRY = ITEMS.register("ex_mimicry", WeaponKaliMimicry::new);
     public static final RegistryObject<Item> EX_DURANDAL = ITEMS.register("ex_durandal", WeaponRolandDurandal::new);
-    public static final RegistryObject<Item> EX_ARGALIA = ITEMS.register("ex_argalia", WeaponArgalia::new);
+    public static final RegistryObject<Item> EX_ARGALIA = ITEMS.register("ex_blue_kichigai", WeaponArgalia::new);
 
     //L社EGO武器 遠距離
     public static final RegistryObject<Item> W4_SOLEMN_LAMENT_L = ITEMS.register("w4_lament_l", W4LamentL::new);

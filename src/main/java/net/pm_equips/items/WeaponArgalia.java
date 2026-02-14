@@ -6,7 +6,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class WeaponArgalia extends SwordItem {
     public WeaponArgalia() {
-        super(new CustomTier(), 26, -1.8f, new Properties().durability(5000));
+        super(new CustomTier(), 21, -2.8f, new Properties().durability(5000));
     }
 
     private static class CustomTier implements Tier {
@@ -28,7 +28,7 @@ public class WeaponArgalia extends SwordItem {
 
         @Override
         public int getLevel() {
-            return 1;
+            return 0;
         }
 
         @Override

@@ -19,7 +19,7 @@ public class WeaponKaliMimicry extends SwordItem {
     private static final String DAMAGE_ACCUM_TAG = "mimicry_damage_accum";
 
     public WeaponKaliMimicry() {
-        super(new CustomTier(), 25, -1.8f, new Item.Properties().durability(8000));
+        super(new CustomTier(), 25, -2.2f, new Item.Properties().durability(8000));
     }
 
     @Override
@@ -36,13 +36,6 @@ public class WeaponKaliMimicry extends SwordItem {
     @Override
     public int getUseDuration(ItemStack stack) {
         return 72000;
-    }
-
-    @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
-        if (!level.isClientSide && entity instanceof Player player && selected) {
-            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 2, 2, true, false));
-        }
     }
 
     public static void onDamageDealt(LivingDamageEvent event) {
@@ -90,7 +83,7 @@ public class WeaponKaliMimicry extends SwordItem {
         @Override public int getUses() { return 5000; }
         @Override public float getSpeed() { return 4.0f; }
         @Override public float getAttackDamageBonus() { return 0.0f; }
-        @Override public int getLevel() { return 1; }
+        @Override public int getLevel() { return 0; }
         @Override public int getEnchantmentValue() { return 0; }
         @Override public Ingredient getRepairIngredient() {
             return Ingredient.EMPTY;

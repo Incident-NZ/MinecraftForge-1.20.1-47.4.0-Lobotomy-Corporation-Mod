@@ -3,7 +3,7 @@ package net.pm_equips.tabs;
 import net.pm_equips.ItemInit;
 import net.minecraft.world.item.Item;
 
-public class PMItemTabs {
+public class PMLobotomyEGOTabs {
     public static final Item[] items = {
             ItemInit.W1_PENITENCE.get(),
             ItemInit.A1_PENITENCE_2.get(),
@@ -85,8 +85,5 @@ public class PMItemTabs {
             ItemInit.W5_TWILIGHT.get(),
             ItemInit.A5_TWILIGHT_1.get(),
             ItemInit.A5_TWILIGHT_2.get(),
-            ItemInit.G_MIMICRY.get(),
-            ItemInit.EX_DURANDAL.get(),
-            ItemInit.EX_ARGALIA.get()
     };
 }
