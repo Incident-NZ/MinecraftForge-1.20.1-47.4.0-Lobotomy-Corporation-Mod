@@ -54,7 +54,7 @@ public class EGOW4MagicBullet extends ProjectileWeaponItem {
             player.level().playSound(
                     null,
                     player.blockPosition(),
-                    SoundInit.EGO_MAGIC_BULLET.get(),
+                    SoundEvents.DISPENSER_FAIL,
                     SoundSource.PLAYERS,
                     1.0F,
                     1.0F
@@ -91,7 +91,7 @@ public class EGOW4MagicBullet extends ProjectileWeaponItem {
         level.playSound(
                 null,
                 player.blockPosition(),
-                SoundEvents.BLAZE_SHOOT,
+                SoundInit.EGO_MAGIC_BULLET.get(),
                 SoundSource.PLAYERS,
                 1.0F,
                 1.2F

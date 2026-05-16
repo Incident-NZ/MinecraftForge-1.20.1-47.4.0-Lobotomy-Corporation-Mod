@@ -62,7 +62,7 @@ public class EGOW2Beak extends ProjectileWeaponItem {
                     1.0F,
                     1.0F
             );
-            return InteractionResultHolder.consume(gun);
+            return InteractionResultHolder.success(gun);
         }
 
         shootBullet(level, player);

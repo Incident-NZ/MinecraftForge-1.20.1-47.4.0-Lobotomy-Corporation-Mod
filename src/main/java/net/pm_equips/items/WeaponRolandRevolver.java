@@ -27,7 +27,7 @@ public class WeaponRolandRevolver extends ProjectileWeaponItem {
 	private static final float VELOCITY = 8.0f;
 
 	public WeaponRolandRevolver(Properties properties) {
-		super(properties.stacksTo(1).durability(2000));
+		super(properties);
 	}
 
 	@Override
@@ -57,12 +57,12 @@ public class WeaponRolandRevolver extends ProjectileWeaponItem {
 			player.level().playSound(
 					null,
 					player.blockPosition(),
-					SoundInit.GUN_SEMI.get(),
+					SoundInit.GUN_ROLAND_REVOLVER.get(),
 					SoundSource.PLAYERS,
 					1.0F,
 					1.0F
 			);
-			return InteractionResultHolder.consume(gun);
+			return InteractionResultHolder.success(gun);
 		}
 
 		// server-side: spawn projectile

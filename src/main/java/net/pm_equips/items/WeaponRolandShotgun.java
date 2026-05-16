@@ -27,7 +27,7 @@ public class WeaponRolandShotgun extends ProjectileWeaponItem {
 	private static final float VELOCITY = 8.0f;
 
 	public WeaponRolandShotgun(Properties properties) {
-		super(properties.stacksTo(1).durability(2000));
+		super(properties);
 	}
 
 	@Override
@@ -54,8 +54,15 @@ public class WeaponRolandShotgun extends ProjectileWeaponItem {
 		}
 
 		if (level.isClientSide) {
-			level.playSound(player, player.blockPosition(), SoundEvents.CROSSBOW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F);
-			return InteractionResultHolder.consume(gun);
+			player.level().playSound(
+					null,
+					player.blockPosition(),
+					SoundInit.GUN_ROLAND_SHOTGUN.get(),
+					SoundSource.PLAYERS,
+					1.0F,
+					1.0F
+			);
+			return InteractionResultHolder.success(gun);
 		}
 
 		// server-side: spawn projectile

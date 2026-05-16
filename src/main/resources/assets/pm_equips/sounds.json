@@ -1,0 +1,36 @@
+{
+  "gun_semi": {
+    "subtitle": "Gun Semi",
+    "sounds": [
+      "gun_semi"
+    ]
+  },
+
+  "gun_auto": {
+    "subtitle": "Gun Auto",
+    "sounds": [
+      "gun_auto"
+    ]
+  },
+
+  "gun_roland_revolver": {
+    "subtitle": "Gun Roland Revolver",
+    "sounds": [
+      "gun_roland_revolver"
+    ]
+  },
+
+  "gun_roland_shotgun": {
+  "subtitle": "Gun Roland Shotgun",
+  "sounds": [
+    "gun_roland_shotgun"
+    ]
+  },
+
+  "ego_magic_bullet": {
+    "subtitle": "E.G.O Magic Bullet",
+    "sounds": [
+      "ego_magic_bullet"
+    ]
+  }
+}

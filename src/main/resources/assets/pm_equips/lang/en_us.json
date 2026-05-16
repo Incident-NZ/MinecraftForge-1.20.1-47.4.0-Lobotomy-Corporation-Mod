@@ -51,9 +51,6 @@
   "item.pm_equips.w2_beak": "E.G.O Weapon TETH - Beak",
   "item.pm_equips.w2_match": "E.G.O  Weapon TETH - Fourth Match Fire",
   "item.pm_equips.w1_penitence": "E.G.O Weapon ZAYIN - Penitence",
-  "item.pm_equips.ex_mimicry": "Kali's Mimicry",
-  "item.pm_equips.ex_durandal": "Durandal",
-  "item.pm_equips.ex_blue_kichigai": "Blue Reverb",
 
   "item.pm_equips.s5_twilight_1": "E.G.O Suit ALEPH - Twilight",
   "item.pm_equips.s5_twilight_2": "E.G.O Suit ALEPH - Twilight",
@@ -107,6 +104,12 @@
   "item.pm_equips.s2_beak_2": "E.G.O Suit TETH - Beak",
   "item.pm_equips.s1_penitence_1": "E.G.O Suit ZAYIN - Penitence",
   "item.pm_equips.s1_penitence_2": "E.G.O Suit ZAYIN - Penitence",
+
+  "item.pm_equips.fixer_kali_mimicry": "Kali's Mimicry",
+  "item.pm_equips.fixer_roland_durandal": "Durandal",
+  "item.pm_equips.fixer_argalia": "Blue Reverb",
+  "item.pm_equips.fixer_roland_lar": "Logic Atelier Revolver - Roland",
+  "item.pm_equips.fixer_roland_lasg": "Logic Atelier Shotgun - Roland",
 
   "item.pm_equips.wcorp_armor_1": "W.Corp Cleanup Agent Armor",
   "item.pm_equips.wcorp_armor_2": "W.Corp Cleanup Agent Armor",

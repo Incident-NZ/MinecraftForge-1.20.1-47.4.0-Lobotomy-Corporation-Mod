@@ -51,9 +51,6 @@
   "item.pm_equips.w2_beak": "E.G.O 武器 TETH - くちばし",
   "item.pm_equips.w2_match": "E.G.O 武器 TETH - 4本目のマッチの火",
   "item.pm_equips.w1_penitence": "E.G.O 武器 ZAYIN - 懺悔",
-  "item.pm_equips.ex_mimicry": "カーリーのミミック",
-  "item.pm_equips.ex_durandal": "デュランダル",
-  "item.pm_equips.ex_blue_kichigai": "青いキチガイの大鎌",
 
   "item.pm_equips.s5_twilight_1": "E.G.O 防具 ALEPH - 黄昏",
   "item.pm_equips.s5_twilight_2": "E.G.O 防具 ALEPH - 黄昏",
@@ -107,6 +104,12 @@
   "item.pm_equips.s2_beak_2": "E.G.O 防具 TETH - くちばし",
   "item.pm_equips.s1_penitence_1": "E.G.O 防具 ZAYIN - 懺悔",
   "item.pm_equips.s1_penitence_2": "E.G.O 防具 ZAYIN - 懺悔",
+
+  "item.pm_equips.fixer_kali_mimicry": "カーリーのミミック",
+  "item.pm_equips.fixer_roland_durandal": "デュランダル",
+  "item.pm_equips.fixer_argalia": "青い残響",
+  "item.pm_equips.fixer_roland_lar": "ロジックアトリエ製リボルバー - ローラン",
+  "item.pm_equips.fixer_roland_lasg": "ロジックアトリエ製ショットガン - ローラン",
 
   "item.pm_equips.wcorp_armor_1": "W社 整理要員のアーマー",
   "item.pm_equips.wcorp_armor_2": "W社 整理要員のアーマー",

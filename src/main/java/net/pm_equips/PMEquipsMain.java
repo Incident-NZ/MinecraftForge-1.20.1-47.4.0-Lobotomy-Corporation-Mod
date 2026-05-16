@@ -36,6 +36,8 @@ public class PMEquipsMain {
 
     private void setup(final FMLCommonSetupEvent event) {
         GeckoLib.initialize();
+        // register network packets
+        net.pm_equips.network.ModPackets.register();
     }
 
     @SubscribeEvent
