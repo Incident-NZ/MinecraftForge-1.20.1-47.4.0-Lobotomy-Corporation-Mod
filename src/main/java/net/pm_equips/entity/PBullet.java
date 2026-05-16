@@ -1,5 +1,6 @@
 package net.pm_equips.entity;
 
+import net.minecraft.world.level.ClipContext;
 import net.pm_equips.EntityInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
@@ -44,8 +45,39 @@ public class PBullet extends Projectile {
         super.tick();
 
         Vec3 motion = this.getDeltaMovement();
+        Vec3 currentPos = this.position();
+        Vec3 nextPos = currentPos.add(motion);
+
+        // Block collision (non-penetrating)
+        if (!this.level().isClientSide) {
+            net.minecraft.world.phys.BlockHitResult blockHit = this.level().clip(
+                    new ClipContext(currentPos, nextPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this)
+            );
+            if (blockHit.getType() == HitResult.Type.BLOCK) {
+                this.onHit(blockHit);
+                return;
+            }
+
+            // Entity collision
+            Entity owner = this.getOwner();
+            EntityHitResult entityHit = net.minecraft.world.entity.projectile.ProjectileUtil.getEntityHitResult(
+                    this.level(),
+                    owner != null ? owner : this,
+                    currentPos,
+                    nextPos,
+                    this.getBoundingBox().expandTowards(motion).inflate(0.5D),
+                    e -> e != owner && e instanceof LivingEntity && ((LivingEntity)e).isAlive()
+            );
+
+            if (entityHit != null) {
+                this.onHitEntity(entityHit);
+                return;
+            }
+        }
+
+        // No collision: move projectile
         if (motion.lengthSqr() > 0) {
-            this.setPos(this.getX() + motion.x, this.getY() + motion.y, this.getZ() + motion.z);
+            this.setPos(nextPos.x, nextPos.y, nextPos.z);
         }
 
         this.checkInsideBlocks();

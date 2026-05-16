@@ -1,12 +1,10 @@
 package net.pm_equips;
 
-import net.pm_equips.blocks.EBoxGen;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -46,17 +44,15 @@ public class BlockInit {
                         .sound(SoundType.METAL)
                         .instabreak()));
 
+        // Enkephalin Generator (EBoxGen)
         public static final RegistryObject<Block> E_GEN = BLOCKS.register("e_gen",
-                () -> new EBoxGen(BlockBehaviour.Properties.of()
-                        .mapColor(MapColor.STONE)
-                        .strength(3.0F, 50F)
-                        .sound(SoundType.METAL)
-                        .instabreak()));
+                () -> new net.pm_equips.blocks.EBoxGen(BlockBehaviour.Properties.of()
+                        .strength(1.5f, 120f)
+                        .sound(SoundType.METAL)));
     }
 
     public static class BlockItems {
         public static final DeferredRegister<Item> BLOCK_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PMEquipsMain.MOD_ID);
-
 
         public static final RegistryObject<Item> ZAYIN_PE_BOX = BLOCK_ITEMS.register("e_box_1",
                 () -> new BlockItem(Blocks.ZAYIN_PE_BOX.get(), new Item.Properties().stacksTo(64)));
@@ -73,7 +69,8 @@ public class BlockInit {
         public static final RegistryObject<Item> ALEPH_PE_BOX = BLOCK_ITEMS.register("e_box_5",
                 () -> new BlockItem(Blocks.ALEPH_PE_BOX.get(), new Item.Properties().stacksTo(64)));
 
+        // EBoxGen block item
         public static final RegistryObject<Item> E_GEN = BLOCK_ITEMS.register("e_gen",
-                () -> new BlockItem(Blocks.E_GEN.get(), new Item.Properties()));
+                () -> new BlockItem(Blocks.E_GEN.get(), new Item.Properties().stacksTo(64)));
     }
 }

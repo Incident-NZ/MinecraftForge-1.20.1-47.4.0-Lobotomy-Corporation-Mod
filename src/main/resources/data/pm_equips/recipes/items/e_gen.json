@@ -2,21 +2,18 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "CCC",
-    "ABA",
-    "AZA"
+    "BAB",
+    "C C"
   ],
   "key": {
-    "Z": {
-      "item": "minecraft:hopper"
-    },
     "A": {
-      "item": "minecraft:iron_block"
+      "item": "minecraft:cauldron"
     },
     "B": {
-      "item": "minecraft:bucket"
+      "item": "pm_equips:bladegear"
     },
     "C": {
-      "item": "minecraft:stonecutter"
+      "item": "minecraft:iron_ingot"
     }
   },
   "result": {

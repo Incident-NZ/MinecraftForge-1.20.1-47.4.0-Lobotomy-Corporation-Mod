@@ -21,6 +21,7 @@ public class PMEquipsMain {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         BlockInit.Blocks.BLOCKS.register(modEventBus);
         BlockInit.BlockItems.BLOCK_ITEMS.register(modEventBus);
+        BlockEntityInit.BLOCK_ENTITIES.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
         TabInit.CREATIVE_TABS.register(modEventBus);
         EntityInit.ENTITY_TYPES.register(modEventBus);

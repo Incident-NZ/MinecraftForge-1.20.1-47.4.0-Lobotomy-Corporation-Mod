@@ -5,11 +5,14 @@
       "item": "minecraft:gunpowder"
     },
     {
-      "item": "minecraft:copper_ingot"
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "pm_equips:item_platinum"
     }
   ],
   "result": {
-    "item": "pm_equips:weapon_bullet_pistol",
-    "count": 16
+    "item": "pm_equips:item_bullet_lasg",
+    "count": 4
   }
 }

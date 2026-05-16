@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CAC",
+    "BB"
+  ],
+  "key": {
+    "A": {
+      "item": "pm_equips:w4_hornet"
+    },
+    "B": {
+      "item": "pm_equips:item_metal"
+    },
+    "C": {
+      "item": "pm_equips:item_platinum"
+    }
+  },
+  "result": {
+    "item": "pm_equips:fixer_roland_lasg"
+  }
+}

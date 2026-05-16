@@ -8,11 +8,11 @@
       "item": "minecraft:copper_ingot"
     },
     {
-      "item": "minecraft:lapis_lazuli"
+      "item": "minecraft:copper_ingot"
     }
   ],
   "result": {
-    "item": "pm_equips:weapon_bullet_magic",
-    "count": 4
+    "item": "pm_equips:item_bullet_r",
+    "count": 8
   }
 }

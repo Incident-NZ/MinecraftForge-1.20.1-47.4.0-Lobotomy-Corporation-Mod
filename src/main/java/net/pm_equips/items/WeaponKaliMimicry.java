@@ -23,6 +23,28 @@ public class WeaponKaliMimicry extends SwordItem {
     }
 
     @Override
+    public void inventoryTick(ItemStack stack, Level level, net.minecraft.world.entity.Entity entity, int slot, boolean selected) {
+        if (!(entity instanceof Player player)) return;
+
+        ItemStack main = player.getMainHandItem();
+        boolean has = main.getItem() instanceof WeaponKaliMimicry;
+
+        if (has) {
+            // 攻撃力上昇 III -> amplifier 2
+            MobEffectInstance atk = new MobEffectInstance(MobEffects.DAMAGE_BOOST, 12, 2, false, false, true);
+            // 耐性 III -> amplifier 2
+            MobEffectInstance res = new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 12, 2, false, false, true);
+            player.addEffect(atk);
+            player.addEffect(res);
+        } else {
+            if (player.hasEffect(MobEffects.DAMAGE_BOOST)) player.removeEffect(MobEffects.DAMAGE_BOOST);
+            if (player.hasEffect(MobEffects.DAMAGE_RESISTANCE)) player.removeEffect(MobEffects.DAMAGE_RESISTANCE);
+        }
+
+        super.inventoryTick(stack, level, entity, slot, selected);
+    }
+
+    @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         player.startUsingItem(hand);
         return InteractionResultHolder.consume(player.getItemInHand(hand));

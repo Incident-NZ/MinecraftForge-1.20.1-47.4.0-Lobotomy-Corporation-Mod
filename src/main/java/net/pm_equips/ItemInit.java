@@ -11,7 +11,15 @@ import net.minecraftforge.registries.RegistryObject;
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PMEquipsMain.MOD_ID);
 
-    //アイテム 弾薬
+    //アイテム
+    public static final RegistryObject<Item> SILVER_INGOT = ITEMS.register("item_silver",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> METAL_INGOT = ITEMS.register("item_metal",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> PLATINUM_INGOT = ITEMS.register("item_platinum",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> BLADE_GEAR = ITEMS.register("item_blade_gear",
+            () -> new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> MAGIC_BULLET_AMMO = ITEMS.register("item_bullet_ego",
             () -> new AmmoMagicBullet(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> RIFLE_BULLET_AMMO = ITEMS.register("item_bullet_r",

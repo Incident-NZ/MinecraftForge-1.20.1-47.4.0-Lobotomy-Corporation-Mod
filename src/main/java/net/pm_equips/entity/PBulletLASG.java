@@ -5,6 +5,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -43,8 +44,32 @@ public class PBulletLASG extends Projectile {
         super.tick();
 
         Vec3 motion = this.getDeltaMovement();
+        Vec3 currentPos = this.position();
+        Vec3 nextPos = currentPos.add(motion);
+
+        if (!this.level().isClientSide) {
+            net.minecraft.world.phys.BlockHitResult blockHit = this.level().clip(
+                    new ClipContext(currentPos, nextPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this)
+            );
+            if (blockHit.getType() == HitResult.Type.BLOCK) {
+                this.onHit(blockHit);
+                return;
+            }
+
+            Entity owner = this.getOwner();
+            EntityHitResult entityHit = net.minecraft.world.entity.projectile.ProjectileUtil.getEntityHitResult(
+                    this.level(), owner != null ? owner : this, currentPos, nextPos,
+                    this.getBoundingBox().expandTowards(motion).inflate(0.5D), e -> e != owner && e instanceof LivingEntity && e.isAlive()
+            );
+
+            if (entityHit != null) {
+                this.onHitEntity(entityHit);
+                return;
+            }
+        }
+
         if (motion.lengthSqr() > 0) {
-            this.setPos(this.getX() + motion.x, this.getY() + motion.y, this.getZ() + motion.z);
+            this.setPos(nextPos.x, nextPos.y, nextPos.z);
         }
 
         this.checkInsideBlocks();

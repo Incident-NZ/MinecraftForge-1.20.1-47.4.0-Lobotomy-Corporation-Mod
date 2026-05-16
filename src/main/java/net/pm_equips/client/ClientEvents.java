@@ -32,6 +32,8 @@ public class ClientEvents {
                 AmmoR::new);
         event.registerEntityRenderer(EntityInit.BULLET_EX.get(),
                 AmmoExR::new);
+        // BlockEntity renderer for EBoxGen
+        event.registerBlockEntityRenderer(net.pm_equips.BlockEntityInit.EBOX_GEN.get(), ctx -> new net.pm_equips.client.renderer.EBoxGenR());
     }
 
     @SubscribeEvent

@@ -8,7 +8,10 @@
   "key.categories.pm_equips.scope": "(銃専用)スコープ",
   "key.categories.pm_equips.reload": "(銃専用)リロード",
 
-  "item.pm_equips.tool_task_tablet": "作業用端末",
+  "item.pm_equips.item_blade_gear": "ブレードギア",
+  "item.pm_equips.item_metal": "鋼インゴット",
+  "item.pm_equips.item_silver": "銀インゴット",
+  "item.pm_equips.item_platinum": "プラチナインゴット",
   "item.pm_equips.item_bullet_ego": "専用弾薬 - 魔法の弾丸",
   "item.pm_equips.item_bullet_r": "大口径弾薬",
   "item.pm_equips.item_bullet_p": "小口径弾薬",
