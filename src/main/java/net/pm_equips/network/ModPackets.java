@@ -1,10 +1,10 @@
 package net.pm_equips.network;
 
-import net.pm_equips.items.W4MagicBullet;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
+import net.pm_equips.items.EGOW4MagicBullet;
 
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -18,6 +18,9 @@ public class ModPackets {
     public static void register() {
         INSTANCE.registerMessage(0, ActivateAbilityPacket.class,
                 ActivateAbilityPacket::encode, ActivateAbilityPacket::decode, ActivateAbilityPacket::handle);
+
+        INSTANCE.registerMessage(1, ReloadPacket.class,
+                ReloadPacket::encode, ReloadPacket::decode, ReloadPacket::handle);
     }
 
     public static class ActivateAbilityPacket {
@@ -40,9 +43,45 @@ public class ModPackets {
                 net.minecraft.server.level.ServerPlayer player = ctx.get().getSender();
                 if (player != null) {
                     net.minecraft.world.item.ItemStack gun = player.getMainHandItem();
-                    if (gun.getItem() instanceof W4MagicBullet && gun.getOrCreateTag().getInt("abilityCharges") > 0) {
+                    if (gun.getItem() instanceof EGOW4MagicBullet && gun.getOrCreateTag().getInt("abilityCharges") > 0) {
                         gun.getOrCreateTag().putBoolean("abilityActive", true);
                         gun.getOrCreateTag().putUUID("targetUUID", msg.targetUUID);
+                    }
+                }
+            });
+            ctx.get().setPacketHandled(true);
+        }
+    }
+
+    public static class ReloadPacket {
+        public ReloadPacket() {}
+
+        public static void encode(ReloadPacket msg, FriendlyByteBuf buf) {}
+
+        public static ReloadPacket decode(FriendlyByteBuf buf) { return new ReloadPacket(); }
+
+        public static void handle(ReloadPacket msg, Supplier<NetworkEvent.Context> ctx) {
+            ctx.get().enqueueWork(() -> {
+                net.minecraft.server.level.ServerPlayer player = ctx.get().getSender();
+                if (player != null) {
+                    net.minecraft.world.item.ItemStack gun = player.getMainHandItem();
+                    if (gun.getItem() instanceof net.pm_equips.items.WeaponRolandRevolver) {
+                        ((net.pm_equips.items.WeaponRolandRevolver) gun.getItem()).startReload(gun, player);
+                    }
+                    if (gun.getItem() instanceof net.pm_equips.items.WeaponRolandShotgun) {
+                        ((net.pm_equips.items.WeaponRolandShotgun) gun.getItem()).startReload(gun, player);
+                    }
+                    if (gun.getItem() instanceof net.pm_equips.items.EGOS2Beak) {
+                        ((net.pm_equips.items.EGOS2Beak) gun.getItem()).startReload(gun, player);
+                    }
+                    if (gun.getItem() instanceof net.pm_equips.items.EGOW3Laetitia) {
+                        ((net.pm_equips.items.EGOW3Laetitia) gun.getItem()).startReload(gun, player);
+                    }
+                    if (gun.getItem() instanceof net.pm_equips.items.EGOW4Hornet) {
+                        ((net.pm_equips.items.EGOW4Hornet) gun.getItem()).startReload(gun, player);
+                    }
+                    if (gun.getItem() instanceof net.pm_equips.items.EGOW4MagicBullet) {
+                        ((net.pm_equips.items.EGOW4MagicBullet) gun.getItem()).startReload(gun, player);
                     }
                 }
             });

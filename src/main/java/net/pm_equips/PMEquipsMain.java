@@ -25,6 +25,7 @@ public class PMEquipsMain {
         TabInit.CREATIVE_TABS.register(modEventBus);
         EntityInit.ENTITY_TYPES.register(modEventBus);
         MobEffectInit.MOB_EFFECTS.register(modEventBus);
+        SoundInit.SOUNDS.register(modEventBus);
 
         modEventBus.addListener(this::setup);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON,

@@ -13,6 +13,8 @@ public class PMBaseTabs {
             BlockInit.BlockItems.WAW_PE_BOX.get(),
             BlockInit.BlockItems.ALEPH_PE_BOX.get(),
             ItemInit.MAGIC_BULLET_AMMO.get(),
+            ItemInit.P_BULLET_LARV.get(),
+            ItemInit.P_BULLET_LASG.get(),
             ItemInit.RIFLE_BULLET_AMMO.get(),
             ItemInit.PISTOL_BULLET_AMMO.get(),
             ItemInit.EXPLOSIVE_BULLET_AMMO.get(),

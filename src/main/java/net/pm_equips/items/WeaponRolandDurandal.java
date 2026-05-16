@@ -6,14 +6,14 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class WeaponRolandDurandal extends SwordItem {
     public WeaponRolandDurandal() {
-        super(new CustomTier(), 17, -1.9f, new Properties().durability(4000));
+        super(new CustomTier(), 17, -1.9f, new Properties().durability(1000));
     }
 
     private static class CustomTier implements Tier {
 
         @Override
         public int getUses() {
-            return 5000;
+            return 1000;
         }
 
         @Override

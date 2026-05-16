@@ -1,10 +1,10 @@
 package net.pm_equips.client;
 
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.pm_equips.EntityInit;
-import net.pm_equips.client.renderer.BulletExRenderer;
+import net.pm_equips.KeyBindInit;
+import net.pm_equips.client.renderer.*;
 import net.pm_equips.PMEquipsMain;
-import net.pm_equips.client.renderer.BulletRenderer;
-import net.pm_equips.client.renderer.BulletMRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -23,11 +23,21 @@ public class ClientEvents {
         event.registerEntityRenderer(EntityInit.W5_SOUND_OF_A_STAR_PROJECTILE.get(),
                 ctx -> new ThrownItemRenderer<>(ctx, 1.0f, true));
         event.registerEntityRenderer(EntityInit.MAGIC_BULLET.get(),
-                BulletMRenderer::new);
+                AmmoMagicR::new);
+        event.registerEntityRenderer(EntityInit.BULLET_LARV.get(),
+                AmmoLARVR::new);
+        event.registerEntityRenderer(EntityInit.BULLET_LASG.get(),
+                AmmoLASGR::new);
         event.registerEntityRenderer(EntityInit.BULLET.get(),
-                BulletRenderer::new);
+                AmmoR::new);
         event.registerEntityRenderer(EntityInit.BULLET_EX.get(),
-                BulletExRenderer::new);
+                AmmoExR::new);
+    }
+
+    @SubscribeEvent
+    public static void registerKeys(RegisterKeyMappingsEvent event) {
+        event.register(KeyBindInit.RELOAD_KEY);
+        event.register(KeyBindInit.SCOPE_KEY);
     }
 }
 

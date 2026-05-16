@@ -1,0 +1,28 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "pm_equips:item/fixer_roland_shotgun"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ -180, -270, -220 ],
+      "translation": [ 0, -2, -6 ],
+      "scale": [ 0.7, 1.9, 1.0 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ -180, -270, -220 ],
+      "translation": [ 0, -2, 6 ],
+      "scale": [ 0.7, 1.9, 1.0 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ -180, -270, -220 ],
+      "translation": [ 0, -2, -4 ],
+      "scale": [ 0.7, 1.9, 1.0 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ -180, -270, -220 ],
+      "translation": [ 0, -2, 6 ],
+      "scale": [ 0.7, 1.9, 1.0 ]
+    }
+  }
+}
