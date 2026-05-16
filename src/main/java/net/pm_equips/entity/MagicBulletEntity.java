@@ -1,5 +1,6 @@
 package net.pm_equips.entity;
 
+import net.minecraft.world.phys.BlockHitResult;
 import net.pm_equips.EntityInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
@@ -89,8 +90,9 @@ public class MagicBulletEntity extends Projectile {
     }
 
     @Override
-    protected void onHit(HitResult result) {
-
+    protected void onHitBlock(BlockHitResult hitResult) {
+        super.onHitBlock(hitResult);
+        this.discard();
     }
 
     @Override

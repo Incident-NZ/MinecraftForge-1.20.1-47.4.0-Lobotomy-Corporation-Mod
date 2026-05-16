@@ -1,5 +1,6 @@
 package net.pm_equips.items;
 
+
 import net.pm_equips.BlockInit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,11 +15,23 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
+/*
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.pm_equips.client.renderer.EGOW5TwilightR;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
+*/
 
 import java.util.List;
 import java.util.UUID;
+//import java.util.function.Consumer;
 
-public class W5Twilight extends SwordItem {
+public class W5Twilight extends SwordItem /*implements GeoItem*/ {
+    //private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     private static final UUID REACH_UUID = UUID.fromString("e3b32f1a-6c19-4bfb-8dc1-4b1d0d77d64f");
     private static final AttributeModifier REACH_MODIFIER =
@@ -70,6 +83,36 @@ public class W5Twilight extends SwordItem {
             }
         }
     }
+
+    /*private PlayState predicate(AnimationState animationState) {
+        animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController(this,"controller", 0, this::predicate));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
+            private EGOW5TwilightR renderer;
+
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if (this.renderer == null)
+                    this.renderer = new EGOW5TwilightR();
+
+                return this.renderer;
+            }
+        });
+    }*/
 
     private static class CustomTier implements Tier {
         @Override public int getUses() { return 4000; }

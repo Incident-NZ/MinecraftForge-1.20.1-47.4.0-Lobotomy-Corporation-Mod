@@ -31,7 +31,6 @@ public class PMEquipsMain {
                 Config.CLIENT_CONFIG, MOD_ID + "-common.toml");
 
         MinecraftForge.EVENT_BUS.register(this);
-        modEventBus.addListener(EntityInit::registerAttributes);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

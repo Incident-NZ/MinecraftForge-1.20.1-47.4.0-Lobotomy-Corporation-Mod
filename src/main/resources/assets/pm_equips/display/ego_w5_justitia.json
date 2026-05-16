@@ -1,0 +1,128 @@
+{
+  "parent": "builtin/entity",
+  "texture_size": [
+    64,
+    64
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        116.88000000000011,
+        -84.84999999999991,
+        107.38000000000011
+      ],
+      "translation": [
+        0.75,
+        -0.25,
+        1.25
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        -129.6500000000001,
+        86.98999999999978,
+        120.73000000000002
+      ],
+      "translation": [
+        0.75,
+        -0.25,
+        0.75
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        -180,
+        -84,
+        -180
+      ],
+      "translation": [
+        0.75,
+        -2.25,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        -84.5,
+        0
+      ],
+      "translation": [
+        1.75,
+        -2.5,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "translation": [
+        0.5,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "gui": {
+      "rotation": [
+        166.73999999999978,
+        -1.2600000000002183,
+        -133.23000000000002
+      ],
+      "translation": [
+        -5,
+        -4.75,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        -45
+      ],
+      "translation": [
+        -5.25,
+        -5,
+        -1
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "on_shelf": {
+      "rotation": [
+        0,
+        90,
+        0
+      ]
+    }
+  },
+  "textures": {
+    "particle": "lobotomy_corporation_mod:item/ego_w5_justitia"
+  }
+}

@@ -3,8 +3,6 @@ package net.pm_equips;
 import net.pm_equips.entity.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -54,19 +52,4 @@ public class EntityInit {
                             .updateInterval(1)
                             .build("bullet_ex"));
 
-    public static final RegistryObject<EntityType<a5_t0346>> A5_T0346 =
-            ENTITY_TYPES.register("a5_t0346", () ->
-                    EntityType.Builder.<a5_t0346>of(
-                                    a5_t0346::new,
-                                    MobCategory.CREATURE
-                            )
-                            .sized(4.0F, 4.0F)
-                            .clientTrackingRange(1)
-                            .updateInterval(3)
-                            .build("a5_t0346"));
-
-    @SubscribeEvent
-    public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(A5_T0346.get(), a5_t0346.createAttributes().build());
-    }
 }

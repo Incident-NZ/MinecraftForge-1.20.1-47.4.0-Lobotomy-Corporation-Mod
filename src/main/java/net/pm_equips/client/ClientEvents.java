@@ -5,7 +5,6 @@ import net.pm_equips.client.renderer.BulletExRenderer;
 import net.pm_equips.PMEquipsMain;
 import net.pm_equips.client.renderer.BulletRenderer;
 import net.pm_equips.client.renderer.BulletMRenderer;
-import net.pm_equips.client.renderer.a5r_t0346;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -29,10 +28,6 @@ public class ClientEvents {
                 BulletRenderer::new);
         event.registerEntityRenderer(EntityInit.BULLET_EX.get(),
                 BulletExRenderer::new);
-        event.registerEntityRenderer(EntityInit.A5_T0346.get(), a5r_t0346::new);
     }
-
-    //EGOSkill
-
 }
 

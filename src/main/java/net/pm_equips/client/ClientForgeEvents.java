@@ -1,6 +1,7 @@
 package net.pm_equips.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraftforge.fml.common.Mod;
 import net.pm_equips.ItemInit;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,7 +18,6 @@ import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class ClientForgeEvents {
 
     //Overlay
     private static final ResourceLocation SCOPE_OVERLAY =
-            new ResourceLocation(PMEquipsMain.MOD_ID, "textures/gui/gun_scope_overlay.png");
+            new ResourceLocation(PMEquipsMain.MOD_ID, "textures/gui/gun_scope.png");
 
     private static final List<RegistryObject<Item>> OVERLAY_ITEMS = List.of(
             ItemInit.W2_FOURTH_MATCH_FIRE,
@@ -63,8 +63,8 @@ public class ClientForgeEvents {
 
         int screenWidth = mc.getWindow().getGuiScaledWidth();
         int screenHeight = mc.getWindow().getGuiScaledHeight();
-        int overlayWidth = 256;
-        int overlayHeight = 256;
+        int overlayWidth = 64;
+        int overlayHeight = 64;
         int x = (screenWidth - overlayWidth) / 2;
         int y = (screenHeight - overlayHeight) / 2;
 
