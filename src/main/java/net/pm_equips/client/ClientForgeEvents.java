@@ -19,6 +19,8 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.RegistryObject;
+import net.pm_equips.KeyBindInit;
+import net.pm_equips.network.ModPackets;
 
 import java.util.List;
 
@@ -42,7 +44,9 @@ public class ClientForgeEvents {
             ItemInit.W4_MAGIC_BULLET,
             ItemInit.W4_SOLEMN_LAMENT_R,
             ItemInit.W4_HORNET,
-            ItemInit.W5_PARADISE_LOST
+            ItemInit.W5_PARADISE_LOST,
+            ItemInit.WEAPON_ROLAND_REVOLVER,
+            ItemInit.WEAPON_ROLAND_SHOTGUN
     );
 
     @SubscribeEvent
@@ -91,7 +95,10 @@ public class ClientForgeEvents {
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
-            isScopeActive = ClientKeyBindings.SCOPE_KEY.isDown();
+            isScopeActive = KeyBindInit.SCOPE_KEY.isDown();
+            if (KeyBindInit.RELOAD_KEY.consumeClick()) {
+                ModPackets.INSTANCE.sendToServer(new ModPackets.ReloadPacket());
+            }
         }
     }
 
@@ -105,7 +112,7 @@ public class ClientForgeEvents {
         if (stack.isEmpty()) return;
 
         if (ClientForgeEvents.isScopeItem(stack.getItem()) && isScopeActive) {
-            event.setFOV(45.0F);
+            event.setFOV(event.getFOV() * 0.5F);
         }
     }
 

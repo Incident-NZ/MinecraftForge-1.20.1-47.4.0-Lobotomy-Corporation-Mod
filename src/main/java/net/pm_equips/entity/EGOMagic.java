@@ -1,0 +1,165 @@
+package net.pm_equips.entity;
+
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.NetworkHooks;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class EGOMagic extends Projectile {
+
+    private static final double SPEED = 16.0D;
+    private static final double MAX_DISTANCE = 128.0D;
+
+    private Vec3 direction = Vec3.ZERO;
+    private double speed = SPEED;
+    private Vec3 startPos = Vec3.ZERO;
+
+    private final Set<Integer> hitEntities = new HashSet<>();
+    // optional override: if > 0, use this damage value instead of random 22..26
+    private float damageOverride = -1.0f;
+
+    public EGOMagic(EntityType<? extends EGOMagic> type, Level level) {
+        super(type, level);
+    }
+
+    public EGOMagic(EntityType<? extends EGOMagic> type, Level level, LivingEntity shooter) {
+        this(type, level);
+
+        this.setOwner(shooter);
+
+        this.setPos(
+                shooter.getX(),
+                shooter.getEyeY() - 0.1D,
+                shooter.getZ()
+        );
+
+        this.startPos = this.position();
+
+        this.direction = shooter.getLookAngle().normalize();
+
+        this.setDeltaMovement(direction.scale(this.speed));
+    }
+
+    public void setDamage(float dmg) {
+        this.damageOverride = dmg;
+    }
+    public void setSpeed(double s) {
+        this.speed = s;
+        // if already has a movement direction, update delta
+        if (this.direction != null && this.direction.length() > 0) {
+            this.setDeltaMovement(this.direction.scale(this.speed));
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        Vec3 motion = this.getDeltaMovement();
+
+        Vec3 currentPos = this.position();
+        Vec3 nextPos = currentPos.add(motion);
+
+        // =========================
+        // ネザーポータル軌跡
+        // =========================
+
+        if (this.level().isClientSide) {
+
+            for (int i = 0; i < 3; i++) {
+
+                this.level().addParticle(
+                        ParticleTypes.PORTAL,
+
+                        this.getX(),
+                        this.getY(),
+                        this.getZ(),
+
+                        0.0D,
+                        0.0D,
+                        0.0D
+                );
+            }
+        }
+
+        // =========================
+        // Entity貫通判定
+        // =========================
+
+        AABB box = this.getBoundingBox()
+                .expandTowards(motion)
+                .inflate(1.0D);
+
+        List<Entity> entities = this.level().getEntities(
+                this,
+                box,
+                entity ->
+                        entity instanceof LivingEntity
+                                && entity.isAlive()
+                                && entity != this.getOwner()
+        );
+
+        for (Entity entity : entities) {
+
+            if (hitEntities.contains(entity.getId())) {
+                continue;
+            }
+
+            hitEntities.add(entity.getId());
+
+            RandomSource random = this.level().random;
+
+            float damage;
+            if (this.damageOverride > 0f) {
+                damage = this.damageOverride;
+            } else {
+                damage = 22 + random.nextInt(5);
+            }
+
+            entity.hurt(
+                    this.damageSources().magic(),
+                    damage
+            );
+        }
+
+        // ブロック完全貫通
+        this.setPos(nextPos);
+
+        // 最大射程
+        if (this.position().distanceTo(startPos) >= MAX_DISTANCE) {
+            this.discard();
+        }
+    }
+
+    @Override
+    protected void defineSynchedData() {
+
+    }
+
+    @Override
+    public boolean isNoGravity() {
+        return true;
+    }
+
+    @Override
+    public boolean shouldRenderAtSqrDistance(double distance) {
+        return true;
+    }
+
+    @Override
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
+}

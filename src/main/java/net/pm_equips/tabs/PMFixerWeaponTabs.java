@@ -8,5 +8,7 @@ public class PMFixerWeaponTabs {
             ItemInit.G_MIMICRY.get(),
             ItemInit.EX_DURANDAL.get(),
             ItemInit.EX_ARGALIA.get(),
+            ItemInit.WEAPON_ROLAND_REVOLVER.get(),
+            ItemInit.WEAPON_ROLAND_SHOTGUN.get(),
     };
 }

@@ -1,0 +1,21 @@
+package net.pm_equips.items;
+
+import net.pm_equips.BlockInit;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
+
+public class EGOW3Blood extends SwordItem {
+    public EGOW3Blood() {
+        super(new CustomTier(), 6, -1.7f, new Properties().durability(2000));
+    }
+
+    private static class CustomTier implements Tier {
+        @Override public int getUses() { return 2000; }
+        @Override public float getSpeed() { return 4.0f; }
+        @Override public float getAttackDamageBonus() { return 0.0f; }
+        @Override public int getLevel() { return 1; }
+        @Override public int getEnchantmentValue() { return 0; }
+        @Override public Ingredient getRepairIngredient() { return Ingredient.of(BlockInit.BlockItems.HE_PE_BOX.get()); }
+    }
+}
