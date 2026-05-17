@@ -1,4 +1,4 @@
-package net.pm_equips.Events;
+package net.pm_equips.events;
 
 import net.minecraftforge.fml.common.Mod;
 

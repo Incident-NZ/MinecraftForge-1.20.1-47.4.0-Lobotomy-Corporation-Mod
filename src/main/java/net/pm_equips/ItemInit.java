@@ -12,6 +12,8 @@ public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PMEquipsMain.MOD_ID);
 
     //アイテム
+    public static final RegistryObject<Item> ITEM_ENKEPHALIN = ITEMS.register("item_enkephalin",
+            () -> new ItemEnkephalin(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> SILVER_INGOT = ITEMS.register("item_silver",
             () -> new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> METAL_INGOT = ITEMS.register("item_metal",

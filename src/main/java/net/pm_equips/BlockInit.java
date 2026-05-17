@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.pm_equips.blocks.EBoxGen;
 
 public class BlockInit {
     public static class Blocks {
@@ -44,9 +45,8 @@ public class BlockInit {
                         .sound(SoundType.METAL)
                         .instabreak()));
 
-        // Enkephalin Generator (EBoxGen)
         public static final RegistryObject<Block> E_GEN = BLOCKS.register("e_gen",
-                () -> new net.pm_equips.blocks.EBoxGen(BlockBehaviour.Properties.of()
+                () -> new EBoxGen(BlockBehaviour.Properties.of()
                         .strength(1.5f, 120f)
                         .sound(SoundType.METAL)));
     }
@@ -69,7 +69,7 @@ public class BlockInit {
         public static final RegistryObject<Item> ALEPH_PE_BOX = BLOCK_ITEMS.register("e_box_5",
                 () -> new BlockItem(Blocks.ALEPH_PE_BOX.get(), new Item.Properties().stacksTo(64)));
 
-        // EBoxGen block item
+        // EBoxGen block item (use the Block, not the BlockEntityType)
         public static final RegistryObject<Item> E_GEN = BLOCK_ITEMS.register("e_gen",
                 () -> new BlockItem(Blocks.E_GEN.get(), new Item.Properties().stacksTo(64)));
     }
