@@ -15,25 +15,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
-/*
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.pm_equips.client.renderer.EGOW5TwilightR;
-import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
-*/
 
 import java.util.List;
 import java.util.UUID;
-//import java.util.function.Consumer;
 
-public class EGOW5Twilight extends SwordItem /*implements GeoItem*/ {
-    //private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+public class EGOW5Twilight extends SwordItem {
 
-    private static final UUID REACH_UUID = UUID.fromString("e3b32f1a-6c19-4bfb-8dc1-4b1d0d77d64f");
+    private static final UUID REACH_UUID = UUID.randomUUID();
     private static final AttributeModifier REACH_MODIFIER =
             new AttributeModifier(REACH_UUID, "twilight_reach_bonus", 5.0, AttributeModifier.Operation.ADDITION);
 
@@ -62,6 +50,16 @@ public class EGOW5Twilight extends SwordItem /*implements GeoItem*/ {
                     entity.hurt(entity.damageSources().onFire(), 18.0f); // 薙ぎ払いダメージ
                 }
             }
+
+            boolean result = super.hurtEnemy(stack, target, attacker);
+
+            if (result && !attacker.level().isClientSide()) {
+                // Iフレーム無視の核心
+                target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+                target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+                target.setInvulnerable(true); // 必要に応じて
+            }
+            return result;
         }
 
         stack.hurtAndBreak(1, attacker, e -> e.broadcastBreakEvent(attacker.getUsedItemHand()));
@@ -83,36 +81,6 @@ public class EGOW5Twilight extends SwordItem /*implements GeoItem*/ {
             }
         }
     }
-
-    /*private PlayState predicate(AnimationState animationState) {
-        animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController(this,"controller", 0, this::predicate));
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            private EGOW5TwilightR renderer;
-
-            @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                if (this.renderer == null)
-                    this.renderer = new EGOW5TwilightR();
-
-                return this.renderer;
-            }
-        });
-    }*/
 
     private static class CustomTier implements Tier {
         @Override public int getUses() { return 4000; }

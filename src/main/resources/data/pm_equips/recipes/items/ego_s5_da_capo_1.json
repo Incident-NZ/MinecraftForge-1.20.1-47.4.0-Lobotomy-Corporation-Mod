@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:music_disc_11"
+      "item": "minecraft:jukebox"
     },
     "Y": {
-      "item": "minecraft:music_disc_5"
+      "item": "minecraft:note_block"
     },
     "Z": {
       "item": "pm_equips:e_box_5"

@@ -11,15 +11,15 @@ public class SoundInit {
             DeferredRegister.create(Registries.SOUND_EVENT, PMEquipsMain.MOD_ID);
 
     public static final RegistryObject<SoundEvent> EGO_MAGIC_BULLET =
-            register("ego_magic_bullet");
+            register("item.ego_magic_bullet");
     public static final RegistryObject<SoundEvent> GUN_AUTO =
-            register("gun_auto");
+            register("item.gun_auto");
     public static final RegistryObject<SoundEvent> GUN_SEMI =
-            register("gun_semi");
+            register("item.gun_semi");
     public static final RegistryObject<SoundEvent> GUN_ROLAND_REVOLVER =
-            register("gun_roland_revolver");
+            register("item.gun_roland_revolver");
     public static final RegistryObject<SoundEvent> GUN_ROLAND_SHOTGUN =
-            register("gun_roland_shotgun");
+            register("item.gun_roland_shotgun");
 
     private static RegistryObject<SoundEvent> register(String name)
     {

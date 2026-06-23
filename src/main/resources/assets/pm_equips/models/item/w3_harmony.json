@@ -24,33 +24,5 @@
       "translation": [ 0, 6, 0 ],
       "scale": [ 1.8, 1.8, 1.2 ]
     }
-  },
-  "overrides": [
-    {
-      "predicate": {
-        "pulling": 1
-      },
-      "model": "item/crossbow_pulling_0"
-    },
-    {
-      "predicate": {
-        "pulling": 1,
-        "pull": 0.58
-      },
-      "model": "item/crossbow_pulling_1"
-    },
-    {
-      "predicate": {
-        "pulling": 1,
-        "pull": 1.0
-      },
-      "model": "item/crossbow_pulling_2"
-    },
-    {
-      "predicate": {
-        "charged": 1
-      },
-      "model": "item/crossbow_arrow"
-    }
-  ]
+  }
 }
