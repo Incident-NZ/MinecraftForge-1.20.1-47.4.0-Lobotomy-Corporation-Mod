@@ -54,10 +54,8 @@ public class EGOW3MK4 extends SwordItem {
 
         for (Entity entity : entities) {
             if (entity instanceof LivingEntity target && isInFront(player, target)) {
-                // Iフレーム無視
-                target.hurtTime = 0; // 重要: これで無視
+                target.hurtTime = 0;
                 target.invulnerableTime = 0;
-                target.setInvulnerable(true);
 
                 DamageSource source = player.damageSources().playerAttack(player);
                 target.hurt(source, DAMAGE_PER_TICK);

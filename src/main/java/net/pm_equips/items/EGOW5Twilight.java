@@ -57,7 +57,6 @@ public class EGOW5Twilight extends SwordItem {
                 // Iフレーム無視の核心
                 target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
                 target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
-                target.setInvulnerable(true); // 必要に応じて
             }
             return result;
         }

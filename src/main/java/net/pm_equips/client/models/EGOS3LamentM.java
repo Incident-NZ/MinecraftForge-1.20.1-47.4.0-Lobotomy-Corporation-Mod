@@ -17,6 +17,6 @@ public class EGOS3LamentM extends GeoModel<EGOS3Lament> {
 
     @Override
     public ResourceLocation getAnimationResource(EGOS3Lament animatable) {
-        return new ResourceLocation("pm_equips", "animation/ego_armor.animation.json");
+        return new ResourceLocation("pm_equips", "animations/ego_armor.animation.json");
     }
 }

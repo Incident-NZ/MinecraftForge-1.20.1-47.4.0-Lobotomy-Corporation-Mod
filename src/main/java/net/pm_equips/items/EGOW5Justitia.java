@@ -55,6 +55,15 @@ public class EGOW5Justitia extends SwordItem {
                     entity.hurt(player.level().damageSources().magic(), 4.0f);
                 }
             }
+
+            boolean result = super.hurtEnemy(stack, target, attacker);
+
+            if (result && !attacker.level().isClientSide()) {
+                // Iフレーム無視の核心
+                target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+                target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+            }
+            return result;
         }
 
         stack.hurtAndBreak(1, attacker, e -> e.broadcastBreakEvent(attacker.getUsedItemHand()));

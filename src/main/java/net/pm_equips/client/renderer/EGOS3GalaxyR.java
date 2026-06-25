@@ -1,0 +1,11 @@
+package net.pm_equips.client.renderer;
+
+import net.pm_equips.client.models.EGOS3GalaxyM;
+import net.pm_equips.items.EGOS3Galaxy;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
+
+public class EGOS3GalaxyR extends GeoArmorRenderer<EGOS3Galaxy> {
+    public EGOS3GalaxyR() {
+        super(new EGOS3GalaxyM());
+    }
+}

@@ -106,7 +106,7 @@ public class PBulletLARV extends Projectile {
         LivingEntity owner = (LivingEntity) this.getOwner();
 
         if (target instanceof LivingEntity living && owner != null && !target.is(owner)) {
-            living.hurt(this.level().damageSources().mobProjectile(this, owner), this.damage);
+            living.hurt(this.level().damageSources().thrown(this, owner), this.damage);
         }
         this.discard();
     }

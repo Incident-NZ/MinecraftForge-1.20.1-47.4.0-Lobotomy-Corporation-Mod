@@ -172,51 +172,51 @@ public class ItemInit {
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_SOLEMN_LAMENT_1 = ITEMS.register("s3_lament_1",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_SOLEMN_LAMENT, ArmorItem.Type.CHESTPLATE,
+            () -> new EGOS3Lament(ArmorEquips.A3_SOLEMN_LAMENT, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_SOLEMN_LAMENT_2 = ITEMS.register("s3_lament_2",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_SOLEMN_LAMENT, ArmorItem.Type.LEGGINGS,
+            () -> new EGOS3Lament(ArmorEquips.A3_SOLEMN_LAMENT, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_GALAXY_1 = ITEMS.register("s3_galaxy_1",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_GALAXY, ArmorItem.Type.CHESTPLATE,
+            () -> new EGOS3Galaxy(ArmorEquips.A3_GALAXY, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_GALAXY_2 = ITEMS.register("s3_galaxy_2",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_GALAXY, ArmorItem.Type.LEGGINGS,
+            () -> new EGOS3Galaxy(ArmorEquips.A3_GALAXY, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_BLOOD_1 = ITEMS.register("s3_blood_1",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_BLOOD, ArmorItem.Type.CHESTPLATE,
+            () -> new EGOS3Blood(ArmorEquips.A3_BLOOD, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_BLOOD_2 = ITEMS.register("s3_blood_2",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_BLOOD, ArmorItem.Type.LEGGINGS,
+            () -> new EGOS3Blood(ArmorEquips.A3_BLOOD, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_LOGGING_1 = ITEMS.register("s3_logging_1",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_LOGGING, ArmorItem.Type.CHESTPLATE,
+            () -> new EGOS3Logging(ArmorEquips.A3_LOGGING, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_LOGGING_2 = ITEMS.register("s3_logging_2",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_LOGGING, ArmorItem.Type.LEGGINGS,
+            () -> new EGOS3Logging(ArmorEquips.A3_LOGGING, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_HARVEST_1 = ITEMS.register("s3_harvest_1",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_HARVEST, ArmorItem.Type.CHESTPLATE,
+            () -> new EGOS3Harvest(ArmorEquips.A3_HARVEST, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_HARVEST_2 = ITEMS.register("s3_harvest_2",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_HARVEST, ArmorItem.Type.LEGGINGS,
+            () -> new EGOS3Harvest(ArmorEquips.A3_HARVEST, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_GRINDER_MK4_2 = ITEMS.register("s3_mk4_1",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_GRINDER_MK4, ArmorItem.Type.CHESTPLATE,
+            () -> new EGOS3MK4(ArmorEquips.A3_GRINDER_MK4, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_GRINDER_MK4_3 = ITEMS.register("s3_mk4_2",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_GRINDER_MK4, ArmorItem.Type.LEGGINGS,
+            () -> new EGOS3MK4(ArmorEquips.A3_GRINDER_MK4, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> A3_ICE_SHARD_2 = ITEMS.register("s3_ice_shard_1",
