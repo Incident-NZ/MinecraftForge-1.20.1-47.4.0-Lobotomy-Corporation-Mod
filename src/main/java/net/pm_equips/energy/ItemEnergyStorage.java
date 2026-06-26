@@ -1,25 +1,98 @@
 package net.pm_equips.energy;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
 
-public class ItemEnergyStorage extends EnergyStorage {
+public class ItemEnergyStorage implements IEnergyStorage
+{
+    private final CompoundTag tag;
 
-    public ItemEnergyStorage(int capacity, int maxTransfer) {
-        super(capacity, maxTransfer);
+    private final int capacity;
+    private final int maxReceive;
+    private final int maxExtract;
+
+    public ItemEnergyStorage(
+            CompoundTag tag,
+            int capacity,
+            int maxReceive,
+            int maxExtract)
+    {
+        this.tag = tag;
+        this.capacity = capacity;
+        this.maxReceive = maxReceive;
+        this.maxExtract = maxExtract;
     }
 
-    public void setEnergy(int energy) {
-        this.energy = Math.min(capacity, energy);
+    @Override
+    public int receiveEnergy(
+            int maxReceive,
+            boolean simulate)
+    {
+        int energy = getEnergyStored();
+
+        int received = Math.min(
+                capacity - energy,
+                Math.min(this.maxReceive, maxReceive));
+
+        if(!simulate)
+        {
+            setEnergyStored(energy + received);
+        }
+
+        return received;
     }
 
-    public CompoundTag serializeNBT() {
-        CompoundTag tag = new CompoundTag();
-        tag.putInt("Energy", energy);
-        return tag;
+    @Override
+    public int extractEnergy(
+            int maxExtract,
+            boolean simulate)
+    {
+        int energy = getEnergyStored();
+
+        int extracted = Math.min(
+                energy,
+                Math.min(this.maxExtract, maxExtract));
+
+        if(!simulate)
+        {
+            setEnergyStored(energy - extracted);
+        }
+
+        return extracted;
     }
 
-    public void deserializeNBT(CompoundTag tag) {
-        energy = tag.getInt("Energy");
+    @Override
+    public int getEnergyStored()
+    {
+        return tag.getInt("Energy");
+    }
+
+    public void setEnergyStored(int value)
+    {
+        tag.putInt(
+                "Energy",
+                Math.max(
+                        0,
+                        Math.min(capacity, value)
+                )
+        );
+    }
+
+    @Override
+    public int getMaxEnergyStored()
+    {
+        return capacity;
+    }
+
+    @Override
+    public boolean canExtract()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean canReceive()
+    {
+        return true;
     }
 }

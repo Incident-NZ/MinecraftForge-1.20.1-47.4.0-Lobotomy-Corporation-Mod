@@ -10,5 +10,9 @@ public class PMFixerWeaponTabs {
             ItemInit.EX_ARGALIA.get(),
             ItemInit.WEAPON_ROLAND_REVOLVER.get(),
             ItemInit.WEAPON_ROLAND_SHOTGUN.get(),
+            ItemInit.ASC2_WALTER.get(),
+            ItemInit.ASC2_WEST_WEAPON.get(),
+            ItemInit.ASC2_SOUTH_W1.get(),
+            ItemInit.ASC2_SOUTH_W2.get(),
     };
 }

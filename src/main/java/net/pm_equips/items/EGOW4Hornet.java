@@ -1,5 +1,7 @@
 package net.pm_equips.items;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
@@ -19,6 +21,7 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 public class EGOW4Hornet extends ProjectileWeaponItem {
@@ -179,5 +182,33 @@ public class EGOW4Hornet extends ProjectileWeaponItem {
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repair) {
         return repair.is(BlockInit.BlockItems.WAW_PE_BOX.get());
+    }
+
+    @Override
+    public void appendHoverText(
+            ItemStack stack,
+            Level level,
+            List<Component> tooltip,
+            TooltipFlag flag
+    ) {
+
+        CompoundTag tag =
+                stack.getOrCreateTag();
+
+        tooltip.add(
+                Component.literal(
+                        "Ammo: "
+                                + tag.getInt("Ammo")
+                                + " / "
+                                + MAX_AMMO
+                )
+        );
+
+        super.appendHoverText(
+                stack,
+                level,
+                tooltip,
+                flag
+        );
     }
 }

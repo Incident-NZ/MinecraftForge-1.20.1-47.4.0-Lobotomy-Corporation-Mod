@@ -1,11 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "X"
+    "XYZ"
   ],
   "key": {
     "X": {
-      "item": "minecraft:stone_axe"
+      "item": "minecraft:iron_boots"
+    },
+    "Y": {
+      "tag": "minecraft:axes"
+    },
+    "Z": {
+      "item": "minecraft:rotten_flesh"
     }
   },
   "result": {

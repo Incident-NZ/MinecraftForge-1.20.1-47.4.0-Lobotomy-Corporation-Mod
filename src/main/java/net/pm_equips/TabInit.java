@@ -9,7 +9,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
-import net.pm_equips.tabs.PMWCorpTabs;
+import net.pm_equips.tabs.PMWingsTabs;
 
 public class TabInit {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, PMEquipsMain.MOD_ID);
@@ -52,7 +52,7 @@ public class TabInit {
                     .title(Component.translatable("itemGroup.pm_wcorp"))
                     .icon(() -> ItemInit.WCORP_ARMOR_1.get().getDefaultInstance())
                     .displayItems((param, output) -> {
-                        for (Item item : PMWCorpTabs.items) {
+                        for (Item item : PMWingsTabs.items) {
                             output.accept(item);
                         }
                     })

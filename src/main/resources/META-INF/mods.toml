@@ -4,7 +4,7 @@ license = "${mod_license}"
 
 [[mods]]
 modId = "pm_equips"
-version = "2.3"
+version = "3.0"
 displayName = "ProjectMoon Equipment Mod"
 authors = "Rei"
 description = "Face the fear, Make the future."
@@ -12,7 +12,7 @@ description = "Face the fear, Make the future."
 [[dependencies."pm_equips"]]
 modId = "forge"
 mandatory = true
-versionRange = "47.4.10"
+versionRange = "47.4.0"
 ordering = "NONE"
 side = "BOTH"
 
@@ -23,14 +23,14 @@ versionRange = "1.20.1"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.pm_equips]]
+[[dependencies."pm_equips"]]
 modId="geckolib"
 mandatory=true
 versionRange="[4.4.9,)"
 ordering="AFTER"
 side="BOTH"
 
-[[dependencies.pm_equips]]
+[[dependencies."pm_equips"]]
 modId="curios"
 mandatory=true
 versionRange="[5.14.1,)"
@@ -40,3 +40,17 @@ requiredMods = ["curios"]
 
 [[mixins]]
 config="pm_equips.mixins.json"
+
+[[dependencies."pm_equips"]]
+modId="mekanism"
+mandatory=false
+versionRange="[10.4,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies."pm_equips"]]
+modId="jei"
+mandatory=false
+versionRange="[15,)"
+ordering="NONE"
+side="BOTH"

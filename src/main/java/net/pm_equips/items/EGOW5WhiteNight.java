@@ -1,7 +1,7 @@
 package net.pm_equips.items;
 
 import net.pm_equips.BlockInit;
-import net.pm_equips.config.Config;
+import net.pm_equips.config.CommonConfig;
 import net.minecraft.core.particles.DustColorTransitionOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.sounds.SoundEvents;
@@ -69,7 +69,7 @@ public class EGOW5WhiteNight extends BowItem {
                 for (LivingEntity target : targets) {
                     if (!hitEntities.contains(target)) {
 
-                        if (!Config.ALLOW_FRIENDLY_FIRE.get()) {
+                        if (!CommonConfig.ALLOW_FRIENDLY_FIRE.get()) {
                             if (target instanceof Player) {
                                 continue;
                             }

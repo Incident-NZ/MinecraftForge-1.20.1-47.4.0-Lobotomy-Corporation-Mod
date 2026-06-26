@@ -3,7 +3,7 @@ package net.pm_equips.items;
 
 import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
-import net.pm_equips.config.Config;
+import net.pm_equips.config.CommonConfig;
 import net.pm_equips.entity.PBullet;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -142,7 +142,7 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
 
         if (entityHit != null) {
             if (entityHit.getEntity() instanceof LivingEntity target) {
-                if (!(target instanceof Player) || Config.ALLOW_FRIENDLY_FIRE.get()) {
+                if (!(target instanceof Player) || CommonConfig.ALLOW_FRIENDLY_FIRE.get()) {
                     target.hurt(player.level().damageSources().generic(), DAMAGE);
                     level.playSound(null, target.blockPosition(), SoundEvents.GENERIC_HURT, SoundSource.PLAYERS, 1.0F, 1.0F);
                 }
@@ -162,7 +162,7 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (target instanceof Player && !Config.ALLOW_FRIENDLY_FIRE.get()) {
+        if (target instanceof Player && !CommonConfig.ALLOW_FRIENDLY_FIRE.get()) {
             stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
             return true;
         }

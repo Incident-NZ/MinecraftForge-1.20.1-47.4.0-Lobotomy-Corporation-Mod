@@ -1,7 +1,11 @@
 package net.pm_equips.items;
 
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeMod;
 import net.pm_equips.BlockInit;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -9,20 +13,42 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 
+import java.util.UUID;
+
 public class EGOW4BlueScar extends SwordItem {
+    private static final UUID REACH_UUID = UUID.randomUUID();
+    private static final AttributeModifier REACH_MODIFIER =
+            new AttributeModifier(REACH_UUID, "blue_scar_reach", -1.0, AttributeModifier.Operation.ADDITION);
+
     public EGOW4BlueScar() {
         super(new CustomTier(), 16, -2.2f, new Properties().durability(3000));
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (attacker instanceof Player player) {
-            stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(p.getUsedItemHand()));
-        }
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+        if (level.isClientSide || !(entity instanceof Player player)) return;
 
-        CompoundTag tag = target.getPersistentData();
-        tag.putInt("blue_scar_dot_ticks", 40);
-        return true;
+        boolean isHolding = selected && player.getMainHandItem() == stack;
+
+        AttributeInstance reachAttr = player.getAttribute(ForgeMod.ENTITY_REACH.get());
+        if (reachAttr != null) {
+            if (isHolding && !reachAttr.hasModifier(REACH_MODIFIER)) {
+                reachAttr.addTransientModifier(REACH_MODIFIER);
+            } else if (!isHolding && reachAttr.hasModifier(REACH_MODIFIER)) {
+                reachAttr.removeModifier(REACH_MODIFIER);
+            }
+        }
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+        return result;
     }
 
     private static class CustomTier implements Tier {

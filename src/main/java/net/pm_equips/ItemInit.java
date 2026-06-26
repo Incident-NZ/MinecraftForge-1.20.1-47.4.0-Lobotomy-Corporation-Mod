@@ -287,6 +287,10 @@ public class ItemInit {
     public static final RegistryObject<Item> G_MIMICRY = ITEMS.register("fixer_kali_mimicry", WeaponKaliMimicry::new);
     public static final RegistryObject<Item> EX_DURANDAL = ITEMS.register("fixer_roland_durandal", WeaponRolandDurandal::new);
     public static final RegistryObject<Item> EX_ARGALIA = ITEMS.register("fixer_argalia", WeaponArgalia::new);
+    public static final RegistryObject<Item> ASC2_SOUTH_W1 = ITEMS.register("asc2_south_weapon1", Asc2SouthWeapon1::new);
+    public static final RegistryObject<Item> ASC2_SOUTH_W2 = ITEMS.register("asc2_south_weapon2", Asc2SouthWeapon2::new);
+    public static final RegistryObject<Item> ASC2_WALTER = ITEMS.register("asc2_walter", Asc2Walter::new);
+    public static final RegistryObject<Item> ASC2_WEST_WEAPON = ITEMS.register("asc2_west_weapon", Asc2WestWeapon::new);
 
     //フィクサー武器 遠距離
     public static final RegistryObject<Item> WEAPON_ROLAND_REVOLVER = ITEMS.register("fixer_roland_lar",
@@ -310,4 +314,18 @@ public class ItemInit {
     public static final RegistryObject<Item> WCORP_ARMOR_ACE_2 = ITEMS.register("wcorp_armor_ace_2",
             () -> new WCorpArmorAce(ArmorEquips.WCORP_ARMOR_ACE, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> WCORP_WEAPON_1 = ITEMS.register("wcorp_w1", WCorpWeapon1::new);
+    public static final RegistryObject<Item> WCORP_WEAPON_2 = ITEMS.register("wcorp_w2", WCorpWeapon2::new);
+    public static final RegistryObject<Item> WCORP_WEAPON_3 = ITEMS.register("wcorp_w3", WCorpWeapon3::new);
+
+    //R社装備
+    public static final RegistryObject<Item> RCORP_RABBIT_RIFLE = ITEMS.register("rcorp_rabbit_rifle",
+            () -> new RCorpRabbitRifle(new Item.Properties().durability(2000)));
+    public static final RegistryObject<Item> RCORP_RABBIT_KNIFE = ITEMS.register("rcorp_rabbit_knife", RCorpRabbitCombatKnife::new);
+
+    //K社装備
+    public static final RegistryObject<Item> KCORP_WEAPON_1 = ITEMS.register("kcorp_w1", KCorpWeapon1::new);
+    public static final RegistryObject<Item> KCORP_WEAPON_2 = ITEMS.register("kcorp_w2", KCorpWeapon2::new);
+    public static final RegistryObject<Item> KCORP_WEAPON_3 = ITEMS.register("kcorp_w3", KCorpWeapon3::new);
 }

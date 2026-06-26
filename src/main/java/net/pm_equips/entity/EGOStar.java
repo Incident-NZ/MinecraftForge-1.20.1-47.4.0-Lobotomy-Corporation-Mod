@@ -2,7 +2,7 @@ package net.pm_equips.entity;
 
 import net.pm_equips.EntityInit;
 import net.pm_equips.ItemInit;
-import net.pm_equips.config.Config;
+import net.pm_equips.config.CommonConfig;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,7 +39,7 @@ public class EGOStar extends ThrowableItemProjectile {
         if (!(target instanceof LivingEntity living)) return;
 
         // === フレンドリーファイア制御 ===
-        if (!Config.ALLOW_FRIENDLY_FIRE.get()) {
+        if (!CommonConfig.ALLOW_FRIENDLY_FIRE.get()) {
             if (owner instanceof Player player) {
                 if (target instanceof Player) return; // プレイヤーへの攻撃無効
                 if (player.isAlliedTo(target)) return; // 味方モブも無効

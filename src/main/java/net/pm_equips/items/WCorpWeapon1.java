@@ -1,114 +1,196 @@
 package net.pm_equips.items;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.pm_equips.energy.WcorpWeaponProvider;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.pm_equips.ItemInit;
+import net.pm_equips.energy.WeaponEnergyProvider;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.UUID;
+import java.util.List;
 
 public class WCorpWeapon1 extends SwordItem {
 
-    private static final UUID DAMAGE_UUID =
-            UUID.fromString("a5f14bc8-fbf9-45d4-90b2-4c7763ef4d1a");
+    public static final int MAX_FE = 5000;
+    public static final int FE_PER_HIT = 200;
 
-    private static final UUID SPEED_UUID =
-            UUID.fromString("42d4c9f4-88d0-4b79-a0c5-c2866a50afcb");
-
-    public WCorpWeapon1(
-            Tier tier,
-            int damage,
-            float speed,
-            Properties properties) {
-
-        super(tier, damage, speed, properties);
+    public WCorpWeapon1() {
+        super(
+                new CustomTier(),
+                6,
+                -2.4F,
+                new Properties()
+                        .stacksTo(1)
+        );
     }
 
     @Override
     public @Nullable ICapabilityProvider initCapabilities(
             ItemStack stack,
-            @Nullable net.minecraft.nbt.CompoundTag nbt) {
-
-        return new WcorpWeaponProvider();
-    }
-
-    @Override
-    public boolean isBarVisible(ItemStack stack) {
-        return true;
-    }
-
-    @Override
-    public int getBarWidth(ItemStack stack) {
-
-        return stack.getCapability(ForgeCapabilities.ENERGY)
-                .map(storage ->
-                        Math.round(
-                                13.0F *
-                                        storage.getEnergyStored() /
-                                        storage.getMaxEnergyStored()
-                        ))
-                .orElse(0);
-    }
-
-    @Override
-    public int getBarColor(ItemStack stack) {
-        return 0x00FFFF;
+            @Nullable CompoundTag nbt
+    ) {
+        return new WeaponEnergyProvider(
+                stack,
+                MAX_FE
+        );
     }
 
     @Override
     public boolean hurtEnemy(
             ItemStack stack,
-            net.minecraft.world.entity.LivingEntity target,
-            net.minecraft.world.entity.LivingEntity attacker) {
+            LivingEntity target,
+            LivingEntity attacker
+    ) {
 
-        stack.getCapability(ForgeCapabilities.ENERGY)
-                .ifPresent(storage ->
-                        storage.extractEnergy(500, false));
-
-        return super.hurtEnemy(stack, target, attacker);
-    }
-
-    @Override
-    public Multimap<Attribute, AttributeModifier>
-    getDefaultAttributeModifiers(EquipmentSlot slot) {
-
-        ImmutableMultimap.Builder<Attribute, AttributeModifier>
-                builder = ImmutableMultimap.builder();
-
-        builder.putAll(super.getDefaultAttributeModifiers(slot));
-
-        if(slot == EquipmentSlot.MAINHAND) {
-
-            builder.put(
-                    Attributes.ATTACK_DAMAGE,
-                    new AttributeModifier(
-                            DAMAGE_UUID,
-                            "energy_damage",
-                            10.0D,
-                            AttributeModifier.Operation.ADDITION
-                    )
-            );
-
-            builder.put(
-                    Attributes.MOVEMENT_SPEED,
-                    new AttributeModifier(
-                            SPEED_UUID,
-                            "energy_speed",
-                            0.20D,
-                            AttributeModifier.Operation.MULTIPLY_TOTAL
-                    )
+        if(attacker.level().isClientSide)
+        {
+            return super.hurtEnemy(
+                    stack,
+                    target,
+                    attacker
             );
         }
 
-        return builder.build();
+        stack.getCapability(
+                ForgeCapabilities.ENERGY
+        ).ifPresent(storage -> {
+
+            if(storage.getEnergyStored() >= FE_PER_HIT)
+            {
+                storage.extractEnergy(
+                        FE_PER_HIT,
+                        false
+                );
+
+                target.knockback(
+                        2.5D,
+                        target.getX() - attacker.getX(),
+                        target.getZ() - attacker.getZ()
+                );
+
+                target.addEffect(
+                        new MobEffectInstance(
+                                MobEffects.MOVEMENT_SLOWDOWN,
+                                100,
+                                2,
+                                false,
+                                true
+                        )
+                );
+            }
+        });
+
+        return super.hurtEnemy(
+                stack,
+                target,
+                attacker
+        );
+    }
+
+    @Override
+    public boolean isBarVisible(
+            ItemStack stack
+    ) {
+        return true;
+    }
+
+    @Override
+    public int getBarWidth(
+            ItemStack stack
+    ) {
+
+        return stack.getCapability(
+                ForgeCapabilities.ENERGY
+        ).map(storage ->
+                Math.round(
+                        13.0F *
+                                storage.getEnergyStored()
+                                / (float) storage.getMaxEnergyStored()
+                )
+        ).orElse(0);
+    }
+
+    @Override
+    public int getBarColor(
+            ItemStack stack
+    ) {
+        return 0x00FFFF;
+    }
+
+    @Override
+    public void appendHoverText(
+            ItemStack stack,
+            @Nullable Level level,
+            List<Component> tooltip,
+            TooltipFlag flag
+    ) {
+
+        stack.getCapability(
+                ForgeCapabilities.ENERGY
+        ).ifPresent(storage ->
+
+                tooltip.add(
+                        Component.literal(
+                                "FE: "
+                                        + storage.getEnergyStored()
+                                        + " / "
+                                        + storage.getMaxEnergyStored()
+                        )
+                )
+        );
+
+        super.appendHoverText(
+                stack,
+                level,
+                tooltip,
+                flag
+        );
+    }
+
+    private static class CustomTier
+            implements Tier {
+
+        @Override
+        public int getUses() {
+            return 2000;
+        }
+
+        @Override
+        public float getSpeed() {
+            return 4.0F;
+        }
+
+        @Override
+        public float getAttackDamageBonus() {
+            return 0.0F;
+        }
+
+        @Override
+        public int getLevel() {
+            return 1;
+        }
+
+        @Override
+        public int getEnchantmentValue() {
+            return 0;
+        }
+
+        @Override
+        public Ingredient getRepairIngredient() {
+
+            return Ingredient.of(
+                    ItemInit.METAL_INGOT.get()
+            );
+        }
     }
 }

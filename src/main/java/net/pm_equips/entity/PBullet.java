@@ -1,40 +1,73 @@
 package net.pm_equips.entity;
 
-import net.minecraft.world.level.ClipContext;
-import net.pm_equips.EntityInit;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
+import net.pm_equips.EntityInit;
+import net.pm_equips.config.CommonConfig;
 
 public class PBullet extends Projectile {
-    private float damage;
-    private int maxLifetime = 100;
 
-    public PBullet(EntityType<? extends PBullet> type, Level level) {
+    private float damage;
+
+    private double maxDistance = 128D;
+
+    private double traveledDistance;
+
+    public PBullet(
+            EntityType<? extends PBullet> type,
+            Level level
+    ) {
         super(type, level);
+
         this.setNoGravity(true);
     }
 
-    public PBullet(Level level, LivingEntity shooter, float damage, float velocity, Vec3 direction) {
-        this(EntityInit.BULLET.get(), level);
+    public PBullet(
+            Level level,
+            LivingEntity shooter,
+            float damage,
+            float velocity,
+            Vec3 direction
+    ) {
+
+        this(
+                EntityInit.BULLET.get(),
+                level
+        );
+
         this.setOwner(shooter);
+
         this.damage = damage;
-        this.setMaxLifetime(100);
 
-        Vec3 shootDir = direction.normalize();
-        Vec3 motion = shootDir.scale(velocity);
-        this.setDeltaMovement(motion);
+        Vec3 shootDir =
+                direction.normalize();
 
-        Vec3 eyePos = shooter.getEyePosition();
-        Vec3 spawnPos = eyePos.add(shootDir.scale(0.8));
-        this.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
+        this.setDeltaMovement(
+                shootDir.scale(velocity)
+        );
+
+        Vec3 spawnPos =
+                shooter.getEyePosition()
+                        .add(shootDir.scale(0.8D));
+
+        this.setPos(
+                spawnPos.x,
+                spawnPos.y,
+                spawnPos.z
+        );
     }
 
     @Override
@@ -42,99 +75,247 @@ public class PBullet extends Projectile {
 
     @Override
     public void tick() {
+
         super.tick();
 
-        Vec3 motion = this.getDeltaMovement();
-        Vec3 currentPos = this.position();
-        Vec3 nextPos = currentPos.add(motion);
+        Vec3 motion =
+                this.getDeltaMovement();
 
-        // Block collision (non-penetrating)
-        if (!this.level().isClientSide) {
-            net.minecraft.world.phys.BlockHitResult blockHit = this.level().clip(
-                    new ClipContext(currentPos, nextPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this)
-            );
-            if (blockHit.getType() == HitResult.Type.BLOCK) {
-                this.onHit(blockHit);
+        if (motion.lengthSqr() <= 0.0001D) {
+            discard();
+            return;
+        }
+
+        Vec3 currentPos =
+                this.position();
+
+        Vec3 nextPos =
+                currentPos.add(motion);
+
+        if (!level().isClientSide) {
+
+            BlockHitResult blockHit =
+                    level().clip(
+                            new ClipContext(
+                                    currentPos,
+                                    nextPos,
+                                    ClipContext.Block.COLLIDER,
+                                    ClipContext.Fluid.NONE,
+                                    this
+                            )
+                    );
+
+            if (blockHit.getType()
+                    == HitResult.Type.BLOCK) {
+
+                onHitBlock(blockHit);
+
                 return;
             }
 
-            // Entity collision
-            Entity owner = this.getOwner();
-            EntityHitResult entityHit = net.minecraft.world.entity.projectile.ProjectileUtil.getEntityHitResult(
-                    this.level(),
-                    owner != null ? owner : this,
-                    currentPos,
-                    nextPos,
-                    this.getBoundingBox().expandTowards(motion).inflate(0.5D),
-                    e -> e != owner && e instanceof LivingEntity && ((LivingEntity)e).isAlive()
-            );
+            Entity owner =
+                    getOwner();
+
+            EntityHitResult entityHit =
+                    ProjectileUtil.getEntityHitResult(
+                            level(),
+                            owner != null ? owner : this,
+                            currentPos,
+                            nextPos,
+                            getBoundingBox()
+                                    .expandTowards(motion)
+                                    .inflate(0.25D),
+
+                            entity -> {
+
+                                if (!(entity instanceof LivingEntity living))
+                                    return false;
+
+                                if (!living.isAlive())
+                                    return false;
+
+                                if (entity == owner)
+                                    return false;
+
+                                if (!CommonConfig.ALLOW_FRIENDLY_FIRE.get()
+                                        && owner instanceof LivingEntity ownerLiving
+                                        && ownerLiving.isAlliedTo(living))
+                                {
+                                    return false;
+                                }
+
+                                return true;
+                            }
+                    );
 
             if (entityHit != null) {
-                this.onHitEntity(entityHit);
+
+                onHitEntity(entityHit);
+
                 return;
             }
         }
 
-        // No collision: move projectile
-        if (motion.lengthSqr() > 0) {
-            this.setPos(nextPos.x, nextPos.y, nextPos.z);
+        traveledDistance += motion.length();
+
+        if (traveledDistance >= maxDistance) {
+
+            discard();
+
+            return;
         }
 
-        this.checkInsideBlocks();
+        move(
+                MoverType.SELF,
+                motion
+        );
 
-        if (this.level().isClientSide) {
-            Vec3 pos = this.position();
+        checkInsideBlocks();
 
-            this.level().addParticle(ParticleTypes.SMOKE,
-                    pos.x, pos.y, pos.z,
-                    0, 0, 0);
+        if (level().isClientSide) {
 
-            if (this.tickCount % 3 == 0) {
-                this.level().addParticle(ParticleTypes.LARGE_SMOKE,
-                        pos.x, pos.y + 0.1, pos.z,
-                        (this.random.nextFloat() - 0.5) * 0.1, 0, (this.random.nextFloat() - 0.5) * 0.1);
+            Vec3 pos =
+                    position();
+
+            level().addParticle(
+                    ParticleTypes.SMOKE,
+                    pos.x,
+                    pos.y,
+                    pos.z,
+                    0,
+                    0,
+                    0
+            );
+
+            if (tickCount % 3 == 0) {
+
+                level().addParticle(
+                        ParticleTypes.LARGE_SMOKE,
+                        pos.x,
+                        pos.y + 0.1D,
+                        pos.z,
+                        (random.nextFloat() - 0.5F) * 0.1F,
+                        0,
+                        (random.nextFloat() - 0.5F) * 0.1F
+                );
+            }
+        }
+    }
+
+    protected void onHitBlock(
+            BlockHitResult hit
+    ) {
+
+        if (CommonConfig.ALLOW_TERRAIN_DAMAGE.get()) {
+
+            BlockPos pos =
+                    hit.getBlockPos();
+
+            if (!level().isClientSide
+                    && !level().getBlockState(pos)
+                    .is(Blocks.BEDROCK))
+            {
+                level().destroyBlock(
+                        pos,
+                        true
+                );
             }
         }
 
-        if (this.tickCount > this.maxLifetime) {
-            this.discard();
-        }
+        discard();
     }
 
     @Override
-    protected void onHit(HitResult result) {
-        // If we hit a block (or any non-entity hit), remove the projectile to make it non-penetrating
-        this.discard();
+    protected void onHit(
+            HitResult result
+    ) {
+        discard();
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult result) {
-        super.onHitEntity(result);
-        Entity target = result.getEntity();
-        LivingEntity owner = (LivingEntity) this.getOwner();
+    protected void onHitEntity(
+            EntityHitResult result
+    ) {
 
-        if (target instanceof LivingEntity living && owner != null && !target.is(owner)) {
-            living.hurt(this.level().damageSources().thrown(this, owner), this.damage);
+        Entity target =
+                result.getEntity();
+
+        Entity ownerEntity =
+                getOwner();
+
+        if (!(ownerEntity instanceof LivingEntity owner)) {
+
+            discard();
+
+            return;
         }
-        this.discard();
+
+        if (!(target instanceof LivingEntity living)) {
+
+            discard();
+
+            return;
+        }
+
+        if (!CommonConfig.ALLOW_FRIENDLY_FIRE.get()
+                && owner.isAlliedTo(living))
+        {
+            discard();
+            return;
+        }
+
+        living.hurt(
+                level()
+                        .damageSources()
+                        .thrown(this, owner),
+                damage
+        );
+
+        discard();
     }
 
-    public void setDamage(float damage) { this.damage = damage; }
-    public void setVelocity(float velocity) {
-        Vec3 dir = this.getDeltaMovement().normalize();
-        if (dir.lengthSqr() > 0) {
-            this.setDeltaMovement(dir.scale(velocity));
-        }
+    public void setDamage(
+            float damage
+    ) {
+        this.damage = damage;
     }
-    public void setMaxLifetime(int lifetime) { this.maxLifetime = lifetime; }
+
+    public void setVelocity(
+            float velocity
+    ) {
+
+        Vec3 motion =
+                getDeltaMovement();
+
+        if (motion.lengthSqr() <= 0.0001D)
+            return;
+
+        setDeltaMovement(
+                motion.normalize()
+                        .scale(velocity)
+        );
+    }
+
+    public void setMaxLifetime(
+            int range
+    ) {
+        this.maxDistance = range;
+    }
 
     @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener>
+    getAddEntityPacket()
+    {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     @Override
-    public EntityDimensions getDimensions(Pose pose) {
-        return EntityDimensions.fixed(0.25F, 0.25F);
+    public EntityDimensions getDimensions(
+            Pose pose
+    ) {
+        return EntityDimensions.fixed(
+                0.1F,
+                0.1F
+        );
     }
 }

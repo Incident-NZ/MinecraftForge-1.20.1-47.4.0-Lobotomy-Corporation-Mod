@@ -1,5 +1,6 @@
 package net.pm_equips.items;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.pm_equips.EntityInit;
@@ -17,6 +19,7 @@ import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
 import net.pm_equips.entity.PBulletLASG;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 public class WeaponRolandShotgun extends ProjectileWeaponItem {
@@ -148,5 +151,33 @@ public class WeaponRolandShotgun extends ProjectileWeaponItem {
 	@Override
 	public int getDefaultProjectileRange() {
 		return 32;
+	}
+
+	@Override
+	public void appendHoverText(
+			ItemStack stack,
+			Level level,
+			List<Component> tooltip,
+			TooltipFlag flag
+	) {
+
+		CompoundTag tag =
+				stack.getOrCreateTag();
+
+		tooltip.add(
+				Component.literal(
+						"Ammo: "
+								+ tag.getInt("Ammo")
+								+ " / "
+								+ MAX_AMMO
+				)
+		);
+
+		super.appendHoverText(
+				stack,
+				level,
+				tooltip,
+				flag
+		);
 	}
 }

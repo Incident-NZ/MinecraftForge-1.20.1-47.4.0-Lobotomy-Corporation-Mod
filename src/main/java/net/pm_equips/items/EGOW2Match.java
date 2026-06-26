@@ -2,7 +2,7 @@ package net.pm_equips.items;
 
 import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
-import net.pm_equips.config.Config;
+import net.pm_equips.config.CommonConfig;
 import net.pm_equips.entity.PBulletExp;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -129,8 +129,8 @@ public class EGOW2Match extends ProjectileWeaponItem {
     }
 
     private void handleExplosion(Level lvl, Player shooter, double x, double y, double z) {
-        boolean allowTerrain = Config.ALLOW_TERRAIN_DAMAGE.get();
-        boolean allowFriendly = Config.ALLOW_FRIENDLY_FIRE.get();
+        boolean allowTerrain = CommonConfig.ALLOW_TERRAIN_DAMAGE.get();
+        boolean allowFriendly = CommonConfig.ALLOW_FRIENDLY_FIRE.get();
 
         double radius = Math.max(1.0, EXPLOSION_POWER);
 

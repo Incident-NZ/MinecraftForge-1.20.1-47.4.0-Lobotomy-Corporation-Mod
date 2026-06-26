@@ -1,5 +1,7 @@
 package net.pm_equips.items;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.TooltipFlag;
 import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
@@ -18,6 +20,7 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 public class EGOW3Laetitia extends ProjectileWeaponItem {
@@ -110,7 +113,7 @@ public class EGOW3Laetitia extends ProjectileWeaponItem {
             level.addFreshEntity(bullet);
         }
 
-        level.playSound(null, player, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.2F, 0.8F);
+        level.playSound(null, player, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 0.8F, 0.8F);
     }
 
     // Rキーリロード開始
@@ -177,5 +180,33 @@ public class EGOW3Laetitia extends ProjectileWeaponItem {
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repair) {
         return repair.is(BlockInit.BlockItems.HE_PE_BOX.get());
+    }
+
+    @Override
+    public void appendHoverText(
+            ItemStack stack,
+            Level level,
+            List<Component> tooltip,
+            TooltipFlag flag
+    ) {
+
+        CompoundTag tag =
+                stack.getOrCreateTag();
+
+        tooltip.add(
+                Component.literal(
+                        "Ammo: "
+                                + tag.getInt("Ammo")
+                                + " / "
+                                + MAX_AMMO
+                )
+        );
+
+        super.appendHoverText(
+                stack,
+                level,
+                tooltip,
+                flag
+        );
     }
 }
