@@ -11,11 +11,23 @@
     "pm_equips:s3_magic_bullet_2",
     "pm_equips:w4_lament_r",
     "pm_equips:w4_lament_l",
+    "pm_equips:s3_lament_1",
+    "pm_equips:s3_lament_2",
     "pm_equips:w3_galaxy",
+    "pm_equips:s3_galaxy_1",
+    "pm_equips:s3_galaxy_2",
     "pm_equips:w3_harvest",
+    "pm_equips:s3_harvest_1",
+    "pm_equips:s3_harvest_2",
     "pm_equips:w3_logging",
+    "pm_equips:s3_logging_1",
+    "pm_equips:s3_logging_2",
     "pm_equips:w3_blood",
+    "pm_equips:s3_blood_1",
+    "pm_equips:s3_blood_2",
     "pm_equips:w3_mk4",
+    "pm_equips:s3_mk4_1",
+    "pm_equips:s3_mk4_2",
     "pm_equips:w3_harmony"
   ]
 }

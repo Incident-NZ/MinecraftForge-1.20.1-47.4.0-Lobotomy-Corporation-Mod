@@ -21,7 +21,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
-import net.pm_equips.energy.EnergyCapabilityProvider;
+import net.pm_equips.energy.WeaponEnergyProvider;
 import net.pm_equips.entity.PBullet;
 
 import java.util.List;
@@ -158,6 +158,8 @@ public class RCorpRabbitRifle extends ProjectileWeaponItem {
         bullet.setMaxLifetime(
                 getDefaultProjectileRange()
         );
+        bullet.setTerrainDamageEnabled(false);
+        bullet.setIgnoreInvulnerabilityFrames(true);
 
         level.addFreshEntity(bullet);
 
@@ -350,11 +352,9 @@ public class RCorpRabbitRifle extends ProjectileWeaponItem {
             ItemStack stack,
             CompoundTag nbt
     ) {
-        return new EnergyCapabilityProvider(
+        return new WeaponEnergyProvider(
                 stack,
-                MAX_ENERGY,
-                500,
-                500
+                MAX_ENERGY
         );
     }
 

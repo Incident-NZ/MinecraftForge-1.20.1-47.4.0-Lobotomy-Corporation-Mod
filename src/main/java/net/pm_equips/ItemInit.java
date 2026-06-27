@@ -22,6 +22,8 @@ public class ItemInit {
             () -> new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> BLADE_GEAR = ITEMS.register("item_blade_gear",
             () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> BATTERY = ITEMS.register("item_battery",
+            () -> new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> MAGIC_BULLET_AMMO = ITEMS.register("item_bullet_ego",
             () -> new AmmoMagicBullet(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> RIFLE_BULLET_AMMO = ITEMS.register("item_bullet_r",
@@ -289,7 +291,7 @@ public class ItemInit {
     public static final RegistryObject<Item> EX_ARGALIA = ITEMS.register("fixer_argalia", WeaponArgalia::new);
     public static final RegistryObject<Item> ASC2_SOUTH_W1 = ITEMS.register("asc2_south_weapon1", Asc2SouthWeapon1::new);
     public static final RegistryObject<Item> ASC2_SOUTH_W2 = ITEMS.register("asc2_south_weapon2", Asc2SouthWeapon2::new);
-    public static final RegistryObject<Item> ASC2_WALTER = ITEMS.register("asc2_walter", Asc2Walter::new);
+    public static final RegistryObject<Item> ASC2_WALTER = ITEMS.register("asc2_south_walter", Asc2Walter::new);
     public static final RegistryObject<Item> ASC2_WEST_WEAPON = ITEMS.register("asc2_west_weapon", Asc2WestWeapon::new);
 
     //フィクサー武器 遠距離

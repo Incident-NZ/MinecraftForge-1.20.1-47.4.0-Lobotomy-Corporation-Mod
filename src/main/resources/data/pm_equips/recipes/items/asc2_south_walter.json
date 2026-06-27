@@ -1,18 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "BAB",
-    "AA "
+    "XXY"
   ],
   "key": {
-    "A": {
+    "X": {
       "item": "pm_equips:item_metal"
     },
-    "B": {
-      "item": "pm_equips:item_platinum"
+    "Y": {
+      "item": "pm_equips:asc2_south_weapon2"
     }
   },
   "result": {
-    "item": "pm_equips:fixer_roland_lasg"
+    "item": "pm_equips:asc2_south_walter"
   }
 }

@@ -83,6 +83,9 @@ public class ModPackets {
                     if (gun.getItem() instanceof net.pm_equips.items.EGOW4MagicBullet) {
                         ((net.pm_equips.items.EGOW4MagicBullet) gun.getItem()).startReload(gun, player);
                     }
+                    if (gun.getItem() instanceof net.pm_equips.items.RCorpRabbitRifle) {
+                        ((net.pm_equips.items.RCorpRabbitRifle) gun.getItem()).startReload(gun, player);
+                    }
                 }
             });
             ctx.get().setPacketHandled(true);

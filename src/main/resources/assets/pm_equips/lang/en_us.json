@@ -1,6 +1,6 @@
 {
   "itemGroup.pm_lobotomy_ego": "PM Mod Lobotomy E.G.O",
-  "itemGroup.pm_base": "PM Mod BaseItems",
+  "itemGroup.pm_base": "PM Mod Material Items",
   "itemGroup.pm_fixers": "PM Mod Fixers Equipments",
   "itemGroup.pm_wcorp": "PM Mod Wings Equipments",
 
@@ -9,6 +9,7 @@
   "key.categories.pm_equips.reload": "Gun Reload",
 
   "item.pm_equips.item_blade_gear": "Blade Gear",
+  "item.pm_equips.item_battery": "Battery",
   "item.pm_equips.item_enkephalin": "Electrical Generation Enkephalin",
   "item.pm_equips.item_metal": "Metal Ingot",
   "item.pm_equips.item_silver": "Silver Ingot",
@@ -117,15 +118,15 @@
   "item.pm_equips.asc2_west_weapon": "Zwei Association West Weapon",
   "item.pm_equips.asc2_south_weapon1": "Zwei Association South Weapon 1",
   "item.pm_equips.asc2_south_weapon2": "Zwei Association South Weapon 2",
-  "item.pm_equips.asc2_walter": "Zwei Association Walter's ZweiHander",
+  "item.pm_equips.asc2_south_walter": "Zwei Association Walter's ZweiHander",
 
   "item.pm_equips.wcorp_armor_1": "W.Corp Cleanup Agent Armor",
   "item.pm_equips.wcorp_armor_2": "W.Corp Cleanup Agent Armor",
   "item.pm_equips.wcorp_armor_ace_1": "W.Corp Cleanup Agent Adept Armor",
   "item.pm_equips.wcorp_armor_ace_2": "W.Corp Cleanup Agent Adept Armor",
   "item.pm_equips.wcorp_w1": "W.Corp Cleanup Agent Baton",
-  "item.pm_equips.wcorp_w2": "W.Corp Cleanup Agent HandAxe",
-  "item.pm_equips.wcorp_w3": "W.Corp Cleanup Agent Halberd",
+  "item.pm_equips.wcorp_w2": "W.Corp Cleanup Agent Halberd",
+  "item.pm_equips.wcorp_w3": "W.Corp Cleanup Agent HandAxe",
   "item.pm_equips.kcorp_w1": "K.Corp Agent Baton",
   "item.pm_equips.kcorp_w2": "K.Corp Agent HandAxe",
   "item.pm_equips.kcorp_w3": "K.Corp Agent Dual Edged Sword",

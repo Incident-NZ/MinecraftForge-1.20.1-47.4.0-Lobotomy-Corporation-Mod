@@ -57,7 +57,7 @@ public class EGOW2Beak extends ProjectileWeaponItem {
             player.level().playSound(
                     null,
                     player.blockPosition(),
-                    SoundInit.GUN_SEMI.get(),
+                    SoundEvents.IRON_TRAPDOOR_CLOSE,
                     SoundSource.PLAYERS,
                     1.0F,
                     1.0F
@@ -121,7 +121,14 @@ public class EGOW2Beak extends ProjectileWeaponItem {
         bullet.setMaxLifetime(getDefaultProjectileRange());
         level.addFreshEntity(bullet);
 
-        level.playSound(null, player, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.2F, 0.8F);
+        player.level().playSound(
+                null,
+                player.blockPosition(),
+                SoundInit.GUN_SEMI.get(),
+                SoundSource.PLAYERS,
+                1.0F,
+                1.0F
+        );
     }
 
     @Override

@@ -42,7 +42,8 @@ public class ClientForgeEvents {
             ItemInit.W4_HORNET,
             ItemInit.W5_PARADISE_LOST,
             ItemInit.WEAPON_ROLAND_REVOLVER,
-            ItemInit.WEAPON_ROLAND_SHOTGUN
+            ItemInit.WEAPON_ROLAND_SHOTGUN,
+            ItemInit.RCORP_RABBIT_RIFLE
     );
 
     @SubscribeEvent

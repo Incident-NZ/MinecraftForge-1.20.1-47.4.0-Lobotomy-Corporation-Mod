@@ -67,8 +67,8 @@ public class WCorpWeapon2 extends SwordItem {
 
                 target.knockback(
                         2.5D,
-                        target.getX() - attacker.getX(),
-                        target.getZ() - attacker.getZ()
+                        attacker.getX() - target.getX(),
+                        attacker.getZ() - target.getZ()
                 );
 
                 target.addEffect(

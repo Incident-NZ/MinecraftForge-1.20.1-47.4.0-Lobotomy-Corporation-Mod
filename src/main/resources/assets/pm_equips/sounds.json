@@ -1,36 +1,26 @@
 {
   "item.gun_semi": {
     "subtitle": "Gun Semi",
-    "sounds": [
-      "item/gun_semi"
-    ]
+    "sounds": ["pm_equips:item/gun_semi"]
   },
-
   "item.gun_auto": {
     "subtitle": "Gun Auto",
-    "sounds": [
-      "item/gun_auto"
-    ]
+    "sounds": ["pm_equips:item/gun_auto"]
   },
-
   "item.gun_roland_revolver": {
     "subtitle": "Gun Roland Revolver",
-    "sounds": [
-      "item/gun_roland_revolver"
-    ]
+    "sounds": ["pm_equips:item/gun_roland_revolver"]
   },
-
   "item.gun_roland_shotgun": {
     "subtitle": "Gun Roland Shotgun",
-    "sounds": [
-      "item/gun_roland_shotgun"
-    ]
+    "sounds": ["pm_equips:item/gun_roland_shotgun"]
   },
-
   "item.ego_magic_bullet": {
     "subtitle": "E.G.O Magic Bullet",
-    "sounds": [
-      "item/ego_magic_bullet"
-    ]
+    "sounds": ["pm_equips:item/ego_magic_bullet"]
+  },
+  "item.ego_lament": {
+    "subtitle": "E.G.O Solemn Lament",
+    "sounds": ["pm_equips:item/ego_lament"]
   }
 }

@@ -144,20 +144,6 @@ public class KCorpWeapon1 extends SwordItem {
                                     + storage.getMaxEnergyStored()
                     )
             );
-
-            tooltip.add(
-                    Component.literal(
-                            "Consumes "
-                                    + FE_PER_HIT
-                                    + " FE on hit"
-                    )
-            );
-
-            tooltip.add(
-                    Component.literal(
-                            "Heal 50% of damage dealt"
-                    )
-            );
         });
 
         super.appendHoverText(

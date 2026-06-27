@@ -78,6 +78,15 @@ public class WeaponRolandShotgun extends ProjectileWeaponItem {
 
 		gun.getOrCreateTag().putInt("Ammo", ammo - 1);
 
+		player.level().playSound(
+				null,
+				player.blockPosition(),
+				SoundInit.GUN_ROLAND_SHOTGUN.get(),
+				SoundSource.PLAYERS,
+				1.0F,
+				1.0F
+		);
+
 		player.awardStat(Stats.ITEM_USED.get(this));
 		player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
 
@@ -127,7 +136,7 @@ public class WeaponRolandShotgun extends ProjectileWeaponItem {
 
 				int loaded = 0;
 				for (ItemStack invStack : player.getInventory().items) {
-					if (invStack.is(ItemInit.P_BULLET_LARV.get())) {
+					if (invStack.is(ItemInit.P_BULLET_LASG.get())) {
 						while (!invStack.isEmpty() && loaded < needed) {
 							invStack.shrink(1);
 							loaded++;
@@ -145,7 +154,7 @@ public class WeaponRolandShotgun extends ProjectileWeaponItem {
 
 	@Override
 	public Predicate<ItemStack> getAllSupportedProjectiles() {
-		return stack -> stack.is(ItemInit.P_BULLET_LARV.get());
+		return stack -> stack.is(ItemInit.P_BULLET_LASG.get());
 	}
 
 	@Override

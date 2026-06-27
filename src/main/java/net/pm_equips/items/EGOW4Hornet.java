@@ -117,7 +117,14 @@ public class EGOW4Hornet extends ProjectileWeaponItem {
             level.addFreshEntity(bullet);
         }
 
-        level.playSound(null, player, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.2F, 0.8F);
+        player.level().playSound(
+                null,
+                player.blockPosition(),
+                SoundInit.GUN_SEMI.get(),
+                SoundSource.PLAYERS,
+                1.0F,
+                1.0F
+        );
     }
 
     // Rキーリロード開始

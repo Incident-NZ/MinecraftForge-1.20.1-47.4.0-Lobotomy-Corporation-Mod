@@ -77,6 +77,15 @@ public class EGOW3Laetitia extends ProjectileWeaponItem {
 
         gun.getOrCreateTag().putInt("Ammo", ammo - 1);
 
+        level.playSound(
+                null,
+                player.blockPosition(),
+                SoundInit.GUN_SEMI.get(),
+                SoundSource.PLAYERS,
+                1.0F,
+                1.0F
+        );
+
         gun.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
         player.awardStat(Stats.ITEM_USED.get(this));
         player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
@@ -113,7 +122,16 @@ public class EGOW3Laetitia extends ProjectileWeaponItem {
             level.addFreshEntity(bullet);
         }
 
-        level.playSound(null, player, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 0.8F, 0.8F);
+        if (level.isClientSide) {
+            player.level().playSound(
+                    null,
+                    player.blockPosition(),
+                    SoundInit.GUN_SEMI.get(),
+                    SoundSource.PLAYERS,
+                    1.0F,
+                    1.0F
+            );
+        }
     }
 
     // Rキーリロード開始

@@ -26,6 +26,10 @@ public class PBullet extends Projectile {
 
     private double traveledDistance;
 
+    private boolean terrainDamageEnabled = true;
+
+    private boolean ignoreInvulnerabilityFrames;
+
     public PBullet(
             EntityType<? extends PBullet> type,
             Level level
@@ -206,7 +210,8 @@ public class PBullet extends Projectile {
             BlockHitResult hit
     ) {
 
-        if (CommonConfig.ALLOW_TERRAIN_DAMAGE.get()) {
+        if (terrainDamageEnabled
+                && CommonConfig.ALLOW_TERRAIN_DAMAGE.get()) {
 
             BlockPos pos =
                     hit.getBlockPos();
@@ -264,6 +269,11 @@ public class PBullet extends Projectile {
             return;
         }
 
+        if (ignoreInvulnerabilityFrames) {
+            living.invulnerableTime = 0;
+            living.hurtTime = 0;
+        }
+
         living.hurt(
                 level()
                         .damageSources()
@@ -300,6 +310,18 @@ public class PBullet extends Projectile {
             int range
     ) {
         this.maxDistance = range;
+    }
+
+    public void setTerrainDamageEnabled(
+            boolean terrainDamageEnabled
+    ) {
+        this.terrainDamageEnabled = terrainDamageEnabled;
+    }
+
+    public void setIgnoreInvulnerabilityFrames(
+            boolean ignoreInvulnerabilityFrames
+    ) {
+        this.ignoreInvulnerabilityFrames = ignoreInvulnerabilityFrames;
     }
 
     @Override

@@ -12,7 +12,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.pm_equips.ItemInit;
-import net.pm_equips.energy.EnergyCapabilityProvider;
+import net.pm_equips.energy.WeaponEnergyProvider;
 
 import java.util.List;
 
@@ -36,11 +36,9 @@ public class RCorpRabbitCombatKnife extends SwordItem {
             ItemStack stack,
             CompoundTag nbt)
     {
-        return new EnergyCapabilityProvider(
+        return new WeaponEnergyProvider(
                 stack,
-                MAX_ENERGY,
-                500,
-                500
+                MAX_ENERGY
         );
     }
 

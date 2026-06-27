@@ -3,6 +3,7 @@ package net.pm_equips.items;
 
 import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
+import net.pm_equips.SoundInit;
 import net.pm_equips.config.CommonConfig;
 import net.pm_equips.entity.PBullet;
 import net.minecraft.network.chat.Component;
@@ -126,7 +127,14 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
         b2.setMaxLifetime(getDefaultProjectileRange());
         level.addFreshEntity(b2);
 
-        level.playSound(null, player, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.0F, 0.9F);
+        level.playSound(
+                null,
+                player.blockPosition(),
+                SoundInit.EGO_LAMENT.get(),
+                SoundSource.PLAYERS,
+                1.0F,
+                1.0F
+        );
     }
 
     private void applyRayDamage(Level level, Player player, Vec3 eyePos, Vec3 dir) {

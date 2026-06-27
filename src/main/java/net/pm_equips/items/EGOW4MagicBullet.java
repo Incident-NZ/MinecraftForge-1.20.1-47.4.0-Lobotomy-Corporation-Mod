@@ -97,7 +97,7 @@ public class EGOW4MagicBullet extends ProjectileWeaponItem {
                 SoundInit.EGO_MAGIC_BULLET.get(),
                 SoundSource.PLAYERS,
                 1.0F,
-                1.2F
+                1.0F
         );
 
         return InteractionResultHolder.success(gun);
