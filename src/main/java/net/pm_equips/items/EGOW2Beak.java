@@ -1,5 +1,6 @@
 package net.pm_equips.items;
 
+import net.minecraft.nbt.CompoundTag;
 import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
@@ -17,15 +18,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 public class EGOW2Beak extends ProjectileWeaponItem {
-    private static final float DAMAGE = 4.0f;
-    private static final float VELOCITY = 12.0f;
+    private static final int MAX_AMMO = 15;
+    private static final int RELOAD_TICKS = 10;
+    private static final float DAMAGE = 2.0f;
+    private static final float VELOCITY = 4.0f;
     private static final int COOLDOWN_TICKS = 10;
     public EGOW2Beak(Properties properties) {
         super(properties.durability(1000));
@@ -45,7 +50,14 @@ public class EGOW2Beak extends ProjectileWeaponItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack gun = player.getItemInHand(hand);
 
-        if (!hasAmmo(player)) {
+        int reload = gun.getOrCreateTag().getInt("Reload");
+        int ammo = gun.getOrCreateTag().getInt("Ammo");
+
+        if (reload > 0) {
+            return InteractionResultHolder.fail(gun);
+        }
+
+        if (ammo <= 0) {
             if (!level.isClientSide) {
                 player.displayClientMessage(Component.literal("弾薬切れ / No Ammo"), true);
                 level.playSound(null, player, SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS, 1.0F, 1.2F);
@@ -66,26 +78,14 @@ public class EGOW2Beak extends ProjectileWeaponItem {
         }
 
         shootBullet(level, player);
-        consumeAmmo(player);
+
+        gun.getOrCreateTag().putInt("Ammo", ammo - 1);
 
         gun.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
         player.awardStat(Stats.ITEM_USED.get(this));
         player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
 
         return InteractionResultHolder.consume(gun);
-    }
-
-    private boolean hasAmmo(Player player) {
-        return player.getInventory().contains(new ItemStack(ItemInit.PISTOL_BULLET_AMMO.get()));
-    }
-
-    private void consumeAmmo(Player player) {
-        if (!player.getAbilities().instabuild) {
-            player.getInventory().clearOrCountMatchingItems(
-                    stack -> stack.is(ItemInit.PISTOL_BULLET_AMMO.get()),
-                    1, player.inventoryMenu.getCraftSlots()
-            );
-        }
     }
 
     private void shootBullet(Level level, Player player) {
@@ -131,6 +131,59 @@ public class EGOW2Beak extends ProjectileWeaponItem {
         );
     }
 
+    // Rキーリロード開始
+    public void startReload(ItemStack stack, Player player) {
+        int reload = stack.getOrCreateTag().getInt("Reload");
+        if (reload > 0) return;
+
+        int ammo = stack.getOrCreateTag().getInt("Ammo");
+        if (ammo >= MAX_AMMO) return;
+
+        boolean hasAmmo = false;
+        for (ItemStack invStack : player.getInventory().items) {
+            if (invStack.is(ItemInit.PISTOL_BULLET_AMMO.get())) {
+                hasAmmo = true; break;
+            }
+        }
+        if (!hasAmmo) return;
+
+        stack.getOrCreateTag().putInt("Reload", RELOAD_TICKS);
+        player.level().playSound(null, player.blockPosition(), SoundEvents.IRON_TRAPDOOR_CLOSE, SoundSource.PLAYERS, 1.0F, 1.0F);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, net.minecraft.world.entity.Entity entity, int slot, boolean selected) {
+        if (!stack.getOrCreateTag().contains("Ammo")) {
+            stack.getOrCreateTag().putInt("Ammo", MAX_AMMO);
+        }
+
+        int reload = stack.getOrCreateTag().getInt("Reload");
+        if (reload > 0) {
+            reload--;
+            stack.getOrCreateTag().putInt("Reload", reload);
+
+            if (reload <= 0 && entity instanceof Player player) {
+                int ammo = stack.getOrCreateTag().getInt("Ammo");
+                int needed = MAX_AMMO - ammo;
+                if (needed <= 0) return;
+
+                int loaded = 0;
+                for (ItemStack invStack : player.getInventory().items) {
+                    if (invStack.is(ItemInit.PISTOL_BULLET_AMMO.get())) {
+                        while (!invStack.isEmpty() && loaded < needed) {
+                            invStack.shrink(1); loaded++;
+                        }
+                    }
+                    if (loaded >= needed) break;
+                }
+
+                stack.getOrCreateTag().putInt("Ammo", ammo + loaded);
+            }
+        }
+
+        super.inventoryTick(stack, level, entity, slot, selected);
+    }
+
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         target.hurt(attacker.level().damageSources().generic(), DAMAGE);
@@ -142,6 +195,34 @@ public class EGOW2Beak extends ProjectileWeaponItem {
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repair) {
         return repair.is(BlockInit.BlockItems.TETH_PE_BOX.get());
+    }
+
+    @Override
+    public void appendHoverText(
+            ItemStack stack,
+            Level level,
+            List<Component> tooltip,
+            TooltipFlag flag
+    ) {
+
+        CompoundTag tag =
+                stack.getOrCreateTag();
+
+        tooltip.add(
+                Component.literal(
+                        "Ammo: "
+                                + tag.getInt("Ammo")
+                                + " / "
+                                + MAX_AMMO
+                )
+        );
+
+        super.appendHoverText(
+                stack,
+                level,
+                tooltip,
+                flag
+        );
     }
 }
 

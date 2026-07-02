@@ -1,6 +1,7 @@
 // java
 package net.pm_equips.items;
 
+import net.minecraft.nbt.CompoundTag;
 import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
@@ -18,16 +19,20 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 public class EGOW4LamentR extends ProjectileWeaponItem {
-    private static final float DAMAGE = 4.0f;
-    private static final float VELOCITY = 16.0f;
-    private static final int RANGE = 96;
+    private static final int MAX_AMMO = 30;
+    private static final int RELOAD_TICKS = 20;
+    private static final float DAMAGE = 2.0f;
+    private static final float VELOCITY = 4.0f;
+    private static final int RANGE = 64;
     private static final int COOLDOWN_TICKS = 5; // 0.25秒
     private static final double ANGLE_DEGREES = 5.0; // 弾を左右に少し振る角度
 
@@ -59,8 +64,15 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
             return InteractionResultHolder.fail(gun);
         }
 
+        int reload = gun.getOrCreateTag().getInt("Reload");
+        int ammo = gun.getOrCreateTag().getInt("Ammo");
+
+        if (reload > 0) {
+            return InteractionResultHolder.fail(gun);
+        }
+
         // 必要弾数は2発
-        if (!hasAmmo(player)) {
+        if (ammo < 2) {
             if (!level.isClientSide) {
                 player.displayClientMessage(Component.literal("弾薬切れ / No Ammo (2 required)"), true);
                 level.playSound(null, player, SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS, 1.0F, 1.2F);
@@ -69,34 +81,20 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
         }
 
         if (level.isClientSide) {
-            level.playSound(player, player.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.0F, 0.9F);
+            level.playSound(player, player.blockPosition(), SoundInit.EGO_LAMENT.get(), SoundSource.PLAYERS, 1.0F, 0.9F);
             return InteractionResultHolder.consume(gun);
         }
 
         // サーバー側で2発射撃
         shootDouble(level, player);
-        consumeAmmo(player);
+
+        gun.getOrCreateTag().putInt("Ammo", ammo - 2);
 
         gun.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
         player.awardStat(Stats.ITEM_USED.get(this));
         player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
 
         return InteractionResultHolder.consume(gun);
-    }
-
-    private boolean hasAmmo(Player player) {
-        // クリエイティブは無制限
-        if (player.getAbilities().instabuild) return true;
-        return player.getInventory().countItem(ItemInit.PISTOL_BULLET_AMMO.get()) >= 2;
-    }
-
-    private void consumeAmmo(Player player) {
-        if (!player.getAbilities().instabuild) {
-            player.getInventory().clearOrCountMatchingItems(
-                    stack -> stack.is(ItemInit.PISTOL_BULLET_AMMO.get()),
-                    1, player.inventoryMenu.getCraftSlots()
-            );
-        }
     }
 
     private void shootDouble(Level level, Player player) {
@@ -135,6 +133,59 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
                 1.0F,
                 1.0F
         );
+    }
+
+    // Rキーリロード開始
+    public void startReload(ItemStack stack, Player player) {
+        int reload = stack.getOrCreateTag().getInt("Reload");
+        if (reload > 0) return;
+
+        int ammo = stack.getOrCreateTag().getInt("Ammo");
+        if (ammo >= MAX_AMMO) return;
+
+        boolean hasAmmo = false;
+        for (ItemStack invStack : player.getInventory().items) {
+            if (invStack.is(ItemInit.PISTOL_BULLET_AMMO.get())) {
+                hasAmmo = true; break;
+            }
+        }
+        if (!hasAmmo) return;
+
+        stack.getOrCreateTag().putInt("Reload", RELOAD_TICKS);
+        player.level().playSound(null, player.blockPosition(), SoundEvents.IRON_TRAPDOOR_CLOSE, SoundSource.PLAYERS, 1.0F, 1.0F);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, net.minecraft.world.entity.Entity entity, int slot, boolean selected) {
+        if (!stack.getOrCreateTag().contains("Ammo")) {
+            stack.getOrCreateTag().putInt("Ammo", MAX_AMMO);
+        }
+
+        int reload = stack.getOrCreateTag().getInt("Reload");
+        if (reload > 0) {
+            reload--;
+            stack.getOrCreateTag().putInt("Reload", reload);
+
+            if (reload <= 0 && entity instanceof Player player) {
+                int ammo = stack.getOrCreateTag().getInt("Ammo");
+                int needed = MAX_AMMO - ammo;
+                if (needed <= 0) return;
+
+                int loaded = 0;
+                for (ItemStack invStack : player.getInventory().items) {
+                    if (invStack.is(ItemInit.PISTOL_BULLET_AMMO.get())) {
+                        while (!invStack.isEmpty() && loaded < needed) {
+                            invStack.shrink(1); loaded++;
+                        }
+                    }
+                    if (loaded >= needed) break;
+                }
+
+                stack.getOrCreateTag().putInt("Ammo", ammo + loaded);
+            }
+        }
+
+        super.inventoryTick(stack, level, entity, slot, selected);
     }
 
     private void applyRayDamage(Level level, Player player, Vec3 eyePos, Vec3 dir) {
@@ -184,6 +235,34 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repair) {
         return repair.is(BlockInit.BlockItems.WAW_PE_BOX.get());
+    }
+
+    @Override
+    public void appendHoverText(
+            ItemStack stack,
+            Level level,
+            List<Component> tooltip,
+            TooltipFlag flag
+    ) {
+
+        CompoundTag tag =
+                stack.getOrCreateTag();
+
+        tooltip.add(
+                Component.literal(
+                        "Ammo: "
+                                + tag.getInt("Ammo")
+                                + " / "
+                                + MAX_AMMO
+                )
+        );
+
+        super.appendHoverText(
+                stack,
+                level,
+                tooltip,
+                flag
+        );
     }
 }
 

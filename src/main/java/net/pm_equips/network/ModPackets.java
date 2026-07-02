@@ -71,11 +71,14 @@ public class ModPackets {
                     if (gun.getItem() instanceof net.pm_equips.items.WeaponRolandShotgun) {
                         ((net.pm_equips.items.WeaponRolandShotgun) gun.getItem()).startReload(gun, player);
                     }
-                    if (gun.getItem() instanceof net.pm_equips.items.EGOS2Beak) {
-                        ((net.pm_equips.items.EGOS2Beak) gun.getItem()).startReload(gun, player);
-                    }
                     if (gun.getItem() instanceof net.pm_equips.items.EGOW3Laetitia) {
                         ((net.pm_equips.items.EGOW3Laetitia) gun.getItem()).startReload(gun, player);
+                    }
+                    if (gun.getItem() instanceof net.pm_equips.items.EGOW2Beak) {
+                        ((net.pm_equips.items.EGOW2Beak) gun.getItem()).startReload(gun, player);
+                    }
+                    if (gun.getItem() instanceof net.pm_equips.items.EGOW4LamentR) {
+                        ((net.pm_equips.items.EGOW4LamentR) gun.getItem()).startReload(gun, player);
                     }
                     if (gun.getItem() instanceof net.pm_equips.items.EGOW4Hornet) {
                         ((net.pm_equips.items.EGOW4Hornet) gun.getItem()).startReload(gun, player);

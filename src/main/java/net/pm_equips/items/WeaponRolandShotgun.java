@@ -105,7 +105,7 @@ public class WeaponRolandShotgun extends ProjectileWeaponItem {
 
 		boolean hasAmmo = false;
 		for (ItemStack invStack : player.getInventory().items) {
-			if (invStack.is(ItemInit.P_BULLET_LARV.get())) {
+			if (invStack.is(ItemInit.P_BULLET_LASG.get())) {
 				hasAmmo = true;
 				break;
 			}

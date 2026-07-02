@@ -25,9 +25,9 @@ import java.util.function.Predicate;
 
 public class EGOW3Laetitia extends ProjectileWeaponItem {
     private static final int MAX_AMMO = 10;
-    private static final int RELOAD_TICKS = 20; // 1秒
-    private static final float VELOCITY = 12.0f;
-    private static final int COOLDOWN_TICKS = 10; // 0.5秒
+    private static final int RELOAD_TICKS = 60; // 3秒
+    private static final float VELOCITY = 8.0f;
+    private static final int COOLDOWN_TICKS = 20; // 1秒
     public EGOW3Laetitia(Properties properties) {
         super(properties.durability(2000));
     }

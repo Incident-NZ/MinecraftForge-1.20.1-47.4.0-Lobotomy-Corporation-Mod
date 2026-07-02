@@ -26,7 +26,7 @@ public class PBullet extends Projectile {
 
     private double traveledDistance;
 
-    private boolean terrainDamageEnabled = true;
+    private boolean terrainDamageEnabled = false;
 
     private boolean ignoreInvulnerabilityFrames;
 
