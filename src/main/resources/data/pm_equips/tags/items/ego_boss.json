@@ -1,10 +1,8 @@
 {
   "values": [
     "pm_equips:w5_twilight",
-    "pm_equips:s5_twilight_1",
-    "pm_equips:s5_twilight_2",
+    "pm_equips:s5_twilight",
     "pm_equips:w5_whitenight",
-    "pm_equips:s5_whitenight_1",
-    "pm_equips:s5_whitenight_2"
+    "pm_equips:s5_whitenight"
   ]
 }

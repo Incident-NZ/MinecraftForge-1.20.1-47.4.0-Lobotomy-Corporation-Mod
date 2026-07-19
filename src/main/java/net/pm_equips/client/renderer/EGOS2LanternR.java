@@ -1,11 +1,22 @@
 package net.pm_equips.client.renderer;
 
+import net.minecraft.world.entity.EquipmentSlot;
 import net.pm_equips.client.models.EGOS2LanternM;
-import net.pm_equips.items.EGOS2Lantern;
+import net.pm_equips.items.EGOP2Lantern;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
-public class EGOS2LanternR extends GeoArmorRenderer<EGOS2Lantern> {
+public class EGOS2LanternR extends GeoArmorRenderer<EGOP2Lantern> {
     public EGOS2LanternR() {
         super(new EGOS2LanternM());
+    }
+
+    @Override
+    protected void applyBoneVisibilityBySlot(EquipmentSlot slot) {
+        setAllVisible(false);
+
+        if (slot == EquipmentSlot.LEGS) {
+            setAllVisible(true);
+            setAllBonesVisible(true);
+        }
     }
 }

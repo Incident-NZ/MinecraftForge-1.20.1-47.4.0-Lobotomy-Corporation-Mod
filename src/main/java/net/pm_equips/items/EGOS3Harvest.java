@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 public class EGOS3Harvest extends ArmorItem implements GeoItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public EGOS3Harvest(ArmorMaterial material, Type type, Properties props) {
+    public EGOS3Harvest(ArmorMaterial material, ArmorItem.Type type, Properties props) {
         super(material, type, props);
     }
 

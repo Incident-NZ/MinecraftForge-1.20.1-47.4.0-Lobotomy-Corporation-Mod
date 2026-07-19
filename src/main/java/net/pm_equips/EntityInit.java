@@ -25,7 +25,7 @@ public class EntityInit {
                                     EGOMagic::new,
                                     MobCategory.MISC
                             )
-                            .sized(0.3F, 0.3F)
+                            .sized(0.1F, 0.1F)
                             .clientTrackingRange(64)
                             .updateInterval(1)
                             .build("magic_bullet"));
@@ -61,7 +61,7 @@ public class EntityInit {
                             .sized(0.25F, 0.25F)
                             .clientTrackingRange(64)
                             .updateInterval(1)
-                            .build("bullet_larv"));
+                            .build("bullet_lasg"));
 
     public static final RegistryObject<EntityType<PBulletExp>> BULLET_EX =
             ENTITY_TYPES.register("bullet_ex", () ->
@@ -73,5 +73,16 @@ public class EntityInit {
                             .clientTrackingRange(64)
                             .updateInterval(1)
                             .build("bullet_ex"));
+
+    public static final RegistryObject<EntityType<WhiteNightProjectile>> WHITE_NIGHT_PROJECTILE =
+            ENTITY_TYPES.register("white_night_projectile", () ->
+                    EntityType.Builder.<WhiteNightProjectile>of(
+                            WhiteNightProjectile::new,
+                            MobCategory.MISC
+                            )
+                            .sized(1.5F, 1.5F)
+                            .clientTrackingRange(64)
+                            .updateInterval(1)
+                            .build("white_night_projectile"));
 
 }

@@ -1,6 +1,7 @@
 package net.pm_equips;
 
 import net.pm_equips.config.CommonConfig;
+import net.pm_equips.compat.Curios;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -8,8 +9,12 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import software.bernie.geckolib.GeckoLib;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotTypeMessage;
+import net.minecraftforge.fml.InterModComms;
 
 @Mod(PMEquipsMain.MOD_ID)
 public class PMEquipsMain {
@@ -28,6 +33,7 @@ public class PMEquipsMain {
         SoundInit.SOUNDS.register(modEventBus);
 
         modEventBus.addListener(this::setup);
+        modEventBus.addListener(this::registerCurioSlot);
         ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON,
                 CommonConfig.COMMON_CONFIG, MOD_ID + "-common.toml");
 
@@ -36,8 +42,14 @@ public class PMEquipsMain {
 
     private void setup(final FMLCommonSetupEvent event) {
         GeckoLib.initialize();
-        // register network packets
         net.pm_equips.network.ModPackets.register();
+    }
+
+    private void registerCurioSlot(final InterModEnqueueEvent event) {
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
+                () -> new SlotTypeMessage.Builder(Curios.CORE_PAGE_SLOT)
+                        .size(1)
+                        .build());
     }
 
     @SubscribeEvent

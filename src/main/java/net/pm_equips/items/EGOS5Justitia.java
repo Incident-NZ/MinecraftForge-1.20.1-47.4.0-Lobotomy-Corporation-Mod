@@ -1,6 +1,5 @@
 package net.pm_equips.items;
 
-import net.pm_equips.client.renderer.EGOS5JustitiaR;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -8,6 +7,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.pm_equips.client.renderer.EGOS5JustitiaR;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 public class EGOS5Justitia extends ArmorItem implements GeoItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public EGOS5Justitia(ArmorMaterial mat, Type type, Properties props) {
+    public EGOS5Justitia(ArmorMaterial mat, ArmorItem.Type type, Properties props) {
         super(mat, type, props);
     }
 

@@ -1,22 +1,22 @@
 package net.pm_equips.client.models;
 
-import net.pm_equips.items.EGOS5Mimicry;
+import net.pm_equips.items.EGOP5Mimicry;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
-public class EGOS5MimicryM extends GeoModel<EGOS5Mimicry> {
+public class EGOS5MimicryM extends GeoModel<EGOP5Mimicry> {
     @Override
-    public ResourceLocation getModelResource(EGOS5Mimicry animatable) {
-        return new ResourceLocation("pm_equips", "geo/ego_armor.geo.json");
+    public ResourceLocation getModelResource(EGOP5Mimicry animatable) {
+        return new ResourceLocation("pm_equips", "geo/ego_armor_type2.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(EGOS5Mimicry animatable) {
+    public ResourceLocation getTextureResource(EGOP5Mimicry animatable) {
         return new ResourceLocation("pm_equips", "textures/armor/ego_s5_mimicry.png");
     }
 
     @Override
-    public ResourceLocation getAnimationResource(EGOS5Mimicry animatable) {
+    public ResourceLocation getAnimationResource(EGOP5Mimicry animatable) {
         return new ResourceLocation("pm_equips", "animations/ego_armor.animation.json");
     }
 }

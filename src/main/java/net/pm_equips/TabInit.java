@@ -50,7 +50,7 @@ public class TabInit {
     public static final RegistryObject<CreativeModeTab> PM_WCORP = CREATIVE_TABS.register("pm_wcorp",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.pm_wcorp"))
-                    .icon(() -> ItemInit.WCORP_ARMOR_1.get().getDefaultInstance())
+                    .icon(() -> ItemInit.WCORP_ARMOR.get().getDefaultInstance())
                     .displayItems((param, output) -> {
                         for (Item item : PMWingsTabs.items) {
                             output.accept(item);

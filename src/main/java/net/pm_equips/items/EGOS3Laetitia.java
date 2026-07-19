@@ -1,14 +1,13 @@
 package net.pm_equips.items;
 
-import net.pm_equips.client.renderer.EGOS3LaetitiaR;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.pm_equips.client.renderer.EGOS3LaetitiaR;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -21,7 +20,7 @@ import java.util.function.Consumer;
 public class EGOS3Laetitia extends ArmorItem implements GeoItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public EGOS3Laetitia(ArmorMaterial material, ArmorItem.Type type, Item.Properties props) {
+    public EGOS3Laetitia(ArmorMaterial material, ArmorItem.Type type, Properties props) {
         super(material, type, props);
     }
 

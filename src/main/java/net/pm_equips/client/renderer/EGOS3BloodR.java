@@ -1,11 +1,22 @@
 package net.pm_equips.client.renderer;
 
+import net.minecraft.world.entity.EquipmentSlot;
 import net.pm_equips.client.models.EGOS3BloodM;
-import net.pm_equips.items.EGOS3Blood;
+import net.pm_equips.items.EGOP3Blood;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
-public class EGOS3BloodR extends GeoArmorRenderer<EGOS3Blood> {
+public class EGOS3BloodR extends GeoArmorRenderer<EGOP3Blood> {
     public EGOS3BloodR() {
         super(new EGOS3BloodM());
+    }
+
+    @Override
+    protected void applyBoneVisibilityBySlot(EquipmentSlot slot) {
+        setAllVisible(false);
+
+        if (slot == EquipmentSlot.LEGS) {
+            setAllVisible(true);
+            setAllBonesVisible(true);
+        }
     }
 }

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DBD",
+    "BAB",
+    "CBC"
+  ],
+  "key": {
+    "A": {
+      "item": "pm_equips:e_box_3"
+    },
+    "B": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "C": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "D": {
+      "item": "minecraft:coal"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s3_magic_bullet"
+  }
+}

@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.pm_equips.client.renderer.WCorpArmorR;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
@@ -17,10 +16,10 @@ import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.function.Consumer;
 
-public class WCorpArmor extends ArmorItem implements GeoItem {
+public class WCorpArmor extends CorePageItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public WCorpArmor(ArmorMaterial material, Type type, Properties props) {
+    public WCorpArmor(ArmorMaterial material, ArmorItem.Type type, Properties props) {
         super(material, type, props);
     }
 

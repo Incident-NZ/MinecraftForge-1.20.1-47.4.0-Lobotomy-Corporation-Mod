@@ -1,6 +1,5 @@
 package net.pm_equips.items;
 
-import net.pm_equips.client.renderer.EGOS5StarR;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,6 +14,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.pm_equips.client.renderer.EGOS5StarR;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -31,7 +31,7 @@ import java.util.function.Consumer;
 public class EGOS5Star extends ArmorItem implements GeoItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public EGOS5Star(ArmorMaterial material, Type type, Properties props) {
+    public EGOS5Star(ArmorMaterial material, ArmorItem.Type type, Properties props) {
         super(material, type, props);
     }
 

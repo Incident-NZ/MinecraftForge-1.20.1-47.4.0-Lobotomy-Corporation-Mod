@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DBD",
+    "BAB",
+    "CBC"
+  ],
+  "key": {
+    "A": {
+      "item": "pm_equips:e_box_3"
+    },
+    "B": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "C": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "D": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s3_galaxy"
+  }
+}

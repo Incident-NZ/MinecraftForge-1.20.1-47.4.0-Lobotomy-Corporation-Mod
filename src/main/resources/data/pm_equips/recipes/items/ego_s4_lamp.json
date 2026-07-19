@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DBD",
+    "BAB",
+    "CBC"
+  ],
+  "key": {
+    "A": {
+      "item": "pm_equips:e_box_4"
+    },
+    "B": {
+      "item": "minecraft:ender_eye"
+    },
+    "C": {
+      "item": "minecraft:feather"
+    },
+    "D": {
+      "item": "minecraft:lantern"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s4_lamp"
+  }
+}

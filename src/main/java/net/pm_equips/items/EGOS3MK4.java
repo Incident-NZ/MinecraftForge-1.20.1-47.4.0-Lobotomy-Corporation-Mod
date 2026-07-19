@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 public class EGOS3MK4 extends ArmorItem implements GeoItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public EGOS3MK4(ArmorMaterial material, Type type, Properties props) {
+    public EGOS3MK4(ArmorMaterial material, ArmorItem.Type type, Properties props) {
         super(material, type, props);
     }
 

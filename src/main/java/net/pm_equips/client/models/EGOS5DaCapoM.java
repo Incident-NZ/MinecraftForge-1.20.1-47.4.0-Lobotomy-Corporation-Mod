@@ -1,22 +1,22 @@
 package net.pm_equips.client.models;
 
-import net.pm_equips.items.EGOS5DaCapo;
+import net.pm_equips.items.EGOP5DaCapo;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
-public class EGOS5DaCapoM extends GeoModel<EGOS5DaCapo> {
+public class EGOS5DaCapoM extends GeoModel<EGOP5DaCapo> {
     @Override
-    public ResourceLocation getModelResource(EGOS5DaCapo animatable) {
-        return new ResourceLocation("pm_equips", "geo/ego_armor.geo.json");
+    public ResourceLocation getModelResource(EGOP5DaCapo animatable) {
+        return new ResourceLocation("pm_equips", "geo/ego_armor_type2.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(EGOS5DaCapo animatable) {
+    public ResourceLocation getTextureResource(EGOP5DaCapo animatable) {
         return new ResourceLocation("pm_equips", "textures/armor/ego_s5_da_capo.png");
     }
 
     @Override
-    public ResourceLocation getAnimationResource(EGOS5DaCapo animatable) {
+    public ResourceLocation getAnimationResource(EGOP5DaCapo animatable) {
         return new ResourceLocation("pm_equips", "animations/ego_armor.animation.json");
     }
 }

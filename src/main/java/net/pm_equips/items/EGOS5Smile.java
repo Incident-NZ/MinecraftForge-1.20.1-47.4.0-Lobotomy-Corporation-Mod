@@ -1,6 +1,5 @@
 package net.pm_equips.items;
 
-import net.pm_equips.client.renderer.EGOS5SmileR;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,6 +15,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.pm_equips.client.renderer.EGOS5SmileR;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -30,7 +30,7 @@ import java.util.function.Consumer;
 
 public class EGOS5Smile extends ArmorItem implements GeoItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    public EGOS5Smile(ArmorMaterial material, Type type, Properties props) {
+    public EGOS5Smile(ArmorMaterial material, ArmorItem.Type type, Properties props) {
         super(material, type, props);
     }
 

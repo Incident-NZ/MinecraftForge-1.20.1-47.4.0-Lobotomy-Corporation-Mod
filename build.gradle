@@ -99,7 +99,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:1.20.1-47.4.10" // ←Forgeバージョンに注意！
 
     // GeckoLib 4.4.9
-    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.20.1:4.4.9")
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.20.1:4.7.4")
 
     // Curios API 5.14.1
     implementation fg.deobf('top.theillusivec4.curios:curios-forge:5.14.1+1.20.1')

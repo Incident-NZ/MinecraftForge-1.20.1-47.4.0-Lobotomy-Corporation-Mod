@@ -1,8 +1,10 @@
 {
   "values": [
-    "pm_equips:rifle_bullet",
-    "pm_equips:pistol_bullet",
-    "pm_equips:explosive_bullet",
-    "pm_equips:magic_bullet"
+    "pm_equips:item_bullet_r",
+    "pm_equips:item_bullet_p",
+    "pm_equips:item_bullet_ex",
+    "pm_equips:item_bullet_ego",
+    "pm_equips:item_bullet_larv",
+    "pm_equips:item_bullet_lasg"
   ]
 }

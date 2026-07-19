@@ -1,28 +1,27 @@
 package net.pm_equips.items;
 
-import net.pm_equips.client.renderer.EGOS5TwilightR;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.pm_equips.client.renderer.EGOS5TwilightR;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-public class EGOS5Twilight extends ArmorItem implements GeoItem {
+public class EGOS5Twilight extends CorePageItem {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public EGOS5Twilight(ArmorMaterial material, Type type, Properties props) {
@@ -62,11 +61,15 @@ public class EGOS5Twilight extends ArmorItem implements GeoItem {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, Level level, Player player) {
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+        if (!(slotContext.entity() instanceof Player player)) {
+            return;
+        }
+        Level level = player.level();
         if (!level.isClientSide) {
-            boolean fullSet = hasFullSet(player);
+            boolean hasTwilightWeapon = player.getMainHandItem().getItem() instanceof EGOW5Twilight;
 
-            if (fullSet) {
+            if (hasTwilightWeapon) {
                 float missingHp = player.getMaxHealth() - player.getHealth();
                 if (missingHp > 0) {
                     int amplifier = (int) Math.floor(missingHp / 4); // 4HP減少ごとに+1段階
@@ -87,9 +90,4 @@ public class EGOS5Twilight extends ArmorItem implements GeoItem {
         }
     }
 
-    private boolean hasFullSet(Player player) {
-        return player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof EGOS5Twilight &&
-                player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof EGOS5Twilight &&
-                player.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof EGOW5Twilight;
-    }
 }

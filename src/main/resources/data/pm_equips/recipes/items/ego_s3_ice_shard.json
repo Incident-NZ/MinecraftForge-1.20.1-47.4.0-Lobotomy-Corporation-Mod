@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DBD",
+    "BAB",
+    "CBC"
+  ],
+  "key": {
+    "A": {
+      "item": "pm_equips:e_box_3"
+    },
+    "B": {
+      "item": "minecraft:ice"
+    },
+    "C": {
+      "item": "minecraft:iron_ingot"
+    },
+    "D": {
+      "item": "minecraft:lapis_lazuli"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s3_ice_shard"
+  }
+}

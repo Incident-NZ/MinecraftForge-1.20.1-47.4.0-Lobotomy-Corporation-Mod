@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DBD",
+    "BAB",
+    "CBC"
+  ],
+  "key": {
+    "A": {
+      "item": "pm_equips:e_box_2"
+    },
+    "B": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "D": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s2_reglet"
+  }
+}

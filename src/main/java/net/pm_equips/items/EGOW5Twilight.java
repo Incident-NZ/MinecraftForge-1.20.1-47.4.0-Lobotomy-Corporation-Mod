@@ -1,6 +1,7 @@
 package net.pm_equips.items;
 
 
+import net.minecraft.world.item.Rarity;
 import net.pm_equips.BlockInit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,7 +27,7 @@ public class EGOW5Twilight extends SwordItem {
             new AttributeModifier(REACH_UUID, "twilight_reach_bonus", 5.0, AttributeModifier.Operation.ADDITION);
 
     public EGOW5Twilight() {
-        super(new CustomTier(), 17, -2.5f, new Properties().durability(4000));
+        super(new CustomTier(), 17, -2.5f, new Properties().rarity(Rarity.EPIC).durability(4000));
     }
 
     @Override

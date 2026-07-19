@@ -7,9 +7,23 @@
     "X": {
       "item": "minecraft:iron_boots"
     },
-    "Y": {
-      "tag": "minecraft:axes"
-    },
+    "Y": [
+      {
+        "item": "minecraft:netherite_axe"
+      },
+      {
+        "item": "minecraft:diamond_axe"
+      },
+      {
+        "item": "minecraft:golden_axe"
+      },
+      {
+        "item": "minecraft:iron_axe"
+      },
+      {
+        "item": "minecraft:stone_axe"
+      }
+    ],
     "Z": {
       "item": "minecraft:rotten_flesh"
     }

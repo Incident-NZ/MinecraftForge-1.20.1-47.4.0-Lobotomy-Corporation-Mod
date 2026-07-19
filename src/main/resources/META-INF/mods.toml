@@ -4,7 +4,7 @@ license = "${mod_license}"
 
 [[mods]]
 modId = "pm_equips"
-version = "3.2"
+version = "1.5"
 displayName = "ProjectMoon Equipment Mod"
 authors = "Rei"
 description = "Face the fear, Make the future."
@@ -26,7 +26,7 @@ side = "BOTH"
 [[dependencies."pm_equips"]]
 modId="geckolib"
 mandatory=true
-versionRange="[4.4.9,)"
+versionRange="[4.7.4,)"
 ordering="AFTER"
 side="BOTH"
 

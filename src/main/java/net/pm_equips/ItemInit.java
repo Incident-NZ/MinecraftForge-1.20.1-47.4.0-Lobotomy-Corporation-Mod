@@ -76,213 +76,109 @@ public class ItemInit {
     public static final RegistryObject<Item> W2_FOURTH_MATCH_FIRE = ITEMS.register("w2_match",
             () -> new EGOW2Match(new Item.Properties().durability(1000)));
 
-    //L社EGO防具
-    public static final RegistryObject<Item> A5_TWILIGHT_1 = ITEMS.register("s5_twilight_1",
-            () -> new EGOS5Twilight(ArmorEquips.A5_TWILIGHT, ArmorItem.Type.CHESTPLATE,
+    //L社EGO防具(EGOページ)
+    public static final RegistryObject<Item> S5_TWILIGHT = ITEMS.register("s5_twilight",
+            () -> new EGOP5Twilight(ArmorEquips.A5_TWILIGHT, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_TWILIGHT_2 = ITEMS.register("s5_twilight_2",
-            () -> new EGOS5Twilight(ArmorEquips.A5_TWILIGHT, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S5_PARADISE_LOST = ITEMS.register("s5_whitenight",
+            () -> new EGOP5WhiteNight(ArmorEquips.A5_PARADISE_LOST, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_PARADISE_LOST_1 = ITEMS.register("s5_whitenight_1",
-            () -> new EGOS5Whitenight(ArmorEquips.A5_PARADISE_LOST, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S5_MIMICRY = ITEMS.register("s5_mimicry",
+            () -> new EGOP5Mimicry(ArmorEquips.A5_MIMICRY, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_PARADISE_LOST_2 = ITEMS.register("s5_whitenight_2",
-            () -> new EGOS5Whitenight(ArmorEquips.A5_PARADISE_LOST, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S5_DA_CAPO = ITEMS.register("s5_da_capo",
+            () -> new EGOP5DaCapo(ArmorEquips.A5_DA_CAPO, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_MIMICRY_2 = ITEMS.register("s5_mimicry_1",
-            () -> new EGOS5Mimicry(ArmorEquips.A5_MIMICRY, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S5_SMILE = ITEMS.register("s5_smile",
+            () -> new EGOP5Smile(ArmorEquips.A5_SMILE, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_MIMICRY_3 = ITEMS.register("s5_mimicry_2",
-            () -> new EGOS5Mimicry(ArmorEquips.A5_MIMICRY, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S5_SOUND_OF_A_STAR = ITEMS.register("s5_star",
+            () -> new EGOP5Star(ArmorEquips.A5_SOUND_OF_A_STAR, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_DA_CAPO_2 = ITEMS.register("s5_da_capo_1",
-            () -> new EGOS5DaCapo(ArmorEquips.A5_DA_CAPO, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S5_JUSTITIA = ITEMS.register("s5_justitia",
+            () -> new EGOP5Justitia(ArmorEquips.A5_JUSTITIA, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_DA_CAPO_3 = ITEMS.register("s5_da_capo_2",
-            () -> new EGOS5DaCapo(ArmorEquips.A5_DA_CAPO, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S4_THE_SWORD_SHARPENED_WITH_TEARS = ITEMS.register("s4_tears",
+            () -> new EGOP4Tears(ArmorEquips.A4_THE_SWORD_SHARPENED_WITH_TEARS, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_SMILE_2 = ITEMS.register("s5_smile_1",
-            () -> new EGOS5Smile(ArmorEquips.A5_SMILE, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S4_LAMP = ITEMS.register("s4_lamp",
+            () -> new EGOP4Lamp(ArmorEquips.A4_LAMP, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_SMILE_3 = ITEMS.register("s5_smile_2",
-            () -> new EGOS5Smile(ArmorEquips.A5_SMILE, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S4_HORNET = ITEMS.register("s4_hornet",
+            () -> new EGOP4Hornet(ArmorEquips.A4_HORNET, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_SOUND_OF_A_STAR_2 = ITEMS.register("s5_star_1",
-            () -> new EGOS5Star(ArmorEquips.A5_SOUND_OF_A_STAR, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S4_BLUE_SCAR = ITEMS.register("s4_blue_scar",
+            () -> new EGOP4BlueScar(ArmorEquips.A4_BLUE_SCAR, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_SOUND_OF_A_STAR_3 = ITEMS.register("s5_star_2",
-            () -> new EGOS5Star(ArmorEquips.A5_SOUND_OF_A_STAR, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S3_MAGIC_BULLET = ITEMS.register("s3_magic_bullet",
+            () -> new EGOP3MagicBullet(ArmorEquips.A3_MAGIC_BULLET, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_JUSTITIA_2 = ITEMS.register("s5_justitia_1",
-            () -> new EGOS5Justitia(ArmorEquips.A5_JUSTITIA, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S3_SOLEMN_LAMENT = ITEMS.register("s3_lament",
+            () -> new EGOP3Lament(ArmorEquips.A3_SOLEMN_LAMENT, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A5_JUSTITIA_3 = ITEMS.register("s5_justitia_2",
-            () -> new EGOS5Justitia(ArmorEquips.A5_JUSTITIA, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S3_GALAXY = ITEMS.register("s3_galaxy",
+            () -> new EGOP3Galaxy(ArmorEquips.A3_GALAXY, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A4_THE_SWORD_SHARPENED_WITH_TEARS_2 = ITEMS.register("s4_tears_1",
-            () -> new EGOS4Tears(ArmorEquips.A4_THE_SWORD_SHARPENED_WITH_TEARS, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S3_BLOOD = ITEMS.register("s3_blood",
+            () -> new EGOP3Blood(ArmorEquips.A3_BLOOD, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A4_THE_SWORD_SHARPENED_WITH_TEARS_3 = ITEMS.register("s4_tears_2",
-            () -> new EGOS4Tears(ArmorEquips.A4_THE_SWORD_SHARPENED_WITH_TEARS, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S3_LOGGING = ITEMS.register("s3_logging",
+            () -> new EGOP3Logging(ArmorEquips.A3_LOGGING, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A4_LAMP_2 = ITEMS.register("s4_lamp_1",
-            () -> new EGOS4Lamp(ArmorEquips.A4_LAMP, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S3_HARVEST = ITEMS.register("s3_harvest",
+            () -> new EGOP3Harvest(ArmorEquips.A3_HARVEST, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A4_LAMP_3 = ITEMS.register("s4_lamp_2",
-            () -> new EGOS4Lamp(ArmorEquips.A4_LAMP, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S3_GRINDER_MK4 = ITEMS.register("s3_mk4",
+            () -> new EGOP3MK4(ArmorEquips.A3_GRINDER_MK4, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A4_HORNET_2 = ITEMS.register("s4_hornet_1",
-            () -> new EGOS4Hornet(ArmorEquips.A4_HORNET, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S3_ICE_SHARD = ITEMS.register("s3_ice_shard",
+            () -> new EGOP3IceShard(ArmorEquips.A3_ICE_SHARD, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A4_HORNET_3 = ITEMS.register("s4_hornet_2",
-            () -> new EGOS4Hornet(ArmorEquips.A4_HORNET, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S3_LAETITIA = ITEMS.register("s3_laetitia",
+            () -> new EGOP3Laetitia(ArmorEquips.A3_LAETITIA, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A4_BLUE_SCAR_2 = ITEMS.register("s4_blue_scar_1",
-            () -> new EGOS4BlueScar(ArmorEquips.A4_BLUE_SCAR, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S2_REGLET = ITEMS.register("s2_reglet",
+            () -> new EGOP2Reglet(ArmorEquips.A2_REGLET, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A4_BLUE_SCAR_3 = ITEMS.register("s4_blue_scar_2",
-            () -> new EGOS4BlueScar(ArmorEquips.A4_BLUE_SCAR, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S2_RED_EYE = ITEMS.register("s2_red_eye",
+            () -> new EGOP2RedEye(ArmorEquips.A2_RED_EYE, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A3_MAGIC_BULLET_2 = ITEMS.register("s3_magic_bullet_1",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_MAGIC_BULLET, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S2_BEAK = ITEMS.register("s2_beak",
+            () -> new EGOP2Beak(ArmorEquips.A2_BEAK, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A3_MAGIC_BULLET_3 = ITEMS.register("s3_magic_bullet_2",
-            () -> new EGOS3MagicBullet(ArmorEquips.A3_MAGIC_BULLET, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S2_FOURTH_MATCH_FIRE = ITEMS.register("s2_match",
+            () -> new EGOP2Match(ArmorEquips.A2_FOURTH_MATCH_FIRE, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A3_SOLEMN_LAMENT_1 = ITEMS.register("s3_lament_1",
-            () -> new EGOS3Lament(ArmorEquips.A3_SOLEMN_LAMENT, ArmorItem.Type.CHESTPLATE,
+    public static final RegistryObject<Item> S2_LANTERN = ITEMS.register("s2_lantern",
+            () -> new EGOP2Lantern(ArmorEquips.A2_LANTERN, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> A3_SOLEMN_LAMENT_2 = ITEMS.register("s3_lament_2",
-            () -> new EGOS3Lament(ArmorEquips.A3_SOLEMN_LAMENT, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_GALAXY_1 = ITEMS.register("s3_galaxy_1",
-            () -> new EGOS3Galaxy(ArmorEquips.A3_GALAXY, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_GALAXY_2 = ITEMS.register("s3_galaxy_2",
-            () -> new EGOS3Galaxy(ArmorEquips.A3_GALAXY, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_BLOOD_1 = ITEMS.register("s3_blood_1",
-            () -> new EGOS3Blood(ArmorEquips.A3_BLOOD, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_BLOOD_2 = ITEMS.register("s3_blood_2",
-            () -> new EGOS3Blood(ArmorEquips.A3_BLOOD, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_LOGGING_1 = ITEMS.register("s3_logging_1",
-            () -> new EGOS3Logging(ArmorEquips.A3_LOGGING, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_LOGGING_2 = ITEMS.register("s3_logging_2",
-            () -> new EGOS3Logging(ArmorEquips.A3_LOGGING, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_HARVEST_1 = ITEMS.register("s3_harvest_1",
-            () -> new EGOS3Harvest(ArmorEquips.A3_HARVEST, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_HARVEST_2 = ITEMS.register("s3_harvest_2",
-            () -> new EGOS3Harvest(ArmorEquips.A3_HARVEST, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_GRINDER_MK4_2 = ITEMS.register("s3_mk4_1",
-            () -> new EGOS3MK4(ArmorEquips.A3_GRINDER_MK4, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_GRINDER_MK4_3 = ITEMS.register("s3_mk4_2",
-            () -> new EGOS3MK4(ArmorEquips.A3_GRINDER_MK4, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_ICE_SHARD_2 = ITEMS.register("s3_ice_shard_1",
-            () -> new EGOS3IceShard(ArmorEquips.A3_ICE_SHARD, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_ICE_SHARD_3 = ITEMS.register("s3_ice_shard_2",
-            () -> new EGOS3IceShard(ArmorEquips.A3_ICE_SHARD, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_LAETITIA_2 = ITEMS.register("s3_laetitia_1",
-            () -> new EGOS3Laetitia(ArmorEquips.A3_LAETITIA, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A3_LAETITIA_3 = ITEMS.register("s3_laetitia_2",
-            () -> new EGOS3Laetitia(ArmorEquips.A3_LAETITIA, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A2_REGLET_2 = ITEMS.register("s2_reglet_1",
-            () -> new EGOS2Reglet(ArmorEquips.A2_REGLET, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A2_REGLET_3 = ITEMS.register("s2_reglet_2",
-            () -> new EGOS2Reglet(ArmorEquips.A2_REGLET, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A2_RED_EYE_2 = ITEMS.register("s2_red_eye_1",
-            () -> new EGOS2RedEye(ArmorEquips.A2_RED_EYE, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A2_RED_EYE_3 = ITEMS.register("s2_red_eye_2",
-            () -> new EGOS2RedEye(ArmorEquips.A2_RED_EYE, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A2_BEAK_1 = ITEMS.register("s2_beak_1",
-            () -> new EGOS2Beak(ArmorEquips.A2_BEAK, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A2_BEAK_2 = ITEMS.register("s2_beak_2",
-            () -> new EGOS2Beak(ArmorEquips.A2_BEAK, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A2_FOURTH_MATCH_FIRE_1 = ITEMS.register("s2_match_1",
-            () -> new EGOS2Match(ArmorEquips.A2_FOURTH_MATCH_FIRE, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A2_FOURTH_MATCH_FIRE_2 = ITEMS.register("s2_match_2",
-            () -> new EGOS2Match(ArmorEquips.A2_FOURTH_MATCH_FIRE, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A2_LANTERN_1 = ITEMS.register("s2_lantern_1",
-            () -> new EGOS2Lantern(ArmorEquips.A2_LANTERN, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A2_LANTERN_2 = ITEMS.register("s2_lantern_2",
-            () -> new EGOS2Lantern(ArmorEquips.A2_LANTERN, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A1_PENITENCE_2 = ITEMS.register("s1_penitence_1",
-            () -> new EGOS1Penitence(ArmorEquips.A1_PENITENCE, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> A1_PENITENCE_3 = ITEMS.register("s1_penitence_2",
-            () -> new EGOS1Penitence(ArmorEquips.A1_PENITENCE, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> S1_PENITENCE = ITEMS.register("s1_penitence",
+            () -> new EGOP1Penitence(ArmorEquips.A1_PENITENCE, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     //フィクサー武器 近距離
@@ -301,20 +197,12 @@ public class ItemInit {
             () -> new WeaponRolandShotgun(new Item.Properties().durability(2000)));
 
     //W社装備
-    public static final RegistryObject<Item> WCORP_ARMOR_1 = ITEMS.register("wcorp_armor_1",
+    public static final RegistryObject<Item> WCORP_ARMOR = ITEMS.register("wcorp_armor",
             () -> new WCorpArmor(ArmorEquips.WCORP_ARMOR, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> WCORP_ARMOR_2 = ITEMS.register("wcorp_armor_2",
-            () -> new WCorpArmor(ArmorEquips.WCORP_ARMOR, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> WCORP_ARMOR_ACE_1 = ITEMS.register("wcorp_armor_ace_1",
+    public static final RegistryObject<Item> WCORP_ARMOR_ACE = ITEMS.register("wcorp_armor_ace",
             () -> new WCorpArmorAce(ArmorEquips.WCORP_ARMOR_ACE, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> WCORP_ARMOR_ACE_2 = ITEMS.register("wcorp_armor_ace_2",
-            () -> new WCorpArmorAce(ArmorEquips.WCORP_ARMOR_ACE, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> WCORP_WEAPON_1 = ITEMS.register("wcorp_w1", WCorpWeapon1::new);
