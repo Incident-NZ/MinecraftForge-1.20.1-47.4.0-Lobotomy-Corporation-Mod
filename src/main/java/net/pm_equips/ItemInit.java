@@ -48,6 +48,7 @@ public class ItemInit {
     public static final RegistryObject<Item> W4_THE_SWORD_SHARPENED_WITH_TEARS = ITEMS.register("w4_tears", EGOW4Tears::new);
     public static final RegistryObject<Item> W4_LAMP = ITEMS.register("w4_lamp", EGOW4Lamp::new);
     public static final RegistryObject<Item> W4_BLUE_SCAR = ITEMS.register("w4_blue_scar", EGOW4BlueScar::new);
+    public static final RegistryObject<Item> W4_CRIMSON_SCAR_R = ITEMS.register("w4_crimson_scar_r", EGOW4CrimsonScarR::new);
     public static final RegistryObject<Item> W3_BLOOD = ITEMS.register("w3_blood", EGOW3Blood::new);
     public static final RegistryObject<Item> W3_HARVEST = ITEMS.register("w3_harvest", EGOW3Harvest::new);
     public static final RegistryObject<Item> W3_LOGGING = ITEMS.register("w3_logging", EGOW3Logging::new);
@@ -67,6 +68,8 @@ public class ItemInit {
             () -> new EGOW4MagicBullet(new Item.Properties().durability(3000)));
     public static final RegistryObject<Item> W4_HORNET = ITEMS.register("w4_hornet",
             () -> new EGOW4Hornet(new Item.Properties().durability(3000)));
+    public static final RegistryObject<Item> W4_CRIMSON_SCAR_L = ITEMS.register("w4_crimson_scar_l",
+            () -> new EGOW4CrimsonScarL(new Item.Properties().durability(3000)));
     public static final RegistryObject<Item> W3_HARMONY = ITEMS.register("w3_harmony",
             () -> new EGOW3Harmony(new Item.Properties().durability(2000)));
     public static final RegistryObject<Item> W3_LAETITIA = ITEMS.register("w3_laetitia",
@@ -119,6 +122,10 @@ public class ItemInit {
 
     public static final RegistryObject<Item> S4_BLUE_SCAR = ITEMS.register("s4_blue_scar",
             () -> new EGOP4BlueScar(ArmorEquips.A4_BLUE_SCAR, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S4_CRIMSON_SCAR = ITEMS.register("s4_crimson_scar",
+            () -> new EGOP4CrimsonScar(ArmorEquips.A4_CRIMSON_SCAR, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> S3_MAGIC_BULLET = ITEMS.register("s3_magic_bullet",
@@ -184,6 +191,14 @@ public class ItemInit {
     //フィクサー武器 近距離
     public static final RegistryObject<Item> G_MIMICRY = ITEMS.register("fixer_kali_mimicry", WeaponKaliMimicry::new);
     public static final RegistryObject<Item> EX_DURANDAL = ITEMS.register("fixer_roland_durandal", WeaponRolandDurandal::new);
+    public static final RegistryObject<Item> FIXER_ROLAND_WHEELS = ITEMS.register("fixer_roland_wheels", WeaponRolandWheels::new);
+    public static final RegistryObject<Item> FIXER_ROLAND_MOOK = ITEMS.register("fixer_roland_mook", WeaponRolandMook::new);
+    public static final RegistryObject<Item> FIXER_ROLAND_CRYSTAL = ITEMS.register("fixer_roland_crystal", WeaponRolandCrystal::new);
+    public static final RegistryObject<Item> FIXER_ROLAND_ALLAS = ITEMS.register("fixer_roland_allas", WeaponRolandAllas::new);
+    public static final RegistryObject<Item> FIXER_ROLAND_OLD_BOYS = ITEMS.register("fixer_roland_oldboys", WeaponRolandOldBoys::new);
+    public static final RegistryObject<Item> FIXER_ROLAND_RANGA = ITEMS.register("fixer_roland_ranga", WeaponRolandRanga::new);
+    public static final RegistryObject<Item> FIXER_ROLAND_ZELKOVA_AXE = ITEMS.register("fixer_roland_zelkova_axe", WeaponRolandZelkovaAxe::new);
+    public static final RegistryObject<Item> FIXER_ROLAND_ZELKOVA_MACE = ITEMS.register("fixer_roland_zelkova_mace", WeaponRolandZelkovaMace::new);
     public static final RegistryObject<Item> EX_ARGALIA = ITEMS.register("fixer_argalia", WeaponArgalia::new);
     public static final RegistryObject<Item> ASC2_SOUTH_W1 = ITEMS.register("asc2_south_weapon1", Asc2SouthWeapon1::new);
     public static final RegistryObject<Item> ASC2_SOUTH_W2 = ITEMS.register("asc2_south_weapon2", Asc2SouthWeapon2::new);
@@ -192,9 +207,9 @@ public class ItemInit {
 
     //フィクサー武器 遠距離
     public static final RegistryObject<Item> WEAPON_ROLAND_REVOLVER = ITEMS.register("fixer_roland_lar",
-            () -> new WeaponRolandRevolver(new Item.Properties().durability(2000)));
+            () -> new WeaponRolandLogicHG(new Item.Properties().durability(2000)));
     public static final RegistryObject<Item> WEAPON_ROLAND_SHOTGUN = ITEMS.register("fixer_roland_lasg",
-            () -> new WeaponRolandShotgun(new Item.Properties().durability(2000)));
+            () -> new WeaponRolandLogicSG(new Item.Properties().durability(2000)));
 
     //W社装備
     public static final RegistryObject<Item> WCORP_ARMOR = ITEMS.register("wcorp_armor",

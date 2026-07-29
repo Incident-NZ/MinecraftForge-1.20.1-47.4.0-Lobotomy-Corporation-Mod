@@ -107,7 +107,7 @@ public class EGOW2Beak extends ProjectileWeaponItem {
             if (entityHit != null) {
                 if (entityHit.getEntity() instanceof LivingEntity target) {
                     if (!(target instanceof Player) || CommonConfig.ALLOW_FRIENDLY_FIRE.get()) {
-                        target.hurt(player.level().damageSources().generic(), DAMAGE);
+                        target.hurt(player.level().damageSources().playerAttack(player), DAMAGE);
                         level.playSound(null, target.blockPosition(), SoundEvents.GENERIC_HURT, SoundSource.PLAYERS, 1.0F, 1.0F);
                     }
                 }
@@ -225,4 +225,3 @@ public class EGOW2Beak extends ProjectileWeaponItem {
         );
     }
 }
-

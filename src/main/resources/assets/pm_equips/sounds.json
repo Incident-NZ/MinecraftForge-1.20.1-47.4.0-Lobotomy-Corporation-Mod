@@ -15,6 +15,14 @@
     "subtitle": "Gun Roland Shotgun",
     "sounds": ["pm_equips:item/gun_roland_shotgun"]
   },
+  "item.roland_mook_atk": {
+    "subtitle": "Roland Mook Attack",
+    "sounds": ["pm_equips:item/roland_mook_atk"]
+  },
+  "item.roland_mook_charge": {
+    "subtitle": "Roland Mook Charge",
+    "sounds": ["pm_equips:item/roland_mook_charge"]
+  },
   "item.ego_magic_bullet": {
     "subtitle": "E.G.O Magic Bullet",
     "sounds": ["pm_equips:item/ego_magic_bullet"]
@@ -22,5 +30,13 @@
   "item.ego_lament": {
     "subtitle": "E.G.O Solemn Lament",
     "sounds": ["pm_equips:item/ego_lament"]
+  },
+  "item.ego_whitenight_atk_1": {
+    "subtitle": "E.G.O WhiteNight Attack 1",
+    "sounds": ["pm_equips:item/ego_whitenight_atk_1"]
+  },
+  "item.ego_whitenight_atk_2": {
+    "subtitle": "E.G.O WhiteNight Attack 2",
+    "sounds": ["pm_equips:item/ego_whitenight_atk_2"]
   }
 }

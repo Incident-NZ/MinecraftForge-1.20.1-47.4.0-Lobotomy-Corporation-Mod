@@ -16,6 +16,7 @@ public class ADSPoseHandler
                     ItemInit.W4_HORNET,
                     ItemInit.W4_MAGIC_BULLET,
                     ItemInit.W4_SOLEMN_LAMENT_R,
+                    ItemInit.W4_CRIMSON_SCAR_L,
                     ItemInit.W3_LAETITIA,
                     ItemInit.W3_HARMONY,
                     ItemInit.W2_BEAK,

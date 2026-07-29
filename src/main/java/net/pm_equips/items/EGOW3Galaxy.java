@@ -1,12 +1,41 @@
 package net.pm_equips.items;
 
-import net.pm_equips.BlockInit;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeMod;
+import net.pm_equips.BlockInit;
+
+import java.util.UUID;
 
 public class EGOW3Galaxy extends SwordItem {
+    private static final UUID REACH_UUID = UUID.randomUUID();
+    private static final AttributeModifier REACH_MODIFIER =
+            new AttributeModifier(REACH_UUID, "galaxy_reach", 8.0, AttributeModifier.Operation.ADDITION);
+
     public EGOW3Galaxy() {
-        super(new CustomTier(), 14, -2.5f, new Properties().durability(3000));
+        super(new CustomTier(), 14, -2.5f, new Properties().durability(2000));
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+        if (level.isClientSide || !(entity instanceof Player player)) return;
+
+        boolean isHolding = selected && player.getMainHandItem() == stack;
+
+        AttributeInstance reachAttr = player.getAttribute(ForgeMod.ENTITY_REACH.get());
+        if (reachAttr != null) {
+            if (isHolding && !reachAttr.hasModifier(REACH_MODIFIER)) {
+                reachAttr.addTransientModifier(REACH_MODIFIER);
+            } else if (!isHolding && reachAttr.hasModifier(REACH_MODIFIER)) {
+                reachAttr.removeModifier(REACH_MODIFIER);
+            }
+        }
     }
 
     private static class CustomTier implements net.minecraft.world.item.Tier {

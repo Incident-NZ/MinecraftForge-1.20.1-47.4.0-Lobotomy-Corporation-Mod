@@ -1,0 +1,7 @@
+{
+  "size": 1,
+  "operation": "SET",
+  "order": 0,
+  "use_native_gui": true,
+  "render_toggle": true
+}

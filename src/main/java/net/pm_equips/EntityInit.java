@@ -74,15 +74,15 @@ public class EntityInit {
                             .updateInterval(1)
                             .build("bullet_ex"));
 
-    public static final RegistryObject<EntityType<WhiteNightProjectile>> WHITE_NIGHT_PROJECTILE =
-            ENTITY_TYPES.register("white_night_projectile", () ->
-                    EntityType.Builder.<WhiteNightProjectile>of(
-                            WhiteNightProjectile::new,
+    public static final RegistryObject<EntityType<PWhiteNight>> WHITENIGHT_PROJECTILE =
+            ENTITY_TYPES.register("whitenight_projectile", () ->
+                    EntityType.Builder.<PWhiteNight>of(
+                            PWhiteNight::new,
                             MobCategory.MISC
                             )
                             .sized(1.5F, 1.5F)
                             .clientTrackingRange(64)
                             .updateInterval(1)
-                            .build("white_night_projectile"));
+                            .build("whitenight_projectile"));
 
 }

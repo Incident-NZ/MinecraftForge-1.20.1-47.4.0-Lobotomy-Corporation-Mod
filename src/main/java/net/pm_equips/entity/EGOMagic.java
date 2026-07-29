@@ -27,7 +27,6 @@ public class EGOMagic extends Projectile {
     private Vec3 startPos = Vec3.ZERO;
 
     private final Set<Integer> hitEntities = new HashSet<>();
-    // optional override: if > 0, use this damage value instead of random 22..26
     private float damageOverride = -1.0f;
 
     public EGOMagic(EntityType<? extends EGOMagic> type, Level level) {
@@ -57,7 +56,6 @@ public class EGOMagic extends Projectile {
     }
     public void setSpeed(double s) {
         this.speed = s;
-        // if already has a movement direction, update delta
         if (this.direction != null && this.direction.length() > 0) {
             this.setDeltaMovement(this.direction.scale(this.speed));
         }
@@ -129,7 +127,7 @@ public class EGOMagic extends Projectile {
             }
 
             entity.hurt(
-                    this.damageSources().magic(),
+                    this.damageSources().thrown(this, getOwner()),
                     damage
             );
         }

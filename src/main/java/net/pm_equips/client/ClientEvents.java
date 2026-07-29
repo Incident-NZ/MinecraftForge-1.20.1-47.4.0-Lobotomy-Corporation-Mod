@@ -44,8 +44,8 @@ public class ClientEvents {
                 AmmoR::new);
         event.registerEntityRenderer(EntityInit.BULLET_EX.get(),
                 AmmoExR::new);
-        event.registerEntityRenderer(EntityInit.WHITE_NIGHT_PROJECTILE.get(),
-                WhiteNightProjectileRenderer::new);
+        event.registerEntityRenderer(EntityInit.WHITENIGHT_PROJECTILE.get(),
+                PWhiteNightR::new);
         event.registerBlockEntityRenderer(BlockEntityInit.EBOX_GEN.get(), ctx -> new EBoxGenR());
     }
 

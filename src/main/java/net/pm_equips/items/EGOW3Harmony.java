@@ -1,9 +1,6 @@
 package net.pm_equips.items;
 
-import net.pm_equips.BlockInit;
-import net.pm_equips.ItemInit;
-import net.pm_equips.config.CommonConfig;
-import net.pm_equips.entity.PBulletExp;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,34 +10,37 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraft.world.level.Explosion;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.pm_equips.BlockInit;
+import net.pm_equips.ItemInit;
+import net.pm_equips.entity.PBulletExp;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 public class EGOW3Harmony extends ProjectileWeaponItem {
-    private static final float DAMAGE = 50.0f;
-    private static final float VELOCITY = 4.0f;
-    private static final int RANGE = 128;
-    private static final int COOLDOWN_TICKS = 120;
-    private static final float EXPLOSION_POWER = 30.0f;
 
-    public EGOW3Harmony(Properties properties) {
+    private static final int MAX_AMMO = 1;
+    private static final int RELOAD_TICKS = 100;
+    private static final float MIN_DAMAGE = 30.0F;
+    private static final float VELOCITY = 4.0F;
+    private static final int RANGE = 64;
+    private static final int COOLDOWN_TICKS = 20;
+    private static final double EXPLOSION_RADIUS = 9.0D;
+
+    public EGOW3Harmony(
+            Properties properties
+    ) {
         super(properties.durability(2000));
     }
 
     @Override
     public Predicate<ItemStack> getAllSupportedProjectiles() {
-        return (stack) -> stack.is(ItemInit.EXPLOSIVE_BULLET_AMMO.get());
+        return stack -> stack.is(ItemInit.EXPLOSIVE_BULLET_AMMO.get());
     }
 
     @Override
@@ -49,137 +49,315 @@ public class EGOW3Harmony extends ProjectileWeaponItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack gun = player.getItemInHand(hand);
+    public InteractionResultHolder<ItemStack> use(
+            Level level,
+            Player player,
+            InteractionHand hand
+    ) {
 
-        if (!hasAmmo(player)) {
+        ItemStack gun =
+                player.getItemInHand(hand);
+
+        CompoundTag tag =
+                gun.getOrCreateTag();
+
+        int reload =
+                tag.getInt("Reload");
+
+        int ammo =
+                tag.getInt("Ammo");
+
+        if (reload > 0) {
+            return InteractionResultHolder.fail(gun);
+        }
+
+        if (ammo <= 0) {
+
             if (!level.isClientSide) {
-                player.displayClientMessage(Component.literal("弾薬切れ / No Ammo"), true);
-                level.playSound(null, player, SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS, 1.0F, 1.2F);
+                player.displayClientMessage(
+                        Component.literal("弾薬切れ / No Ammo"),
+                        true
+                );
+
+                level.playSound(
+                        null,
+                        player,
+                        SoundEvents.DISPENSER_FAIL,
+                        SoundSource.PLAYERS,
+                        1.0F,
+                        1.2F
+                );
             }
+
             return InteractionResultHolder.fail(gun);
         }
 
         if (level.isClientSide) {
-            level.playSound(player, player.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.2F, 0.8F);
+            level.playSound(
+                    player,
+                    player.blockPosition(),
+                    SoundEvents.GENERIC_EXPLODE,
+                    SoundSource.PLAYERS,
+                    1.2F,
+                    0.8F
+            );
+
             return InteractionResultHolder.consume(gun);
         }
 
-        shootBullet(level, player);
-        consumeAmmo(player);
+        shootBullet(
+                level,
+                player
+        );
 
-        gun.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
-        player.awardStat(Stats.ITEM_USED.get(this));
-        player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
+        tag.putInt(
+                "Ammo",
+                ammo - 1
+        );
+
+        gun.hurtAndBreak(
+                1,
+                player,
+                p -> p.broadcastBreakEvent(hand)
+        );
+
+        player.awardStat(
+                Stats.ITEM_USED.get(this)
+        );
+
+        player.getCooldowns()
+                .addCooldown(
+                        this,
+                        COOLDOWN_TICKS
+                );
 
         return InteractionResultHolder.consume(gun);
     }
 
-    private boolean hasAmmo(Player player) {
-        return player.getInventory().contains(new ItemStack(ItemInit.EXPLOSIVE_BULLET_AMMO.get()));
-    }
+    private void shootBullet(
+            Level level,
+            Player player
+    ) {
 
-    private void consumeAmmo(Player player) {
-        if (!player.getAbilities().instabuild) {
-            player.getInventory().clearOrCountMatchingItems(
-                    stack -> stack.is(ItemInit.EXPLOSIVE_BULLET_AMMO.get()),
-                    1, player.inventoryMenu.getCraftSlots()
-            );
-        }
-    }
+        Vec3 look =
+                player.getLookAngle();
 
-    private void shootBullet(Level level, Player player) {
-        Vec3 look = player.getLookAngle();
-        Vec3 eyePos = player.getEyePosition();
-        Vec3 spawnPos = eyePos.add(look.scale(0.5));
-        Vec3 endPos = eyePos.add(look.scale(getDefaultProjectileRange()));
+        float damage =
+                MIN_DAMAGE + level.random.nextInt(21);
 
-        EntityHitResult entityHit = null;
-        if (!level.isClientSide) {
-            entityHit = ProjectileUtil.getEntityHitResult(
-                    level,
-                    player,
-                    eyePos,
-                    endPos,
-                    player.getBoundingBox().expandTowards(look.scale(getDefaultProjectileRange())).inflate(1.0D),
-                    (e) -> e != player && e instanceof LivingEntity && e.isAlive()
-            );
-        }
+        PBulletExp bullet =
+                new PBulletExp(
+                        level,
+                        player,
+                        damage,
+                        VELOCITY,
+                        look
+                );
 
-        Vec3 explosionCenter;
-        if (entityHit != null) {
-            explosionCenter = entityHit.getEntity().position();
-        } else {
-            explosionCenter = endPos;
-        }
-
-        if (!level.isClientSide) {
-            handleExplosion(level, player, explosionCenter.x, explosionCenter.y, explosionCenter.z);
-        }
-
-        PBulletExp bullet = new PBulletExp(level, player, DAMAGE, VELOCITY, look);
-        bullet.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
-        bullet.setDamage(DAMAGE);
+        bullet.setDamage(damage);
         bullet.setVelocity(VELOCITY);
         bullet.setMaxLifetime(getDefaultProjectileRange());
+        bullet.setExplosionRadius(EXPLOSION_RADIUS);
+
         level.addFreshEntity(bullet);
 
-        level.playSound(null, player, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1.2F, 0.8F);
+        level.playSound(
+                null,
+                player.blockPosition(),
+                SoundEvents.GENERIC_EXPLODE,
+                SoundSource.PLAYERS,
+                1.2F,
+                0.8F
+        );
     }
 
-    private void handleExplosion(Level lvl, Player shooter, double x, double y, double z) {
-        boolean allowTerrain = CommonConfig.ALLOW_TERRAIN_DAMAGE.get();
-        boolean allowFriendly = CommonConfig.ALLOW_FRIENDLY_FIRE.get();
+    // Rキーリロード開始
+    public void startReload(
+            ItemStack stack,
+            Player player
+    ) {
 
-        double radius = Math.max(1.0, EXPLOSION_POWER);
+        CompoundTag tag =
+                stack.getOrCreateTag();
 
-        if (allowTerrain) {
-            Map<Player, Float> savedPlayerHealth = new HashMap<>();
-            if (!allowFriendly) {
-                List<Player> players = lvl.getEntitiesOfClass(
-                        Player.class,
-                        new AABB(x, y, z, x, y, z).inflate(radius),
-                        p -> p != shooter && p.isAlive()
-                );
-                for (Player p : players) {
-                    savedPlayerHealth.put(p, p.getHealth());
-                }
-            }
+        int reload =
+                tag.getInt("Reload");
 
-            Explosion explosion = lvl.explode(shooter, x, y, z, EXPLOSION_POWER, Level.ExplosionInteraction.TNT);
+        if (reload > 0) {
+            return;
+        }
 
-            if (!allowFriendly) {
-                for (Map.Entry<Player, Float> e : savedPlayerHealth.entrySet()) {
-                    Player p = e.getKey();
-                    if (p.isAlive()) {
-                        p.setHealth(e.getValue());
-                        p.invulnerableTime = 0;
-                    }
-                }
-            }
-        } else {
-            Explosion explosion = lvl.explode(shooter, x, y, z, EXPLOSION_POWER, Level.ExplosionInteraction.NONE);
+        int ammo =
+                tag.getInt("Ammo");
 
-            AABB area = new AABB(x, y, z, x, y, z).inflate(radius);
-            List<LivingEntity> targets = lvl.getEntitiesOfClass(LivingEntity.class, area, e -> e.isAlive() && e != shooter);
-            for (LivingEntity t : targets) {
-                if (t instanceof Player && !allowFriendly) {
-                    continue;
-                }
-                t.hurt(lvl.damageSources().explosion(explosion), DAMAGE);
+        if (ammo >= MAX_AMMO) {
+            return;
+        }
+
+        boolean hasAmmo =
+                false;
+
+        for (ItemStack invStack : player.getInventory().items) {
+
+            if (invStack.is(ItemInit.EXPLOSIVE_BULLET_AMMO.get())) {
+                hasAmmo = true;
+                break;
             }
         }
+
+        if (!hasAmmo) {
+            return;
+        }
+
+        tag.putInt(
+                "Reload",
+                RELOAD_TICKS
+        );
+
+        player.level().playSound(
+                null,
+                player.blockPosition(),
+                SoundEvents.IRON_TRAPDOOR_CLOSE,
+                SoundSource.PLAYERS,
+                1.0F,
+                1.0F
+        );
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        target.hurt(attacker.level().damageSources().explosion(null), DAMAGE);
-        stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+    public void inventoryTick(
+            ItemStack stack,
+            Level level,
+            net.minecraft.world.entity.Entity entity,
+            int slot,
+            boolean selected
+    ) {
+
+        CompoundTag tag =
+                stack.getOrCreateTag();
+
+        if (!tag.contains("Ammo")) {
+            tag.putInt(
+                    "Ammo",
+                    MAX_AMMO
+            );
+        }
+
+        int reload =
+                tag.getInt("Reload");
+
+        if (reload > 0) {
+
+            reload--;
+
+            tag.putInt(
+                    "Reload",
+                    reload
+            );
+
+            if (reload <= 0
+                    && entity instanceof Player player) {
+
+                int ammo =
+                        tag.getInt("Ammo");
+
+                int needed =
+                        MAX_AMMO - ammo;
+
+                if (needed <= 0) {
+                    return;
+                }
+
+                int loaded =
+                        0;
+
+                for (ItemStack invStack : player.getInventory().items) {
+
+                    if (invStack.is(ItemInit.EXPLOSIVE_BULLET_AMMO.get())) {
+
+                        while (!invStack.isEmpty()
+                                && loaded < needed) {
+
+                            invStack.shrink(1);
+                            loaded++;
+                        }
+                    }
+
+                    if (loaded >= needed) {
+                        break;
+                    }
+                }
+
+                tag.putInt(
+                        "Ammo",
+                        ammo + loaded
+                );
+            }
+        }
+
+        super.inventoryTick(
+                stack,
+                level,
+                entity,
+                slot,
+                selected
+        );
+    }
+
+    @Override
+    public boolean hurtEnemy(
+            ItemStack stack,
+            LivingEntity target,
+            LivingEntity attacker
+    ) {
+
+        target.hurt(
+                attacker.level().damageSources().explosion(null),
+                MIN_DAMAGE
+        );
+
+        stack.hurtAndBreak(
+                1,
+                attacker,
+                p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND)
+        );
+
         return true;
     }
 
     @Override
-    public boolean isValidRepairItem(ItemStack stack, ItemStack repair) {
+    public boolean isValidRepairItem(
+            ItemStack stack,
+            ItemStack repair
+    ) {
         return repair.is(BlockInit.BlockItems.HE_PE_BOX.get());
+    }
+
+    @Override
+    public void appendHoverText(
+            ItemStack stack,
+            Level level,
+            List<Component> tooltip,
+            TooltipFlag flag
+    ) {
+
+        CompoundTag tag =
+                stack.getOrCreateTag();
+
+        tooltip.add(
+                Component.literal(
+                        "Ammo: "
+                                + tag.getInt("Ammo")
+                                + " / "
+                                + MAX_AMMO
+                )
+        );
+
+        super.appendHoverText(
+                stack,
+                level,
+                tooltip,
+                flag
+        );
     }
 }

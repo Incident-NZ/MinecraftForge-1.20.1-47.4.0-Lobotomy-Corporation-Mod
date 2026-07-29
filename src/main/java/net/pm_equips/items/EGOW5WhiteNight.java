@@ -6,8 +6,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.pm_equips.BlockInit;
+import net.pm_equips.SoundInit;
 import net.pm_equips.config.CommonConfig;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -20,7 +20,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
-import net.pm_equips.entity.WhiteNightProjectile;
+import net.pm_equips.entity.PWhiteNight;
 import net.pm_equips.EntityInit;
 
 import java.util.UUID;
@@ -130,8 +130,8 @@ public class EGOW5WhiteNight extends SwordItem {
 
                 Vec3 spawnPos = new Vec3(randomX, spawnY + 1.5, randomZ);
 
-                WhiteNightProjectile projectile = new WhiteNightProjectile(
-                        EntityInit.WHITE_NIGHT_PROJECTILE.get(),
+                PWhiteNight projectile = new PWhiteNight(
+                        EntityInit.WHITENIGHT_PROJECTILE.get(),
                         level,
                         player,
                         spawnPos,
@@ -148,11 +148,11 @@ public class EGOW5WhiteNight extends SwordItem {
 
         // Apply effects to target
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 2, false, false)); // 5 sec, level III (value 2)
-        target.hurt(target.damageSources().magic(), (float) damage);
+        target.hurt(level.damageSources().playerAttack(player), (float) damage);
 
         // Play sound
         level.playSound(null, target.getX(), target.getY(), target.getZ(),
-                SoundEvents.WARDEN_HURT, SoundSource.PLAYERS, 1.0F, 1.2F);
+                SoundInit.EGO_WHITENIGHT_ATK_1.get(), SoundSource.PLAYERS, 1.0F, 1.2F);
 
         // Damage weapon
         itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
