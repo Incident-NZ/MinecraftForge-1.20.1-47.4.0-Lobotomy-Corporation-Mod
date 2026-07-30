@@ -3,6 +3,7 @@ package net.pm_equips.items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.item.UseAnim;
 import net.pm_equips.SoundInit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.pm_equips.events.RolandMookDropHandler;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -29,7 +31,7 @@ public class WeaponRolandMook extends SwordItem {
     private static final int COOLDOWN_TICKS = 20 * 15;
 
     public WeaponRolandMook() {
-        super(new CustomTier(), 0, -2.8f, new Properties().durability(1000));
+        super(new CustomTier(), 14, -2.8f, new Properties().durability(1000));
     }
 
     @Override
@@ -46,12 +48,17 @@ public class WeaponRolandMook extends SwordItem {
 
         player.startUsingItem(hand);
         level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundInit.ROLAND_MOOK_CHARGE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-        return InteractionResultHolder.consume(stack);
+        return InteractionResultHolder.success(stack);
     }
 
     @Override
     public int getUseDuration(ItemStack stack) {
         return USE_DURATION;
+    }
+
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.BLOCK;
     }
 
     @Override
@@ -133,7 +140,6 @@ public class WeaponRolandMook extends SwordItem {
         List<LivingEntity> targets = level.getEntitiesOfClass(LivingEntity.class, area,
                 entity -> entity != player
                         && entity.isAlive()
-                        && !(entity instanceof Player)
                         && entity instanceof Mob
                         && !entity.isInvulnerable()
                         && !entity.isAlliedTo(player));

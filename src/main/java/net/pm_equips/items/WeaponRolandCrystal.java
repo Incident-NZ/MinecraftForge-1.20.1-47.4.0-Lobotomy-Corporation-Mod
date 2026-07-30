@@ -5,8 +5,6 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -16,23 +14,17 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.pm_equips.ItemInit;
-import net.pm_equips.PMEquipsMain;
 
 public class WeaponRolandCrystal extends SwordItem {
     private static final int DURABILITY = 1000;
-    private static final float MIN_DAMAGE = 7.0F;
-    private static final int DAMAGE_VARIANCE = 5;
     private static final int SPEED_EFFECT_DURATION = 12;
     private static final int SPEED_EFFECT_AMPLIFIER = 4;
     private static final int DASH_COOLDOWN_TICKS = 60;
     private static final double DASH_DISTANCE = 15.0D;
 
     public WeaponRolandCrystal() {
-        super(new CustomTier(), 0, -2.2F, new Properties().durability(DURABILITY));
+        super(new CustomTier(), 10, -2.2F, new Properties().durability(DURABILITY));
     }
 
     @Override
@@ -71,12 +63,6 @@ public class WeaponRolandCrystal extends SwordItem {
         super.inventoryTick(stack, level, entity, slot, selected);
     }
 
-    @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.hurtAndBreak(1, attacker, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-        return true;
-    }
-
     private static boolean isDualWielding(Player player) {
         return player.getMainHandItem().is(ItemInit.FIXER_ROLAND_CRYSTAL.get())
                 && player.getOffhandItem().is(ItemInit.FIXER_ROLAND_CRYSTAL.get());
@@ -102,10 +88,6 @@ public class WeaponRolandCrystal extends SwordItem {
 
         player.teleportTo(target.x, target.y, target.z);
         player.fallDistance = 0.0F;
-    }
-
-    private static float rollDamage(Player player) {
-        return MIN_DAMAGE + player.level().random.nextInt(DAMAGE_VARIANCE);
     }
 
     private static class CustomTier implements Tier {
@@ -137,22 +119,6 @@ public class WeaponRolandCrystal extends SwordItem {
         @Override
         public Ingredient getRepairIngredient() {
             return Ingredient.EMPTY;
-        }
-    }
-
-    @Mod.EventBusSubscriber(modid = PMEquipsMain.MOD_ID)
-    public static class CrystalEvents {
-        @SubscribeEvent
-        public static void onLivingHurt(LivingHurtEvent event) {
-            if (!(event.getSource().getEntity() instanceof Player player)) {
-                return;
-            }
-
-            if (!player.getMainHandItem().is(ItemInit.FIXER_ROLAND_CRYSTAL.get())) {
-                return;
-            }
-
-            event.setAmount(rollDamage(player));
         }
     }
 }

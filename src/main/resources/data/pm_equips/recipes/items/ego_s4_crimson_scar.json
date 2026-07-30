@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BDB",
+    "BAB",
+    "CCC"
+  ],
+  "key": {
+    "A": {
+      "item": "pm_equips:e_box_4"
+    },
+    "B": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "minecraft:gunpowder"
+    },
+    "D": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "pm_equips:s4_crimson_scar"
+  }
+}

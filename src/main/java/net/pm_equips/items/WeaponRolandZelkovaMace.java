@@ -21,7 +21,7 @@ public class WeaponRolandZelkovaMace extends SwordItem {
     private static final int ARMOR_PIERCING_BONUS_DAMAGE_VARIANCE = 5;
 
     public WeaponRolandZelkovaMace() {
-        super(new CustomTier(), 0, -2.9F, new Properties().durability(1000));
+        super(new CustomTier(), 7, -2.9F, new Properties().durability(1000));
     }
 
     @Override

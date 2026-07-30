@@ -20,7 +20,7 @@ public class WeaponRolandZelkovaAxe extends SwordItem {
     private static final int GUARD_PIERCING_DAMAGE_VARIANCE = 6;
 
     public WeaponRolandZelkovaAxe() {
-        super(new CustomTier(), 0, -2.8F, new Properties().durability(1000));
+        super(new CustomTier(), 7, -2.8F, new Properties().durability(1000));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package net.pm_equips.items;
+package net.pm_equips.client;
 
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.pm_equips.ItemInit;
 import net.pm_equips.PMEquipsMain;
+import net.pm_equips.items.WeaponRolandMook;
 
 @Mod.EventBusSubscriber(modid = PMEquipsMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class RolandMookClient {

@@ -10,22 +10,15 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.pm_equips.ItemInit;
-import net.pm_equips.PMEquipsMain;
 import net.pm_equips.config.CommonConfig;
 
 public class WeaponRolandAllas extends SwordItem {
-    private static final float MIN_DAMAGE = 5.0F;
-    private static final int DAMAGE_VARIANCE = 5;
     private static final double WEAKNESS_RADIUS = 3.0D;
     private static final int WEAKNESS_DURATION = 20;
     private static final int WEAKNESS_AMPLIFIER = 1;
 
     public WeaponRolandAllas() {
-        super(new CustomTier(), 0, -2.3F, new Properties().durability(1000));
+        super(new CustomTier(), 7, -2.3F, new Properties().durability(1000));
     }
 
     @Override
@@ -60,10 +53,6 @@ public class WeaponRolandAllas extends SwordItem {
         }
     }
 
-    private static float rollDamage(Player player) {
-        return MIN_DAMAGE + player.level().random.nextInt(DAMAGE_VARIANCE);
-    }
-
     private static class CustomTier implements Tier {
         @Override
         public int getUses() {
@@ -93,22 +82,6 @@ public class WeaponRolandAllas extends SwordItem {
         @Override
         public Ingredient getRepairIngredient() {
             return Ingredient.EMPTY;
-        }
-    }
-
-    @Mod.EventBusSubscriber(modid = PMEquipsMain.MOD_ID)
-    public static class AllasEvents {
-        @SubscribeEvent
-        public static void onLivingHurt(LivingHurtEvent event) {
-            if (!(event.getSource().getEntity() instanceof Player player)) {
-                return;
-            }
-
-            if (!player.getMainHandItem().is(ItemInit.FIXER_ROLAND_ALLAS.get())) {
-                return;
-            }
-
-            event.setAmount(rollDamage(player));
         }
     }
 }

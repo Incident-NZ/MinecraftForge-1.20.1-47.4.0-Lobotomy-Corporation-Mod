@@ -1,4 +1,4 @@
-package net.pm_equips.items;
+package net.pm_equips.events;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -24,7 +24,12 @@ public class RolandMookDropHandler {
     @SubscribeEvent
     public static void onLivingDrops(LivingDropsEvent event) {
         LivingEntity entity = event.getEntity();
-        if (entity instanceof Player || !EXTRA_DROP_ENTITIES.remove(entity.getUUID())) {
+
+        if (entity instanceof Player) {
+            return;
+        }
+
+        if (!Boolean.TRUE.equals(EXTRA_DROP_ENTITIES.remove(entity.getUUID()))) {
             return;
         }
 
@@ -36,6 +41,7 @@ public class RolandMookDropHandler {
             ItemStack stack = drop.getItem();
             int count = stack.getCount();
             int newCount = Math.max(1, (int) Math.ceil(count * 1.5F));
+
             if (newCount != count) {
                 stack.setCount(newCount);
                 drop.setItem(stack);

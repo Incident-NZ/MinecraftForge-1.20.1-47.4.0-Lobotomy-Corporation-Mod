@@ -12,7 +12,7 @@ import net.minecraft.world.entity.Entity;
 
 public class WeaponRolandDurandal extends SwordItem {
     public WeaponRolandDurandal() {
-        super(new CustomTier(), 17, -1.9f, new Properties().durability(1000));
+        super(new CustomTier(), 8, -2.2f, new Properties().durability(1000));
     }
 
     private static class CustomTier implements Tier {

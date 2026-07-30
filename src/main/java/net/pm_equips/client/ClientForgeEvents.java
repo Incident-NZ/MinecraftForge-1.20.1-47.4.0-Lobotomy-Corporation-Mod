@@ -40,6 +40,7 @@ public class ClientForgeEvents {
             ItemInit.W4_MAGIC_BULLET,
             ItemInit.W4_SOLEMN_LAMENT_R,
             ItemInit.W4_HORNET,
+            ItemInit.W4_CRIMSON_SCAR_L,
             ItemInit.W5_PARADISE_LOST,
             ItemInit.WEAPON_ROLAND_REVOLVER,
             ItemInit.WEAPON_ROLAND_SHOTGUN,
