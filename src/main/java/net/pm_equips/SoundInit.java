@@ -14,6 +14,12 @@ public class SoundInit {
             register("item.ego_lament");
     public static final RegistryObject<SoundEvent> EGO_MAGIC_BULLET =
             register("item.ego_magic_bullet");
+    public static final RegistryObject<SoundEvent> EGO_CRIMSON_SCAR =
+            register("item.ego_crimson_scar");
+    public static final RegistryObject<SoundEvent> EGO_WHITENIGHT_ATK_1 =
+            register("item.ego_whitenight_atk_1");
+    public static final RegistryObject<SoundEvent> EGO_WHITENIGHT_ATK_2 =
+            register("item.ego_whitenight_atk_2");
     public static final RegistryObject<SoundEvent> GUN_AUTO =
             register("item.gun_auto");
     public static final RegistryObject<SoundEvent> GUN_SEMI =
@@ -22,10 +28,6 @@ public class SoundInit {
             register("item.gun_roland_revolver");
     public static final RegistryObject<SoundEvent> GUN_ROLAND_SHOTGUN =
             register("item.gun_roland_shotgun");
-    public static final RegistryObject<SoundEvent> EGO_WHITENIGHT_ATK_1 =
-            register("item.ego_whitenight_atk_1");
-    public static final RegistryObject<SoundEvent> EGO_WHITENIGHT_ATK_2 =
-            register("item.ego_whitenight_atk_2");
     public static final RegistryObject<SoundEvent> ROLAND_MOOK_CHARGE =
             register("item.roland_mook_charge");
     public static final RegistryObject<SoundEvent> ROLAND_MOOK_ATTACK =

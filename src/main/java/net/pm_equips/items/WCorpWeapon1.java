@@ -2,9 +2,10 @@ package net.pm_equips.items;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
@@ -25,13 +26,7 @@ public class WCorpWeapon1 extends SwordItem {
     public static final int FE_PER_HIT = 200;
 
     public WCorpWeapon1() {
-        super(
-                new CustomTier(),
-                6,
-                -2.4F,
-                new Properties()
-                        .stacksTo(1)
-        );
+        super(new CustomTier(), 6, -2.4F, new Properties().stacksTo(1));
     }
 
     @Override
@@ -51,50 +46,20 @@ public class WCorpWeapon1 extends SwordItem {
             LivingEntity target,
             LivingEntity attacker
     ) {
-
-        if(attacker.level().isClientSide)
-        {
-            return super.hurtEnemy(
-                    stack,
-                    target,
-                    attacker
-            );
-        }
-
-        stack.getCapability(
-                ForgeCapabilities.ENERGY
-        ).ifPresent(storage -> {
-
-            if(storage.getEnergyStored() >= FE_PER_HIT)
-            {
-                storage.extractEnergy(
-                        FE_PER_HIT,
-                        false
-                );
-
-                target.knockback(
-                        2.5D,
-                        attacker.getX() - target.getX(),
-                        attacker.getZ() - target.getZ()
-                );
-
-                target.addEffect(
-                        new MobEffectInstance(
-                                MobEffects.MOVEMENT_SLOWDOWN,
-                                100,
-                                2,
-                                false,
-                                true
-                        )
-                );
-            }
-        });
-
         return super.hurtEnemy(
                 stack,
                 target,
                 attacker
         );
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(
+            Level level,
+            Player player,
+            InteractionHand hand
+    ) {
+        return WCorpTeleport.useTeleport(level, player, hand, this, FE_PER_HIT);
     }
 
     @Override

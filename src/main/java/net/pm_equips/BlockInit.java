@@ -8,7 +8,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.pm_equips.blocks.EBoxGen;
+import net.pm_equips.blocks.LobotomyEGOExtractionTable;
+import net.pm_equips.blocks.PEBoxGenerator;
 
 public class BlockInit {
     public static class Blocks {
@@ -45,10 +46,8 @@ public class BlockInit {
                         .sound(SoundType.METAL)
                         .instabreak()));
 
-        public static final RegistryObject<Block> E_GEN = BLOCKS.register("e_gen",
-                () -> new EBoxGen(BlockBehaviour.Properties.of()
-                        .strength(1.5f, 120f)
-                        .sound(SoundType.METAL)));
+        public static final RegistryObject<Block> PEBOX_GENERATOR = BLOCKS.register("pe_box_generator", PEBoxGenerator::new);
+        public static final RegistryObject<Block> EGO_EXTRACTION_TABLE = BLOCKS.register("ego_extraction_table", LobotomyEGOExtractionTable::new);
     }
 
     public static class BlockItems {
@@ -69,8 +68,9 @@ public class BlockInit {
         public static final RegistryObject<Item> ALEPH_PE_BOX = BLOCK_ITEMS.register("e_box_5",
                 () -> new BlockItem(Blocks.ALEPH_PE_BOX.get(), new Item.Properties().stacksTo(64)));
 
-        // EBoxGen block item (use the Block, not the BlockEntityType)
-        public static final RegistryObject<Item> E_GEN = BLOCK_ITEMS.register("e_gen",
-                () -> new BlockItem(Blocks.E_GEN.get(), new Item.Properties().stacksTo(64)));
+        public static final RegistryObject<Item> PEBOX_GENERATOR = BLOCK_ITEMS.register("pe_box_generator",
+                () -> new BlockItem(Blocks.PEBOX_GENERATOR.get(), new Item.Properties().stacksTo(64)));
+        public static final RegistryObject<Item> EGO_EXTRACTION_TABLE = BLOCK_ITEMS.register("ego_extraction_table",
+                () -> new BlockItem(Blocks.EGO_EXTRACTION_TABLE.get(), new Item.Properties().stacksTo(64)));
     }
 }

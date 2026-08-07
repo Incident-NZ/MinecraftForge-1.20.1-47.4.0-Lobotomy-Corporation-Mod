@@ -5,6 +5,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.pm_equips.BlockInit;
 import net.pm_equips.SoundInit;
 import net.pm_equips.config.CommonConfig;
@@ -110,25 +113,20 @@ public class EGOW5WhiteNight extends SwordItem {
         // Calculate random ranged damage (22-28)
         int damage = 22 + level.random.nextInt(7);
 
-        // Generate 12 projectiles in 3x3 area around target (on ground)
-        Vec3 targetPos = target.position();
+        // Generate 12 stationary weapons around the target, similar to Cataclysm's phantom halberd.
         int projectilesPerWeapon = 4; // 3 weapon types x 4 = 12 total
+        int totalProjectiles = 3 * projectilesPerWeapon;
+        int projectileIndex = 0;
 
         for (int weaponType = 0; weaponType < 3; weaponType++) {
             for (int i = 0; i < projectilesPerWeapon; i++) {
-                // Random position in 3x3 area (xz plane, ground level)
-                double randomX = targetPos.x + (level.random.nextDouble() - 0.5) * 3;
-                double randomZ = targetPos.z + (level.random.nextDouble() - 0.5) * 3;
-                double spawnY = targetPos.y;
-
-                // Find ground level
-                net.minecraft.core.BlockPos checkPos = new net.minecraft.core.BlockPos((int) randomX, (int) spawnY - 1, (int) randomZ);
-                while (spawnY > 0 && level.getBlockState(checkPos).isCollisionShapeFullBlock(level, checkPos)) {
-                    spawnY--;
-                    checkPos = new net.minecraft.core.BlockPos((int) randomX, (int) spawnY - 1, (int) randomZ);
-                }
-
-                Vec3 spawnPos = new Vec3(randomX, spawnY + 1.5, randomZ);
+                double angleRadians = (Math.PI * 2.0D * projectileIndex) / totalProjectiles;
+                double radius = 1.45D + weaponType * 0.15D;
+                double spawnX = target.getX() + Math.cos(angleRadians) * radius;
+                double spawnZ = target.getZ() + Math.sin(angleRadians) * radius;
+                double spawnY = findSurfaceY(level, spawnX, target.getY() + target.getBbHeight() + 1.0D, spawnZ);
+                Vec3 spawnPos = new Vec3(spawnX, spawnY, spawnZ);
+                float yawDegrees = (float) (angleRadians * Mth.RAD_TO_DEG) + 90.0F;
 
                 PWhiteNight projectile = new PWhiteNight(
                         EntityInit.WHITENIGHT_PROJECTILE.get(),
@@ -136,13 +134,13 @@ public class EGOW5WhiteNight extends SwordItem {
                         player,
                         spawnPos,
                         (float) damage,
-                        weaponType
+                        weaponType,
+                        yawDegrees,
+                        PWhiteNight.DEFAULT_RENDER_SCALE
                 );
 
-                // Add upward velocity for "thrust from ground" effect
-                projectile.setDeltaMovement(0, 0.2, 0);
-
                 level.addFreshEntity(projectile);
+                projectileIndex++;
             }
         }
 
@@ -156,6 +154,21 @@ public class EGOW5WhiteNight extends SwordItem {
 
         // Damage weapon
         itemStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+    }
+
+    private static double findSurfaceY(Level level, double x, double startY, double z) {
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(Mth.floor(x), Mth.floor(startY), Mth.floor(z));
+        int minY = level.getMinBuildHeight();
+
+        while (pos.getY() > minY && level.getBlockState(pos).isAir()) {
+            pos.move(Direction.DOWN);
+        }
+
+        if (level.getBlockState(pos).isCollisionShapeFullBlock(level, pos)) {
+            return pos.getY() + 1.0D;
+        }
+
+        return startY;
     }
 
     private static class CustomTier implements Tier {

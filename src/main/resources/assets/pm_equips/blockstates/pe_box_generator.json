@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "pm_equips:block/pe_box_generator"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "pm_equips:block/ego_table_under",
+    "east": "pm_equips:block/ego_table_side",
+    "north": "pm_equips:block/ego_table_north",
+    "south": "pm_equips:block/ego_table_side",
+    "up": "pm_equips:block/ego_table_top",
+    "west": "pm_equips:block/ego_table_side"
+  }
+}

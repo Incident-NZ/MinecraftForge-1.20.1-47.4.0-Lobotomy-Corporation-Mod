@@ -34,10 +34,11 @@ public class PWhiteNightR extends EntityRenderer<PWhiteNight> {
                        PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
 
-        poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
+        float entityYaw = Mth.lerp(partialTicks, entity.yRotO, entity.getYRot());
+        float scale = entity.getRenderScale();
 
-        float scale = 1.5F;
+        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - entityYaw));
+        poseStack.translate(0.0F, scale * 0.5F, 0.0F);
         poseStack.scale(scale, scale, scale);
 
         PoseStack.Pose pose =
@@ -50,7 +51,7 @@ public class PWhiteNightR extends EntityRenderer<PWhiteNight> {
                 pose.normal();
 
         VertexConsumer vertexConsumer =
-                buffer.getBuffer(RenderType.entityCutout(getTextureLocation(entity)));
+                buffer.getBuffer(RenderType.entityCutoutNoCull(getTextureLocation(entity)));
 
         int light =
                 Math.max(packedLight, LightTexture.FULL_BRIGHT);

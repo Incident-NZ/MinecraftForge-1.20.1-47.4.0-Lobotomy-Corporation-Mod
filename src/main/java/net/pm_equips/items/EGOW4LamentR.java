@@ -80,11 +80,6 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
             return InteractionResultHolder.fail(gun);
         }
 
-        if (level.isClientSide) {
-            level.playSound(player, player.blockPosition(), SoundInit.EGO_LAMENT.get(), SoundSource.PLAYERS, 1.0F, 0.9F);
-            return InteractionResultHolder.consume(gun);
-        }
-
         // サーバー側で2発射撃
         shootDouble(level, player);
 

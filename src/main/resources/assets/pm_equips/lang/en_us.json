@@ -24,6 +24,10 @@
   "item.pm_equips.item_bullet_lasg": "Logic Atelier Shotgun Shell",
   "item.pm_equips.item_bullet_larv": "Logic Atelier Revolver Bullet",
 
+  "block.pm_equips.pe_box_generator": "PE-Box Generator",
+  "block.pm_equips.ego_extraction_table": "Lobotomy E.G.O Extraction Table",
+  "container.pm_equips.lobotomy_ego_extraction_table": "Lobotomy E.G.O Extraction Table",
+  "gui.pm_equips.lobotomy_ego_extraction_table.craft": "Extract",
   "block.pm_equips.e_box_1": "E-Box ZAYIN",
   "block.pm_equips.e_box_2": "E-Box TETH",
   "block.pm_equips.e_box_3": "E-Box HE",

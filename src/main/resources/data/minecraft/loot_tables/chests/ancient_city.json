@@ -17,7 +17,7 @@
         },
         {
           "type": "minecraft:tag",
-          "name": "pm_equips:ego_high",
+          "name": "pm_equips:ego_t5_aleph",
           "expand": true,
           "weight": 7
         }

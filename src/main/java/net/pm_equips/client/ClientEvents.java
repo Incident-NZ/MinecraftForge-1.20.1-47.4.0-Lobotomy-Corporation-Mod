@@ -4,10 +4,13 @@ import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.pm_equips.BlockEntityInit;
 import net.pm_equips.EntityInit;
 import net.pm_equips.KeyBindInit;
+import net.pm_equips.MenuInit;
 import net.pm_equips.client.renderer.*;
+import net.pm_equips.client.screen.LobotomyEGOExtractionScreen;
 import net.pm_equips.items.CorePageItem;
 import net.pm_equips.PMEquipsMain;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,6 +30,7 @@ public class ClientEvents {
         event.enqueueWork(() -> ForgeRegistries.ITEMS.getValues().stream()
                 .filter(CorePageItem.class::isInstance)
                 .forEach(item -> CuriosRendererRegistry.register(item, CorePageCurioRenderer::new)));
+        event.enqueueWork(() -> MenuScreens.register(MenuInit.LOBOTOMY_EGO_EXTRACTION_TABLE.get(), LobotomyEGOExtractionScreen::new));
     }
 
     //EntityRenderer
@@ -46,7 +50,7 @@ public class ClientEvents {
                 AmmoExR::new);
         event.registerEntityRenderer(EntityInit.WHITENIGHT_PROJECTILE.get(),
                 PWhiteNightR::new);
-        event.registerBlockEntityRenderer(BlockEntityInit.EBOX_GEN.get(), ctx -> new EBoxGenR());
+        event.registerBlockEntityRenderer(BlockEntityInit.EBOX_GEN.get(), EBoxGenR::new);
     }
 
     @SubscribeEvent

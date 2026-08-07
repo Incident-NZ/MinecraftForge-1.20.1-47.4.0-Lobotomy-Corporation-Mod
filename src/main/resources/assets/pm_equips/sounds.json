@@ -31,6 +31,10 @@
     "subtitle": "E.G.O Solemn Lament",
     "sounds": ["pm_equips:item/ego_lament"]
   },
+  "item.ego_crimson_scar": {
+    "subtitle": "E.G.O Crimson Scar",
+    "sounds": ["pm_equips:item/ego_crimson_scar"]
+  },
   "item.ego_whitenight_atk_1": {
     "subtitle": "E.G.O WhiteNight Attack 1",
     "sounds": ["pm_equips:item/ego_whitenight_atk_1"]

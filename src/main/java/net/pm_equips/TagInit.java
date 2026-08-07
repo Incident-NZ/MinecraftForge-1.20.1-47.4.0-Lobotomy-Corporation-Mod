@@ -13,6 +13,11 @@ public class TagInit {
         public static final TagKey<Item> EGO_MED = createTag("ego_med");
         public static final TagKey<Item> EGO_HIGH = createTag("ego_high");
         public static final TagKey<Item> EGO_BOSS = createTag("ego_boss");
+        public static final TagKey<Item> EGO_T1_ZAYIN = createTag("ego_t1_zayin");
+        public static final TagKey<Item> EGO_T2_TETH = createTag("ego_t2_teth");
+        public static final TagKey<Item> EGO_T3_HE = createTag("ego_t3_he");
+        public static final TagKey<Item> EGO_T4_WAW = createTag("ego_t4_waw");
+        public static final TagKey<Item> EGO_T5_ALEPH = createTag("ego_t5_aleph");
 
         private static TagKey<Item> createTag(String name) {
             return ItemTags.create(new ResourceLocation(PMEquipsMain.MOD_ID, name));

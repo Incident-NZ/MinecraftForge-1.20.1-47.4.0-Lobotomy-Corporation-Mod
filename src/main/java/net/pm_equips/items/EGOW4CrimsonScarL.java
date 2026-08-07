@@ -64,11 +64,6 @@ public class EGOW4CrimsonScarL extends ProjectileWeaponItem {
             return InteractionResultHolder.fail(gun);
         }
 
-        if (level.isClientSide) {
-            level.playSound(player, player.blockPosition(), SoundInit.GUN_SEMI.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-            return InteractionResultHolder.consume(gun);
-        }
-
         shootBullet(level, player);
         tag.putInt("Ammo", ammo - 1);
 
@@ -92,7 +87,7 @@ public class EGOW4CrimsonScarL extends ProjectileWeaponItem {
         bullet.setMaxLifetime(getDefaultProjectileRange());
         level.addFreshEntity(bullet);
 
-        level.playSound(null, player.blockPosition(), SoundInit.GUN_SEMI.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+        level.playSound(null, player.blockPosition(), SoundInit.EGO_CRIMSON_SCAR.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
     }
 
     public void startReload(ItemStack stack, Player player) {

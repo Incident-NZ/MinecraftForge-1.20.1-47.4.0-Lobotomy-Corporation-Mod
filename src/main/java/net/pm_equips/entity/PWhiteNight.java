@@ -30,7 +30,9 @@ public class PWhiteNight extends Projectile implements IEntityAdditionalSpawnDat
 
     private static final EntityDataAccessor<Integer> TEXTURE_ID = SynchedEntityData.defineId(PWhiteNight.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> WEAPON_TYPE = SynchedEntityData.defineId(PWhiteNight.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Float> RENDER_SCALE = SynchedEntityData.defineId(PWhiteNight.class, EntityDataSerializers.FLOAT);
     public static final int TEXTURE_COUNT = 3;
+    public static final float DEFAULT_RENDER_SCALE = 2.8F;
 
     public PWhiteNight(EntityType<? extends PWhiteNight> type, Level level) {
         super(type, level);
@@ -38,11 +40,23 @@ public class PWhiteNight extends Projectile implements IEntityAdditionalSpawnDat
 
     public PWhiteNight(EntityType<? extends PWhiteNight> type, Level level,
                        LivingEntity shooter, Vec3 pos, float damage, int weaponType) {
+        this(type, level, shooter, pos, damage, weaponType, 0.0F, DEFAULT_RENDER_SCALE);
+    }
+
+    public PWhiteNight(EntityType<? extends PWhiteNight> type, Level level,
+                       LivingEntity shooter, Vec3 pos, float damage, int weaponType,
+                       float yawDegrees, float renderScale) {
         this(type, level);
         this.setOwner(shooter);
         this.setPos(pos.x, pos.y, pos.z);
+        this.setYRot(yawDegrees);
+        this.setXRot(0.0F);
+        this.setNoGravity(true);
+        this.noPhysics = true;
+        this.setDeltaMovement(Vec3.ZERO);
         this.damage = damage;
         this.weaponType = weaponType;
+        this.entityData.set(RENDER_SCALE, renderScale);
 
         if (!level.isClientSide) {
             // choose a random texture index and sync weapon type
@@ -55,6 +69,9 @@ public class PWhiteNight extends Projectile implements IEntityAdditionalSpawnDat
     @Override
     public void tick() {
         super.tick();
+        this.setNoGravity(true);
+        this.noPhysics = true;
+        this.setDeltaMovement(Vec3.ZERO);
         
         if (!this.level().isClientSide) {
             ticksExisted++;
@@ -88,6 +105,7 @@ public class PWhiteNight extends Projectile implements IEntityAdditionalSpawnDat
     protected void defineSynchedData() {
         this.entityData.define(TEXTURE_ID, 0);
         this.entityData.define(WEAPON_TYPE, 0);
+        this.entityData.define(RENDER_SCALE, DEFAULT_RENDER_SCALE);
     }
 
     public int getTextureId() {
@@ -106,16 +124,28 @@ public class PWhiteNight extends Projectile implements IEntityAdditionalSpawnDat
         this.entityData.set(WEAPON_TYPE, t);
     }
 
+    public float getRenderScale() {
+        return this.entityData.get(RENDER_SCALE);
+    }
+
+    public void setRenderScale(float scale) {
+        this.entityData.set(RENDER_SCALE, scale);
+    }
+
     @Override
     public void writeSpawnData(FriendlyByteBuf buffer) {
         buffer.writeInt(this.entityData.get(TEXTURE_ID));
         buffer.writeInt(this.entityData.get(WEAPON_TYPE));
+        buffer.writeFloat(this.getYRot());
+        buffer.writeFloat(this.entityData.get(RENDER_SCALE));
     }
 
     @Override
     public void readSpawnData(FriendlyByteBuf buffer) {
         this.entityData.set(TEXTURE_ID, buffer.readInt());
         this.entityData.set(WEAPON_TYPE, buffer.readInt());
+        this.setYRot(buffer.readFloat());
+        this.entityData.set(RENDER_SCALE, buffer.readFloat());
     }
 
     @Override

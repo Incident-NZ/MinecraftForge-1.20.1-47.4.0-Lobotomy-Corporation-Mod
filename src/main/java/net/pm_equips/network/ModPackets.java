@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
+import net.pm_equips.menu.LobotomyEGOExtractionMenu;
 import net.pm_equips.items.EGOW4MagicBullet;
 import net.pm_equips.items.WeaponRolandLogicHG;
 import net.pm_equips.items.WeaponRolandLogicSG;
@@ -25,6 +26,9 @@ public class ModPackets {
 
         INSTANCE.registerMessage(1, ReloadPacket.class,
                 ReloadPacket::encode, ReloadPacket::decode, ReloadPacket::handle);
+
+        INSTANCE.registerMessage(2, LobotomyEGOExtractPacket.class,
+                LobotomyEGOExtractPacket::encode, LobotomyEGOExtractPacket::decode, LobotomyEGOExtractPacket::handle);
     }
 
     public static class ActivateAbilityPacket {
@@ -103,6 +107,26 @@ public class ModPackets {
             } else if (stack.getItem() instanceof net.pm_equips.items.RCorpRabbitRifle) {
                 ((net.pm_equips.items.RCorpRabbitRifle) stack.getItem()).startReload(stack, player);
             }
+        }
+    }
+
+    public static class LobotomyEGOExtractPacket {
+        public LobotomyEGOExtractPacket() {}
+
+        public static void encode(LobotomyEGOExtractPacket msg, FriendlyByteBuf buf) {}
+
+        public static LobotomyEGOExtractPacket decode(FriendlyByteBuf buf) {
+            return new LobotomyEGOExtractPacket();
+        }
+
+        public static void handle(LobotomyEGOExtractPacket msg, Supplier<NetworkEvent.Context> ctx) {
+            ctx.get().enqueueWork(() -> {
+                net.minecraft.server.level.ServerPlayer player = ctx.get().getSender();
+                if (player != null && player.containerMenu instanceof LobotomyEGOExtractionMenu menu) {
+                    menu.craft(player);
+                }
+            });
+            ctx.get().setPacketHandled(true);
         }
     }
 }

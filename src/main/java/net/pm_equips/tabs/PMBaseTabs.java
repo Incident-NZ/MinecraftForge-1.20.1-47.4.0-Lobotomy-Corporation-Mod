@@ -6,6 +6,8 @@ import net.minecraft.world.item.Item;
 
 public class PMBaseTabs {
     public static final Item[] items = {
+            BlockInit.BlockItems.PEBOX_GENERATOR.get(),
+            BlockInit.BlockItems.EGO_EXTRACTION_TABLE.get(),
             ItemInit.ITEM_ENKEPHALIN.get(),
             BlockInit.BlockItems.ZAYIN_PE_BOX.get(),
             BlockInit.BlockItems.TETH_PE_BOX.get(),
