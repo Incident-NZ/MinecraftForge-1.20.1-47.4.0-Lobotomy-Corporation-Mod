@@ -68,9 +68,9 @@ public class CorePageItem extends ArmorItem implements GeoItem, ICurioItem {
     private boolean isTypeOneModel() {
         return switch (material) {
             case A5_TWILIGHT, A5_SOUND_OF_A_STAR, A5_JUSTITIA, A4_THE_SWORD_SHARPENED_WITH_TEARS,
-                    A4_HORNET, A4_LAMP, A4_BLUE_SCAR, A4_CRIMSON_SCAR, A3_MAGIC_BULLET, A3_ICE_SHARD, A3_LAETITIA,
+                 A4_HORNET, A4_LAMP, A4_AROMA, A4_STEM, A4_SWAN, A4_CRIMSON_SCAR, A3_MAGIC_BULLET, A3_ICE_SHARD, A3_LAETITIA,
                     A3_BLOOD, A3_SOLEMN_LAMENT, A3_GRINDER_MK4, A2_FOURTH_MATCH_FIRE, A2_RED_EYE,
-                    A2_REGLET -> true;
+                    A2_REGLET, A2_SOMEWHERE -> true;
             default -> false;
         };
     }

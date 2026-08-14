@@ -46,6 +46,10 @@ public class ClientEvents {
                 AmmoLASGR::new);
         event.registerEntityRenderer(EntityInit.BULLET.get(),
                 AmmoR::new);
+        event.registerEntityRenderer(EntityInit.HEAVEN_PROJECTILE.get(),
+                ctx -> new ThrownItemRenderer<>(ctx, 1.0F, true));
+        event.registerEntityRenderer(EntityInit.HATRED_MAGIC_PROJECTILE.get(),
+                AmmoHatredR::new);
         event.registerEntityRenderer(EntityInit.BULLET_EX.get(),
                 AmmoExR::new);
         event.registerEntityRenderer(EntityInit.WHITENIGHT_PROJECTILE.get(),

@@ -1,0 +1,22 @@
+package net.pm_equips.client.models;
+
+import net.minecraft.resources.ResourceLocation;
+import net.pm_equips.items.EGOP4Stem;
+import software.bernie.geckolib.model.GeoModel;
+
+public class EGOS4StemM extends GeoModel<EGOP4Stem> {
+    @Override
+    public ResourceLocation getModelResource(EGOP4Stem animatable) {
+        return new ResourceLocation("pm_equips", "geo/ego_armor_type1.geo.json");
+    }
+
+    @Override
+    public ResourceLocation getTextureResource(EGOP4Stem animatable) {
+        return new ResourceLocation("pm_equips", "textures/armor/ego_s4_stem.png");
+    }
+
+    @Override
+    public ResourceLocation getAnimationResource(EGOP4Stem animatable) {
+        return new ResourceLocation("pm_equips", "animations/ego_armor.animation.json");
+    }
+}

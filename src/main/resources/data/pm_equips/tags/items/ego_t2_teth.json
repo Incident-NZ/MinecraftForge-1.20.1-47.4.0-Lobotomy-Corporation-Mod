@@ -9,6 +9,14 @@
     "pm_equips:w2_red_eye",
     "pm_equips:s2_red_eye",
     "pm_equips:w2_match",
-    "pm_equips:s2_match"
+    "pm_equips:s2_match",
+    "pm_equips:w2_somewhere",
+    "pm_equips:s2_somewhere",
+    "pm_equips:w2_bath",
+    "pm_equips:s2_bath",
+    "pm_equips:w2_solitude",
+    "pm_equips:s2_solitude",
+    "pm_equips:w2_today",
+    "pm_equips:s2_today"
   ]
 }

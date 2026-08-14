@@ -33,15 +33,20 @@ public class ClientForgeEvents {
             new ResourceLocation(PMEquipsMain.MOD_ID, "textures/gui/gun_scope.png");
 
     private static final List<RegistryObject<Item>> OVERLAY_ITEMS = List.of(
+            ItemInit.W1_SODA,
+            ItemInit.W2_SOLITUDE,
+            ItemInit.W2_TODAY,
             ItemInit.W2_FOURTH_MATCH_FIRE,
             ItemInit.W2_BEAK,
             ItemInit.W3_LAETITIA,
             ItemInit.W3_HARMONY,
             ItemInit.W4_MAGIC_BULLET,
+            ItemInit.W4_AROMA,
             ItemInit.W4_SOLEMN_LAMENT_R,
             ItemInit.W4_HORNET,
             ItemInit.W4_CRIMSON_SCAR_L,
             ItemInit.W5_PARADISE_LOST,
+            ItemInit.W5_PINK,
             ItemInit.WEAPON_ROLAND_REVOLVER,
             ItemInit.WEAPON_ROLAND_SHOTGUN,
             ItemInit.RCORP_RABBIT_RIFLE

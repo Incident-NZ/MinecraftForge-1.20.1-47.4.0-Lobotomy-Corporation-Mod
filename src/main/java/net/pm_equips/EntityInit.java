@@ -41,6 +41,28 @@ public class EntityInit {
                             .updateInterval(1)
                             .build("bullet"));
 
+    public static final RegistryObject<EntityType<EGOHeavenProjectile>> HEAVEN_PROJECTILE =
+            ENTITY_TYPES.register("heaven_projectile", () ->
+                    EntityType.Builder.<EGOHeavenProjectile>of(
+                                    EGOHeavenProjectile::new,
+                                    MobCategory.MISC
+                            )
+                            .sized(0.25F, 0.25F)
+                            .clientTrackingRange(64)
+                            .updateInterval(1)
+                            .build("heaven_projectile"));
+
+    public static final RegistryObject<EntityType<EGOHatredMagicProjectile>> HATRED_MAGIC_PROJECTILE =
+            ENTITY_TYPES.register("hatred_magic_projectile", () ->
+                    EntityType.Builder.<EGOHatredMagicProjectile>of(
+                                    EGOHatredMagicProjectile::new,
+                                    MobCategory.MISC
+                            )
+                            .sized(0.1F, 0.1F)
+                            .clientTrackingRange(64)
+                            .updateInterval(1)
+                            .build("hatred_magic_projectile"));
+
     public static final RegistryObject<EntityType<PBulletLARV>> BULLET_LARV =
             ENTITY_TYPES.register("bullet_larv", () ->
                     EntityType.Builder.<PBulletLARV>of(

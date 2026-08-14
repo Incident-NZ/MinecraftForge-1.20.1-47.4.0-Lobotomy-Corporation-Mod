@@ -47,20 +47,33 @@ public class ItemInit {
     public static final RegistryObject<Item> W5_JUSTITIA = ITEMS.register("w5_justitia", EGOW5Justitia::new);
     public static final RegistryObject<Item> W4_THE_SWORD_SHARPENED_WITH_TEARS = ITEMS.register("w4_tears", EGOW4Tears::new);
     public static final RegistryObject<Item> W4_LAMP = ITEMS.register("w4_lamp", EGOW4Lamp::new);
+    public static final RegistryObject<Item> W4_HATRED = ITEMS.register("w4_hatred", EGOW4Hatred::new);
+    public static final RegistryObject<Item> W4_HEAVEN = ITEMS.register("w4_heaven", EGOW4Heaven::new);
+    public static final RegistryObject<Item> W4_SWAN = ITEMS.register("w4_swan", EGOW4Swan::new);
+    public static final RegistryObject<Item> W4_STEM = ITEMS.register("w4_stem", EGOW4Stem::new);
+    public static final RegistryObject<Item> W4_DIFFRACTION = ITEMS.register("w4_diffraction", EGOW4Diffraction::new);
     public static final RegistryObject<Item> W4_BLUE_SCAR = ITEMS.register("w4_blue_scar", EGOW4BlueScar::new);
     public static final RegistryObject<Item> W4_CRIMSON_SCAR_R = ITEMS.register("w4_crimson_scar_r", EGOW4CrimsonScarR::new);
     public static final RegistryObject<Item> W3_BLOOD = ITEMS.register("w3_blood", EGOW3Blood::new);
+    public static final RegistryObject<Item> W3_BEAR = ITEMS.register("w3_bear", EGOW3Bear::new);
     public static final RegistryObject<Item> W3_HARVEST = ITEMS.register("w3_harvest", EGOW3Harvest::new);
     public static final RegistryObject<Item> W3_LOGGING = ITEMS.register("w3_logging", EGOW3Logging::new);
     public static final RegistryObject<Item> W3_GALAXY = ITEMS.register("w3_galaxy", EGOW3Galaxy::new);
     public static final RegistryObject<Item> W3_GRINDER_MK4 = ITEMS.register("w3_mk4", EGOW3MK4::new);
     public static final RegistryObject<Item> W3_ICE_SHARD = ITEMS.register("w3_ice_shard", EGOW3IceShard::new);
     public static final RegistryObject<Item> W2_REGLET = ITEMS.register("w2_reglet", EGOW2Reglet::new);
+    public static final RegistryObject<Item> W2_SOMEWHERE = ITEMS.register("w2_somewhere", EGOW2SomeWhere::new);
+    public static final RegistryObject<Item> W2_BATH = ITEMS.register("w2_bath", EGOW2Bath::new);
     public static final RegistryObject<Item> W2_RED_EYE = ITEMS.register("w2_red_eye", EGOW2RedEye::new);
     public static final RegistryObject<Item> W2_LANTERN = ITEMS.register("w2_lantern", EGOW2Lantern::new);
     public static final RegistryObject<Item> W1_PENITENCE = ITEMS.register("w1_penitence", EGOW1Penitence::new);
+    public static final RegistryObject<Item> W1_WINGBEAT = ITEMS.register("w1_wingbeat", EGOW1WingBeat::new);
 
     //L社EGO武器 遠距離
+    public static final RegistryObject<Item> W5_PINK = ITEMS.register("w5_pink",
+            () -> new EGOW5Pink(new Item.Properties().durability(4000)));
+    public static final RegistryObject<Item> W4_AROMA = ITEMS.register("w4_aroma",
+            () -> new EGOW4Aroma(new Item.Properties().durability(3000)));
     public static final RegistryObject<Item> W4_SOLEMN_LAMENT_L = ITEMS.register("w4_lament_l", EGOW4LamentL::new);
     public static final RegistryObject<Item> W4_SOLEMN_LAMENT_R = ITEMS.register("w4_lament_r",
             () -> new EGOW4LamentR(new Item.Properties().durability(3000)));
@@ -76,8 +89,14 @@ public class ItemInit {
             () -> new EGOW3Laetitia(new Item.Properties().durability(2000)));
     public static final RegistryObject<Item> W2_BEAK = ITEMS.register("w2_beak",
             () -> new EGOW2Beak(new Item.Properties().durability(1000)));
+    public static final RegistryObject<Item> W2_SOLITUDE = ITEMS.register("w2_solitude",
+            () -> new EGOW2Solitude(new Item.Properties().durability(1000)));
+    public static final RegistryObject<Item> W2_TODAY = ITEMS.register("w2_today",
+            () -> new EGOW2Today(new Item.Properties().durability(1000)));
     public static final RegistryObject<Item> W2_FOURTH_MATCH_FIRE = ITEMS.register("w2_match",
             () -> new EGOW2Match(new Item.Properties().durability(1000)));
+    public static final RegistryObject<Item> W1_SODA = ITEMS.register("w1_soda",
+            () -> new EGOW1Soda(new Item.Properties().durability(800)));
 
     //L社EGO防具(EGOページ)
     public static final RegistryObject<Item> S5_TWILIGHT = ITEMS.register("s5_twilight",
@@ -93,7 +112,7 @@ public class ItemInit {
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> S5_DA_CAPO = ITEMS.register("s5_da_capo",
-            () -> new EGOP5DaCapo(ArmorEquips.A5_DA_CAPO, ArmorItem.Type.LEGGINGS,
+            () -> new EGOP4Heaven(ArmorEquips.A5_DA_CAPO, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> S5_SMILE = ITEMS.register("s5_smile",
@@ -102,6 +121,10 @@ public class ItemInit {
 
     public static final RegistryObject<Item> S5_SOUND_OF_A_STAR = ITEMS.register("s5_star",
             () -> new EGOP5Star(ArmorEquips.A5_SOUND_OF_A_STAR, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S5_PINK = ITEMS.register("s5_pink",
+            () -> new EGOP5Pink(ArmorEquips.A5_PINK, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> S5_JUSTITIA = ITEMS.register("s5_justitia",
@@ -120,12 +143,32 @@ public class ItemInit {
             () -> new EGOP4Hornet(ArmorEquips.A4_HORNET, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> S4_HEAVEN = ITEMS.register("s4_heaven",
+            () -> new EGOP4Heaven(ArmorEquips.A4_HEAVEN, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S4_HATRED = ITEMS.register("s4_hatred",
+            () -> new EGOP4Hatred(ArmorEquips.A4_HATRED, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> S4_BLUE_SCAR = ITEMS.register("s4_blue_scar",
             () -> new EGOP4BlueScar(ArmorEquips.A4_BLUE_SCAR, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> S4_CRIMSON_SCAR = ITEMS.register("s4_crimson_scar",
             () -> new EGOP4CrimsonScar(ArmorEquips.A4_CRIMSON_SCAR, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S4_STEM = ITEMS.register("s4_stem",
+            () -> new EGOP4Stem(ArmorEquips.A4_STEM, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S4_SWAN = ITEMS.register("s4_swan",
+            () -> new EGOP4Swan(ArmorEquips.A4_SWAN, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S4_AROMA = ITEMS.register("s4_aroma",
+            () -> new EGOP4Aroma(ArmorEquips.A4_AROMA, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> S3_MAGIC_BULLET = ITEMS.register("s3_magic_bullet",
@@ -146,6 +189,10 @@ public class ItemInit {
 
     public static final RegistryObject<Item> S3_LOGGING = ITEMS.register("s3_logging",
             () -> new EGOP3Logging(ArmorEquips.A3_LOGGING, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S3_BEAR = ITEMS.register("s3_bear",
+            () -> new EGOP3Bear(ArmorEquips.A3_BEAR, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> S3_HARVEST = ITEMS.register("s3_harvest",
@@ -180,8 +227,32 @@ public class ItemInit {
             () -> new EGOP2Match(ArmorEquips.A2_FOURTH_MATCH_FIRE, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> S2_SOMEWHERE = ITEMS.register("s2_somewhere",
+            () -> new EGOP2SomeWhere(ArmorEquips.A2_SOMEWHERE, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S2_SOLITUDE = ITEMS.register("s2_solitude",
+            () -> new EGOP2Solitude(ArmorEquips.A2_SOLITUDE, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S2_TODAY = ITEMS.register("s2_today",
+            () -> new EGOP2Today(ArmorEquips.A2_TODAY, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S2_BATH = ITEMS.register("s2_bath",
+            () -> new EGOP2Bath(ArmorEquips.A2_BATH, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> S2_LANTERN = ITEMS.register("s2_lantern",
             () -> new EGOP2Lantern(ArmorEquips.A2_LANTERN, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S1_SODA = ITEMS.register("s1_soda",
+            () -> new EGOP1Soda(ArmorEquips.A1_SODA, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> S1_WINGBEAT = ITEMS.register("s1_wingbeat",
+            () -> new EGOP1WingBeat(ArmorEquips.A1_WINGBEAT, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> S1_PENITENCE = ITEMS.register("s1_penitence",

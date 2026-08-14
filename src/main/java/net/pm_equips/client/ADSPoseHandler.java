@@ -13,7 +13,9 @@ public class ADSPoseHandler
 {
     private static final List<RegistryObject<Item>> ADS_ITEMS =
             List.of(
+                    ItemInit.W5_PINK,
                     ItemInit.W4_HORNET,
+                    ItemInit.W4_AROMA,
                     ItemInit.W4_MAGIC_BULLET,
                     ItemInit.W4_SOLEMN_LAMENT_R,
                     ItemInit.W4_CRIMSON_SCAR_L,
@@ -21,6 +23,9 @@ public class ADSPoseHandler
                     ItemInit.W3_HARMONY,
                     ItemInit.W2_BEAK,
                     ItemInit.W2_FOURTH_MATCH_FIRE,
+                    ItemInit.W2_SOLITUDE,
+                    ItemInit.W2_TODAY,
+                    ItemInit.W1_SODA,
                     ItemInit.WEAPON_ROLAND_REVOLVER,
                     ItemInit.WEAPON_ROLAND_SHOTGUN,
                     ItemInit.RCORP_RABBIT_RIFLE
