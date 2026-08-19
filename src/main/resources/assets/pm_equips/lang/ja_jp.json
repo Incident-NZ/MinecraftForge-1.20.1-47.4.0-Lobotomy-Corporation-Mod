@@ -49,6 +49,7 @@
   "item.pm_equips.w4_hornet": "E.G.O 武器 WAW - ホーネット",
   "item.pm_equips.w4_lamp": "E.G.O 武器 WAW - ランプ",
   "item.pm_equips.w4_aroma": "E.G.O 武器 WAW - 残り香",
+  "item.pm_equips.w4_hatred": "E.G.O 武器 WAW - 愛と憎しみの名の下に",
   "item.pm_equips.w4_heaven": "E.G.O 武器 WAW - 天国",
   "item.pm_equips.w4_swan": "E.G.O 武器 WAW - ブラック・スワン",
   "item.pm_equips.w4_stem": "E.G.O 武器 WAW - 緑の幹",
@@ -155,6 +156,5 @@
   "entity.pm_equips.bullet": "弾丸",
   "entity.pm_equips.bullet_ex": "砲弾",
   "entity.pm_equips.ego_sound_of_a_star_projectile": "星の音",
-  "entity.pm_equips.whitenight_projectile": "使徒の武器",
-  "item.pm_equips.w4_hatred": "E.G.O Weapon WAW - In the Name of Love and Hate"
+  "entity.pm_equips.whitenight_projectile": "使徒の武器"
 }
