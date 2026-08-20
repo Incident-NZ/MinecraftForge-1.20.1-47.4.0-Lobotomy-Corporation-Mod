@@ -112,7 +112,7 @@ public class ItemInit {
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> S5_DA_CAPO = ITEMS.register("s5_da_capo",
-            () -> new EGOP4Heaven(ArmorEquips.A5_DA_CAPO, ArmorItem.Type.LEGGINGS,
+            () -> new EGOP5DaCapo(ArmorEquips.A5_DA_CAPO, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> S5_SMILE = ITEMS.register("s5_smile",

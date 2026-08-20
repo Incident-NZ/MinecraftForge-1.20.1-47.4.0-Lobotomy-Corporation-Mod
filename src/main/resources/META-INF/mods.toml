@@ -4,7 +4,7 @@ license = "${mod_license}"
 
 [[mods]]
 modId = "pm_equips"
-version = "3.1"
+version = "3.2"
 displayName = "ProjectMoon Equipment Mod"
 authors = "Rei"
 description = "Face the fear, Make the future."
@@ -53,4 +53,11 @@ modId="jei"
 mandatory=false
 versionRange="[15,)"
 ordering="NONE"
+side="BOTH"
+
+[[dependencies."pm_equips"]]
+modId="epicfight"
+mandatory=false
+versionRange="20.14.17"
+ordering="AFTER"
 side="BOTH"

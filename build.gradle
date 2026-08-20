@@ -80,6 +80,13 @@ mixin {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    exclusiveContent {
+        forRepository {
+            maven { name = "Modrinth"; url = "https://api.modrinth.com/maven" } }
+        forRepositories(fg.repository)
+        filter { includeGroup "maven.modrinth" }
+    }
+
     maven { url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
     mavenCentral()
 
@@ -96,7 +103,7 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:1.20.1-47.4.10" // ←Forgeバージョンに注意！
+    minecraft "net.minecraftforge:forge:1.20.1-47.4.10"
 
     // GeckoLib 4.4.9
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.20.1:4.7.4")
@@ -115,6 +122,9 @@ dependencies {
     compileOnly fg.deobf("mekanism:Mekanism:1.20.1-10.4.16.80:api")
     // 開発環境用
     runtimeOnly fg.deobf("mekanism:Mekanism:1.20.1-10.4.16.80")
+
+    //Epic Fight(Optional)
+    implementation fg.deobf("maven.modrinth:epic-fight:${epicfight_version}")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
