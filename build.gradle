@@ -80,12 +80,6 @@ mixin {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    exclusiveContent {
-        forRepository {
-            maven { name = "Modrinth"; url = "https://api.modrinth.com/maven" } }
-        forRepositories(fg.repository)
-        filter { includeGroup "maven.modrinth" }
-    }
 
     maven { url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
     mavenCentral()
@@ -94,11 +88,6 @@ repositories {
 
     maven {
         url = "https://maven.blamejared.com/"
-    }
-
-    maven {
-        name = "Mekanism"
-        url = "https://modmaven.dev"
     }
 }
 
@@ -117,14 +106,6 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.20.0.106")
     // 開発環境用
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.106")
-
-    // Mekanism API
-    compileOnly fg.deobf("mekanism:Mekanism:1.20.1-10.4.16.80:api")
-    // 開発環境用
-    runtimeOnly fg.deobf("mekanism:Mekanism:1.20.1-10.4.16.80")
-
-    //Epic Fight(Optional)
-    implementation fg.deobf("maven.modrinth:epic-fight:${epicfight_version}")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }

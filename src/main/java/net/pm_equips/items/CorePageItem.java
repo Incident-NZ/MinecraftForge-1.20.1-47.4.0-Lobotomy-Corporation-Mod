@@ -37,42 +37,72 @@ public class CorePageItem extends ArmorItem implements GeoItem, ICurioItem {
     }
 
     public ResourceLocation getModelResource() {
-        return new ResourceLocation("pm_equips", isTypeOneModel() ? "geo/ego_armor_type1.geo.json" :
-                material == ArmorEquips.WCORP_ARMOR || material == ArmorEquips.WCORP_ARMOR_ACE
-                        ? "geo/wcorp_armor.geo.json" : "geo/ego_armor_type2.geo.json");
+        if (this instanceof WCorpArmor) {
+            return resource("geo/wcorp_armor.geo.json");
+        }
+        if (this instanceof KCorpAgentArmor) {
+            return resource("geo/kcorp_agent_armor.geo.json");
+        }
+        if (this instanceof KCorpOfficerArmor) {
+            return resource("geo/kcorp_officer_armor.geo.json");
+        }
+        if (this instanceof RCorp4thRabbitArmor) {
+            return resource("geo/rcorp_4th_rabbit_armor.geo.json");
+        }
+
+        return resource(isTypeOneModel() ? "geo/ego_armor_type1.geo.json" : "geo/ego_armor_type2.geo.json");
     }
 
     public ResourceLocation getTextureResource() {
-        return new ResourceLocation("pm_equips", "textures/armor/" + switch (material) {
+        if (this instanceof WCorpArmor) {
+            return resource("textures/armor/wcorp_armor.png");
+        }
+        if (this instanceof KCorpAgentArmor) {
+            return resource("textures/armor/kcorp_agent_armor.png");
+        }
+        if (this instanceof KCorpOfficerArmor) {
+            return resource("textures/armor/kcorp_officer_armor.png");
+        }
+        if (this instanceof RCorp4thRabbitArmor) {
+            return resource("textures/armor/rcorp_4th_rabbit_armor.png");
+        }
+
+        return resource("textures/armor/" + switch (material) {
             case A5_PARADISE_LOST -> "ego_s5_whitenight.png";
             case A4_THE_SWORD_SHARPENED_WITH_TEARS -> "ego_s4_tears.png";
-            case A4_CRIMSON_SCAR -> "ego_s4_crimsom_scar.png";
+            case A4_CRIMSON_SCAR -> "ego_s4_crimson_scar.png";
             case A2_FOURTH_MATCH_FIRE -> "ego_s2_match.png";
             case A3_SOLEMN_LAMENT -> "ego_s3_lament.png";
             case A3_GRINDER_MK4 -> "ego_s3_mk4.png";
-            case A3_BLOOD -> "ego_s3_blood.png";
-            case A3_LOGGING -> "ego_s3_logging.png";
-            case A3_HARVEST -> "ego_s3_harvest.png";
-            case A3_GALAXY -> "ego_s3_galaxy.png";
-            case WCORP_ARMOR -> "wcorp_armor.png";
-            case WCORP_ARMOR_ACE -> "wcorp_armor_adept.png";
             default -> "ego_" + material.getName().substring(material.getName().indexOf(':') + 1) + ".png";
         });
     }
 
     public ResourceLocation getAnimationResource() {
-        return new ResourceLocation("pm_equips", material == ArmorEquips.WCORP_ARMOR || material == ArmorEquips.WCORP_ARMOR_ACE
-                ? "animations/wcorp.animation.json" : "animations/ego_armor.animation.json");
+        return resource(isCompanyArmor() ? "animations/armor.animation.json" : "animations/ego_armor.animation.json");
+    }
+
+    private boolean isCompanyArmor() {
+        return this instanceof WCorpArmor
+                || this instanceof KCorpAgentArmor
+                || this instanceof KCorpOfficerArmor
+                || this instanceof RCorp4thRabbitArmor;
     }
 
     private boolean isTypeOneModel() {
         return switch (material) {
-            case A5_TWILIGHT, A5_SOUND_OF_A_STAR, A5_JUSTITIA, A4_THE_SWORD_SHARPENED_WITH_TEARS,
-                 A4_HORNET, A4_LAMP, A4_AROMA, A4_STEM, A4_SWAN, A4_CRIMSON_SCAR, A3_MAGIC_BULLET, A3_ICE_SHARD, A3_LAETITIA,
-                    A3_BLOOD, A3_SOLEMN_LAMENT, A3_GRINDER_MK4, A2_FOURTH_MATCH_FIRE, A2_RED_EYE,
-                    A2_REGLET, A2_SOMEWHERE -> true;
+            case A5_TWILIGHT, A5_SOUND_OF_A_STAR, A5_JUSTITIA,
+                    A4_THE_SWORD_SHARPENED_WITH_TEARS, A4_HORNET, A4_LAMP, A4_AROMA,
+                    A4_STEM, A4_SWAN, A4_CRIMSON_SCAR, A4_BLUE_SCAR,
+                    A3_MAGIC_BULLET, A3_ICE_SHARD, A3_LAETITIA, A3_BLOOD,
+                    A3_SOLEMN_LAMENT, A3_GRINDER_MK4,
+                    A2_FOURTH_MATCH_FIRE, A2_RED_EYE, A2_REGLET, A2_SOMEWHERE -> true;
             default -> false;
         };
+    }
+
+    private static ResourceLocation resource(String path) {
+        return new ResourceLocation("pm_equips", path);
     }
 
     @Override

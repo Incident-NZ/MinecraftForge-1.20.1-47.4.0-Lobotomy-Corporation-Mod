@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC ",
+    "CAB",
+    "B B"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:iron_block"
+    },
+    "B": {
+      "item": "pm_equips:item_battery"
+    },
+    "C": {
+      "item": "pm_equips:item_enkephalin"
+    }
+  },
+  "result": {
+    "item": "pm_equips:rcorp_rabbit_armor"
+  }
+}

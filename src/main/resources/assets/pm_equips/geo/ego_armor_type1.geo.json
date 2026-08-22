@@ -20,32 +20,14 @@
 					"parent": "bipedBody",
 					"pivot": [0, 24, 0],
 					"cubes": [
-						{"origin": [-4, 8, -2], "size": [8, 16, 4], "inflate": 0.6, "uv": [0, 0]}
+						{"origin": [-4, 8, -2], "size": [8, 16, 4], "inflate": 0.6, "uv": [0, 0]},
+						{"origin": [-4, 12, -2], "size": [8, 12, 4], "inflate": 0.55, "uv": [0, 20]}
 					]
 				},
 				{
 					"name": "armorBodyLayer",
 					"parent": "bipedBody",
-					"pivot": [0, 24, 0],
-					"cubes": [
-						{"origin": [-4, 12, -2], "size": [8, 12, 4], "inflate": 0.59, "uv": [0, 20]}
-					]
-				},
-				{
-					"name": "armorRightLeg",
-					"parent": "bipedBody",
-					"pivot": [-1.8125, 12, 0],
-					"cubes": [
-						{"origin": [-4, 0, -2], "size": [4, 12, 4], "inflate": 0.35, "uv": [0, 36]}
-					]
-				},
-				{
-					"name": "armorLeftLeg",
-					"parent": "bipedBody",
-					"pivot": [1.875, 12, 0],
-					"cubes": [
-						{"origin": [0, 0, -2], "size": [4, 12, 4], "inflate": 0.35, "uv": [24, 32]}
-					]
+					"pivot": [0, 24, 0]
 				},
 				{
 					"name": "bipedRightArm",
@@ -57,7 +39,7 @@
 					"pivot": [-3.8125, 22, 0],
 					"cubes": [
 						{"origin": [-8, 11.9375, -2], "size": [4, 12, 4], "inflate": 0.58, "uv": [40, 0]},
-						{"origin": [-8, 11.9375, -2], "size": [4, 12, 4], "inflate": 0.57, "uv": [24, 0]}
+						{"origin": [-8, 11.9375, -2], "size": [4, 12, 4], "inflate": 0.55, "uv": [24, 0]}
 					]
 				},
 				{
@@ -70,7 +52,31 @@
 					"pivot": [3.8125, 22, 0],
 					"cubes": [
 						{"origin": [4, 11.9375, -2], "size": [4, 12, 4], "inflate": 0.58, "uv": [40, 16]},
-						{"origin": [4, 11.9375, -2], "size": [4, 12, 4], "inflate": 0.57, "uv": [24, 16]}
+						{"origin": [4, 11.9375, -2], "size": [4, 12, 4], "inflate": 0.55, "uv": [24, 16]}
+					]
+				},
+				{
+					"name": "bipedRightLeg",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "armorRightLeg",
+					"parent": "bipedRightLeg",
+					"pivot": [-1.8125, 12, 0],
+					"cubes": [
+						{"origin": [-4, 0, -2], "size": [4, 12, 4], "inflate": 0.35, "uv": [0, 36]}
+					]
+				},
+				{
+					"name": "bipedLeftLeg",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "armorLeftLeg",
+					"parent": "bipedLeftLeg",
+					"pivot": [1.875, 12, 0],
+					"cubes": [
+						{"origin": [0, 0, -2], "size": [4, 12, 4], "inflate": 0.35, "uv": [24, 32]}
 					]
 				}
 			]

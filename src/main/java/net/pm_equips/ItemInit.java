@@ -284,11 +284,7 @@ public class ItemInit {
 
     //W社装備
     public static final RegistryObject<Item> WCORP_ARMOR = ITEMS.register("wcorp_armor",
-            () -> new WCorpArmor(ArmorEquips.WCORP_ARMOR, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> WCORP_ARMOR_ACE = ITEMS.register("wcorp_armor_ace",
-            () -> new WCorpArmorAce(ArmorEquips.WCORP_ARMOR_ACE, ArmorItem.Type.CHESTPLATE,
+            () -> new WCorpArmor(ArmorEquips.WCORP_ARMOR, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> WCORP_WEAPON_1 = ITEMS.register("wcorp_w1", WCorpWeapon1::new);
@@ -296,12 +292,26 @@ public class ItemInit {
     public static final RegistryObject<Item> WCORP_WEAPON_3 = ITEMS.register("wcorp_w3", WCorpWeapon3::new);
 
     //R社装備
+    public static final RegistryObject<Item> RCORP_RABBIT_ARMOR = ITEMS.register("rcorp_rabbit_armor",
+            () -> new RCorp4thRabbitArmor(ArmorEquips.RCORP_4TH_RABBIT_ARMOR, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> RCORP_RABBIT_RIFLE = ITEMS.register("rcorp_rabbit_rifle",
             () -> new RCorpRabbitRifle(new Item.Properties().durability(2000)));
     public static final RegistryObject<Item> RCORP_RABBIT_KNIFE = ITEMS.register("rcorp_rabbit_knife", RCorpRabbitCombatKnife::new);
 
     //K社装備
+    public static final RegistryObject<Item> KCORP_AGENT_ARMOR = ITEMS.register("kcorp_agent_armor",
+            () -> new KCorpAgentArmor(ArmorEquips.KCORP_ARMOR, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> KCORP_OFFICER_ARMOR = ITEMS.register("kcorp_officer_armor",
+            () -> new KCorpOfficerArmor(ArmorEquips.KCORP_ARMOR, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> KCORP_WEAPON_1 = ITEMS.register("kcorp_w1", KCorpWeapon1::new);
     public static final RegistryObject<Item> KCORP_WEAPON_2 = ITEMS.register("kcorp_w2", KCorpWeapon2::new);
     public static final RegistryObject<Item> KCORP_WEAPON_3 = ITEMS.register("kcorp_w3", KCorpWeapon3::new);
+
+    //頭装備
+    public static final RegistryObject<Item> HEAD_CLAW = ITEMS.register("head_claw", HeadClaw::new);
 }

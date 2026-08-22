@@ -4,7 +4,7 @@ license = "${mod_license}"
 
 [[mods]]
 modId = "pm_equips"
-version = "3.2"
+version = "4.0"
 displayName = "ProjectMoon Equipment Mod"
 authors = "Rei"
 description = "Face the fear, Make the future."
@@ -12,7 +12,7 @@ description = "Face the fear, Make the future."
 [[dependencies."pm_equips"]]
 modId = "forge"
 mandatory = true
-versionRange = "47.4.0"
+versionRange = "47.4.10"
 ordering = "NONE"
 side = "BOTH"
 
@@ -42,22 +42,8 @@ requiredMods = ["curios"]
 config="pm_equips.mixins.json"
 
 [[dependencies."pm_equips"]]
-modId="mekanism"
-mandatory=false
-versionRange="[10.4,)"
-ordering="AFTER"
-side="BOTH"
-
-[[dependencies."pm_equips"]]
 modId="jei"
 mandatory=false
 versionRange="[15,)"
 ordering="NONE"
-side="BOTH"
-
-[[dependencies."pm_equips"]]
-modId="epicfight"
-mandatory=false
-versionRange="20.14.17"
-ordering="AFTER"
 side="BOTH"

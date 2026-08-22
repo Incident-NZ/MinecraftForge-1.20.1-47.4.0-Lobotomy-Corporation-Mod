@@ -18,6 +18,6 @@ public class WCorpArmorM extends GeoModel<WCorpArmor> {
 
     @Override
     public ResourceLocation getAnimationResource(WCorpArmor animatable) {
-        return new ResourceLocation("pm_equips", "animations/wcorp.animation.json");
+        return new ResourceLocation("pm_equips", "animations/armor.animation.json");
     }
 }

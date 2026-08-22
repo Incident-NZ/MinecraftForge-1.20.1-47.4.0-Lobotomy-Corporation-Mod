@@ -3,11 +3,10 @@ package net.pm_equips.items;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.pm_equips.client.renderer.WCorpArmorAceR;
+import net.pm_equips.client.renderer.KCorpAgentArmorR;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -16,23 +15,23 @@ import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.function.Consumer;
 
-public class WCorpArmorAce extends CorePageItem {
+public class KCorpAgentArmor extends CorePageItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public WCorpArmorAce(ArmorMaterial material, ArmorItem.Type type, Properties props) {
+    public KCorpAgentArmor(ArmorMaterial material, Type type, Properties props) {
         super(material, type, props);
     }
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
-            private WCorpArmorAceR renderer;
+            private KCorpAgentArmorR renderer;
 
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
 
                 if (this.renderer == null)
-                    this.renderer = new WCorpArmorAceR();
+                    this.renderer = new KCorpAgentArmorR();
 
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
                 return this.renderer;

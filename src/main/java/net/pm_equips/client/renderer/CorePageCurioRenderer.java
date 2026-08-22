@@ -5,6 +5,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -23,10 +24,10 @@ public class CorePageCurioRenderer implements ICurioRenderer {
             float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         if (!(parent.getModel() instanceof HumanoidModel<?> humanoidModel)) return;
         armorRenderer.prepForRender(slotContext.entity(), stack, EquipmentSlot.CHEST, humanoidModel);
-        armorRenderer.renderToBuffer(poseStack, null, light, net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY,
+        armorRenderer.renderToBuffer(poseStack, null, light, OverlayTexture.NO_OVERLAY,
                 1.0f, 1.0f, 1.0f, 1.0f);
         armorRenderer.prepForRender(slotContext.entity(), stack, EquipmentSlot.LEGS, humanoidModel);
-        armorRenderer.renderToBuffer(poseStack, null, light, net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY,
+        armorRenderer.renderToBuffer(poseStack, null, light, OverlayTexture.NO_OVERLAY,
                 1.0f, 1.0f, 1.0f, 1.0f);
     }
 }

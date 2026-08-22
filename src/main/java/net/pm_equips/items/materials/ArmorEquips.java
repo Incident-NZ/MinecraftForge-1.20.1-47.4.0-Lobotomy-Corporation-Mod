@@ -134,8 +134,11 @@ public enum ArmorEquips implements ArmorMaterial {
     WCORP_ARMOR("wcorp_armor", 1000, new int[]{0, 0, 15, 0}, 0,
             SoundEvents.ARMOR_EQUIP_GENERIC, 20.0f, 1.0f, () -> Ingredient.EMPTY),
 
-    WCORP_ARMOR_ACE("wcorp_armor_ace", 2000, new int[]{0, 0, 20, 0}, 0,
-            SoundEvents.ARMOR_EQUIP_GENERIC, 30.0f, 1.2f, () -> Ingredient.EMPTY);
+    KCORP_ARMOR("kcorp_armor", 1000, new int[]{0, 0, 15, 0}, 0,
+            SoundEvents.ARMOR_EQUIP_GENERIC, 20.0f, 1.0f, () -> Ingredient.EMPTY),
+
+    RCORP_4TH_RABBIT_ARMOR("rcorp_4th_rabbit_armor", 1000, new int[]{0, 0, 15, 0}, 0,
+            SoundEvents.ARMOR_EQUIP_GENERIC, 20.0f, 1.0f, () -> Ingredient.EMPTY);
 
 
     private final String name;
