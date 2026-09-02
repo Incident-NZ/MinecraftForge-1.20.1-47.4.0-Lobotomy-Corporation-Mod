@@ -24,10 +24,10 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class EGOW3Laetitia extends ProjectileWeaponItem {
-    private static final int MAX_AMMO = 10;
-    private static final int RELOAD_TICKS = 60; // 3秒
-    private static final float VELOCITY = 8.0f;
-    private static final int COOLDOWN_TICKS = 20; // 1秒
+    private static final int MAX_AMMO = 5;
+    private static final int RELOAD_TICKS = 50; // 3秒
+    private static final float VELOCITY = 3.5f;
+    private static final int COOLDOWN_TICKS = 10; // 0.5秒
     public EGOW3Laetitia(Properties properties) {
         super(properties.durability(2000));
     }
@@ -91,19 +91,6 @@ public class EGOW3Laetitia extends ProjectileWeaponItem {
         player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
 
         return InteractionResultHolder.consume(gun);
-    }
-
-    private boolean hasAmmo(Player player) {
-        return player.getInventory().contains(new ItemStack(ItemInit.RIFLE_BULLET_AMMO.get()));
-    }
-
-    private void consumeAmmo(Player player) {
-        if (!player.getAbilities().instabuild) {
-            player.getInventory().clearOrCountMatchingItems(
-                    stack -> stack.is(ItemInit.RIFLE_BULLET_AMMO.get()),
-                    1, player.inventoryMenu.getCraftSlots()
-            );
-        }
     }
 
     private void shootBullet(Level level, Player player, ItemStack gun) {

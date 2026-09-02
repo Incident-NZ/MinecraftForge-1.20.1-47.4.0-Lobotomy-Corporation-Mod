@@ -101,7 +101,7 @@ public class EGOW4Aroma extends ProjectileWeaponItem {
                 player.getXRot(),
                 player.getYRot(),
                 0.0F,
-                3.15F,
+                4.0F,
                 1.0F
         );
 

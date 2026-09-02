@@ -25,10 +25,10 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class EGOW4Hornet extends ProjectileWeaponItem {
-    private static final int MAX_AMMO = 10;
-    private static final int RELOAD_TICKS = 60; // 3秒
-    private static final float VELOCITY = 8.0f;
-    private static final int COOLDOWN_TICKS = 20; // 1秒
+    private static final int MAX_AMMO = 5;
+    private static final int RELOAD_TICKS = 40; // 2秒
+    private static final float VELOCITY = 4.0f;
+    private static final int COOLDOWN_TICKS = 10; // 0.5秒
     public EGOW4Hornet(Properties properties) {
         super(properties.durability(3000));
     }
@@ -86,19 +86,6 @@ public class EGOW4Hornet extends ProjectileWeaponItem {
         player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
 
         return InteractionResultHolder.consume(gun);
-    }
-
-    private boolean hasAmmo(Player player) {
-        return player.getInventory().contains(new ItemStack(ItemInit.RIFLE_BULLET_AMMO.get()));
-    }
-
-    private void consumeAmmo(Player player) {
-        if (!player.getAbilities().instabuild) {
-            player.getInventory().clearOrCountMatchingItems(
-                    stack -> stack.is(ItemInit.RIFLE_BULLET_AMMO.get()),
-                    1, player.inventoryMenu.getCraftSlots()
-            );
-        }
     }
 
     private void shootBullet(Level level, Player player) {

@@ -18,7 +18,7 @@ public class EGOW4Stem extends SwordItem {
 
     private static final UUID REACH_UUID = UUID.randomUUID();
     private static final AttributeModifier REACH_MODIFIER =
-            new AttributeModifier(REACH_UUID, "stem_reach", 2.0, AttributeModifier.Operation.ADDITION);
+            new AttributeModifier(REACH_UUID, "stem_reach", 0.5, AttributeModifier.Operation.ADDITION);
 
     public EGOW4Stem() {
         super(new CustomTier(), 9, -2.0f, new Properties().durability(3000));

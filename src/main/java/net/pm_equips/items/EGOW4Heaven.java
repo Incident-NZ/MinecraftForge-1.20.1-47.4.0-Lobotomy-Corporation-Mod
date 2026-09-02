@@ -5,7 +5,10 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -13,16 +16,36 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeMod;
 import net.pm_equips.BlockInit;
 import net.pm_equips.entity.EGOHeavenProjectile;
 
+import java.util.UUID;
+
 public class EGOW4Heaven extends SwordItem {
     private static final int MIN_THROW_CHARGE_TICKS = 10;
+    private static final UUID REACH_UUID = UUID.randomUUID();
+    private static final AttributeModifier REACH_MODIFIER =
+            new AttributeModifier(REACH_UUID, "blue_scar_reach", -1.0, AttributeModifier.Operation.ADDITION);
 
     public EGOW4Heaven() {
-        // Player base damage is 1.0, so this 15.0 modifier results in 16.0 attack damage.
-        // Player base attack speed is 4.0, so -2.2 results in 1.8 attack speed.
         super(new CustomTier(), 15, -2.2F, new Properties().durability(3000));
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+        if (level.isClientSide || !(entity instanceof Player player)) return;
+
+        boolean isHolding = selected && player.getMainHandItem() == stack;
+
+        AttributeInstance reachAttr = player.getAttribute(ForgeMod.ENTITY_REACH.get());
+        if (reachAttr != null) {
+            if (isHolding && !reachAttr.hasModifier(REACH_MODIFIER)) {
+                reachAttr.addTransientModifier(REACH_MODIFIER);
+            } else if (!isHolding && reachAttr.hasModifier(REACH_MODIFIER)) {
+                reachAttr.removeModifier(REACH_MODIFIER);
+            }
+        }
     }
 
     @Override
@@ -57,7 +80,6 @@ public class EGOW4Heaven extends SwordItem {
                 SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
         player.awardStat(Stats.ITEM_USED.get(this));
 
-        // The weapon is consumed on every successful throw, including in creative mode.
         stack.shrink(1);
     }
 

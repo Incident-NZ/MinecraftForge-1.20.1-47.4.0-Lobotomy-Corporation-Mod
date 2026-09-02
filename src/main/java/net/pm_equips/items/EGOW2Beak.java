@@ -30,7 +30,7 @@ public class EGOW2Beak extends ProjectileWeaponItem {
     private static final int MAX_AMMO = 15;
     private static final int RELOAD_TICKS = 10;
     private static final float DAMAGE = 2.0f;
-    private static final float VELOCITY = 4.0f;
+    private static final float VELOCITY = 3.0f;
     private static final int COOLDOWN_TICKS = 10;
     public EGOW2Beak(Properties properties) {
         super(properties.durability(1000));
@@ -43,7 +43,7 @@ public class EGOW2Beak extends ProjectileWeaponItem {
 
     @Override
     public int getDefaultProjectileRange() {
-        return 128;
+        return 64;
     }
 
     @Override

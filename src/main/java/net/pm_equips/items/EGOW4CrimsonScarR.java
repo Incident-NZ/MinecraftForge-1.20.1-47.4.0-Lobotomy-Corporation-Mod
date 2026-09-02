@@ -3,11 +3,15 @@ package net.pm_equips.items;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -16,13 +20,34 @@ import net.pm_equips.ItemInit;
 import net.pm_equips.PMEquipsMain;
 import net.pm_equips.config.CommonConfig;
 
+import java.util.UUID;
+
 public class EGOW4CrimsonScarR extends SwordItem {
     private static final float MIN_DAMAGE = 11.0F;
     private static final int DAMAGE_VARIANCE = 3;
+    private static final UUID REACH_UUID = UUID.randomUUID();
+    private static final AttributeModifier REACH_MODIFIER =
+            new AttributeModifier(REACH_UUID, "crimson_scar_reach", -1.0, AttributeModifier.Operation.ADDITION);
     private static final float LOW_HEALTH_DAMAGE_MULTIPLIER = 1.5F;
 
     public EGOW4CrimsonScarR() {
         super(new CustomTier(), 0, -2.4F, new Properties().durability(3000));
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+        if (level.isClientSide || !(entity instanceof Player player)) return;
+
+        boolean isHolding = selected && player.getMainHandItem() == stack;
+
+        AttributeInstance reachAttr = player.getAttribute(ForgeMod.ENTITY_REACH.get());
+        if (reachAttr != null) {
+            if (isHolding && !reachAttr.hasModifier(REACH_MODIFIER)) {
+                reachAttr.addTransientModifier(REACH_MODIFIER);
+            } else if (!isHolding && reachAttr.hasModifier(REACH_MODIFIER)) {
+                reachAttr.removeModifier(REACH_MODIFIER);
+            }
+        }
     }
 
     @Override

@@ -27,8 +27,8 @@ public class EGOW2Match extends ProjectileWeaponItem {
     private static final int MAX_AMMO = 1;
     private static final int RELOAD_TICKS = 100;
     private static final float MIN_DAMAGE = 20.0F;
-    private static final float VELOCITY = 4.0F;
-    private static final int RANGE = 64;
+    private static final float VELOCITY = 2.0F;
+    private static final int RANGE = 128;
     private static final int COOLDOWN_TICKS = 20;
 
     public EGOW2Match(

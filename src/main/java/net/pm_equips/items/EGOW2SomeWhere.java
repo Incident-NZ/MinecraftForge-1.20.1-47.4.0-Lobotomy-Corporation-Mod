@@ -18,7 +18,7 @@ public class EGOW2SomeWhere extends SwordItem {
 
     private static final UUID REACH_UUID = UUID.randomUUID();
     private static final AttributeModifier REACH_MODIFIER =
-            new AttributeModifier(REACH_UUID, "somewhere_reach", 2.0, AttributeModifier.Operation.ADDITION);
+            new AttributeModifier(REACH_UUID, "somewhere_reach", 0.5, AttributeModifier.Operation.ADDITION);
 
     public EGOW2SomeWhere() {
         super(new CustomTier(), 9, -2.2f, new Properties().durability(1000));

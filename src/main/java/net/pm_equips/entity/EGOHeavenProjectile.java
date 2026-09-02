@@ -25,7 +25,7 @@ import java.util.Set;
 public class EGOHeavenProjectile extends ThrowableItemProjectile {
     private static final float DAMAGE = 100.0F;
     private static final double MAX_DISTANCE = 128.0D;
-    private static final double SPEED = 4.0D;
+    private static final double SPEED = 8.0D;
     private static final double HITBOX_INFLATION = 0.3D;
 
     private final Set<Integer> hitEntityIds = new HashSet<>();

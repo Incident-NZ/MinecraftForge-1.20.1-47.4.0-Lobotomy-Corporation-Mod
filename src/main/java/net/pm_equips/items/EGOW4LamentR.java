@@ -34,7 +34,7 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
     private static final float VELOCITY = 4.0f;
     private static final int RANGE = 64;
     private static final int COOLDOWN_TICKS = 5; // 0.25秒
-    private static final double ANGLE_DEGREES = 5.0; // 弾を左右に少し振る角度
+    private static final double ANGLE_DEGREES = 10.0; // 弾を左右に少し振る角度
 
     public EGOW4LamentR(Properties properties) {
         super(properties.durability(1500));

@@ -29,8 +29,8 @@ import java.util.function.Predicate;
 public class EGOW2Solitude extends ProjectileWeaponItem {
     private static final int MAX_AMMO = 6;
     private static final int RELOAD_TICKS = 30;
-    private static final float DAMAGE = 4.0f;
-    private static final float VELOCITY = 6.0f;
+    private static final float DAMAGE = 3.0f;
+    private static final float VELOCITY = 4.0f;
     private static final int COOLDOWN_TICKS = 10;
     public EGOW2Solitude(Properties properties) {
         super(properties.durability(1000));
@@ -43,7 +43,7 @@ public class EGOW2Solitude extends ProjectileWeaponItem {
 
     @Override
     public int getDefaultProjectileRange() {
-        return 128;
+        return 64;
     }
 
     @Override

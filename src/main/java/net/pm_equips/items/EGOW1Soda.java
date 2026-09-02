@@ -43,7 +43,7 @@ public class EGOW1Soda extends ProjectileWeaponItem {
 
     @Override
     public int getDefaultProjectileRange() {
-        return 128;
+        return 64;
     }
 
     @Override

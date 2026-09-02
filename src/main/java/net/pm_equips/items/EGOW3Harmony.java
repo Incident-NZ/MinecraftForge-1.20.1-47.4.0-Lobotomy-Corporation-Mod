@@ -27,8 +27,8 @@ public class EGOW3Harmony extends ProjectileWeaponItem {
     private static final int MAX_AMMO = 1;
     private static final int RELOAD_TICKS = 100;
     private static final float MIN_DAMAGE = 30.0F;
-    private static final float VELOCITY = 4.0F;
-    private static final int RANGE = 64;
+    private static final float VELOCITY = 3.0F;
+    private static final int RANGE = 128;
     private static final int COOLDOWN_TICKS = 20;
     private static final double EXPLOSION_RADIUS = 9.0D;
 

@@ -19,7 +19,7 @@ public class EGOW3Bear extends SwordItem {
 
     private static final UUID REACH_UUID = UUID.randomUUID();
     private static final AttributeModifier REACH_MODIFIER =
-            new AttributeModifier(REACH_UUID, "blood_reach", -2.0, AttributeModifier.Operation.ADDITION);
+            new AttributeModifier(REACH_UUID, "blood_reach", -1.0, AttributeModifier.Operation.ADDITION);
 
     public EGOW3Bear() {
         super(new CustomTier(), 7, -3.0f, new Properties().durability(2000));

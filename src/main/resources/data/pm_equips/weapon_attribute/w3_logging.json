@@ -1,0 +1,6 @@
+{
+  "parent": "bettercombat:heave_axe",
+  "attributes": {
+    "two_handed": true
+  }
+}

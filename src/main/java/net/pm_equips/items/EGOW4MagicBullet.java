@@ -23,9 +23,9 @@ import net.minecraft.stats.Stats;
 
 public class EGOW4MagicBullet extends ProjectileWeaponItem {
 
-    private static final int MAX_AMMO = 5;
+    private static final int MAX_AMMO = 7;
     private static final int RELOAD_TICKS = 100;
-    private static final int COOLDOWN_TICKS = 40; // 2 seconds between shots
+    private static final int COOLDOWN_TICKS = 40;
 
     public EGOW4MagicBullet(Properties properties) {
         super(properties);

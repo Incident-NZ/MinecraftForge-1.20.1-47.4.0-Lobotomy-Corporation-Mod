@@ -24,7 +24,7 @@ public class EGOW5Twilight extends SwordItem {
 
     private static final UUID REACH_UUID = UUID.randomUUID();
     private static final AttributeModifier REACH_MODIFIER =
-            new AttributeModifier(REACH_UUID, "twilight_reach_bonus", 5.0, AttributeModifier.Operation.ADDITION);
+            new AttributeModifier(REACH_UUID, "twilight_reach_bonus", 1.0, AttributeModifier.Operation.ADDITION);
 
     public EGOW5Twilight() {
         super(new CustomTier(), 17, -2.5f, new Properties().rarity(Rarity.EPIC).durability(4000));

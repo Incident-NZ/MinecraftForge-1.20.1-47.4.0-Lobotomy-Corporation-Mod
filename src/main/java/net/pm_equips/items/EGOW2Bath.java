@@ -19,7 +19,7 @@ public class EGOW2Bath extends SwordItem {
 
     private static final UUID REACH_UUID = UUID.randomUUID();
     private static final AttributeModifier REACH_MODIFIER =
-            new AttributeModifier(REACH_UUID, "bath_reach", -2.0, AttributeModifier.Operation.ADDITION);
+            new AttributeModifier(REACH_UUID, "bath_reach", -1.0, AttributeModifier.Operation.ADDITION);
 
     public EGOW2Bath() {
         super(new CustomTier(), 3, -1.0f, new Properties().durability(1000));

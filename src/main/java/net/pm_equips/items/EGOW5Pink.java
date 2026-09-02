@@ -26,9 +26,9 @@ import java.util.function.Predicate;
 
 public class EGOW5Pink extends ProjectileWeaponItem {
     private static final int MAX_AMMO = 10;
-    private static final int RELOAD_TICKS = 40; // 2秒
-    private static final float VELOCITY = 12.0f;
-    private static final int COOLDOWN_TICKS = 40; // 2秒
+    private static final int RELOAD_TICKS = 30; // 1.5秒
+    private static final float VELOCITY = 4.0f;
+    private static final int COOLDOWN_TICKS = 20; // 0.5秒
     public EGOW5Pink(Properties properties) {
         super(properties.durability(4000));
     }
@@ -86,19 +86,6 @@ public class EGOW5Pink extends ProjectileWeaponItem {
         player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
 
         return InteractionResultHolder.consume(gun);
-    }
-
-    private boolean hasAmmo(Player player) {
-        return player.getInventory().contains(new ItemStack(ItemInit.RIFLE_BULLET_AMMO.get()));
-    }
-
-    private void consumeAmmo(Player player) {
-        if (!player.getAbilities().instabuild) {
-            player.getInventory().clearOrCountMatchingItems(
-                    stack -> stack.is(ItemInit.RIFLE_BULLET_AMMO.get()),
-                    1, player.inventoryMenu.getCraftSlots()
-            );
-        }
     }
 
     private void shootBullet(Level level, Player player) {

@@ -30,7 +30,7 @@ public class EGOW2Today extends ProjectileWeaponItem {
     private static final int MAX_AMMO = 8;
     private static final int RELOAD_TICKS = 20;
     private static final float DAMAGE = 3.0f;
-    private static final float VELOCITY = 5.0f;
+    private static final float VELOCITY = 3.0f;
     private static final int COOLDOWN_TICKS = 15;
     public EGOW2Today(Properties properties) {
         super(properties.durability(1000));
@@ -43,7 +43,7 @@ public class EGOW2Today extends ProjectileWeaponItem {
 
     @Override
     public int getDefaultProjectileRange() {
-        return 128;
+        return 64;
     }
 
     @Override
