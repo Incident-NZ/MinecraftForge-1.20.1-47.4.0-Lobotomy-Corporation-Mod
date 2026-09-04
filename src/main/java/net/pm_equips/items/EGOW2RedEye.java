@@ -1,5 +1,6 @@
 package net.pm_equips.items;
 
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.common.ForgeMod;
@@ -23,6 +24,18 @@ public class EGOW2RedEye extends SwordItem {
 
     public EGOW2RedEye() {
         super(new CustomTier(), 8, -2.6f, new Properties().durability(1000));
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+
+        return true;
     }
 
     @Override

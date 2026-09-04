@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
@@ -15,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.pm_equips.EntityInit;
 import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
-import net.pm_equips.entity.EGOMagic;
+import net.pm_equips.entity.EGOMagicP;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -29,6 +30,17 @@ public class EGOW4MagicBullet extends ProjectileWeaponItem {
 
     public EGOW4MagicBullet(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+        return result;
     }
 
     @Override
@@ -69,7 +81,7 @@ public class EGOW4MagicBullet extends ProjectileWeaponItem {
         // 発射
         if (!level.isClientSide) {
 
-            EGOMagic bullet = new EGOMagic(
+            EGOMagicP bullet = new EGOMagicP(
                     EntityInit.MAGIC_BULLET.get(),
                     level,
                     player

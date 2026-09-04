@@ -20,10 +20,10 @@ public class ClientSetup {
     @SubscribeEvent
     public static void onClientSetup(final FMLClientSetupEvent event) {
         try {
-            setTabIcon(TabInit.PM_LOBOTOMY_EGO.get(), (Supplier<ItemStack>) () -> ItemInit.W1_PENITENCE.get().getDefaultInstance());
-            setTabIcon(TabInit.PM_BASE.get(), (Supplier<ItemStack>) () -> new ItemStack(BlockInit.BlockItems.ZAYIN_PE_BOX.get()));
-            setTabIcon(TabInit.PM_FIXERS.get(), (Supplier<ItemStack>) () -> ItemInit.EX_DURANDAL.get().getDefaultInstance());
-            setTabIcon(TabInit.PM_WCORP.get(), (Supplier<ItemStack>) () -> ItemInit.WCORP_ARMOR.get().getDefaultInstance());
+            setTabIcon(TabInit.PM_LOBOTOMY_EGO.get(), () -> ItemInit.W1_PENITENCE.get().getDefaultInstance());
+            setTabIcon(TabInit.PM_BASE.get(), () -> new ItemStack(BlockInit.BlockItems.ZAYIN_PE_BOX.get()));
+            setTabIcon(TabInit.PM_FIXERS.get(), () -> ItemInit.EX_DURANDAL.get().getDefaultInstance());
+            setTabIcon(TabInit.PM_WCORP.get(), () -> ItemInit.WCORP_WEAPON_1.get().getDefaultInstance());
         } catch (Throwable t) {
             // ignore to avoid crashing client if reflection fails
         }

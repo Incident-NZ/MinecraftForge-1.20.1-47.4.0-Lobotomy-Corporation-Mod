@@ -5,7 +5,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.pm_equips.EntityInit;
 import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
-import net.pm_equips.entity.PBulletLARV;
+import net.pm_equips.entity.AmmoLogicRV;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -72,7 +72,7 @@ public class WeaponRolandLogicHG extends ProjectileWeaponItem {
 		Vec3 look = player.getLookAngle();
 		float damage = 4 + player.getRandom().nextInt(5); // 4..8
 
-		PBulletLARV bullet = new PBulletLARV(EntityInit.BULLET_LARV.get(), level);
+		AmmoLogicRV bullet = new AmmoLogicRV(EntityInit.BULLET_LARV.get(), level);
 		bullet.initFromShooter(player, damage, VELOCITY, look);
 		level.addFreshEntity(bullet);
 

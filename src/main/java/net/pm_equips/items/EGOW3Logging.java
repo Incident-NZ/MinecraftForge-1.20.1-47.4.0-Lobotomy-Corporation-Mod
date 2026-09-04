@@ -1,5 +1,7 @@
 package net.pm_equips.items;
 
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.pm_equips.BlockInit;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
@@ -8,6 +10,18 @@ import net.minecraft.world.item.crafting.Ingredient;
 public class EGOW3Logging extends SwordItem {
     public EGOW3Logging() {
         super(new CustomTier(), 20, -3.2f, new Properties().durability(2000));
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+
+        return true;
     }
 
     private static class CustomTier implements Tier {

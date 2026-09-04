@@ -6,13 +6,13 @@
 	},
 	"display": {
 		"thirdperson_righthand": {
-			"rotation": [-168, 78, 122.5],
-			"translation": [-1.75, 2, -5.5],
+			"rotation": [-180, 90, 135],
+			"translation": [-1.75, 2, -3.5],
 			"scale": [1.5, 1.5, 1.5]
 		},
 		"thirdperson_lefthand": {
-			"rotation": [-10, -75, 40],
-			"translation": [-1.75, 2, -5.5],
+			"rotation": [-180, -90, -135],
+			"translation": [-1.75, 2, -3.5],
 			"scale": [1.5, 1.5, 1.5]
 		},
 		"firstperson_righthand": {

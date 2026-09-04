@@ -60,11 +60,17 @@ public class EGOW5WhiteNight extends SwordItem {
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         boolean result = super.hurtEnemy(stack, target, attacker);
         if (result && !attacker.level().isClientSide()) {
-            // Apply Absorption (HP 20 = 10 absorption hearts)
             if (attacker instanceof Player player) {
                 player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 200, 0, false, false));
             }
         }
+
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+
         return result;
     }
 

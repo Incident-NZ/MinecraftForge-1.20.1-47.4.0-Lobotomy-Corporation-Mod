@@ -127,6 +127,6 @@ public class WCorpWeapon3 extends SwordItem {
         @Override public float getAttackDamageBonus() { return 0.0f; }
         @Override public int getLevel() { return 1; }
         @Override public int getEnchantmentValue() { return 0; }
-        @Override public Ingredient getRepairIngredient() { return Ingredient.of(ItemInit.METAL_INGOT.get()); }
+        @Override public Ingredient getRepairIngredient() { return Ingredient.of(ItemInit.WCORP_BATTERY.get()); }
     }
 }

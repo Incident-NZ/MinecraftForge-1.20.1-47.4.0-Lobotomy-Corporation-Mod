@@ -22,7 +22,17 @@ public class ItemInit {
             () -> new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> BLADE_GEAR = ITEMS.register("item_blade_gear",
             () -> new Item(new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> BATTERY = ITEMS.register("item_battery",
+    public static final RegistryObject<Item> WCORP_BATTERY = ITEMS.register("item_wcorp_battery",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> RCORP_BATTERY = ITEMS.register("item_rcorp_battery",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> KCORP_AMPOULE = ITEMS.register("item_kcorp_ampoule",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> HCORP_BOLUS_MAO = ITEMS.register("item_hcorp_bolus_mao",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> HCORP_BOLUS_SI = ITEMS.register("item_hcorp_bolus_si",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> HCORP_BOLUS_YOU = ITEMS.register("item_hcorp_bolus_you",
             () -> new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> MAGIC_BULLET_AMMO = ITEMS.register("item_bullet_ego",
             () -> new AmmoMagicBullet(new Item.Properties().stacksTo(64)));
@@ -271,10 +281,30 @@ public class ItemInit {
     public static final RegistryObject<Item> FIXER_ROLAND_ZELKOVA_AXE = ITEMS.register("fixer_roland_zelkova_axe", WeaponRolandZelkovaAxe::new);
     public static final RegistryObject<Item> FIXER_ROLAND_ZELKOVA_MACE = ITEMS.register("fixer_roland_zelkova_mace", WeaponRolandZelkovaMace::new);
     public static final RegistryObject<Item> EX_ARGALIA = ITEMS.register("fixer_argalia", WeaponArgalia::new);
+
     public static final RegistryObject<Item> ASC2_SOUTH_W1 = ITEMS.register("asc2_south_weapon1", Asc2SouthWeapon1::new);
     public static final RegistryObject<Item> ASC2_SOUTH_W2 = ITEMS.register("asc2_south_weapon2", Asc2SouthWeapon2::new);
     public static final RegistryObject<Item> ASC2_WALTER = ITEMS.register("asc2_south_walter", Asc2Walter::new);
     public static final RegistryObject<Item> ASC2_WEST_WEAPON = ITEMS.register("asc2_west_weapon", Asc2WestWeapon::new);
+    public static final RegistryObject<Item> ASC2_SOUTH_ARMOR_S6 = ITEMS.register("asc2_south_armor_s6",
+            () -> new ASC2SouthArmor(ArmorEquips.ASC2_ARMOR_SEC6, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ASC2_SOUTH_ARMOR_S5 = ITEMS.register("asc2_south_armor_s5",
+            () -> new ASC2SouthArmor(ArmorEquips.ASC2_ARMOR_SEC5, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ASC2_SOUTH_ARMOR_S4 = ITEMS.register("asc2_south_armor_s4",
+            () -> new ASC2SouthArmor(ArmorEquips.ASC2_ARMOR_SEC4, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ASC2_SOUTH_ARMOR_S3 = ITEMS.register("asc2_south_armor_s3",
+            () -> new ASC2SouthArmor(ArmorEquips.ASC2_ARMOR_SEC3, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ASC2_SOUTH_ARMOR_S2 = ITEMS.register("asc2_south_armor_s2",
+            () -> new ASC2SouthArmor(ArmorEquips.ASC2_ARMOR_SEC2, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ASC2_SOUTH_ARMOR_S1 = ITEMS.register("asc2_south_armor_s1",
+            () -> new ASC2SouthArmor(ArmorEquips.ASC2_ARMOR_SEC1, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
 
     //フィクサー武器 遠距離
     public static final RegistryObject<Item> WEAPON_ROLAND_REVOLVER = ITEMS.register("fixer_roland_lar",
@@ -283,34 +313,131 @@ public class ItemInit {
             () -> new WeaponRolandLogicSG(new Item.Properties().durability(2000)));
 
     //W社装備
-    public static final RegistryObject<Item> WCORP_ARMOR = ITEMS.register("wcorp_armor",
-            () -> new WCorpArmor(ArmorEquips.WCORP_ARMOR, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-
     public static final RegistryObject<Item> WCORP_WEAPON_1 = ITEMS.register("wcorp_w1", WCorpWeapon1::new);
     public static final RegistryObject<Item> WCORP_WEAPON_2 = ITEMS.register("wcorp_w2", WCorpWeapon2::new);
     public static final RegistryObject<Item> WCORP_WEAPON_3 = ITEMS.register("wcorp_w3", WCorpWeapon3::new);
 
-    //R社装備
-    public static final RegistryObject<Item> RCORP_RABBIT_ARMOR = ITEMS.register("rcorp_rabbit_armor",
-            () -> new RCorp4thRabbitArmor(ArmorEquips.RCORP_4TH_RABBIT_ARMOR, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> WCORP_ARMOR_L1 = ITEMS.register("wcorp_armor_l1",
+            () -> new WCorpArmor(ArmorEquips.WCORP_ARMOR_L1, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> WCORP_ARMOR_L2 = ITEMS.register("wcorp_armor_l2",
+            () -> new WCorpArmor(ArmorEquips.WCORP_ARMOR_L2, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> WCORP_ARMOR_L3 = ITEMS.register("wcorp_armor_l3",
+            () -> new WCorpArmor(ArmorEquips.WCORP_ARMOR_L3, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> WCORP_ARMOR_L4 = ITEMS.register("wcorp_armor_l4",
+            () -> new WCorpArmor(ArmorEquips.WCORP_ARMOR_L4, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> WCORP_ARMOR_L5 = ITEMS.register("wcorp_armor_l5",
+            () -> new WCorpArmor(ArmorEquips.WCORP_ARMOR_L5, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    //R社装備
     public static final RegistryObject<Item> RCORP_RABBIT_RIFLE = ITEMS.register("rcorp_rabbit_rifle",
             () -> new RCorpRabbitRifle(new Item.Properties().durability(2000)));
     public static final RegistryObject<Item> RCORP_RABBIT_KNIFE = ITEMS.register("rcorp_rabbit_knife", RCorpRabbitCombatKnife::new);
 
-    //K社装備
-    public static final RegistryObject<Item> KCORP_AGENT_ARMOR = ITEMS.register("kcorp_agent_armor",
-            () -> new KCorpAgentArmor(ArmorEquips.KCORP_ARMOR, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> KCORP_OFFICER_ARMOR = ITEMS.register("kcorp_officer_armor",
-            () -> new KCorpOfficerArmor(ArmorEquips.KCORP_ARMOR, ArmorItem.Type.LEGGINGS,
+    public static final RegistryObject<Item> RCORP_RABBIT_ARMOR_L1 = ITEMS.register("rcorp_rabbit_armor_l1",
+            () -> new RCorp4thRabbitArmor(ArmorEquips.RCORP_4TH_RABBIT_ARMOR_L1, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> RCORP_RABBIT_ARMOR_L2 = ITEMS.register("rcorp_rabbit_armor_l2",
+            () -> new RCorp4thRabbitArmor(ArmorEquips.RCORP_4TH_RABBIT_ARMOR_L2, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> RCORP_RABBIT_ARMOR_L3 = ITEMS.register("rcorp_rabbit_armor_l3",
+            () -> new RCorp4thRabbitArmor(ArmorEquips.RCORP_4TH_RABBIT_ARMOR_L3, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> RCORP_RABBIT_ARMOR_L4 = ITEMS.register("rcorp_rabbit_armor_l4",
+            () -> new RCorp4thRabbitArmor(ArmorEquips.RCORP_4TH_RABBIT_ARMOR_L4, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> RCORP_RABBIT_ARMOR_L5 = ITEMS.register("rcorp_rabbit_armor_l5",
+            () -> new RCorp4thRabbitArmor(ArmorEquips.RCORP_4TH_RABBIT_ARMOR_L5, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    //K社装備
     public static final RegistryObject<Item> KCORP_WEAPON_1 = ITEMS.register("kcorp_w1", KCorpWeapon1::new);
     public static final RegistryObject<Item> KCORP_WEAPON_2 = ITEMS.register("kcorp_w2", KCorpWeapon2::new);
     public static final RegistryObject<Item> KCORP_WEAPON_3 = ITEMS.register("kcorp_w3", KCorpWeapon3::new);
+
+    public static final RegistryObject<Item> KCORP_OFFICER_ARMOR_L1 = ITEMS.register("kcorp_officer_armor_l1",
+            () -> new KCorpOfficerArmor(ArmorEquips.KCORP_ARMOR_L1, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> KCORP_OFFICER_ARMOR_L2 = ITEMS.register("kcorp_officer_armor_l2",
+            () -> new KCorpOfficerArmor(ArmorEquips.KCORP_ARMOR_L2, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> KCORP_AGENT_ARMOR_L3 = ITEMS.register("kcorp_agent_armor_l3",
+            () -> new KCorpAgentArmor(ArmorEquips.KCORP_ARMOR_L3, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> KCORP_AGENT_ARMOR_L4 = ITEMS.register("kcorp_agent_armor_l4",
+            () -> new KCorpAgentArmor(ArmorEquips.KCORP_ARMOR_L4, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> KCORP_AGENT_ARMOR_L5 = ITEMS.register("kcorp_agent_armor_l5",
+            () -> new KCorpAgentArmor(ArmorEquips.KCORP_ARMOR_L5, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    //H社装備
+    public static final RegistryObject<Item> HCORP_MAO_WEAPON = ITEMS.register("hcorp_mao_weapon", HCorpMaoWeapon::new);
+    public static final RegistryObject<Item> HCORP_MAO_ARMOR_L1 = ITEMS.register("hcorp_mao_armor_l1",
+            () -> new HCorpMaoArmor(ArmorEquips.HCORP_MAO_ARMOR_L1, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_MAO_ARMOR_L2 = ITEMS.register("hcorp_mao_armor_l2",
+            () -> new HCorpMaoArmor(ArmorEquips.HCORP_MAO_ARMOR_L2, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_MAO_ARMOR_L3 = ITEMS.register("hcorp_mao_armor_l3",
+            () -> new HCorpMaoArmor(ArmorEquips.HCORP_MAO_ARMOR_L3, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_MAO_ARMOR_L4 = ITEMS.register("hcorp_mao_armor_l4",
+            () -> new HCorpMaoArmor(ArmorEquips.HCORP_MAO_ARMOR_L4, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_MAO_ARMOR_L5 = ITEMS.register("hcorp_mao_armor_l5",
+            () -> new HCorpMaoArmor(ArmorEquips.HCORP_MAO_ARMOR_L5, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> HCORP_SI_WEAPON = ITEMS.register("hcorp_si_weapon", HCorpSiWeapon::new);
+    public static final RegistryObject<Item> HCORP_SI_ARMOR_L1 = ITEMS.register("hcorp_si_armor_l1",
+            () -> new HCorpSiArmor(ArmorEquips.HCORP_SI_ARMOR_L1, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_SI_ARMOR_L2 = ITEMS.register("hcorp_si_armor_l2",
+            () -> new HCorpSiArmor(ArmorEquips.HCORP_SI_ARMOR_L2, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_SI_ARMOR_L3 = ITEMS.register("hcorp_si_armor_l3",
+            () -> new HCorpSiArmor(ArmorEquips.HCORP_SI_ARMOR_L3, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_SI_ARMOR_L4 = ITEMS.register("hcorp_si_armor_l4",
+            () -> new HCorpSiArmor(ArmorEquips.HCORP_SI_ARMOR_L4, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_SI_ARMOR_L5 = ITEMS.register("hcorp_si_armor_l5",
+            () -> new HCorpSiArmor(ArmorEquips.HCORP_SI_ARMOR_L5, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> HCORP_YOU_WEAPON = ITEMS.register("hcorp_you_weapon", HCorpYouWeapon::new);
+    public static final RegistryObject<Item> HCORP_YOU_ARMOR_L1 = ITEMS.register("hcorp_you_armor_l1",
+            () -> new HCorpYouArmor(ArmorEquips.HCORP_YOU_ARMOR_L1, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_YOU_ARMOR_L2 = ITEMS.register("hcorp_you_armor_l2",
+            () -> new HCorpYouArmor(ArmorEquips.HCORP_YOU_ARMOR_L2, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_YOU_ARMOR_L3 = ITEMS.register("hcorp_you_armor_l3",
+            () -> new HCorpYouArmor(ArmorEquips.HCORP_YOU_ARMOR_L3, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_YOU_ARMOR_L4 = ITEMS.register("hcorp_you_armor_l4",
+            () -> new HCorpYouArmor(ArmorEquips.HCORP_YOU_ARMOR_L4, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HCORP_YOU_ARMOR_L5 = ITEMS.register("hcorp_you_armor_l5",
+            () -> new HCorpYouArmor(ArmorEquips.HCORP_YOU_ARMOR_L5, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().stacksTo(1)));
 
     //頭装備
     public static final RegistryObject<Item> HEAD_CLAW = ITEMS.register("head_claw", HeadClaw::new);

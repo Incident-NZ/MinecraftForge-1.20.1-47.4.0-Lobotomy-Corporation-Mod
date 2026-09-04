@@ -28,9 +28,19 @@ public class EGOW4Swan extends SwordItem {
     private static final AttributeModifier REACH_MODIFIER =
             new AttributeModifier(REACH_UUID, "swan_reach", -0.5, AttributeModifier.Operation.ADDITION);
 
-
     public EGOW4Swan() {
         super(new CustomTier(), 6, -1.8F, new Properties().durability(3000));
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+        return result;
     }
 
     @Override

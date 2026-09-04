@@ -184,7 +184,7 @@ public class KCorpWeapon1 extends SwordItem {
         @Override
         public Ingredient getRepairIngredient() {
             return Ingredient.of(
-                    ItemInit.METAL_INGOT.get()
+                    ItemInit.KCORP_AMPOULE.get()
             );
         }
     }

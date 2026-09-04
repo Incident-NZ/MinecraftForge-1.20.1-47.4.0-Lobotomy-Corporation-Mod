@@ -5,7 +5,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
-import net.pm_equips.entity.PBullet;
+import net.pm_equips.entity.AmmoGun;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -73,7 +73,7 @@ public class EGOW3Laetitia extends ProjectileWeaponItem {
             return InteractionResultHolder.success(gun);
         }
 
-        shootBullet(level, player, gun);
+        shootBullet(level, player);
 
         gun.getOrCreateTag().putInt("Ammo", ammo - 1);
 
@@ -93,7 +93,7 @@ public class EGOW3Laetitia extends ProjectileWeaponItem {
         return InteractionResultHolder.consume(gun);
     }
 
-    private void shootBullet(Level level, Player player, ItemStack gun) {
+    private void shootBullet(Level level, Player player) {
         Vec3 look = player.getLookAngle();
         Vec3 eyePos = player.getEyePosition();
         Vec3 spawnPos = eyePos.add(look.scale(0.5));
@@ -102,7 +102,7 @@ public class EGOW3Laetitia extends ProjectileWeaponItem {
             // spawn a non-penetrating projectile that will handle damage
             float damage = 5 + level.random.nextInt(2); // 5..6
 
-            PBullet bullet = new PBullet(level, player, damage, VELOCITY, look);
+            AmmoGun bullet = new AmmoGun(level, player, damage, VELOCITY, look);
             bullet.setDamage(damage);
             bullet.setVelocity(VELOCITY);
             bullet.setMaxLifetime(getDefaultProjectileRange());
@@ -176,6 +176,13 @@ public class EGOW3Laetitia extends ProjectileWeaponItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+
         target.hurt(attacker.level().damageSources().generic(), 5.0f);
 
         stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));

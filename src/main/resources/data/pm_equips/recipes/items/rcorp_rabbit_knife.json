@@ -8,7 +8,7 @@
       "item": "pm_equips:item_metal"
     },
     "Y": {
-      "item": "pm_equips:item_battery"
+      "item": "pm_equips:item_rcorp_battery"
     },
     "Z": {
       "tag": "minecraft:swords"

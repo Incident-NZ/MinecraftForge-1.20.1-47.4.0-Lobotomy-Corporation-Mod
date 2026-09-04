@@ -17,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 import net.pm_equips.EntityInit;
 import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
-import net.pm_equips.entity.PBulletLASG;
+import net.pm_equips.entity.AmmoLogicSG;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -72,7 +72,7 @@ public class WeaponRolandLogicSG extends ProjectileWeaponItem {
 		Vec3 look = player.getLookAngle();
 		float damage = 7 + player.getRandom().nextInt(6); // 7..12
 
-		PBulletLASG bullet = new PBulletLASG(EntityInit.BULLET_LASG.get(), level);
+		AmmoLogicSG bullet = new AmmoLogicSG(EntityInit.BULLET_LASG.get(), level);
 		bullet.initFromShooter(player, damage, VELOCITY, look);
 		level.addFreshEntity(bullet);
 

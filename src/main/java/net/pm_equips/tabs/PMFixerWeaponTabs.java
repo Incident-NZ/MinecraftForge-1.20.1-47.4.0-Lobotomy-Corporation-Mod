@@ -22,5 +22,11 @@ public class PMFixerWeaponTabs {
             ItemInit.ASC2_WEST_WEAPON.get(),
             ItemInit.ASC2_SOUTH_W1.get(),
             ItemInit.ASC2_SOUTH_W2.get(),
+            ItemInit.ASC2_SOUTH_ARMOR_S6.get(),
+            ItemInit.ASC2_SOUTH_ARMOR_S5.get(),
+            ItemInit.ASC2_SOUTH_ARMOR_S4.get(),
+            ItemInit.ASC2_SOUTH_ARMOR_S3.get(),
+            ItemInit.ASC2_SOUTH_ARMOR_S2.get(),
+            ItemInit.ASC2_SOUTH_ARMOR_S1.get(),
     };
 }

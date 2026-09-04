@@ -45,13 +45,13 @@ public class ClientEvents {
         event.registerEntityRenderer(EntityInit.BULLET_LASG.get(),
                 AmmoLASGR::new);
         event.registerEntityRenderer(EntityInit.BULLET.get(),
-                AmmoR::new);
+                AmmoGunR::new);
         event.registerEntityRenderer(EntityInit.HEAVEN_PROJECTILE.get(),
                 ctx -> new ThrownItemRenderer<>(ctx, 1.0F, true));
         event.registerEntityRenderer(EntityInit.HATRED_MAGIC_PROJECTILE.get(),
                 AmmoHatredR::new);
         event.registerEntityRenderer(EntityInit.BULLET_EX.get(),
-                AmmoExR::new);
+                AmmoExpR::new);
         event.registerEntityRenderer(EntityInit.WHITENIGHT_PROJECTILE.get(),
                 PWhiteNightR::new);
         event.registerBlockEntityRenderer(BlockEntityInit.EBOX_GEN.get(), EBoxGenR::new);
@@ -61,6 +61,7 @@ public class ClientEvents {
     public static void registerKeys(RegisterKeyMappingsEvent event) {
         event.register(KeyBindInit.RELOAD_KEY);
         event.register(KeyBindInit.SCOPE_KEY);
+        event.register(KeyBindInit.CORE_PAGE_ABILITY_KEY);
     }
 }
 

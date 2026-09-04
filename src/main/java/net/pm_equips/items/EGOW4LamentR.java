@@ -6,7 +6,7 @@ import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
 import net.pm_equips.config.CommonConfig;
-import net.pm_equips.entity.PBullet;
+import net.pm_equips.entity.AmmoGun;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -34,10 +34,10 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
     private static final float VELOCITY = 4.0f;
     private static final int RANGE = 64;
     private static final int COOLDOWN_TICKS = 5; // 0.25秒
-    private static final double ANGLE_DEGREES = 10.0; // 弾を左右に少し振る角度
+    private static final double ANGLE_DEGREES = 0.0; // 弾を左右に少し振る角度
 
     public EGOW4LamentR(Properties properties) {
-        super(properties.durability(1500));
+        super(properties);
     }
 
     @Override
@@ -106,14 +106,14 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
             applyRayDamage(level, player, eyePos, dirRight);
         }
 
-        PBullet b1 = new PBullet(level, player, DAMAGE, VELOCITY, dirLeft);
+        AmmoGun b1 = new AmmoGun(level, player, DAMAGE, VELOCITY, dirLeft);
         b1.setPos(spawnBase.x, spawnBase.y, spawnBase.z);
         b1.setDamage(DAMAGE);
         b1.setVelocity(VELOCITY);
         b1.setMaxLifetime(getDefaultProjectileRange());
         level.addFreshEntity(b1);
 
-        PBullet b2 = new PBullet(level, player, DAMAGE, VELOCITY, dirRight);
+        AmmoGun b2 = new AmmoGun(level, player, DAMAGE, VELOCITY, dirRight);
         b2.setPos(spawnBase.x, spawnBase.y, spawnBase.z);
         b2.setDamage(DAMAGE);
         b2.setVelocity(VELOCITY);
@@ -216,6 +216,13 @@ public class EGOW4LamentR extends ProjectileWeaponItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+
         if (target instanceof Player && !CommonConfig.ALLOW_FRIENDLY_FIRE.get()) {
             stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
             return true;

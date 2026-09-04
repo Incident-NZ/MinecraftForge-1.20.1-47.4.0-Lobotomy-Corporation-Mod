@@ -102,6 +102,9 @@ public class ClientForgeEvents {
             if (KeyBindInit.RELOAD_KEY.consumeClick()) {
                 ModPackets.INSTANCE.sendToServer(new ModPackets.ReloadPacket());
             }
+            if (KeyBindInit.CORE_PAGE_ABILITY_KEY.consumeClick()) {
+                ModPackets.INSTANCE.sendToServer(new ModPackets.CorePageActivatePacket());
+            }
         }
     }
 

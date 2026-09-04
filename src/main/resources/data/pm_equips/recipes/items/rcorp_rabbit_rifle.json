@@ -12,7 +12,7 @@
       "item": "pm_equips:item_bullet_r"
     },
     "Z": {
-      "item": "pm_equips:item_battery"
+      "item": "pm_equips:item_rcorp_battery"
     }
   },
   "result": {

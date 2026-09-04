@@ -1,6 +1,8 @@
 package net.pm_equips.items;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
@@ -22,6 +24,18 @@ public class HeadClaw extends SwordItem implements GeoItem {
         super(new CustomTier(), 30, -2.0f, new Properties().rarity(Rarity.EPIC));
 
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+
+        return true;
     }
 
     @Override

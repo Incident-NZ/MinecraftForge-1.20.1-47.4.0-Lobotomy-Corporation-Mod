@@ -22,7 +22,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
 import net.pm_equips.energy.WeaponEnergyProvider;
-import net.pm_equips.entity.PBullet;
+import net.pm_equips.entity.AmmoGun;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -46,6 +46,11 @@ public class RCorpRabbitRifle extends ProjectileWeaponItem {
     @Override
     public Predicate<ItemStack> getAllSupportedProjectiles() {
         return stack -> stack.is(ItemInit.RIFLE_BULLET_AMMO.get());
+    }
+
+    @Override
+    public boolean isRepairable(ItemStack stack) {
+        return super.isRepairable(ItemInit.RCORP_BATTERY.get().getDefaultInstance());
     }
 
     @Override
@@ -138,8 +143,8 @@ public class RCorpRabbitRifle extends ProjectileWeaponItem {
                 player.getEyePosition()
                         .add(look.scale(0.5D));
 
-        PBullet bullet =
-                new PBullet(
+        AmmoGun bullet =
+                new AmmoGun(
                         level,
                         player,
                         damage,
@@ -318,6 +323,12 @@ public class RCorpRabbitRifle extends ProjectileWeaponItem {
             LivingEntity target,
             LivingEntity attacker
     ) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
 
         target.hurt(
                 attacker.level()

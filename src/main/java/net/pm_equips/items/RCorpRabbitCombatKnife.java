@@ -121,7 +121,7 @@ public class RCorpRabbitCombatKnife extends SwordItem {
         @Override
         public Ingredient getRepairIngredient() {
             return Ingredient.of(
-                    ItemInit.METAL_INGOT.get()
+                    ItemInit.RCORP_BATTERY.get()
             );
         }
     }

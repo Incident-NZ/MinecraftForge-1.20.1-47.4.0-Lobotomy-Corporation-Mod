@@ -1,8 +1,10 @@
 package net.pm_equips.network;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.InteractionHand;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -29,6 +31,9 @@ public class ModPackets {
 
         INSTANCE.registerMessage(2, LobotomyEGOExtractPacket.class,
                 LobotomyEGOExtractPacket::encode, LobotomyEGOExtractPacket::decode, LobotomyEGOExtractPacket::handle);
+
+        INSTANCE.registerMessage(3, CorePageActivatePacket.class,
+                CorePageActivatePacket::encode, CorePageActivatePacket::decode, CorePageActivatePacket::handle);
     }
 
     public static class ActivateAbilityPacket {
@@ -72,14 +77,14 @@ public class ModPackets {
             ctx.get().enqueueWork(() -> {
                 net.minecraft.server.level.ServerPlayer player = ctx.get().getSender();
                 if (player != null) {
-                    tryStartReload(player, InteractionHand.MAIN_HAND, player.getMainHandItem());
-                    tryStartReload(player, InteractionHand.OFF_HAND, player.getOffhandItem());
+                    tryStartReload(player, player.getMainHandItem());
+                    tryStartReload(player, player.getOffhandItem());
                 }
             });
             ctx.get().setPacketHandled(true);
         }
 
-        private static void tryStartReload(net.minecraft.server.level.ServerPlayer player, InteractionHand hand, ItemStack stack) {
+        private static void tryStartReload(net.minecraft.server.level.ServerPlayer player, ItemStack stack) {
             if (stack.isEmpty()) {
                 return;
             }
@@ -132,6 +137,58 @@ public class ModPackets {
             } else if (stack.getItem() instanceof net.pm_equips.items.RCorpRabbitRifle) {
                 ((net.pm_equips.items.RCorpRabbitRifle) stack.getItem()).startReload(stack, player);
             }
+        }
+    }
+
+    public static class CorePageActivatePacket {
+        public CorePageActivatePacket() {}
+
+        public static void encode(CorePageActivatePacket msg, FriendlyByteBuf buf) {}
+
+        public static CorePageActivatePacket decode(FriendlyByteBuf buf) {
+            return new CorePageActivatePacket();
+        }
+
+        public static void handle(CorePageActivatePacket msg, Supplier<NetworkEvent.Context> ctx) {
+            ctx.get().enqueueWork(() -> {
+                net.minecraft.server.level.ServerPlayer player = ctx.get().getSender();
+                if (player == null) {
+                    return;
+                }
+
+                ItemStack stack = net.pm_equips.items.CorePageItem.findEquippedAbilityItem(player)
+                        .orElse(ItemStack.EMPTY);
+                if (stack.isEmpty()) {
+                    return;
+                }
+
+                if (stack.getItem() instanceof net.pm_equips.items.WCorpArmor) {
+                    activateEffect(player, stack, 1000, net.pm_equips.MobEffectInit.WCORP_SIN.get());
+                } else if (stack.getItem() instanceof net.pm_equips.items.RCorp4thRabbitArmor) {
+                    activateEffect(player, stack, 2000, net.pm_equips.MobEffectInit.RCORP_SIN.get());
+                } else if (stack.getItem() instanceof net.pm_equips.items.KCorpAgentArmor
+                        || stack.getItem() instanceof net.pm_equips.items.KCorpOfficerArmor) {
+                    activateEffect(player, stack, 1500, net.pm_equips.MobEffectInit.KCORP_SIN.get());
+                }
+            });
+            ctx.get().setPacketHandled(true);
+        }
+
+        private static void activateEffect(
+                ServerPlayer player,
+                ItemStack stack,
+                int cost,
+                MobEffect effect
+        ) {
+            stack.getCapability(ForgeCapabilities.ENERGY)
+                    .map(storage -> {
+                        if (storage.getEnergyStored() < cost) {
+                            return false;
+                        }
+                        storage.extractEnergy(cost, false);
+                        player.addEffect(new net.minecraft.world.effect.MobEffectInstance(effect, 12000, 0));
+                        return true;
+                    });
         }
     }
 

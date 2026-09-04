@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
-import net.pm_equips.entity.PBulletExp;
+import net.pm_equips.entity.AmmoExp;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -144,8 +144,8 @@ public class EGOW2Match extends ProjectileWeaponItem {
         float damage =
                 MIN_DAMAGE + level.random.nextInt(11);
 
-        PBulletExp bullet =
-                new PBulletExp(
+        AmmoExp bullet =
+                new AmmoExp(
                         level,
                         player,
                         damage,
@@ -308,6 +308,13 @@ public class EGOW2Match extends ProjectileWeaponItem {
             LivingEntity target,
             LivingEntity attacker
     ) {
+
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
 
         target.hurt(
                 attacker.level().damageSources().explosion(null),

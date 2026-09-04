@@ -18,7 +18,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import net.pm_equips.BlockInit;
-import net.pm_equips.entity.EGOHeavenProjectile;
+import net.pm_equips.entity.EGOHeavenP;
 
 import java.util.UUID;
 
@@ -30,6 +30,17 @@ public class EGOW4Heaven extends SwordItem {
 
     public EGOW4Heaven() {
         super(new CustomTier(), 15, -2.2F, new Properties().durability(3000));
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+        return result;
     }
 
     @Override
@@ -73,7 +84,7 @@ public class EGOW4Heaven extends SwordItem {
             return;
         }
 
-        EGOHeavenProjectile projectile = new EGOHeavenProjectile(level, player, player.getLookAngle());
+        EGOHeavenP projectile = new EGOHeavenP(level, player, player.getLookAngle());
         level.addFreshEntity(projectile);
 
         level.playSound(null, player.getX(), player.getY(), player.getZ(),

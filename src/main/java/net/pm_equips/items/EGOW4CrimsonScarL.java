@@ -18,7 +18,7 @@ import net.minecraft.world.phys.Vec3;
 import net.pm_equips.BlockInit;
 import net.pm_equips.ItemInit;
 import net.pm_equips.SoundInit;
-import net.pm_equips.entity.PBullet;
+import net.pm_equips.entity.AmmoGun;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -80,7 +80,7 @@ public class EGOW4CrimsonScarL extends ProjectileWeaponItem {
         Vec3 spawnPos = eyePos.add(look.scale(0.5D));
         float damage = MIN_DAMAGE + level.random.nextInt(3);
 
-        PBullet bullet = new PBullet(level, player, damage, VELOCITY, look);
+        AmmoGun bullet = new AmmoGun(level, player, damage, VELOCITY, look);
         bullet.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
         bullet.setDamage(damage);
         bullet.setVelocity(VELOCITY);
@@ -155,6 +155,13 @@ public class EGOW4CrimsonScarL extends ProjectileWeaponItem {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+
         target.hurt(attacker.level().damageSources().generic(), MIN_DAMAGE);
         stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return true;

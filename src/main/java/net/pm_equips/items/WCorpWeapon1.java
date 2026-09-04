@@ -154,7 +154,7 @@ public class WCorpWeapon1 extends SwordItem {
         public Ingredient getRepairIngredient() {
 
             return Ingredient.of(
-                    ItemInit.METAL_INGOT.get()
+                    ItemInit.WCORP_BATTERY.get()
             );
         }
     }

@@ -23,4 +23,13 @@ public class KeyBindInit {
                     GLFW.GLFW_KEY_LEFT_SHIFT,
                     "key.categories.pm_equips"
             );
+
+    public static final KeyMapping CORE_PAGE_ABILITY_KEY =
+            new KeyMapping(
+                    "key.categories.pm_equips.core_page_ability",
+                    KeyConflictContext.IN_GAME,
+                    InputConstants.Type.KEYSYM,
+                    GLFW.GLFW_KEY_V,
+                    "key.categories.pm_equips"
+            );
 }

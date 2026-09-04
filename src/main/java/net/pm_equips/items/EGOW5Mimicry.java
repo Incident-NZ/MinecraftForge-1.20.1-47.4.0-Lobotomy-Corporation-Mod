@@ -1,5 +1,6 @@
 package net.pm_equips.items;
 
+import net.minecraft.world.entity.LivingEntity;
 import net.pm_equips.BlockInit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -17,6 +18,17 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class EGOW5Mimicry extends SwordItem {
     public EGOW5Mimicry() {
         super(new CustomTier(), 13, -2.2f, new Properties().durability(4000));
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        boolean result = super.hurtEnemy(stack, target, attacker);
+        if (result && !attacker.level().isClientSide()) {
+            // Iフレーム無視
+            target.hurtTime = 0;           // クライアント側の赤フラッシュ時間
+            target.invulnerableTime = 0;   // または noDamageTicks (バージョンにより名称確認)
+        }
+        return result;
     }
 
     @Override

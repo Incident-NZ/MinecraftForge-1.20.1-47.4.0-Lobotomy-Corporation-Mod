@@ -127,17 +127,14 @@ public class KCorpWeapon3 extends SwordItem {
 
         stack.getCapability(
                 ForgeCapabilities.ENERGY
-        ).ifPresent(storage -> {
-
-            tooltip.add(
-                    Component.literal(
-                            "FE: "
-                                    + storage.getEnergyStored()
-                                    + " / "
-                                    + storage.getMaxEnergyStored()
-                    )
-            );
-        });
+        ).ifPresent(storage -> tooltip.add(
+                Component.literal(
+                        "FE: "
+                                + storage.getEnergyStored()
+                                + " / "
+                                + storage.getMaxEnergyStored()
+                )
+        ));
 
         super.appendHoverText(
                 stack,
@@ -153,6 +150,6 @@ public class KCorpWeapon3 extends SwordItem {
         @Override public float getAttackDamageBonus() { return 0.0f; }
         @Override public int getLevel() { return 1; }
         @Override public int getEnchantmentValue() { return 0; }
-        @Override public Ingredient getRepairIngredient() { return Ingredient.of(ItemInit.METAL_INGOT.get()); }
+        @Override public Ingredient getRepairIngredient() { return Ingredient.of(ItemInit.KCORP_AMPOULE.get()); }
     }
 }
