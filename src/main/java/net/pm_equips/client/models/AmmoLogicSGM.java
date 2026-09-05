@@ -8,7 +8,7 @@ public class AmmoLogicSGM extends GeoModel<AmmoLogicSG> {
 
     @Override
     public ResourceLocation getModelResource(AmmoLogicSG animatable) {
-        return ResourceLocation.parse("pm_equips:geo/p_bullet.geo.json");
+        return ResourceLocation.parse("pm_equips:geo/p_bullet_gun.geo.json");
     }
 
     @Override

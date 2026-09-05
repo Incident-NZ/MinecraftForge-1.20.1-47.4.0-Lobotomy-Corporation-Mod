@@ -21,6 +21,12 @@
           "name": "pm_equips:ego_t5_aleph",
           "expand": true,
           "weight": 2
+        },
+        {
+          "type": "minecraft:tag",
+          "name": "pm_equips:wings_material",
+          "expand": true,
+          "weight": 8
         }
       ]
     },

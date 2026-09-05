@@ -21,6 +21,12 @@
           "name": "pm_equips:ego_t3_he",
           "expand": true,
           "weight": 6
+        },
+        {
+          "type": "minecraft:tag",
+          "name": "pm_equips:wings_material",
+          "expand": true,
+          "weight": 8
         }
       ]
     },
